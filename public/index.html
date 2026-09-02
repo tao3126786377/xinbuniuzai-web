@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>西部牛仔</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- 主菜单 -->
+    <section id="screen-menu" class="screen">
+      <h1 class="game-title">西部牛仔</h1>
+      <p class="subtitle">开枪 · 防御 · 装弹</p>
+      <div class="menu-btns">
+        <button class="big-btn" id="btn-mode-ai">人机对战</button>
+        <button class="big-btn" id="btn-mode-pvp">玩家对决</button>
+      </div>
+      <button class="link-btn" id="btn-rules">游戏规则</button>
+      <p class="footnote" id="ai-memory-note"></p>
+      <p class="footnote" id="version-note"></p>
+    </section>
+
+    <!-- 玩家对决子菜单 -->
+    <section id="screen-pvp-menu" class="screen hidden">
+      <h2>玩家对决</h2>
+      <div class="menu-btns">
+        <button class="big-btn" id="btn-create">创建房间</button>
+        <div class="join-row">
+          <input id="join-code" inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" placeholder="输入房间号" autocomplete="off">
+          <button class="big-btn join-btn" id="btn-join">加入</button>
+        </div>
+      </div>
+      <button class="link-btn" id="btn-pvp-back">返回</button>
+    </section>
+
+    <!-- 等待房间 -->
+    <section id="screen-lobby" class="screen hidden">
+      <h2>房间号</h2>
+      <div class="room-code" id="lobby-code">----</div>
+      <button class="small-btn" id="btn-copy">复制房间号</button>
+      <p class="lobby-status" id="lobby-status">等待对手加入…</p>
+      <div class="spinner" id="lobby-spinner"></div>
+      <button class="link-btn" id="btn-leave-lobby">离开房间</button>
+    </section>
+
+    <!-- 对局 -->
+    <section id="screen-game" class="screen hidden">
+      <div class="top-bar">
+        <span id="game-mode-label">人机对战</span>
+        <span id="round-label">回合 1/100</span>
+      </div>
+
+      <div class="bullet-panel" id="opponent-panel">
+        <div class="panel-name" id="opponent-name">电脑</div>
+        <div class="bullets-row">
+          <span class="bullets-num" id="opp-bullets-num">0</span>
+          <span class="bullet-icons" id="opp-bullets-icons"></span>
+        </div>
+        <div class="action-badge hidden" id="opp-action"></div>
+        <div class="panel-status" id="opp-status"></div>
+      </div>
+
+      <div class="mid-area">
+        <div class="banner hidden" id="banner"></div>
+        <div class="countdown hidden" id="countdown"></div>
+        <div class="history-strip" id="history-strip"></div>
+      </div>
+
+      <div class="bullet-panel" id="player-panel">
+        <div class="panel-name">你</div>
+        <div class="bullets-row">
+          <span class="bullets-num" id="my-bullets-num">0</span>
+          <span class="bullet-icons" id="my-bullets-icons"></span>
+        </div>
+        <div class="action-badge hidden" id="my-action"></div>
+        <div class="panel-status" id="my-status"></div>
+      </div>
+
+      <div class="actions">
+        <button class="act-btn" id="act-u">开枪</button>
+        <button class="act-btn" id="act-i">防御</button>
+        <button class="act-btn" id="act-o">装弹</button>
+      </div>
+      <button class="link-btn" id="btn-leave-game">离开房间（判负）</button>
+    </section>
+
+    <!-- 结果 -->
+    <section id="screen-result" class="screen hidden">
+      <h2 class="result-title" id="result-title">你赢了！</h2>
+      <p class="result-reason" id="result-reason"></p>
+      <div class="menu-btns">
+        <button class="big-btn" id="btn-rematch">再来一局</button>
+      </div>
+      <p class="rematch-line hidden" id="rematch-status-line"></p>
+      <button class="link-btn" id="btn-result-menu">返回主菜单</button>
+    </section>
+
+    <!-- 断开 -->
+    <section id="screen-disconnected" class="screen hidden">
+      <h2>连接已断开</h2>
+      <div class="spinner" id="disc-spinner"></div>
+      <p id="disc-status">正在重连…</p>
+      <button class="big-btn hidden" id="btn-disc-menu">返回主菜单</button>
+    </section>
+
+    <!-- 规则弹窗 -->
+    <div id="rules-modal" class="modal hidden">
+      <div class="modal-box">
+        <h3>游戏规则</h3>
+        <p class="rules-text">
+          你和对手对立，每回合各自选择：<br>
+          <b>开枪</b> —— 消耗自己一颗子弹（无子弹不能开枪）<br>
+          <b>防御</b> —— 对方开枪时攻击无效（对方仍消耗子弹）<br>
+          <b>装弹</b> —— 子弹 +1（上限 10）<br><br>
+          胜负判定：<br>
+          · 一方开枪、另一方装弹时，开枪方立即获胜；<br>
+          · 双方子弹数不相等时，先攒到 5 颗子弹的一方获胜；<br>
+          · 双方都到 10 颗子弹为平局；双方同时开枪则各减一颗继续。<br><br>
+          玩家对决：每回合限时 60 秒，超时系统随机代出，连续 3 次超时判负。
+        </p>
+        <button class="big-btn" id="btn-rules-close">知道了</button>
+      </div>
+    </div>
+
+    <!-- 加载遮罩 -->
+    <div id="loading-overlay" class="loading hidden">
+      <div class="spinner"></div>
+      <p>正在分析历史对局…</p>
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="strategies.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/net.js"></script>
+  <script src="js/mode-ai.js"></script>
+  <script src="js/mode-pvp.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

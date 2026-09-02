@@ -1,0 +1,62 @@
+# 西部牛仔 · 网页版（人机对战 + 玩家对决）
+
+单进程 Node.js 服务器：静态页面 + WebSocket 房间对战。无构建步骤，手机浏览器（含微信内置浏览器）可直接游玩。
+
+## 局域网试玩
+
+1. 双击 `start.bat`（首次运行会自动安装依赖；需要已安装 [Node.js](https://nodejs.org/) LTS）
+2. Windows 防火墙弹窗时点"允许访问"
+3. 启动横幅会打印本机与局域网地址，例如 `http://192.168.x.x:3000`
+4. 电脑与手机连**同一个 WiFi**，手机浏览器（或微信）打开该地址即可
+5. 一台设备"创建房间"，另一台输入房间号加入
+
+## 游戏说明
+
+- **人机对战**：电脑会观察你的习惯逐渐调整策略（记忆存于本机浏览器，每台设备独立）
+- **玩家对决**：房间号制。每回合限时 60 秒，超时系统随机代出，连续 3 次超时判负；
+  主动离开立即判负；意外断线有 60 秒重连宽限期（刷新页面可自动恢复）
+
+## 环境变量（部署/调参）
+
+| 变量 | 默认 | 说明 |
+|---|---|---|
+| PORT | 3000 | 监听端口 |
+| ROUND_TIMEOUT_MS | 60000 | 每回合限时（毫秒） |
+| GRACE_MS | 60000 | 断线重连宽限期（毫秒） |
+| TIMEOUT_STRIKES | 3 | 连续超时判负次数 |
+| MAX_ROOMS | 1000 | 房间数上限 |
+| MAX_ROOMS_PER_IP | 10 | 每 IP 最多创建房间数 |
+| ROOM_TTL_MS | 600000 | 空房间清理时限（毫秒） |
+| ROOM_CODE_LENGTH | 4 | 房间号位数（公网建议 5~6） |
+| ALLOWED_ORIGINS | 空 | 额外允许的 WS Origin（逗号分隔，反代场景） |
+| ALLOW_NO_ORIGIN | true | 是否允许无 Origin 的连接（公网建议 false） |
+
+示例：`PORT=8080 node server.js`（Linux/Mac 写法；Windows cmd 用 `set PORT=8080 && node server.js`）
+
+## 公网部署清单
+
+### 方案：GitHub + Render（免费，约 20 分钟）
+
+1. **注册/登录**：[github.com](https://github.com)（托管代码）与 [render.com](https://render.com)（托管服务器，免费额度）
+2. **上传代码**：在 GitHub 新建**私有仓库**，把 `web/` 文件夹里的内容推上去（`package.json`、`server.js`、`public/`、`launch.js`、`start.bat`、`README.md`——`node_modules` 不用传）
+3. **在 Render 创建服务**：Dashboard → New → **Web Service** → 连接该仓库 → 保持自动检测的设置（Node 环境、Build Command 留空或 `npm install`、Start Command `npm start`）→ 选择免费实例 → Create
+4. **配置环境变量**（服务设置 → Environment）：`ROOM_CODE_LENGTH=5`、`ALLOW_NO_ORIGIN=false`（其余默认即可）
+5. **拿链接分发**：部署完成后得到 `https://xxx.onrender.com`，微信里直接发这个链接即可游玩（平台自带 HTTPS/WSS，代码零改动）
+
+注意：
+- Render 免费实例闲置 15 分钟会休眠，下次访问需约 30~60 秒冷启动（网页先开、游戏照常）
+- 免费实例位于海外，国内访问偶尔偏慢；回合制游戏对延迟不敏感，不影响对战
+- 若访问异常，可在国内云服务器（需备案域名）上用同一份代码自托管，见上方环境变量表
+
+### 方案 B：电脑常开 + 内网穿透（零注册）
+
+PC 跑 `start.bat`，再开一个穿透工具（如 Cloudflare Tunnel：`cloudflared tunnel --url http://localhost:3000`）得到公网 https 地址发给朋友。缺点：电脑必须一直开机，地址每次重启会变。适合临时约战。
+
+## 开发
+
+- `npm run gen`：从 `../Game_XiBuNiuZai/strategy_data.h` 重新生成 `public/strategies.js`
+- `npm run test:ai`：AI 移植正确性验证（需先在项目根目录运行 `python web/tools/gen_reference.py` 生成最强对照数据）
+
+## 与 C++ 控制台版的关系
+
+网页版 AI 是 C++ `Game_XiBuNiuZai.cpp` 自适应层的逐行 JS 移植（差桶后验 + 完整最佳响应值迭代 + ε 门槛混合），日志格式与 `game_log.txt` 完全兼容。C++ 版与网页版独立运行，互不读写对方文件。

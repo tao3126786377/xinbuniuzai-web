@@ -1,0 +1,17 @@
+{
+  "name": "xinbuniuzai-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "西部牛仔 网页版（人机对战 + 玩家对决）",
+  "scripts": {
+    "start": "node server.js",
+    "gen": "node tools/gen_strategies.js",
+    "test:ai": "node test/verify_ai.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
