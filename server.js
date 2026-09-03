@@ -10,6 +10,10 @@
  *
  * 环境变量：PORT / ROUND_TIMEOUT_MS / GRACE_MS / TIMEOUT_STRIKES / MAX_ROOMS /
  *          MAX_ROOMS_PER_IP / ROOM_TTL_MS / ROOM_CODE_LENGTH / ALLOWED_ORIGINS / ALLOW_NO_ORIGIN
+ *
+ * 一局模式（mode='match'）：最多 5 轮筹码对决，每轮先保密选初始子弹 0~2（选弹与出招
+ * 共享 60 秒限时与连击计数），轮末按子弹差 x 结算 y=(i+1)(j+1)x（劣势方胜双倍），
+ * 平局各 -5×自选子弹；结算规则见 public/js/match.js（服务器权威）。
  */
 'use strict';
 
@@ -20,6 +24,7 @@ const os = require('os');
 const crypto = require('crypto');
 const { WebSocketServer, WebSocket } = require('ws');
 const Game = require('./public/js/game.js');
+const Match = require('./public/js/match.js');
 
 // ==================== 环境配置 ====================
 const PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -33,6 +38,9 @@ const ROOM_CODE_LENGTH = parseInt(process.env.ROOM_CODE_LENGTH, 10) || 4;
 // 测试钩子（生产环境不设置即无影响）
 const ROUND_CAP = parseInt(process.env.ROUND_CAP_OVERRIDE, 10) || Game.MAX_ROUNDS;   // 回合上限覆盖
 const TEST_TIMEOUT_ACTION = process.env.TEST_TIMEOUT_ACTION || null;                // 超时代出固定动作（自动化测试用）
+const TEST_BULLET_CHOICE_RAW = parseInt(process.env.TEST_BULLET_CHOICE, 10);
+const TEST_BULLET_CHOICE = (TEST_BULLET_CHOICE_RAW >= 0 && TEST_BULLET_CHOICE_RAW <= 2)
+  ? TEST_BULLET_CHOICE_RAW : null;                                                 // 选弹超时代选固定值（自动化测试用）
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
   .split(',').map(s => s.trim()).filter(Boolean);
 const ALLOW_NO_ORIGIN = (process.env.ALLOW_NO_ORIGIN || 'true') !== 'false';
@@ -128,10 +136,12 @@ function sendError(ws, code, msg) {
 // ==================== 房间 ====================
 const rooms = new Map(); // code -> room
 
-function createRoom(code) {
+function createRoom(code, mode) {
   return {
     code: code,
     status: 'waiting',          // waiting | playing | finished
+    mode: mode || 'single',     // 'single'（一轮） | 'match'（一局）
+    phase: 'play',              // 'play'（出招） | 'pick'（选初始子弹，仅 match）
     seats: [
       { token: null, conn: null, connected: false, ip: null },
       { token: null, conn: null, connected: false, ip: null }
@@ -140,12 +150,17 @@ function createRoom(code) {
     round: 1,
     pending: [null, null],      // 本回合已提交的动作（null = 未出招）
     timedOut: [false, false],
-    timeoutStrikes: [0, 0],
+    timeoutStrikes: [0, 0],     // 超时连击（一局：选弹与出招共享）
     roundDeadline: null,
     lastRound: null,            // 最近一次 round_result（重进同步）
     lastOutcome: null,          // 最近一次对局结果（重进同步，按座位构造 game_over）
     rematchVotes: [false, false],
     history: [],
+    money: [Match.START_MONEY, Match.START_MONEY],   // 一局筹码（仅 match 使用）
+    matchRound: 1,              // 一局第几轮（1..MATCH_ROUNDS，仅 match 使用）
+    picks: [0, 0],              // 本轮已公开的初始子弹 i/j（仅 match 使用）
+    pendingBullets: [null, null],   // 选弹阶段已提交的选择（null = 未选，仅 match 使用）
+    matchHistory: [],           // 每轮结算摘要（重进重建筹码芯片，仅 match 使用）
     createdAt: Date.now(),
     lastActivity: Date.now(),
     graceUntil: null
@@ -172,6 +187,7 @@ function startRound(room) {
 }
 
 function startGame(room) {
+  if (room.mode === 'match') { startMatch(room); return; }
   room.status = 'playing';
   room.b1 = 0;
   room.b2 = 0;
@@ -188,6 +204,7 @@ function startGame(room) {
     if (conn) {
       send(conn, {
         type: 'game_started',
+        mode: 'single',
         b1: room.b1, b2: room.b2, round: room.round,
         roundDeadline: room.roundDeadline,
         serverNow: now,
@@ -196,7 +213,52 @@ function startGame(room) {
       });
     }
   }
-  // 开局时缺席的座位视同断线：立即开始宽限期
+  notifyAbsentSeats(room);
+}
+
+/* 一局开局：进入第 1 轮选弹阶段（选弹与出招共用 60 秒限时） */
+function startMatch(room) {
+  room.status = 'playing';
+  room.phase = 'pick';
+  room.b1 = 0;
+  room.b2 = 0;
+  room.round = 1;
+  room.money = [Match.START_MONEY, Match.START_MONEY];
+  room.matchRound = 1;
+  room.picks = [0, 0];
+  room.pending = [null, null];
+  room.timedOut = [false, false];
+  room.pendingBullets = [null, null];
+  room.timeoutStrikes = [0, 0];
+  room.graceUntil = null;
+  room.lastRound = null;
+  room.lastOutcome = null;
+  room.history = [];
+  room.matchHistory = [];
+  room.roundDeadline = Date.now() + ROUND_TIMEOUT_MS;   // 选弹死线
+  const now = Date.now();
+  for (let seat = 0; seat < 2; seat++) {
+    const conn = room.seats[seat].conn;
+    if (conn) {
+      send(conn, {
+        type: 'game_started',
+        mode: 'match',
+        phase: 'pick',
+        matchRound: room.matchRound,
+        money: room.money.slice(),
+        b1: room.b1, b2: room.b2, round: room.round,
+        roundDeadline: room.roundDeadline,
+        serverNow: now,
+        roundTimeoutMs: ROUND_TIMEOUT_MS,
+        timeoutStrikes: room.timeoutStrikes.slice()
+      });
+    }
+  }
+  notifyAbsentSeats(room);
+}
+
+/* 开局时缺席的座位视同断线：立即开始宽限期 */
+function notifyAbsentSeats(room) {
   for (let seat = 0; seat < 2; seat++) {
     if (!room.seats[seat].connected) {
       room.graceUntil = Date.now() + GRACE_MS;
@@ -206,6 +268,32 @@ function startGame(room) {
       }
     }
   }
+}
+
+/* 双方选弹就位：公布初始子弹并开始对决回合 */
+function revealAndStartDuel(room) {
+  room.picks = room.pendingBullets.slice();
+  room.pendingBullets = [null, null];
+  room.timedOut = [false, false];
+  room.phase = 'play';
+  room.round = 1;
+  room.b1 = room.picks[0];
+  room.b2 = room.picks[1];
+  room.history = [];   // 清空上一轮对决移动芯片
+  startRound(room);
+  broadcast(room, {
+    type: 'bullet_reveal',
+    matchRound: room.matchRound,
+    picks: room.picks.slice(),
+    b1: room.b1,
+    b2: room.b2,
+    round: room.round,
+    roundDeadline: room.roundDeadline,
+    serverNow: Date.now(),
+    roundTimeoutMs: ROUND_TIMEOUT_MS,
+    timeoutStrikes: room.timeoutStrikes.slice(),
+    money: room.money.slice()
+  });
 }
 
 function outcomeToResults(winner) {
@@ -219,29 +307,39 @@ function finishGame(room, reason, results) {
   room.roundDeadline = null;
   room.graceUntil = null;
   room.pending = [null, null];
+  room.pendingBullets = [null, null];
   room.rematchVotes = [false, false];
   room.lastActivity = Date.now();
-  room.lastOutcome = {
-    reason: reason,
-    results: results.slice(),
-    rounds: room.round,
-    timeoutStrikes: room.timeoutStrikes.slice()
-  };
+  room.lastOutcome = buildOutcome(room, reason, results);
   for (let seat = 0; seat < 2; seat++) {
     send(room.seats[seat].conn, gameOverPayload(room, seat));
   }
 }
 
+/* 统一构造对局结果（一轮与一局共用；一局附带筹码与局轮数） */
+function buildOutcome(room, reason, results) {
+  const o = {
+    reason: reason,
+    results: results.slice(),
+    rounds: room.mode === 'match' ? room.matchRound : room.round,
+    timeoutStrikes: room.timeoutStrikes.slice()
+  };
+  if (room.mode === 'match') o.money = room.money.slice();
+  return o;
+}
+
 /* 按座位构造 game_over（result 为座位相对视角） */
 function gameOverPayload(room, seat) {
   const o = room.lastOutcome;
-  return {
+  const p = {
     type: 'game_over',
     result: o.results[seat],
     reason: o.reason,
     rounds: o.rounds,
     timeoutStrikes: o.timeoutStrikes.slice()
   };
+  if (o.money) p.money = o.money.slice();
+  return p;
 }
 
 function resolveRound(room) {
@@ -259,6 +357,11 @@ function resolveRound(room) {
   };
   room.history.push({ b1: room.b1, b2: room.b2, a1: payload.a1, a2: payload.a2, outcome: outcome });
   if (room.history.length > Game.MAX_ROUNDS) room.history.shift();
+
+  if (room.mode === 'match') {
+    resolveMatchRound(room, r, payload);
+    return;
+  }
 
   if (r.winner === -1) {
     room.b1 = r.b1;
@@ -287,8 +390,103 @@ function resolveRound(room) {
   broadcast(room, payload);
 }
 
+/* 一局对决回合结算（一轮路径不走此处）。
+ * r = Game.step 结果；payload = 已填基础字段的 round_result（b1/b2 为行动前子弹）。 */
+function resolveMatchRound(room, r, payload) {
+  payload.matchRound = room.matchRound;
+  payload.picks = room.picks.slice();
+  payload.money = room.money.slice();
+  if (r.winner === -1) {
+    room.b1 = r.b1;
+    room.b2 = r.b2;
+    payload.b1_next = r.b1;
+    payload.b2_next = r.b2;
+    if (room.round >= ROUND_CAP) {
+      // 对决步数封顶：轮平局（同 -5×自选子弹罚金）
+      payload.outcome = 'draw';
+      payload.capped = true;
+      settleMatchRound(room, 0, payload);
+      advanceMatch(room, payload);
+    } else {
+      room.round++;
+      startRound(room);   // 隐式开始下一回合（新 deadline 随 round_result 下发）
+      payload.roundDeadline = room.roundDeadline;
+    }
+  } else {
+    payload.b1_next = r.b1;
+    payload.b2_next = r.b2;
+    settleMatchRound(room, r.winner, payload);
+    advanceMatch(room, payload);
+  }
+  room.lastRound = payload;
+  broadcast(room, payload);            // 先广播最后一回合，再发 game_over
+  if (payload.matchOver) {
+    finishGame(room, 'match_end', outcomeToResults(payload.matchWinner));
+  }
+}
+
+/* 一局单轮筹码结算：更新 room.money 并回填 payload（x/y/A/double/transfer/settled/money）。
+ * winner: 1|2 非平局（按末动作终弹差结算）；0 平局（双方各 -5×自选子弹）。
+ * 注意：结算终弹必须用行动前 room.b1/b2 喂 finalBullets（瞬间胜负时 step 返回子弹不变）。 */
+function settleMatchRound(room, winner, payload) {
+  let s;
+  if (winner === 0) {
+    s = Match.settleRoundMoney(room.money[0], room.money[1], room.picks[0], room.picks[1], 0, 0, 0);
+  } else {
+    const fb = Match.finalBullets(room.b1, room.b2, room.pending[0], room.pending[1], winner);
+    s = Match.settleRoundMoney(room.money[0], room.money[1], room.picks[0], room.picks[1], winner, fb.b1, fb.b2);
+  }
+  room.money = [s.money1, s.money2];
+  payload.settled = s.settled;
+  payload.money = room.money.slice();
+  if (winner === 0) {
+    payload.drawPenalty = [Match.PICK_PENALTY * room.picks[0], Match.PICK_PENALTY * room.picks[1]];
+  } else {
+    payload.x = s.x;
+    payload.y = s.y;
+    payload.A = s.A;
+    payload.double = s.double;
+    payload.transfer = s.transfer;
+  }
+  room.matchHistory.push({
+    matchRound: room.matchRound,
+    picks: room.picks.slice(),
+    outcome: payload.outcome,
+    settled: s.settled,
+    x: s.x, y: s.y, A: s.A, double: s.double, transfer: s.transfer,
+    capped: !!payload.capped,
+    draw: winner === 0,
+    money: room.money.slice()
+  });
+  if (room.matchHistory.length > Match.MATCH_ROUNDS) room.matchHistory.shift();
+}
+
+/* 每轮结算后推进比赛：筹码 ≤0 或已满 5 轮 → matchOver（matchWinner 1|2|0）；
+ * 否则进入下一轮选弹阶段（新死线随 payload 下发，客户端揭示完再展示倒计时）。 */
+function advanceMatch(room, payload) {
+  const t = Match.checkMatchOver(room.money[0], room.money[1], room.matchRound);
+  payload.matchOver = t.over;
+  if (t.over) {
+    payload.matchWinner = t.winner;
+    return;
+  }
+  room.matchRound++;
+  room.phase = 'pick';
+  room.b1 = 0;      // 选弹阶段子弹归零（新轮不继承上轮终弹，客户端同步显示 0/0）
+  room.b2 = 0;
+  room.pendingBullets = [null, null];
+  room.picks = [0, 0];
+  room.pending = [null, null];
+  room.timedOut = [false, false];
+  room.roundDeadline = Date.now() + ROUND_TIMEOUT_MS;
+  payload.nextPhase = 'pick';
+  payload.nextMatchRound = room.matchRound;
+  payload.nextDeadline = room.roundDeadline;
+}
+
 /* 到点结算：代出 + 连击检查（连击先于结算——随机动作不能救拖延者） */
 function applyTimeout(room) {
+  if (room.mode === 'match' && room.phase === 'pick') { applyPickTimeout(room); return; }
   for (let seat = 0; seat < 2; seat++) {
     if (room.pending[seat] !== null) continue;
     const bullets = seat === 0 ? room.b1 : room.b2;
@@ -330,6 +528,42 @@ function applyTimeout(room) {
   resolveRound(room);
 }
 
+/* 选弹到点：代选 + 连击检查（连击先于揭晓——随机代选不能救拖延者） */
+function applyPickTimeout(room) {
+  for (let seat = 0; seat < 2; seat++) {
+    if (room.pendingBullets[seat] !== null) continue;
+    const pick = TEST_BULLET_CHOICE !== null ? TEST_BULLET_CHOICE : crypto.randomInt(Match.MAX_PICK + 1);
+    room.pendingBullets[seat] = pick;
+    room.timedOut[seat] = true;
+    room.timeoutStrikes[seat]++;
+  }
+  const s0 = room.timeoutStrikes[0] >= TIMEOUT_STRIKES;
+  const s1 = room.timeoutStrikes[1] >= TIMEOUT_STRIKES;
+
+  // 广播代选通知（先于揭晓）
+  for (let seat = 0; seat < 2; seat++) {
+    if (room.timedOut[seat]) {
+      broadcast(room, {
+        type: 'timeout_notice',
+        seat: seat,
+        phase: 'pick',
+        pick: room.pendingBullets[seat],
+        timeoutStrikes: room.timeoutStrikes.slice()
+      });
+    }
+  }
+
+  if (s0 || s1) {
+    let results;
+    if (s0 && s1) results = ['draw', 'draw'];
+    else if (s0) results = ['lose', 'win'];
+    else results = ['win', 'lose'];
+    finishGame(room, 'timeout_loss', results);
+    return;
+  }
+  revealAndStartDuel(room);
+}
+
 /* 宽限期到期：断线方判负（败者 token 作废） */
 function forfeitByDisconnect(room, offSeat) {
   console.log('[房间] ' + room.code + ' 座位 ' + offSeat + ' 宽限期满判负');
@@ -338,12 +572,7 @@ function forfeitByDisconnect(room, offSeat) {
   const results = ['draw', 'draw'];
   results[offSeat] = 'lose';
   results[other] = 'win';
-  room.lastOutcome = {
-    reason: 'opponent_left',
-    results: results,
-    rounds: room.round,
-    timeoutStrikes: room.timeoutStrikes.slice()
-  };
+  room.lastOutcome = buildOutcome(room, 'opponent_left', results);
   send(room.seats[other].conn, gameOverPayload(room, other));
   room.seats[offSeat].token = null;
   room.status = 'waiting';
@@ -354,15 +583,18 @@ function forfeitByDisconnect(room, offSeat) {
 }
 
 function roomStatePayload(room, seat) {
-  return {
+  const p = {
     type: 'room_state',
     code: room.code,
     status: room.status,
+    mode: room.mode,
     seat: seat,
     b1: room.b1,
     b2: room.b2,
     round: room.round,
-    acted: [room.pending[0] !== null, room.pending[1] !== null],
+    acted: room.phase === 'pick'
+      ? [room.pendingBullets[0] !== null, room.pendingBullets[1] !== null]
+      : [room.pending[0] !== null, room.pending[1] !== null],
     opponentConnected: room.seats[1 - seat].connected,
     roundDeadline: room.roundDeadline,
     serverNow: Date.now(),
@@ -373,6 +605,17 @@ function roomStatePayload(room, seat) {
     lastGameOver: room.lastOutcome ? gameOverPayload(room, seat) : null,
     history: room.history.slice()
   };
+  if (room.mode === 'match') {
+    p.phase = room.phase;
+    p.matchRound = room.matchRound;
+    p.money = room.money.slice();
+    p.picks = room.picks.slice();
+    p.bulletActed = [room.pendingBullets[0] !== null, room.pendingBullets[1] !== null];
+    // 仅下发自己的选择；对手 pendingBullets 保密
+    if (room.pendingBullets[seat] !== null) p.myPick = room.pendingBullets[seat];
+    p.matchHistory = room.matchHistory.slice();
+  }
+  return p;
 }
 
 function detachSeat(room, seat) {
@@ -402,7 +645,7 @@ function handleMessage(ws, msg) {
       if (myRooms >= MAX_ROOMS_PER_IP) { sendError(ws, 'server_full', '你创建的房间过多'); return; }
 
       const code = generateRoomCode();
-      const newRoom = createRoom(code);
+      const newRoom = createRoom(code, msg.mode === 'match' ? 'match' : 'single');
       rooms.set(code, newRoom);
       const token = crypto.randomBytes(16).toString('hex');
       newRoom.seats[0].token = token;
@@ -411,8 +654,8 @@ function handleMessage(ws, msg) {
       newRoom.seats[0].ip = ws.ip;
       ws.room = newRoom;
       ws.seat = 0;
-      send(ws, { type: 'room_created', code: code, seat: 0, token: token });
-      console.log('[房间] ' + code + ' 创建（' + rooms.size + ' 个活跃房间）');
+      send(ws, { type: 'room_created', code: code, seat: 0, token: token, mode: newRoom.mode });
+      console.log('[房间] ' + code + ' 创建（' + newRoom.mode + '，' + rooms.size + ' 个活跃房间）');
       return;
     }
 
@@ -510,9 +753,34 @@ function handleMessage(ws, msg) {
       return;
     }
 
+    case 'submit_bullets': {
+      if (!room) { sendError(ws, 'not_playing', '不在对局中'); return; }
+      if (room.mode !== 'match' || room.status !== 'playing' || room.phase !== 'pick') {
+        sendError(ws, 'not_playing', '当前不是选弹阶段');
+        return;
+      }
+      if (room.pendingBullets[seat] !== null) { sendError(ws, 'already_submitted', '本轮已选初始子弹'); return; }
+      if (typeof msg.bullets !== 'number' || !Number.isInteger(msg.bullets) ||
+          msg.bullets < 0 || msg.bullets > Match.MAX_PICK) {
+        sendError(ws, 'invalid_bullets', '初始子弹须为 0~2 的整数');
+        return;
+      }
+      room.pendingBullets[seat] = msg.bullets;
+      room.timeoutStrikes[seat] = 0;   // 准时提交清空超时连击（选弹与出招共享）
+      room.lastActivity = Date.now();
+      if (room.pendingBullets[0] !== null && room.pendingBullets[1] !== null) {
+        revealAndStartDuel(room);
+      }
+      return;
+    }
+
     case 'submit_action': {
       if (!room) { sendError(ws, 'not_playing', '不在对局中'); return; }
       if (room.status !== 'playing') { sendError(ws, 'not_playing', '对局未在进行'); return; }
+      if (room.mode === 'match' && room.phase !== 'play') {
+        sendError(ws, 'not_playing', '当前不是出招阶段');
+        return;
+      }
       if (room.pending[seat] !== null) { sendError(ws, 'already_submitted', '本回合已出招'); return; }
       if (typeof msg.action !== 'string') { sendError(ws, 'invalid_action', '非法动作'); return; }
       const a = Game.charToAction(msg.action);
@@ -655,9 +923,11 @@ wss.on('connection', (ws, req) => {
     handleMessage(ws, msg);
   });
 
-  ws.on('close', () => {
+  ws.on('close', (code) => {
     const room = ws.room, seat = ws.seat;
     if (!room) return;
+    // 诊断日志：仅在仍有房间归属时打印（正常离场先 detach，不会走到这里）
+    console.log('[连接] 房间 ' + room.code + ' 座位 ' + seat + ' 断开（code=' + code + '）');
     ws.room = null;
     ws.seat = null;
     const s = room.seats[seat];
@@ -682,7 +952,11 @@ wss.on('connection', (ws, req) => {
 // ==================== 心跳 ====================
 setInterval(() => {
   for (const ws of wss.clients) {
-    if (ws.isAlive === false) { ws.terminate(); continue; }
+    if (ws.isAlive === false) {
+      console.log('[连接] 心跳超时断开（' + (ws.room ? ws.room.code + ' 座位 ' + ws.seat : '无房间归属') + '）');
+      ws.terminate();
+      continue;
+    }
     ws.isAlive = false;
     ws.ping();
   }

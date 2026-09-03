@@ -14,8 +14,10 @@
       <h1 class="game-title">西部牛仔</h1>
       <p class="subtitle">开枪 · 防御 · 装弹</p>
       <div class="menu-btns">
-        <button class="big-btn" id="btn-mode-ai">人机对战</button>
-        <button class="big-btn" id="btn-mode-pvp">玩家对决</button>
+        <button class="big-btn" id="btn-mode-ai">一轮 · 人机对战</button>
+        <button class="big-btn" id="btn-mode-pvp">一轮 · 玩家对决</button>
+        <button class="big-btn" id="btn-mode-pvp-match">一局 · 玩家对决</button>
+        <button class="big-btn" id="btn-mode-ai-match" disabled>一局 · 人机对战（开发中）</button>
       </div>
       <button class="link-btn" id="btn-rules">游戏规则</button>
       <p class="footnote" id="ai-memory-note"></p>
@@ -24,7 +26,8 @@
 
     <!-- 玩家对决子菜单 -->
     <section id="screen-pvp-menu" class="screen hidden">
-      <h2>玩家对决</h2>
+      <h2 id="pvp-menu-title">玩家对决</h2>
+      <p class="footnote hidden" id="pvp-menu-hint"></p>
       <div class="menu-btns">
         <button class="big-btn" id="btn-create">创建房间</button>
         <div class="join-row">
@@ -58,6 +61,7 @@
           <span class="bullets-num" id="opp-bullets-num">0</span>
           <span class="bullet-icons" id="opp-bullets-icons"></span>
         </div>
+        <div class="money-row hidden" id="opp-money-row"><span class="money-label">筹码</span><span class="money-num" id="opp-money">50</span></div>
         <div class="action-badge hidden" id="opp-action"></div>
         <div class="panel-status" id="opp-status"></div>
       </div>
@@ -74,11 +78,22 @@
           <span class="bullets-num" id="my-bullets-num">0</span>
           <span class="bullet-icons" id="my-bullets-icons"></span>
         </div>
+        <div class="money-row hidden" id="my-money-row"><span class="money-label">筹码</span><span class="money-num" id="my-money">50</span></div>
         <div class="action-badge hidden" id="my-action"></div>
         <div class="panel-status" id="my-status"></div>
       </div>
 
-      <div class="actions">
+      <div class="pick-area hidden" id="pick-area">
+        <div class="pick-title">选择本轮初始子弹（0~2 颗）</div>
+        <div class="pick-btns">
+          <button class="pick-btn" id="pick-0">0</button>
+          <button class="pick-btn" id="pick-1">1</button>
+          <button class="pick-btn" id="pick-2">2</button>
+        </div>
+        <div class="pick-status" id="pick-status"></div>
+      </div>
+
+      <div class="actions" id="actions">
         <button class="act-btn" id="act-u">开枪</button>
         <button class="act-btn" id="act-i">防御</button>
         <button class="act-btn" id="act-o">装弹</button>
@@ -118,7 +133,12 @@
           · 一方开枪、另一方装弹时，开枪方立即获胜；<br>
           · 双方子弹数不相等时，先攒到 5 颗子弹的一方获胜；<br>
           · 双方都到 10 颗子弹为平局；双方同时开枪则各减一颗继续。<br><br>
-          玩家对决：每回合限时 60 秒，超时系统随机代出，连续 3 次超时判负。
+          玩家对决：每回合限时 60 秒，超时系统随机代出，连续 3 次超时判负。<br><br>
+          一局对决：一局最多 5 轮。每轮双方先<b>保密选择初始子弹</b>（0~2 颗），
+          轮开始时公开，该轮从所选子弹数开局。轮末按子弹差结算筹码：
+          y=(i+1)(j+1)x，劣势方获胜赔付翻倍；x=0 不结算；
+          平局双方各扣 5×自选子弹。一方筹码归零立即结束，
+          5 轮后筹码多者获胜。选弹与出招限时、连击规则相同。
         </p>
         <button class="big-btn" id="btn-rules-close">知道了</button>
       </div>
@@ -133,6 +153,7 @@
   </div>
 
   <script src="js/game.js"></script>
+  <script src="js/match.js"></script>
   <script src="strategies.js"></script>
   <script src="js/ai.js"></script>
   <script src="js/net.js"></script>

@@ -313,3 +313,51 @@ html, body {
   text-align: center;
   animation: pop 0.25s ease-out;
 }
+
+/* ---------- 一局模式（筹码 / 选弹） ---------- */
+.big-btn:disabled {
+  background: var(--btn-disabled);
+  border-color: #5c4a34;
+  color: #8d7d66;
+  cursor: not-allowed;
+}
+.money-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.money-label { font-size: 12px; color: var(--muted); }
+.money-num { font-size: 22px; font-weight: bold; color: var(--accent); min-width: 40px; }
+.pick-area {
+  width: 100%;
+  background: var(--panel);
+  border: 2px solid var(--accent-dark);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.pick-title { font-size: 14px; color: var(--muted); }
+.pick-btns { display: flex; gap: 12px; width: 100%; }
+.pick-btn {
+  flex: 1;
+  min-height: 64px;
+  font-size: 28px;
+  color: var(--text);
+  background: var(--btn);
+  border: 2px solid var(--accent-dark);
+  border-radius: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.pick-btn:active { background: var(--btn-active); }
+.pick-btn:disabled {
+  background: var(--btn-disabled);
+  border-color: #5c4a34;
+  color: #8d7d66;
+  cursor: not-allowed;
+}
+.pick-status { font-size: 13px; color: var(--muted); min-height: 18px; }

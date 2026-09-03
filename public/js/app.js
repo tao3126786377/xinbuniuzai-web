@@ -143,8 +143,18 @@
 
   $('btn-mode-pvp').addEventListener('click', function () {
     activeMode = 'pvp';
-    ModePvp.enterMenu();
+    ModePvp.enterMenu('single');
   });
+
+  $('btn-mode-pvp-match').addEventListener('click', function () {
+    activeMode = 'pvp';
+    ModePvp.enterMenu('match');
+  });
+
+  // 一局选弹按钮
+  $('pick-0').addEventListener('click', function () { ModePvp.submitBullets(0); });
+  $('pick-1').addEventListener('click', function () { ModePvp.submitBullets(1); });
+  $('pick-2').addEventListener('click', function () { ModePvp.submitBullets(2); });
 
   $('btn-pvp-back').addEventListener('click', function () {
     showScreen('menu');
@@ -214,8 +224,8 @@
 
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.10');
-  console.log('西部牛仔 网页版 v0.10');
+  setText('version-note', '网页版 v0.11');
+  console.log('西部牛仔 网页版 v0.11');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();

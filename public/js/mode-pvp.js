@@ -16,6 +16,14 @@
   var state = {
     session: null,       // {code, seat, token}
     status: null,        // 'waiting' | 'playing' | 'finished'
+    mode: 'single',      // 'single'（一轮） | 'match'（一局）
+    phase: 'play',       // 'play'（出招） | 'pick'（选初始子弹，仅 match）
+    money: [50, 50],     // 一局筹码（绝对值，[座位0, 座位1]）
+    matchRound: 1,       // 一局第几轮（1..5）
+    picks: [0, 0],       // 本轮已公开的初始子弹
+    myPick: null,        // 选弹阶段我已选的值（未选 null）
+    bulletActed: false,  // 选弹阶段我是否已提交
+    matchHistory: [],    // 每轮结算摘要（重进重建筹码芯片）
     b1: 0, b2: 0,
     round: 1,
     acted: false,        // 本回合我是否已出招
@@ -37,12 +45,16 @@
   var reconnectTimer = null;
   var reconnectDelay = 1000;
   var reconnectAttempt = 0;
+  var reconnectDeadline = 0;  // 本次重连尝试的截止时间（超过则自动放弃回主菜单）
+  var RECONNECT_MAX_MS = 60000;   // 重连总时长上限（与服务端宽限期一致）
   var revealTimer = null;     // 回合揭示计时器（先展示双方行动 1.5 秒再进入下一回合/结果）
   var pendingGameOver = null; // 揭示期间到达的 game_over，展示完成后处理
+  var pickBannerTimer = null; // 选弹揭晓 banner 的自动隐藏计时器
   var REVEAL_MS = 1500;
 
   function clearReveal() {
     if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+    if (pickBannerTimer) { clearTimeout(pickBannerTimer); pickBannerTimer = null; }
     pendingGameOver = null;
   }
 
@@ -70,7 +82,7 @@
         } else if (intent && intent.type === 'rejoin') {
           send({ type: 'rejoin', code: state.session.code, seat: state.session.seat, token: state.session.token });
         } else if (intent && intent.type === 'create') {
-          send({ type: 'create_room' });
+          send({ type: 'create_room', mode: state.mode });
         } else if (intent && intent.type === 'join') {
           send({ type: 'join_room', code: intent.code });
         }
@@ -83,10 +95,18 @@
   function send(obj) { Net.send(obj); }
 
   // ==================== 入口 ====================
-  function enterMenu() {
+  function enterMenu(mode) {
     intent = null;
     stopTick();
     stopReconnect();
+    state.mode = mode === 'match' ? 'match' : 'single';
+    App.setText('pvp-menu-title', state.mode === 'match' ? '一局 · 玩家对决' : '玩家对决');
+    if (state.mode === 'match') {
+      App.setText('pvp-menu-hint', '五轮对局，筹码决胜负');
+      App.show('pvp-menu-hint');
+    } else {
+      App.hide('pvp-menu-hint');
+    }
     App.showScreen('pvp-menu');
   }
 
@@ -145,6 +165,13 @@
     if (!keepSession) clearSession();
     clearReveal();
     state.status = null;
+    state.phase = 'play';
+    state.money = [50, 50];
+    state.matchRound = 1;
+    state.picks = [0, 0];
+    state.myPick = null;
+    state.bulletActed = false;
+    state.matchHistory = [];
     state.b1 = 0; state.b2 = 0;
     state.round = 1;
     state.acted = false;
@@ -188,6 +215,7 @@
       case 'game_started':
         clearReveal();
         state.status = 'playing';
+        state.mode = msg.mode || 'single';
         state.b1 = msg.b1; state.b2 = msg.b2;
         state.round = msg.round;
         state.deadline = msg.roundDeadline;
@@ -198,7 +226,7 @@
         App.hide('rematch-status-line');
         App.setActiveMode('pvp');
         App.clearHistory();
-        App.setText('game-mode-label', '房间 ' + (state.session ? state.session.code : ''));
+        App.setText('game-mode-label', '房间 ' + (state.session ? state.session.code : '') + (state.mode === 'match' ? ' · 一局' : ''));
         App.setText('opponent-name', '对手');
         App.setText('btn-leave-game', '离开房间（判负）');
         App.hide('banner');
@@ -206,19 +234,69 @@
         App.hide('opp-action');
         App.setText('my-status', '');
         App.setText('opp-status', '');
-        App.setText('round-label', '回合 ' + state.round + '/' + Game.MAX_ROUNDS);
         App.showScreen('game');
-        refreshPanels();
-        App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
+        if (state.mode === 'match') {
+          state.money = (msg.money || [Match.START_MONEY, Match.START_MONEY]).slice();
+          state.matchRound = msg.matchRound || 1;
+          state.picks = [0, 0];
+          state.myPick = null;
+          state.bulletActed = false;
+          state.matchHistory = [];
+          enterPickUI(state.matchRound, state.deadline);
+        } else {
+          App.hide('pick-area');
+          App.show('actions');
+          App.setText('round-label', '回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+          refreshPanels();
+          App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
+        }
         startTick();
         return;
 
       case 'round_result':
-        handleRoundResult(msg);
+        if (msg.money !== undefined && msg.picks) handleMatchRoundResult(msg);
+        else handleRoundResult(msg);
+        return;
+
+      case 'bullet_reveal':
+        clearReveal();
+        state.phase = 'play';
+        state.picks = msg.picks.slice();
+        state.b1 = msg.b1; state.b2 = msg.b2;
+        state.round = msg.round;
+        state.deadline = msg.roundDeadline;
+        state.offset = msg.serverNow - Date.now();
+        state.timeoutStrikes = msg.timeoutStrikes.slice();
+        state.money = (msg.money || state.money).slice();
+        state.acted = false;
+        state.bulletActed = false;
+        state.myPick = null;
+        var mySeat = state.session.seat;
+        App.hide('pick-area');
+        App.show('actions');
+        App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+        App.hide('my-action');
+        App.hide('opp-action');
+        App.showBanner('初始子弹公开：你 ' + state.picks[mySeat] + ' 颗 / 对手 ' + state.picks[1 - mySeat] + ' 颗');
+        pickBannerTimer = setTimeout(function () {
+          pickBannerTimer = null;
+          App.hide('banner');
+        }, REVEAL_MS);
+        App.setText('my-status', '');
+        App.setText('opp-status', '');
+        refreshPanels();
+        App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
         return;
 
       case 'timeout_notice': {
         var mine = msg.seat === state.session.seat;
+        if (msg.pick !== undefined) {
+          var n2 = msg.timeoutStrikes[msg.seat];
+          App.toast(mine
+            ? '你超时了，系统代你选择初始子弹：' + msg.pick + ' 颗（连续超时 ' + n2 + '/3）'
+            : '对手超时，系统代其选择初始子弹：' + msg.pick + ' 颗');
+          return;
+        }
         var act = App.actionName(msg.action);
         var n = msg.timeoutStrikes[msg.seat];
         App.toast(mine
@@ -269,7 +347,8 @@
         return;
 
       case 'room_state':
-        syncFromRoomState(msg);
+        if (msg.mode === 'match') syncMatchFromRoomState(msg);
+        else syncFromRoomState(msg);
         return;
 
       case 'error':
@@ -351,6 +430,254 @@
         }
       }, REVEAL_MS);
     }
+  }
+
+  /* 一局对决回合结果：展示双方行动 1.5 秒，再按结算进入下一回合/选弹/结果页 */
+  function handleMatchRoundResult(msg) {
+    var my = state.session.seat;
+    var myChar = my === 0 ? msg.a1 : msg.a2;
+    var oppChar = my === 0 ? msg.a2 : msg.a1;
+
+    clearReveal();
+    state.b1 = msg.b1_next;
+    state.b2 = msg.b2_next;
+    state.timeoutStrikes = msg.timeoutStrikes.slice();
+    state.matchRound = msg.matchRound;
+    state.picks = msg.picks.slice();
+    state.money = msg.money.slice();
+    refreshPanels();
+
+    App.showBadge('my-action', '你：' + App.actionName(myChar), App.actionBadgeClass(myChar));
+    App.showBadge('opp-action', '对手：' + App.actionName(oppChar), App.actionBadgeClass(oppChar));
+    App.lockActionButtons();
+
+    if (msg.outcome === 'continue') {
+      App.showBanner('对手出招：' + App.actionName(oppChar) + '！');
+      App.addHistoryChip(App.actionName(myChar) + '/' + App.actionName(oppChar), '');
+    } else {
+      // 结算展示 + 每轮筹码芯片
+      App.showBanner(matchSettlementText(msg));
+      var myDelta = 0;
+      var hcls = 'draw';
+      if (msg.outcome === 'p1_win') {
+        myDelta = my === 0 ? msg.transfer : -msg.transfer;
+        hcls = my === 0 ? 'win' : 'lose';
+      } else if (msg.outcome === 'p2_win') {
+        myDelta = my === 1 ? msg.transfer : -msg.transfer;
+        hcls = my === 1 ? 'win' : 'lose';
+      } else if (msg.drawPenalty) {
+        myDelta = -msg.drawPenalty[my];
+      }
+      App.addHistoryChip('第' + msg.matchRound + '轮 ' + (myDelta === 0 ? '0' : (myDelta >= 0 ? '+' : '') + myDelta), hcls);
+    }
+
+    if (msg.outcome === 'continue') {
+      // 先展示双方行动 REVEAL_MS，再进入下一回合（新回合服务器已计时，无影响）
+      var nextRound = msg.round + 1;
+      var nextDeadline = msg.roundDeadline;
+      revealTimer = setTimeout(function () {
+        revealTimer = null;
+        state.round = nextRound;
+        state.deadline = nextDeadline;
+        state.acted = false;
+        App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+        App.setText('my-status', '');
+        App.setText('opp-status', '');
+        App.hide('my-action');
+        App.hide('opp-action');
+        App.hide('banner');
+        App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
+        if (pendingGameOver) {
+          var g = pendingGameOver;
+          pendingGameOver = null;
+          showGameOver(g);
+        }
+      }, REVEAL_MS);
+    } else {
+      // 终局：揭示完成后进入下一轮选弹（或消费缓冲的 game_over 进结果页）
+      state.acted = true;
+      var nextPhase = msg.nextPhase;
+      var nextMatchRound = msg.nextMatchRound;
+      var nextDeadline = msg.nextDeadline;
+      revealTimer = setTimeout(function () {
+        revealTimer = null;
+        if (pendingGameOver) {
+          var g2 = pendingGameOver;
+          pendingGameOver = null;
+          showGameOver(g2);
+          return;
+        }
+        if (nextPhase === 'pick') {
+          enterPickUI(nextMatchRound, nextDeadline);
+        }
+      }, REVEAL_MS);
+    }
+  }
+
+  /* 一局结算文案（banner） */
+  function matchSettlementText(msg) {
+    var my = state.session.seat;
+    var myPick = msg.picks[my];
+    if (msg.outcome === 'draw') {
+      return '本轮平局：你扣 ' + (msg.drawPenalty ? msg.drawPenalty[my] : 0) + ' 筹码（初始子弹 ' + myPick + ' 颗 ×5）';
+    }
+    if (!msg.settled) {
+      var iWon = (msg.outcome === 'p1_win') === (my === 0);
+      return iWon ? '你获胜，终局子弹相同（x=0），不结算' : '对手获胜，终局子弹相同（x=0），不结算';
+    }
+    var mineWon = (msg.outcome === 'p1_win') === (my === 0);
+    return '结算：' + (mineWon ? '你赢 ' : '你输 ') + msg.transfer +
+      ' 筹码（x=' + msg.x + '，y=' + msg.y + (msg.double ? '，劣势方双倍 ×2' : '') + '）';
+  }
+
+  /* 一局每轮结算摘要芯片（重进重建） */
+  function matchHistoryDeltaText(mh, seat) {
+    var d;
+    if (mh.draw) d = -(Match.PICK_PENALTY * mh.picks[seat]);
+    else if (mh.outcome === 'p1_win') d = seat === 0 ? mh.transfer : -mh.transfer;
+    else d = seat === 1 ? mh.transfer : -mh.transfer;
+    if (d === 0) return '0';
+    return (d >= 0 ? '+' : '') + d;
+  }
+  function matchHistoryChipClass(mh, seat) {
+    if (mh.draw) return 'draw';
+    if (mh.outcome === 'p1_win') return seat === 0 ? 'win' : 'lose';
+    return seat === 1 ? 'win' : 'lose';
+  }
+
+  /* 进入选弹阶段：显示选弹 UI、隐藏动作区（deadline 由服务器消息置位，倒计时组件零改动） */
+  function enterPickUI(matchRound, deadline) {
+    state.phase = 'pick';
+    state.acted = false;
+    state.bulletActed = false;
+    state.myPick = null;
+    state.deadline = deadline;
+    state.b1 = 0;   // 选弹阶段子弹归零显示（新轮不继承上轮终弹，与服务器一致）
+    state.b2 = 0;
+    App.setText('round-label', '第 ' + matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 选弹');
+    App.hide('banner');
+    App.hide('my-action');
+    App.hide('opp-action');
+    App.lockActionButtons();
+    App.hide('actions');
+    App.show('pick-area');
+    App.setText('pick-status', '');
+    setPickButtonsEnabled(true);
+    refreshPanels();
+  }
+
+  function setPickButtonsEnabled(enabled) {
+    document.getElementById('pick-0').disabled = !enabled;
+    document.getElementById('pick-1').disabled = !enabled;
+    document.getElementById('pick-2').disabled = !enabled;
+  }
+
+  /* 选弹提交（按钮直调） */
+  function submitBullets(n) {
+    if (state.mode !== 'match' || state.status !== 'playing' || state.phase !== 'pick') return;
+    if (state.bulletActed) return;
+    if (typeof n !== 'number' || n < 0 || n > Match.MAX_PICK) return;
+    send({ type: 'submit_bullets', bullets: n });
+    state.bulletActed = true;
+    state.myPick = n;
+    setPickButtonsEnabled(false);
+    App.setText('pick-status', '已选择 ' + n + ' 颗，等待对手选择…');
+  }
+
+  /* 一局重进全量同步 */
+  function syncMatchFromRoomState(msg) {
+    clearReveal();
+    var wasReconnecting = state.reconnecting;
+    state.session = { code: msg.code, seat: msg.seat, token: state.session.token };
+    state.status = msg.status;
+    state.mode = 'match';
+    state.phase = msg.phase;
+    state.b1 = msg.b1; state.b2 = msg.b2;
+    state.round = msg.round;
+    state.deadline = msg.roundDeadline;
+    state.offset = msg.serverNow - Date.now();
+    state.timeoutStrikes = msg.timeoutStrikes.slice();
+    state.oppConnected = msg.opponentConnected;
+    state.graceDeadline = msg.opponentConnected ? null : Date.now() + (msg.graceMs || 60000);
+    state.money = (msg.money || [Match.START_MONEY, Match.START_MONEY]).slice();
+    state.matchRound = msg.matchRound || 1;
+    state.picks = (msg.picks || [0, 0]).slice();
+    state.matchHistory = msg.matchHistory ? msg.matchHistory.slice() : [];
+    if (wasReconnecting) App.toast('已恢复对局');
+    stopReconnect();
+
+    App.setActiveMode('pvp');
+    App.setText('game-mode-label', '房间 ' + msg.code + ' · 一局');
+    App.setText('opponent-name', '对手');
+    App.setText('btn-leave-game', '离开房间（判负）');
+    App.clearHistory();
+
+    if (msg.lastGameOver) {
+      // 回来时比赛已结束：直接显示结果
+      App.showResult(msg.lastGameOver.result, reasonText(msg.lastGameOver));
+      var btn = document.getElementById('btn-rematch');
+      btn.classList.remove('hidden');
+      state.status = 'finished';
+      state.lastReason = msg.lastGameOver.reason;
+      return;
+    }
+
+    if (msg.status === 'waiting') {
+      App.setText('lobby-code', msg.code);
+      App.setText('lobby-status', '等待对手加入…');
+      App.show('lobby-spinner');
+      App.showScreen('lobby');
+      return;
+    }
+
+    // 重建历史：对决移动芯片 + 每轮结算筹码芯片
+    if (msg.history) {
+      for (var i = 0; i < msg.history.length; i++) {
+        var h = msg.history[i];
+        App.addHistoryChip(App.actionName(h.a1) + '/' + App.actionName(h.a2), '');
+      }
+    }
+    for (var k = 0; k < state.matchHistory.length; k++) {
+      var mh = state.matchHistory[k];
+      App.addHistoryChip('第' + mh.matchRound + '轮 ' + matchHistoryDeltaText(mh, msg.seat), matchHistoryChipClass(mh, msg.seat));
+    }
+
+    App.setText('opp-status', msg.opponentConnected ? '' : '对手已断开，等待重连…');
+    App.showScreen('game');
+    refreshPanels();
+
+    if (msg.phase === 'pick') {
+      state.bulletActed = !!msg.bulletActed[msg.seat];
+      state.myPick = (msg.myPick !== undefined) ? msg.myPick : null;
+      enterPickUI(state.matchRound, state.deadline);
+      if (state.bulletActed) {
+        setPickButtonsEnabled(false);
+        App.setText('pick-status', '已选择 ' + state.myPick + ' 颗，等待对手选择…');
+      }
+    } else {
+      App.hide('pick-area');
+      App.show('actions');
+      App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+      App.hide('banner');
+      App.hide('my-action');
+      App.hide('opp-action');
+      state.acted = !!msg.acted[msg.seat];
+      if (msg.lastRound) {
+        var my = msg.seat;
+        var myChar = my === 0 ? msg.lastRound.a1 : msg.lastRound.a2;
+        var oppChar = my === 0 ? msg.lastRound.a2 : msg.lastRound.a1;
+        App.showBadge('my-action', '你：' + App.actionName(myChar), App.actionBadgeClass(myChar));
+        App.showBadge('opp-action', '对手：' + App.actionName(oppChar), App.actionBadgeClass(oppChar));
+      }
+      if (state.acted) {
+        App.lockActionButtons();
+        App.setText('my-status', '已出招');
+        App.setText('opp-status', msg.acted[1 - msg.seat] ? '' : '等待对方出招…');
+      } else {
+        App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
+      }
+    }
+    startTick();
   }
 
   /* 重进全量同步 */
@@ -501,9 +828,11 @@
       state.reconnecting = true;
       reconnectAttempt = 0;
       reconnectDelay = 1000;
+      reconnectDeadline = Date.now() + RECONNECT_MAX_MS;   // 每次重连事件重新计时
       App.showScreen('disconnected');
       App.setText('disc-status', '连接已断开，正在重连…');
-      App.hide('btn-disc-menu');
+      App.setText('btn-disc-menu', '取消重连，返回主菜单');
+      App.show('btn-disc-menu');   // 随时可取消，不把用户卡在转圈页
       scheduleReconnect();
     } else if (intent && (intent.type === 'create' || intent.type === 'join')) {
       // 建房/加入阶段连接失败
@@ -518,8 +847,15 @@
 
   function scheduleReconnect() {
     stopReconnect();
+    if (Date.now() >= reconnectDeadline) {
+      // 重连总时长到上限：放弃本次会话（服务器侧会在宽限期满后判负，本地不再等待）
+      App.toast('重连超时，已返回主菜单');
+      giveUpReconnect();
+      return;
+    }
     reconnectAttempt++;
-    App.setText('disc-status', '连接已断开，正在重连…（第 ' + reconnectAttempt + ' 次）');
+    var remaining = Math.max(0, Math.ceil((reconnectDeadline - Date.now()) / 1000));
+    App.setText('disc-status', '连接已断开，正在重连…（第 ' + reconnectAttempt + ' 次，剩余约 ' + remaining + ' 秒）');
     reconnectTimer = setTimeout(function () {
       connectPvp();
     }, reconnectDelay);
@@ -589,6 +925,16 @@
   function refreshPanels() {
     App.updateBullets('my-bullets-num', 'my-bullets-icons', myBullets());
     App.updateBullets('opp-bullets-num', 'opp-bullets-icons', oppBullets());
+    // 一局筹码行
+    if (state.mode === 'match' && state.session) {
+      App.setText('my-money', String(state.money[state.session.seat]));
+      App.setText('opp-money', String(state.money[1 - state.session.seat]));
+      App.show('my-money-row');
+      App.show('opp-money-row');
+    } else {
+      App.hide('my-money-row');
+      App.hide('opp-money-row');
+    }
     // 连击提示
     if (state.status === 'playing' && state.timeoutStrikes[state.session.seat] > 0) {
       App.setText('my-status', '连续超时 ' + state.timeoutStrikes[state.session.seat] + '/3');
@@ -613,6 +959,13 @@
         if (msg.result === 'lose') return '你连续超时 3 次，判负';
         if (msg.result === 'draw') return '双方连续超时，判平';
         return '对方连续超时 3 次，你获胜';
+      case 'match_end': {
+        var my = state.session ? state.session.seat : 0;
+        var myMoney = msg.money ? msg.money[my] : 0;
+        var oppMoney = msg.money ? msg.money[1 - my] : 0;
+        var verdict = msg.result === 'win' ? '你获胜' : msg.result === 'lose' ? '你落败' : '平局';
+        return verdict + '（最终筹码：你 ' + myMoney + '，对手 ' + oppMoney + '）';
+      }
       default:
         return '';
     }
@@ -645,6 +998,14 @@
     }
 
     if (state.status !== 'playing') return;
+
+    // 出招/选弹后无响应检测：服务器最迟在死线时结算并广播；死线过后 5 秒仍无任何结果，
+    // 说明连接已半死（发出去没人收）——主动断开走重连，避免卡在"等待对方出招"
+    if ((state.acted || state.bulletActed) && state.deadline &&
+        now + state.offset > state.deadline + 5000) {
+      Net.abort();
+      return;
+    }
 
     var el = document.getElementById('countdown');
     if (state.deadline) {
@@ -695,6 +1056,7 @@
     create: create,
     join: join,
     submitAction: submitAction,
+    submitBullets: submitBullets,
     rematchVote: rematchVote,
     leave: leave,
     giveUpReconnect: giveUpReconnect
