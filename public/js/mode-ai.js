@@ -26,16 +26,15 @@
     }
   }
 
-  /* 刷新主菜单记忆脚注：只统计正常结束（GAME_END NORMAL）的对局 */
+  /* 刷新主菜单统计脚注（分模式对局数与胜率，见 stats.js） */
   function refreshMemoryNote() {
-    var games = (logText.match(/^GAME_END NORMAL/gm) || []).length;
-    App.setText('ai-memory-note', games > 0 ? '电脑已记住你的 ' + games + ' 局历史对局' : '电脑还未记录你的对局');
+    Stats.refresh();
   }
 
   /* 构建 AI 会话（与 C++ main 启动序列一致：日志 → 桶 → 后验 → 最佳响应） */
   function buildSession() {
     try { logText = localStorage.getItem(LOG_KEY) || ''; } catch (e) { logText = ''; }
-    var loaded = AI.loadAndProcessLog(logText, nowSec());
+    var loaded = AI.loadAndProcessLog(logText);
     if (loaded.changed) {
       logText = loaded.prunedText;   // 裁剪后写回（等价 C++ 的 dropped_any 重写）
       saveLog();
@@ -86,6 +85,11 @@
     App.setText('opponent-name', '电脑');
     App.setText('btn-leave-game', '返回主菜单（本局作废）');
     App.clearHistory();
+    // 清除一局模式残留的 UI（筹码行 / 选弹面板 / 隐藏的动作区）
+    App.hide('my-money-row');
+    App.hide('opp-money-row');
+    App.hide('pick-area');
+    App.show('actions');
     App.showScreen('game');
     startRound();
   }

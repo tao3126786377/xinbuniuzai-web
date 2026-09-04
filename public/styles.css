@@ -361,3 +361,28 @@ html, body {
   cursor: not-allowed;
 }
 .pick-status { font-size: 13px; color: var(--muted); min-height: 18px; }
+
+/* ---------- 对局记录弹窗 ---------- */
+.hist-box { max-height: 80vh; }
+.hist-list {
+  max-height: 58vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+.hist-empty { color: var(--muted); font-size: 14px; }
+.hist-game {
+  background: var(--panel2);
+  border-radius: 10px;
+  padding: 8px 10px;
+  text-align: left;
+}
+.hist-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; color: var(--text); }
+.hist-title.hist-win { color: var(--accent); }
+.hist-title.hist-lose { color: #e8a0a0; }
+.hist-title.hist-draw { color: #b0b0c8; }
+.hist-moves { font-size: 12px; color: var(--muted); line-height: 1.7; word-break: break-all; }
+.hist-label { color: var(--text); }

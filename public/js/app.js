@@ -222,20 +222,22 @@
     hide('rules-modal');
   });
 
+  $('btn-history').addEventListener('click', function () {
+    Stats.openHistory();
+  });
+
+  $('btn-history-close').addEventListener('click', function () {
+    Stats.closeHistory();
+  });
+
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.11');
-  console.log('西部牛仔 网页版 v0.11');
+  setText('version-note', '网页版 v0.12');
+  console.log('西部牛仔 网页版 v0.12');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();
 
-  // 菜单脚注：统计历史对局数（不构建模型，仅数行；只统计正常结束的对局）
-  try {
-    var logText = localStorage.getItem('xnz_log_v1') || '';
-    var games = (logText.match(/^GAME_END NORMAL/gm) || []).length;
-    setText('ai-memory-note', games > 0 ? '电脑已记住你的 ' + games + ' 局历史对局' : '电脑还未记录你的对局');
-  } catch (e) {
-    setText('ai-memory-note', '');
-  }
+  // 菜单脚注：分模式对局数与胜率（Stats 内部自处理 localStorage 异常）
+  Stats.refresh();
 })();

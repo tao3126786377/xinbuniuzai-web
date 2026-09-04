@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""生成 AI 移植最强对照数据 + 存档新基线（放宽随机检测阈值后）。
+"""生成 AI 移植最强对照数据 + 存档新基线（网页版权重 = 按局数降权）。
 
 用法：python web/tools/gen_reference.py
-1. 复用项目根目录 evaluation.py（已验证的 Python 镜像）按现行配置（差桶、N0=10、
-   eps=0.05、kappa=5、随机检测新阈值 JS<0.03/样本≥20）计算完整策略表，
-   导出 web/test/reference.json 供 test/verify_ai.js 第 3 层逐状态 diff；
+1. 复用项目根目录 evaluation.py（已验证的 Python 镜像）按网页版现行配置
+   （按局数降权 decay="games"、差桶、N0=10、eps=0.05、kappa=5、
+   随机检测 JS<0.03/样本≥20）计算完整策略表，导出 web/test/reference.json
+   供 test/verify_ai.js 第 3 层逐状态 diff（局数权重与时间无关，对比确定）；
 2. 顺带跑两个配置的镜像评估并存档新基线（纯均衡 / 当前配置）。
 """
 import json
@@ -20,7 +21,7 @@ import evaluation as ev
 def main():
     t0 = time.time()
     eq_comp, eq_player, v_values = ev.parse_header(ev.HEADER_PATH)
-    counts, totals, fired = ev.load_log(ev.LOG_PATH)
+    counts, totals, fired = ev.load_log(ev.LOG_PATH, decay="games")
     pool = ev.pool_stats(counts, totals)
 
     print("随机检测触发状态（新阈值 JS<%.2f、样本>=%g）: %s" % (
@@ -41,7 +42,6 @@ def main():
     out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "test", "reference.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
-            "now_sec": int(time.time()),   # 验证脚本须用同一时刻计算时间衰减权重，保证对比确定
             "comp": comp.tolist(),
             "br": [[int(br[b1, b2]) for b2 in range(11)] for b1 in range(11)],
             "V_br": V_br.tolist(),

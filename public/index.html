@@ -14,12 +14,13 @@
       <h1 class="game-title">西部牛仔</h1>
       <p class="subtitle">开枪 · 防御 · 装弹</p>
       <div class="menu-btns">
-        <button class="big-btn" id="btn-mode-ai">一轮 · 人机对战</button>
-        <button class="big-btn" id="btn-mode-pvp">一轮 · 玩家对决</button>
-        <button class="big-btn" id="btn-mode-pvp-match">一局 · 玩家对决</button>
-        <button class="big-btn" id="btn-mode-ai-match" disabled>一局 · 人机对战（开发中）</button>
+        <button class="big-btn" id="btn-mode-ai">快速 · 人机对战</button>
+        <button class="big-btn" id="btn-mode-pvp">快速 · 玩家对决</button>
+        <button class="big-btn" id="btn-mode-pvp-match">完整 · 玩家对决</button>
+        <button class="big-btn" id="btn-mode-ai-match" disabled>完整 · 人机对战（开发中）</button>
       </div>
       <button class="link-btn" id="btn-rules">游戏规则</button>
+      <button class="link-btn" id="btn-history">对局记录</button>
       <p class="footnote" id="ai-memory-note"></p>
       <p class="footnote" id="version-note"></p>
     </section>
@@ -134,13 +135,22 @@
           · 双方子弹数不相等时，先攒到 5 颗子弹的一方获胜；<br>
           · 双方都到 10 颗子弹为平局；双方同时开枪则各减一颗继续。<br><br>
           玩家对决：每回合限时 60 秒，超时系统随机代出，连续 3 次超时判负。<br><br>
-          一局对决：一局最多 5 轮。每轮双方先<b>保密选择初始子弹</b>（0~2 颗），
+          完整对决：完整对局最多 5 轮。每轮双方先<b>保密选择初始子弹</b>（0~2 颗），
           轮开始时公开，该轮从所选子弹数开局。轮末按子弹差结算筹码：
           y=(i+1)(j+1)x，劣势方获胜赔付翻倍；x=0 不结算；
           平局双方各扣 5×自选子弹。一方筹码归零立即结束，
           5 轮后筹码多者获胜。选弹与出招限时、连击规则相同。
         </p>
         <button class="big-btn" id="btn-rules-close">知道了</button>
+      </div>
+    </div>
+
+    <!-- 对局记录弹窗 -->
+    <div id="history-modal" class="modal hidden">
+      <div class="modal-box hist-box">
+        <h3>对局记录（最近 20 局）</h3>
+        <div id="history-list" class="hist-list"></div>
+        <button class="big-btn" id="btn-history-close">关闭</button>
       </div>
     </div>
 
@@ -158,6 +168,7 @@
   <script src="js/ai.js"></script>
   <script src="js/net.js"></script>
   <script src="js/mode-ai.js"></script>
+  <script src="js/stats.js"></script>
   <script src="js/mode-pvp.js"></script>
   <script src="js/app.js"></script>
 </body>

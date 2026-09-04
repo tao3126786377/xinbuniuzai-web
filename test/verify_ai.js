@@ -8,8 +8,8 @@
  *       零和博弈纳什均衡处最佳响应值 == 均衡值，容差吸收 LP 求解误差）
  *
  * 第 2 层：日志相关检查（用户现有 game_log.txt）
- *   差桶样本量、随机检测触发状态（应为 (1,1)(3,1)）、已知开枪率（工作记录.md：
- *   (1,1) 72.8% / (2,2) 72.9% / (4,4) 82.1%，日志持续增长允许 ±3pp 漂移）
+ *   差桶样本量、随机检测触发状态、已知开枪率（2026-09-03 按局数降权后重校准：
+ *   (1,1) 6.6% / (2,2) 59.6% / (4,4) 73.2%，日志持续增长允许 ±3pp 漂移）
  *
  * 第 3 层：最强对照（需先运行 python tools/gen_reference.py 生成 reference.json）
  *   最终策略概率逐状态 diff < 1e-6；br_policy 差异状态数应为 0
@@ -33,8 +33,6 @@ function check(cond, msg) {
   if (cond) console.log('  [通过] ' + msg);
   else { console.error('  [失败] ' + msg); failures++; }
 }
-
-const nowSec = Math.floor(Date.now() / 1000);
 
 // ================= 第 1 层：日志无关 =================
 console.log('== 第 1 层：日志无关检查 ==');
@@ -71,7 +69,7 @@ check(rowOk, '1b. 均衡策略：非终态行和 = 1 且不可行动作为 0（c
 // 空日志不变量：w=0 → w_bayes=0 → 最终策略不混入任何 BR 质量。
 // （C++ 原样行为：最终输出经全 3 动作重归一，LP 解 %.8f 打印使行和 ≈1±1e-8，
 //   重归一引入 ~1e-8 扰动——容差取 1e-6 即可捕获任何实质性的 BR 混入。）
-const emptySession = AI.buildAiSession('', nowSec, Strategies);
+const emptySession = AI.buildAiSession('', Strategies);
 let eqInvariant = true, eqMaxDiff = 0;
 for (let b1 = 0; b1 <= MB; b1++) {
   for (let b2 = 0; b2 <= MB; b2++) {
@@ -113,15 +111,15 @@ check(vIterOk, '1d. 值迭代机制：BR(均衡玩家) 的 V_br 复现 V_values�
 console.log('== 第 2 层：日志相关检查（' + LOG_PATH + '）==');
 if (fs.existsSync(LOG_PATH)) {
   const logText = fs.readFileSync(LOG_PATH, 'utf8');
-  const session = AI.buildAiSession(logText, nowSec, Strategies);
+  const session = AI.buildAiSession(logText, Strategies);
 
   console.log('  差桶样本量（桶 d≤-3..≥+3 × 支撑 [0弹, 非0弹]）：');
   for (let bk = 0; bk < 7; bk++) {
     console.log('    桶' + bk + ': [' + session.poolTotal[bk][0].toFixed(2) + ', ' + session.poolTotal[bk][1].toFixed(2) + ']');
   }
   console.log('  随机检测触发状态（b1,b2,JS）：' + JSON.stringify(session.loaded.fired));
-  // 放宽后（JS<0.03、样本≥20）：(1,1) 权重充足且 JS=0.0205 仍触发；
-  // (3,1) 旧样本权重不足 20（旧门槛 10 时曾触发），新门槛下不再检查——符合放宽预期。
+  // 按局数降权后（2026-09-03）：(1,1) 权重 6.60 仍触发（JS=0.0236）；
+  // (3,1) 等旧样本权重已低于门槛 20，不再检查——符合局数降权预期。
   const firedFlat = session.loaded.fired.map(f => f[0] + ',' + f[1]).sort().join(' ');
   const b11Weight = session.loaded.totalWeight[1][1];
   console.log('  (1,1) 降权后权重 = ' + b11Weight.toFixed(2) + '（原始 ' + session.loaded.rawTotal[1][1].toFixed(2) + '）');
@@ -129,7 +127,7 @@ if (fs.existsSync(LOG_PATH)) {
   const allFiredBelowThreshold = session.loaded.fired.every(f => f[2] < AI.RANDOM_JS_THRESHOLD);
   check(allFiredBelowThreshold, '2a\'. 所有触发状态 JS < 0.03（阈值一致性）');
 
-  const known = { '1,1': 0.728, '2,2': 0.729, '4,4': 0.821 };
+  const known = { '1,1': 0.066, '2,2': 0.596, '4,4': 0.732 };
   for (const key of Object.keys(known)) {
     const b1 = +key.split(',')[0], b2 = +key.split(',')[1];
     const p = AI.computeFinalStrategy(session, b1, b2);
@@ -146,9 +144,8 @@ console.log('== 第 3 层：与 evaluation.py 参照 diff ==');
 if (fs.existsSync(REF_PATH) && fs.existsSync(LOG_PATH)) {
   const ref = JSON.parse(fs.readFileSync(REF_PATH, 'utf8'));
   const logText = fs.readFileSync(LOG_PATH, 'utf8');
-  // 与参照数据用同一时刻计算时间衰减权重（否则 w 随时刻漂移，对比不确定）
-  const refNowSec = ref.now_sec || nowSec;
-  const session = AI.buildAiSession(logText, refNowSec, Strategies);
+  // 权重按对局数量降权（与时间无关），参照数据可直接逐状态对比
+  const session = AI.buildAiSession(logText, Strategies);
   let maxDiff = 0, brDiff = 0, states = 0;
   let maxVbrDiff = 0, maxVeqDiff = 0, gateMismatch = 0;
   const brDiffStates = [], gateMismatchStates = [];

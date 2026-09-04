@@ -1,14 +1,17 @@
 /* 西部牛仔 · 自适应 AI 管线（浏览器 <script> 与 Node require 通用，UMD）
  *
- * C++ Game_XiBuNiuZai.cpp 的自适应层逐行移植（纯函数，无 DOM / localStorage）：
- *   loadAndProcessLog    → 日志解析/整局缓冲/90 天裁剪/时间衰减/随机检测降权
+ * C++ Game_XiBuNiuZai.cpp 的自适应层移植（纯函数，无 DOM / localStorage）：
+ *   loadAndProcessLog    → 日志解析/整局缓冲/按局数降权/随机检测降权
  *   buildPoolStats       → 子弹差桶 × 支撑类型合并统计
  *   buildPosterior       → Dirichlet 后验（κ 先验 + Laplace +1，仅可行支撑）
  *   computeBestResponse  → 完整最佳响应（Jacobi 值迭代 ≤20000 次，δ<1e-7）
  *   computeFinalStrategy → 混合决策（w_bayes=w/(w+N0)，ε 门槛）
  *   sampleAction         → 累积采样
  *
- * 随机检测参数为 2026-09-02 放宽后的值：JS 阈值 0.03（原 0.05）、样本门槛 20（原 10）。
+ * 权重方案（2026-09-03 用户拍板）：按对局数量降权替代时间衰减——最新一局权重 1，
+ * 每往前一局 ×0.95（半衰期 ≈13.5 局），只保留最近 90 局（权重 <1%）。
+ * C++ 控制台版仍为时间衰减（保持不动）。随机检测参数为 2026-09-02 放宽后的值：
+ * JS 阈值 0.03（原 0.05）、样本门槛 20（原 10）。
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -22,11 +25,10 @@
   var MB = Game.MAX_BULLET;   // 10
   var NA = 3;
 
-  // 常量（与 C++ 一致；随机检测为放宽后的阈值）
+  // 常量（GAMMA 与 C++ 一致；随机检测为放宽后的阈值；权重按局数降权）
   var GAMMA = 0.999;
-  var TIME_DECAY_LAMBDA = 0.95;
-  var TIME_DECAY_TAU = 86400.0;
-  var LOG_PRUNE_DAYS = 90.0;
+  var GAME_DECAY_LAMBDA = 0.95;   // 每往前一局权重 ×0.95（半衰期 ≈13.5 局）
+  var MAX_KEEP_GAMES = 90;        // 只保留最近 90 局（第 90 局权重 <1%）
   var RANDOM_JS_THRESHOLD = 0.03;
   var RANDOM_DOWNWEIGHT = 0.3;
   var MIN_SAMPLES_FOR_RANDOM_CHECK = 20.0;
@@ -68,10 +70,10 @@
     return 0.5 * (kl_pm + kl_um);
   }
 
-  /* 日志加载（C++ load_and_process_log 逐行移植）。
-   * logText: 完整日志文本；nowSec: 当前 Unix 秒。
+  /* 日志加载（权重按对局数量降权：最新一局权重 1，每往前一局 ×0.95）。
+   * logText: 完整日志文本。nowSec 参数仅保留兼容（不再参与计算）。
    * 返回 { rawCount, rawTotal, weightedCount, totalWeight, prunedText, changed, fired }
-   *  - 只计入 GAME_END NORMAL 且局开始时间距今 ≤90 天的对局；
+   *  - 只计入 GAME_END NORMAL 的对局，最多保留最近 90 局（超量旧局裁掉）；
    *  - 中止/无结尾/杂行被裁掉，changed=true 时应将 prunedText 写回存储；
    *  - 只学习玩家动作（电脑动作仅随日志原样保留）。
    */
@@ -82,7 +84,7 @@
     var rounds = [];        // 当前局的回合缓冲
     var inGame = false;
     var gameStartT = 0;
-    var out = [];           // 裁剪后保留的行（原样时间戳）
+    var games = [];         // 正常结束的完整对局（顺序收集：{startT, endT, rounds}）
     var changed = false;
 
     var lines = logText.split('\n');
@@ -98,26 +100,10 @@
         var normal = line.indexOf('NORMAL') !== -1;
         var mEnd = line.match(/^GAME_END\s+\S+\s+(\d+)/);
         var endT = mEnd ? parseInt(mEnd[1], 10) : 0;
-        if (inGame && normal && (nowSec - gameStartT) <= LOG_PRUNE_DAYS * TIME_DECAY_TAU) {
-          for (var i = 0; i < rounds.length; i++) {
-            var r = rounds[i];
-            if (r.b1 < 0 || r.b1 > MB || r.b2 < 0 || r.b2 > MB) continue;
-            var pi = Game.charToAction(r.pa);
-            if (pi < 0) continue;
-            var tw = Math.pow(TIME_DECAY_LAMBDA, (nowSec - r.t) / TIME_DECAY_TAU);
-            if (tw > 1.0) tw = 1.0;   // 未来时间戳保护
-            rawCount[r.b1][r.b2][pi] += tw;
-            rawTotal[r.b1][r.b2] += tw;
-          }
-          // 重新序列化保留在裁剪后的日志中
-          out.push('GAME_START ' + gameStartT);
-          for (var j = 0; j < rounds.length; j++) {
-            var rr = rounds[j];
-            out.push(rr.b1 + ' ' + rr.b2 + ' ' + rr.pa + ' ' + rr.ca + ' ' + rr.t);
-          }
-          out.push('GAME_END NORMAL ' + endT);
+        if (inGame && normal) {
+          games.push({ startT: gameStartT, endT: endT, rounds: rounds.slice() });
         } else {
-          changed = true;   // 中止对局/过期对局/无 START 的 END 行：裁掉
+          changed = true;   // 中止对局/无 START 的 END 行：裁掉
         }
         inGame = false;
       } else if (inGame) {
@@ -133,6 +119,31 @@
       }
     }
     if (inGame) changed = true;   // 文件尾仍处于游戏中：该局丢弃
+
+    // 按对局数量降权：gamesAgo = 距最新一局的局数，tw = 0.95^gamesAgo；
+    // 最多保留最近 MAX_KEEP_GAMES 局（超量旧局裁掉，changed 置位以触发写回）
+    var keepStart = games.length > MAX_KEEP_GAMES ? games.length - MAX_KEEP_GAMES : 0;
+    if (keepStart > 0) changed = true;
+    var out = [];           // 裁剪后保留的行（原样时间戳）
+    for (var g = keepStart; g < games.length; g++) {
+      var gm = games[g];
+      var tw = Math.pow(GAME_DECAY_LAMBDA, games.length - 1 - g);
+      for (var i = 0; i < gm.rounds.length; i++) {
+        var r = gm.rounds[i];
+        if (r.b1 < 0 || r.b1 > MB || r.b2 < 0 || r.b2 > MB) continue;
+        var pi = Game.charToAction(r.pa);
+        if (pi < 0) continue;
+        rawCount[r.b1][r.b2][pi] += tw;
+        rawTotal[r.b1][r.b2] += tw;
+      }
+      // 重新序列化保留在裁剪后的日志中
+      out.push('GAME_START ' + gm.startT);
+      for (var j = 0; j < gm.rounds.length; j++) {
+        var rr = gm.rounds[j];
+        out.push(rr.b1 + ' ' + rr.b2 + ' ' + rr.pa + ' ' + rr.ca + ' ' + rr.t);
+      }
+      out.push('GAME_END NORMAL ' + gm.endT);
+    }
 
     // 随机行为检测与降权（在原始加权计数上统一处理）
     var weightedCount = zeros3();
@@ -371,8 +382,8 @@
   /* 页面加载时的一次性管线（C++ main 启动序列）：
    * 载入日志 → 差桶统计 → 后验 → 完整最佳响应 → 打包会话
    */
-  function buildAiSession(logText, nowSec, strategies) {
-    var loaded = loadAndProcessLog(logText, nowSec);
+  function buildAiSession(logText, strategies) {
+    var loaded = loadAndProcessLog(logText);
     var pool = buildPoolStats(loaded.weightedCount, loaded.totalWeight);
     var post = buildPosterior(pool.poolCount, pool.poolTotal, strategies.eq_policy_player);
     var br = computeBestResponse(post, strategies.eq_policy_comp, strategies.V_values);
@@ -391,9 +402,8 @@
   return {
     // 常量（供验证与调试读取）
     GAMMA: GAMMA,
-    TIME_DECAY_LAMBDA: TIME_DECAY_LAMBDA,
-    TIME_DECAY_TAU: TIME_DECAY_TAU,
-    LOG_PRUNE_DAYS: LOG_PRUNE_DAYS,
+    GAME_DECAY_LAMBDA: GAME_DECAY_LAMBDA,
+    MAX_KEEP_GAMES: MAX_KEEP_GAMES,
     RANDOM_JS_THRESHOLD: RANDOM_JS_THRESHOLD,
     RANDOM_DOWNWEIGHT: RANDOM_DOWNWEIGHT,
     MIN_SAMPLES_FOR_RANDOM_CHECK: MIN_SAMPLES_FOR_RANDOM_CHECK,

@@ -100,7 +100,7 @@
     stopTick();
     stopReconnect();
     state.mode = mode === 'match' ? 'match' : 'single';
-    App.setText('pvp-menu-title', state.mode === 'match' ? '一局 · 玩家对决' : '玩家对决');
+    App.setText('pvp-menu-title', state.mode === 'match' ? '完整 · 玩家对决' : '玩家对决');
     if (state.mode === 'match') {
       App.setText('pvp-menu-hint', '五轮对局，筹码决胜负');
       App.show('pvp-menu-hint');
@@ -226,7 +226,7 @@
         App.hide('rematch-status-line');
         App.setActiveMode('pvp');
         App.clearHistory();
-        App.setText('game-mode-label', '房间 ' + (state.session ? state.session.code : '') + (state.mode === 'match' ? ' · 一局' : ''));
+        App.setText('game-mode-label', '房间 ' + (state.session ? state.session.code : '') + (state.mode === 'match' ? ' · 完整对局' : ''));
         App.setText('opponent-name', '对手');
         App.setText('btn-leave-game', '离开房间（判负）');
         App.hide('banner');
@@ -607,7 +607,7 @@
     stopReconnect();
 
     App.setActiveMode('pvp');
-    App.setText('game-mode-label', '房间 ' + msg.code + ' · 一局');
+    App.setText('game-mode-label', '房间 ' + msg.code + ' · 完整对局');
     App.setText('opponent-name', '对手');
     App.setText('btn-leave-game', '离开房间（判负）');
     App.clearHistory();
