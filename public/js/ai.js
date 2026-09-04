@@ -145,7 +145,11 @@
       out.push('GAME_END NORMAL ' + gm.endT);
     }
 
-    // 随机行为检测与降权（在原始加权计数上统一处理）
+    // 随机行为检测与降权（在原始加权计数上统一处理；dw 矩阵同时供记忆计数使用）
+    var dw = zeros2();
+    for (var b1 = 0; b1 <= MB; b1++) {
+      for (var b2 = 0; b2 <= MB; b2++) dw[b1][b2] = 1.0;
+    }
     var weightedCount = zeros3();
     var totalWeight = zeros2();
     var fired = [];
@@ -153,19 +157,18 @@
       for (var b2 = 0; b2 <= MB; b2++) {
         var total = rawTotal[b1][b2];
         if (total < 1e-9) continue;
-        var downweight = 1.0;
         if (total >= MIN_SAMPLES_FOR_RANDOM_CHECK && !Game.isTerminal(b1, b2)) {
           var feas = Game.feasible(b1);
           if (feas.length >= 2) {
             var js = jsDivergenceToUniform(rawCount[b1][b2], total, feas);
             if (js < RANDOM_JS_THRESHOLD) {
-              downweight = RANDOM_DOWNWEIGHT;
+              dw[b1][b2] = RANDOM_DOWNWEIGHT;
               fired.push([b1, b2, js]);
             }
           }
         }
-        for (var a = 0; a < NA; a++) weightedCount[b1][b2][a] = rawCount[b1][b2][a] * downweight;
-        totalWeight[b1][b2] = total * downweight;
+        for (var a = 0; a < NA; a++) weightedCount[b1][b2][a] = rawCount[b1][b2][a] * dw[b1][b2];
+        totalWeight[b1][b2] = total * dw[b1][b2];
       }
     }
 
@@ -176,7 +179,9 @@
       totalWeight: totalWeight,
       prunedText: out.length ? out.join('\n') + '\n' : '',
       changed: changed,
-      fired: fired
+      fired: fired,
+      games: games,
+      dw: dw
     };
   }
 
@@ -379,15 +384,281 @@
     return Game.ACT_O;
   }
 
+  // ==================== 记忆-1 增广管线（2026-09-05 升级式设计） ====================
+  // 与 Python memory_sim.py 逐行一致：
+  //  - 记忆单元 = 上一回合动作对（含开局 start 共 10 个），m' = (玩家动作, 电脑动作)
+  //  - 层级平滑：记忆单元向桶边际后验收缩（smooth=3），稀疏单元自然退化为生产模型
+  //  - 增广 MDP（子弹 × 记忆，300 个增广状态）：策略迭代 + 高斯消元精确求解
+  //  - 升级式决策：仅当 V_br_mem − V_blind_on_mem > 0.02 才换用记忆 BR，否则沿用生产策略
+  var MEM_NAMES = ['start', 'uu', 'ui', 'uo', 'iu', 'ii', 'io', 'ou', 'oi', 'oo'];
+  var PAIR_TO_MEM = { uu: 1, ui: 2, uo: 3, iu: 4, ii: 5, io: 6, ou: 7, oi: 8, oo: 9 };
+  var MEM_SMOOTH = 3.0;
+  var EV_UPGRADE_EPSILON = 0.02;
+
+  function memIndex(paCh, caCh) {
+    return PAIR_TO_MEM[paCh + caCh] || 0;
+  }
+
+  /* 增广状态枚举：非终态 (b1,b2)（b1 外 b2 内）× 10 记忆单元，与 Python AUG 同序 */
+  var AUG = [];
+  var AUG_IDX = [];   // [b1][b2][mi] -> idx（终态为 -1）
+  for (var _b1 = 0; _b1 <= MB; _b1++) {
+    var row = [];
+    for (var _b2 = 0; _b2 <= MB; _b2++) {
+      var cells = new Array(10).fill(-1);
+      if (!Game.isTerminal(_b1, _b2)) {
+        for (var _mi = 0; _mi < 10; _mi++) {
+          cells[_mi] = AUG.length;
+          AUG.push([_b1, _b2, _mi]);
+        }
+      }
+      row.push(cells);
+    }
+    AUG_IDX.push(row);
+  }
+
+  function zeros4() {
+    var t = [];
+    for (var i = 0; i <= MB; i++) {
+      var r = [];
+      for (var j = 0; j <= MB; j++) {
+        var c = [];
+        for (var k = 0; k < 10; k++) c.push([0, 0, 0]);
+        r.push(c);
+      }
+      t.push(r);
+    }
+    return t;
+  }
+  function zerosMem() {
+    var t = [];
+    for (var i = 0; i <= MB; i++) {
+      var r = [];
+      for (var j = 0; j <= MB; j++) r.push(new Array(10).fill(0));
+      t.push(r);
+    }
+    return t;
+  }
+  function zerosMemFill(v) {
+    var t = [];
+    for (var i = 0; i <= MB; i++) {
+      var r = [];
+      for (var j = 0; j <= MB; j++) r.push(new Array(10).fill(v));
+      t.push(r);
+    }
+    return t;
+  }
+
+  /* 增广转移：返回 { pay, next }——next = [nb1, nb2, nextMi] 或 null（终局） */
+  function augStep(b1, b2, c, h) {
+    if (c === Game.ACT_U && h === Game.ACT_O) return { pay: 1.0, next: null };
+    if (h === Game.ACT_U && c === Game.ACT_O) return { pay: 0.0, next: null };
+    var nb1 = b1, nb2 = b2;
+    if (h === Game.ACT_U) nb1--;
+    else if (h === Game.ACT_O) nb1++;
+    if (c === Game.ACT_U) nb2--;
+    else if (c === Game.ACT_O) nb2++;
+    if (nb1 >= MB && nb2 >= MB) return { pay: 0.5, next: null };
+    if (nb1 >= 5 && nb1 > nb2) return { pay: 0.0, next: null };
+    if (nb2 >= 5 && nb2 > nb1) return { pay: 1.0, next: null };
+    return { pay: 0, next: [nb1, nb2, memIndex(Game.ACT_CHARS[h], Game.ACT_CHARS[c])] };
+  }
+
+  /* 记忆计数：局数降权（0.95^局距，保留最近 90 局）× 状态级随机检测降权 × 记忆单元。
+   * games = loadAndProcessLog 返回的完整正常对局；dw = 状态降权矩阵。 */
+  function buildMemoryCounts(games, dw) {
+    var cnt = [], tot = [];
+    for (var bk = 0; bk < 7; bk++) {
+      var tyArr = [];
+      for (var ty = 0; ty < 2; ty++) {
+        var mArr = [];
+        for (var mi = 0; mi < 10; mi++) mArr.push([0, 0, 0]);
+        tyArr.push(mArr);
+      }
+      cnt.push(tyArr);
+      tot.push([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]);
+    }
+    var N = games.length;
+    var keepStart = N > MAX_KEEP_GAMES ? N - MAX_KEEP_GAMES : 0;
+    for (var g = keepStart; g < N; g++) {
+      var w = Math.pow(GAME_DECAY_LAMBDA, N - 1 - g);
+      var rounds = games[g].rounds;
+      for (var t = 0; t < rounds.length; t++) {
+        var r = rounds[t];
+        if (r.b1 < 0 || r.b1 > MB || r.b2 < 0 || r.b2 > MB) continue;
+        var pi = Game.charToAction(r.pa);
+        if (pi < 0) continue;
+        var bk = diffBucket(r.b1, r.b2), ty = supportType(r.b1);
+        var mi = t > 0 ? memIndex(rounds[t - 1].pa, rounds[t - 1].ca) : 0;
+        cnt[bk][ty][mi][pi] += w * dw[r.b1][r.b2];
+        tot[bk][ty][mi] += w * dw[r.b1][r.b2];
+      }
+    }
+    return { poolCount: cnt, poolTotal: tot };
+  }
+
+  /* 记忆-1 玩家模型：桶边际后验为基（复用生产 buildPosterior 公式），
+   * 记忆单元向基收缩：post = (cnt + smooth·base) / (w + smooth) */
+  function buildMemoryModel(cnt, tot, eqPlayer, smooth) {
+    var poolCount = [], poolTotal = [];
+    for (var bk = 0; bk < 7; bk++) {
+      poolCount.push([[0, 0, 0], [0, 0, 0]]);
+      poolTotal.push([0, 0]);
+      for (var ty = 0; ty < 2; ty++) {
+        for (var a = 0; a < NA; a++) {
+          for (var mi = 0; mi < 10; mi++) poolCount[bk][ty][a] += cnt[bk][ty][mi][a];
+        }
+        for (mi = 0; mi < 10; mi++) poolTotal[bk][ty] += tot[bk][ty][mi];
+      }
+    }
+    var base = buildPosterior(poolCount, poolTotal, eqPlayer);
+    var post = zeros4();
+    for (var b1 = 0; b1 <= MB; b1++) {
+      for (var b2 = 0; b2 <= MB; b2++) {
+        if (Game.isTerminal(b1, b2)) continue;
+        var feas = Game.feasible(b1);
+        var bk = diffBucket(b1, b2), ty = supportType(b1);
+        for (var mi = 0; mi < 10; mi++) {
+          var wm = tot[bk][ty][mi];
+          for (var k = 0; k < feas.length; k++) {
+            var h = feas[k];
+            post[b1][b2][mi][h] = (cnt[bk][ty][mi][h] + smooth * base[b1][b2][h]) / (wm + smooth);
+          }
+        }
+      }
+    }
+    return post;
+  }
+
+  /* 高斯消元（部分主元）解 (I − γP)x = r（300 增广状态线性系统） */
+  function solveLinear(P, r, gamma) {
+    var n = P.length;
+    var M = new Array(n);
+    for (var i = 0; i < n; i++) {
+      var row = new Array(n + 1);
+      for (var j = 0; j < n; j++) row[j] = (i === j ? 1.0 : 0.0) - gamma * P[i][j];
+      row[n] = r[i];
+      M[i] = row;
+    }
+    for (var k = 0; k < n; k++) {
+      var piv = k, max = Math.abs(M[k][k]);
+      for (var ii = k + 1; ii < n; ii++) {
+        var v = Math.abs(M[ii][k]);
+        if (v > max) { max = v; piv = ii; }
+      }
+      if (max < 1e-300) throw new Error('AI 增广求解：矩阵奇异');
+      if (piv !== k) { var tmp = M[k]; M[k] = M[piv]; M[piv] = tmp; }
+      var diag = M[k][k];
+      for (ii = k + 1; ii < n; ii++) {
+        var f = M[ii][k] / diag;
+        if (f === 0) continue;
+        for (var j = k; j <= n; j++) M[ii][j] -= f * M[k][j];
+      }
+    }
+    var x = new Array(n);
+    for (var i = n - 1; i >= 0; i--) {
+      var s = M[i][n];
+      for (var j = i + 1; j < n; j++) s -= M[i][j] * x[j];
+      x[i] = s / M[i][i];
+    }
+    return x;
+  }
+
+  /* 增广 MDP 策略评估：comp[b1][b2][mi][c]、playerModel[b1][b2][mi][h] → 值向量（AUG 序） */
+  function evaluateAug(comp, playerModel, gamma) {
+    var n = AUG.length;
+    var P = new Array(n);
+    var r = new Array(n);
+    for (var i = 0; i < n; i++) { P[i] = new Array(n).fill(0); r[i] = 0; }
+    for (i = 0; i < n; i++) {
+      var b1 = AUG[i][0], b2 = AUG[i][1], mi = AUG[i][2];
+      var feasC = Game.feasible(b2);
+      var feasP = Game.feasible(b1);
+      for (var ki = 0; ki < feasC.length; ki++) {
+        var c = feasC[ki];
+        var pc = comp[b1][b2][mi][c];
+        if (pc <= 0) continue;
+        for (var kj = 0; kj < feasP.length; kj++) {
+          var h = feasP[kj];
+          var ph = playerModel[b1][b2][mi][h];
+          if (ph <= 0) continue;
+          var t = augStep(b1, b2, c, h);
+          if (t.next === null) r[i] += pc * ph * t.pay;
+          else P[i][AUG_IDX[t.next[0]][t.next[1]][t.next[2]]] += pc * ph;
+        }
+      }
+    }
+    return solveLinear(P, r, gamma);
+  }
+
+  /* 完整最佳响应（增广版）：策略迭代，初始 = 均衡（记忆盲），
+   * 改进取可行序 [i,u,o] 中严格更优的首个动作（平局决胜与 Python 一致）。
+   * 返回 { VbrMem, VeqMem, brMem }（11×11×10 网格）。 */
+  function solveBrAug(playerModel, eqComp, gamma) {
+    var n = AUG.length;
+    // 初始策略 = 均衡（记忆盲），4D 结构 [b1][b2][mi][a]，与 Python 一致
+    var pi = zeros4();
+    var eqPi = zeros4();
+    for (var i = 0; i < n; i++) {
+      var b1 = AUG[i][0], b2 = AUG[i][1], mi0 = AUG[i][2];
+      var fc = Game.feasible(b2);
+      for (var k = 0; k < fc.length; k++) {
+        pi[b1][b2][mi0][fc[k]] = eqComp[b1][b2][fc[k]];
+        eqPi[b1][b2][mi0][fc[k]] = eqComp[b1][b2][fc[k]];
+      }
+    }
+    for (var iter = 0; iter < 100; iter++) {
+      var V = evaluateAug(pi, playerModel, gamma);
+      var newPi = zeros4();
+      var changed = false;
+      for (i = 0; i < n; i++) {
+        var b1 = AUG[i][0], b2 = AUG[i][1], mi = AUG[i][2];
+        var feasC = Game.feasible(b2);
+        var feasP = Game.feasible(b1);
+        var best = -1e18, ba = feasC[0];
+        for (var ki = 0; ki < feasC.length; ki++) {
+          var c = feasC[ki];
+          var q = 0.0;
+          for (var kj = 0; kj < feasP.length; kj++) {
+            var h = feasP[kj];
+            var ph = playerModel[b1][b2][mi][h];
+            if (ph <= 0) continue;
+            var t = augStep(b1, b2, c, h);
+            q += ph * (t.next === null ? t.pay : gamma * V[AUG_IDX[t.next[0]][t.next[1]][t.next[2]]]);
+          }
+          if (q > best) { best = q; ba = c; }
+        }
+        newPi[b1][b2][mi][ba] = 1.0;
+        if (pi[b1][b2][mi][ba] !== 1.0) changed = true;
+      }
+      pi = newPi;
+      if (!changed) break;
+    }
+    var Vbr = evaluateAug(pi, playerModel, gamma);
+    var Veq = evaluateAug(eqPi, playerModel, gamma);
+    var VbrG = zerosMem(), VeqG = zerosMem(), brG = zerosMemFill(0);
+    for (i = 0; i < n; i++) {
+      var b1 = AUG[i][0], b2 = AUG[i][1], mi = AUG[i][2];
+      VbrG[b1][b2][mi] = Vbr[i];
+      VeqG[b1][b2][mi] = Veq[i];
+      var bestA = 0, bestP = -1;
+      for (var a = 0; a < NA; a++) {
+        if (pi[b1][b2][mi][a] > bestP) { bestP = pi[b1][b2][mi][a]; bestA = a; }
+      }
+      brG[b1][b2][mi] = bestA;
+    }
+    return { VbrMem: VbrG, VeqMem: VeqG, brMem: brG };
+  }
+
   /* 页面加载时的一次性管线（C++ main 启动序列）：
-   * 载入日志 → 差桶统计 → 后验 → 完整最佳响应 → 打包会话
+   * 载入日志 → 差桶统计 → 后验 → 完整最佳响应 → 记忆-1 增广管线 → 打包会话
    */
   function buildAiSession(logText, strategies) {
     var loaded = loadAndProcessLog(logText);
     var pool = buildPoolStats(loaded.weightedCount, loaded.totalWeight);
     var post = buildPosterior(pool.poolCount, pool.poolTotal, strategies.eq_policy_player);
     var br = computeBestResponse(post, strategies.eq_policy_comp, strategies.V_values);
-    return {
+    var session = {
       post: post,
       Vbr: br.Vbr,
       Veq: br.Veq,
@@ -397,6 +668,61 @@
       eqPlayer: strategies.eq_policy_player,
       loaded: loaded
     };
+
+    // ---- 记忆-1 增广管线（升级式设计，2026-09-05）----
+    var memCounts = buildMemoryCounts(loaded.games, loaded.dw);
+    var memPost = buildMemoryModel(memCounts.poolCount, memCounts.poolTotal,
+                                   strategies.eq_policy_player, MEM_SMOOTH);
+    var brMem = solveBrAug(memPost, strategies.eq_policy_comp, GAMMA);
+    // 生产策略（记忆盲）增广副本，在记忆模型上求值 → 升级式切换基准
+    var blindAug = zeros4();
+    for (var b1 = 0; b1 <= MB; b1++) {
+      for (var b2 = 0; b2 <= MB; b2++) {
+        if (Game.isTerminal(b1, b2)) continue;
+        var p = computeFinalStrategy(session, b1, b2);
+        for (var mi = 0; mi < 10; mi++) blindAug[b1][b2][mi] = p.slice();
+      }
+    }
+    var VblVec = evaluateAug(blindAug, memPost, GAMMA);
+    var VblMem = zerosMem();
+    for (var i = 0; i < AUG.length; i++) {
+      VblMem[AUG[i][0]][AUG[i][1]][AUG[i][2]] = VblVec[i];
+    }
+    // 切换决策：V_br_mem − V_blind_on_mem > ε 的增广状态换记忆 BR 行动，否则沿用生产策略。
+    // 数据门槛：该桶无任何样本时不切换（空日志 → 纯均衡，与生产"无数据不出手"原则一致；
+    // 桶内有数据的增广状态模型由桶后验兜底，仍可切换——与全部离线实验一致）
+    var memAction = zerosMemFill(-1);
+    for (var b1 = 0; b1 <= MB; b1++) {
+      for (var b2 = 0; b2 <= MB; b2++) {
+        if (Game.isTerminal(b1, b2)) continue;
+        var bk = diffBucket(b1, b2), ty = supportType(b1);
+        if (session.poolTotal[bk][ty] < 1e-9) continue;
+        for (var mi = 0; mi < 10; mi++) {
+          if (brMem.VbrMem[b1][b2][mi] - VblMem[b1][b2][mi] > EV_UPGRADE_EPSILON) {
+            memAction[b1][b2][mi] = brMem.brMem[b1][b2][mi];
+          }
+        }
+      }
+    }
+    session.memPost = memPost;
+    session.VbrMem = brMem.VbrMem;
+    session.VeqMem = brMem.VeqMem;
+    session.brMem = brMem.brMem;
+    session.VblMem = VblMem;
+    session.memAction = memAction;
+    return session;
+  }
+
+  /* 最终决策（记忆版）：(b1, b2, mi) 处若已切换则纯记忆 BR 行动，否则沿用生产策略。
+   * mi 为当前局内记忆单元（0=开局，1..9=上一回合动作对），由调用方追踪。 */
+  function computeFinalStrategyMem(session, b1, b2, mi) {
+    var a = session.memAction[b1][b2][mi];
+    if (a >= 0) {
+      var p = [0, 0, 0];
+      p[a] = 1.0;
+      return p;
+    }
+    return computeFinalStrategy(session, b1, b2);
   }
 
   return {
@@ -411,6 +737,10 @@
     N0: N0,
     EV_ADVANTAGE_EPSILON: EV_ADVANTAGE_EPSILON,
     MAX_ROUNDS_BUFFER: MAX_ROUNDS_BUFFER,
+    MEM_NAMES: MEM_NAMES,
+    PAIR_TO_MEM: PAIR_TO_MEM,
+    MEM_SMOOTH: MEM_SMOOTH,
+    EV_UPGRADE_EPSILON: EV_UPGRADE_EPSILON,
     // 函数
     jsDivergenceToUniform: jsDivergenceToUniform,
     loadAndProcessLog: loadAndProcessLog,
@@ -421,6 +751,14 @@
     computeBestResponse: computeBestResponse,
     computeFinalStrategy: computeFinalStrategy,
     sampleAction: sampleAction,
-    buildAiSession: buildAiSession
+    memIndex: memIndex,
+    buildMemoryCounts: buildMemoryCounts,
+    buildMemoryModel: buildMemoryModel,
+    evaluateAug: evaluateAug,
+    solveBrAug: solveBrAug,
+    computeFinalStrategyMem: computeFinalStrategyMem,
+    buildAiSession: buildAiSession,
+    AUG: AUG,
+    AUG_IDX: AUG_IDX
   };
 });

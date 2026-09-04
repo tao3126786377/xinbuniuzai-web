@@ -107,6 +107,41 @@ for (let b1 = 0; b1 <= MB; b1++) {
 }
 check(vIterOk, '1d. 值迭代机制：BR(均衡玩家) 的 V_br 复现 V_values（最大误差 ' + maxVErr.toExponential(2) + ' < 1e-3）');
 
+// 记忆管线：空日志不变量（记忆模型 = 均衡 → 无切换，所有记忆单元输出生产策略 = 均衡）
+let memInvariant = true, memMaxDiff = 0;
+for (let b1 = 0; b1 <= MB; b1++) {
+  for (let b2 = 0; b2 <= MB; b2++) {
+    if (Game.isTerminal(b1, b2)) continue;
+    for (let mi = 0; mi < 10; mi++) {
+      const p = AI.computeFinalStrategyMem(emptySession, b1, b2, mi);
+      for (let a = 0; a < 3; a++) {
+        memMaxDiff = Math.max(memMaxDiff, Math.abs(p[a] - Strategies.eq_policy_comp[b1][b2][a]));
+        if (Math.abs(p[a] - Strategies.eq_policy_comp[b1][b2][a]) > 1e-6) memInvariant = false;
+      }
+    }
+  }
+}
+check(memInvariant, '1e. 空日志不变量（记忆版）：全部 300 增广状态最终策略 == 电脑均衡策略（最大差 ' + memMaxDiff.toExponential(2) + '）');
+
+// 增广求解器自检：均衡策略 vs 均衡玩家 → V(0,0,start) ≈ 0.49483569
+// （均衡表 8 位小数截断经 γ=0.999 放大 ~1e-5，容差取 1e-4）
+const eqAugComp = [], eqAugPlayer = [];
+for (let b1 = 0; b1 <= MB; b1++) {
+  eqAugComp[b1] = [];
+  eqAugPlayer[b1] = [];
+  for (let b2 = 0; b2 <= MB; b2++) {
+    eqAugComp[b1][b2] = [];
+    eqAugPlayer[b1][b2] = [];
+    for (let mi = 0; mi < 10; mi++) {
+      eqAugComp[b1][b2][mi] = Strategies.eq_policy_comp[b1][b2].slice();
+      eqAugPlayer[b1][b2][mi] = Strategies.eq_policy_player[b1][b2].slice();
+    }
+  }
+}
+const VaugEq = AI.evaluateAug(eqAugComp, eqAugPlayer, AI.GAMMA);
+const vStart = VaugEq[AI.AUG_IDX[0][0][0]];
+check(Math.abs(vStart - 0.49483569) < 1e-4, '1f. 增广求解器自检：均衡 vs 均衡 V(0,0,start) = ' + vStart.toFixed(8) + '（容差 1e-4）');
+
 // ================= 第 2 层：日志相关 =================
 console.log('== 第 2 层：日志相关检查（' + LOG_PATH + '）==');
 if (fs.existsSync(LOG_PATH)) {
@@ -179,6 +214,47 @@ if (fs.existsSync(REF_PATH) && fs.existsSync(LOG_PATH)) {
   check(gateMismatch === 0, '3d. ε 门槛一致（差异 ' + gateMismatch + ' 个' + (gateMismatch ? '：' + gateMismatchStates.join(' ') : '') + '）');
   check(maxDiff < 1e-6, '3e. 最终策略概率最大差 ' + maxDiff.toExponential(3) + ' < 1e-6');
   check(brDiff === 0, '3f. br_policy 全状态一致（差异 ' + brDiff + ' 个' + (brDiff ? '：' + brDiffStates.join(' ') + '（近似平局处，需人工核对）' : '') + '）');
+
+  // ---- 记忆-1 增广管线 diff（2026-09-05，升级式设计） ----
+  if (ref.br_mem) {
+    let brMemDiff = 0, maxVbrMemDiff = 0, maxVblMemDiff = 0, memSwitchDiff = 0, maxCompMemDiff = 0;
+    let cells = 0;
+    const memSwitchDiffCells = [];
+    for (let b1 = 0; b1 <= MB; b1++) {
+      for (let b2 = 0; b2 <= MB; b2++) {
+        if (Game.isTerminal(b1, b2)) continue;
+        for (let mi = 0; mi < 10; mi++) {
+          cells++;
+          if (session.brMem[b1][b2][mi] !== ref.br_mem[b1][b2][mi]) brMemDiff++;
+          maxVbrMemDiff = Math.max(maxVbrMemDiff, Math.abs(session.VbrMem[b1][b2][mi] - ref.V_br_mem[b1][b2][mi]));
+          maxVblMemDiff = Math.max(maxVblMemDiff, Math.abs(session.VblMem[b1][b2][mi] - ref.V_bl_mem[b1][b2][mi]));
+          const swJS = session.memAction[b1][b2][mi] >= 0;
+          const swPY = ref.V_br_mem[b1][b2][mi] - ref.V_bl_mem[b1][b2][mi] > AI.EV_UPGRADE_EPSILON &&
+            ref.bucket_total[AI.diffBucket(b1, b2)][AI.supportType(b1)] >= 1e-9;
+          if (swJS !== swPY) { memSwitchDiff++; memSwitchDiffCells.push('(' + b1 + ',' + b2 + ',' + mi + ')'); }
+          if (swJS === swPY) {
+            const p = AI.computeFinalStrategyMem(session, b1, b2, mi);
+            for (let a = 0; a < 3; a++) {
+              maxCompMemDiff = Math.max(maxCompMemDiff, Math.abs(p[a] - ref.comp_mem[b1][b2][mi][a]));
+            }
+          }
+        }
+      }
+    }
+    check(cells === 300, '3g. 增广状态数 300（实际 ' + cells + '）');
+    check(brMemDiff === 0, '3h. br_mem 全单元一致（差异 ' + brMemDiff + ' 个）');
+    check(maxVbrMemDiff < 1e-6, '3i. V_br_mem 最大差 ' + maxVbrMemDiff.toExponential(2) + ' < 1e-6（高斯消元 vs numpy）');
+    check(maxVblMemDiff < 1e-6, '3j. V_bl_mem 最大差 ' + maxVblMemDiff.toExponential(2) + ' < 1e-6（高斯消元 vs numpy）');
+    check(memSwitchDiff === 0, '3k. 升级式切换决策一致（差异 ' + memSwitchDiff + ' 个' + (memSwitchDiff ? '：' + memSwitchDiffCells.join(' ') : '') + '）');
+    check(maxCompMemDiff < 1e-6, '3l. 记忆版最终策略概率最大差 ' + maxCompMemDiff.toExponential(3) + ' < 1e-6');
+    let maxPoolDiff = 0;
+    for (let bk = 0; bk < 7; bk++) {
+      for (let ty = 0; ty < 2; ty++) {
+        maxPoolDiff = Math.max(maxPoolDiff, Math.abs(session.poolTotal[bk][ty] - ref.bucket_total[bk][ty]));
+      }
+    }
+    check(maxPoolDiff < 1e-9, '3m. 桶总量与参照一致（最大差 ' + maxPoolDiff.toExponential(2) + '）');
+  }
 } else {
   console.log('  参照文件 reference.json 或日志不存在，跳过（先运行：python web/tools/gen_reference.py）');
 }

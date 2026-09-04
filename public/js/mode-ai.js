@@ -79,6 +79,7 @@
       compAction: -1,
       playerActed: false,
       over: false,
+      mem: 0,   // 局内记忆单元（0=开局；1..9=上一回合动作对，供记忆-1 升级式决策）
       logLines: ['GAME_START ' + nowSec()]
     };
     App.setText('game-mode-label', '人机对战');
@@ -108,8 +109,9 @@
     App.hide('countdown');
     App.setActionButtons({ u: game.b1 > 0, i: true, o: game.b1 < Game.MAX_BULLET });
 
-    // AI 在玩家出招前采样（与 C++ 一致：玩家看不到也影响不了本次 AI 行动）
-    var probs = AI.computeFinalStrategy(session, game.b1, game.b2);
+    // AI 在玩家出招前采样（与 C++ 一致：玩家看不到也影响不了本次 AI 行动）；
+    // 记忆-1 升级式：按 (状态, 上一回合动作对) 决策
+    var probs = AI.computeFinalStrategyMem(session, game.b1, game.b2, game.mem);
     game.compAction = AI.sampleAction(probs);
   }
 
@@ -120,6 +122,9 @@
     game.playerActed = true;
     var pch = Game.ACT_CHARS[a];
     var cch = Game.ACT_CHARS[game.compAction];
+
+    // 更新局内记忆（下一回合的决策依据）
+    game.mem = AI.memIndex(pch, cch);
 
     // 日志先行（C++ 顺序：结算前写回合行，瞬间胜负回合也写）
     game.logLines.push(game.b1 + ' ' + game.b2 + ' ' + pch + ' ' + cch + ' ' + nowSec());

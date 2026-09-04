@@ -39,6 +39,31 @@ def main():
     comp = ev.comp_strategy(post, eq_comp, V_br, V_eqm, br, totals,
                             ev.EV_ADVANTAGE_EPSILON, ev.N0, w_table=wtab)
 
+    # ---- 记忆-1 增广管线参照（升级式：V_br_mem − V_blind_on_mem > 0.02 处换记忆 BR） ----
+    import memory_sim as ms
+    from memory_analysis import parse_games
+    games = parse_games(ev.LOG_PATH)
+    cnt_m, tot_m = ms.build_memory_counts(games)
+    model_m = ms.build_memory_model(cnt_m, tot_m, eq_player)
+    V_br_m, V_eq_m, br_m = ms.solve_br_aug(model_m, eq_comp)
+    comp_blind_aug = np.zeros((11, 11, 10, 3))
+    for (b1, b2) in ev.STATES:
+        for mi in range(10):
+            comp_blind_aug[b1, b2, mi] = comp[b1, b2]
+    V_bl_m = ms.evaluate_aug(comp_blind_aug, model_m)
+    pb_t = tot_m.sum(axis=2)   # 桶总量（与 JS 数据门槛一致）
+    comp_mem = ms.comp_upgrade_mem(br_m, comp_blind_aug, V_br_m, V_bl_m, eps=0.02,
+                                   bucket_tot=pb_t)
+
+    def aug_grid(vec):
+        g = [[[0.0] * 10 for _ in range(11)] for _ in range(11)]
+        for (b1, b2, mi) in ms.AUG:
+            g[b1][b2][mi] = float(vec[ms.AUG_IDX[(b1, b2, mi)]])
+        return g
+
+    br_mem_grid = [[[int(np.argmax(br_m[b1, b2, mi])) for mi in range(10)]
+                    for b2 in range(11)] for b1 in range(11)]
+
     out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "test", "reference.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
@@ -46,6 +71,12 @@ def main():
             "br": [[int(br[b1, b2]) for b2 in range(11)] for b1 in range(11)],
             "V_br": V_br.tolist(),
             "V_eqm": V_eqm.tolist(),
+            "br_mem": br_mem_grid,
+            "V_br_mem": aug_grid(V_br_m),
+            "V_bl_mem": aug_grid(V_bl_m),
+            "comp_mem": [[[comp_mem[b1, b2, mi].tolist() for mi in range(10)]
+                          for b2 in range(11)] for b1 in range(11)],
+            "bucket_total": pool[1].tolist(),
         }, f)
     print("已导出参照数据: %s" % os.path.relpath(out_path, ROOT))
 
