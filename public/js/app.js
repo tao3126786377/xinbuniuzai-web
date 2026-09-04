@@ -230,6 +230,68 @@
     Stats.closeHistory();
   });
 
+  // ==================== 临时：导出对战日志（测试后删除） ====================
+  $('btn-export-log').addEventListener('click', function () {
+    var text = '';
+    try { text = localStorage.getItem('xnz_log_v1') || ''; } catch (e) { text = ''; }
+    if (!text) {
+      toast('暂无对战日志（本设备未玩过快速·人机）');
+      return;
+    }
+    var games = (text.match(/GAME_END NORMAL/g) || []).length;
+    $('export-text').value = text;
+    setText('export-info', '本设备共 ' + games + ' 局，约 ' + Math.max(1, Math.round(text.length / 1024)) + ' KB');
+    show('export-modal');
+  });
+
+  $('btn-export-copy').addEventListener('click', function () {
+    var text = $('export-text').value;
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        toast('日志已复制，粘贴保存发给 Claude 即可');
+      }, function () {
+        fallbackCopyExport();
+      });
+    } else {
+      fallbackCopyExport();
+    }
+  });
+
+  function fallbackCopyExport() {
+    var ta = $('export-text');
+    ta.focus();
+    ta.select();
+    try {
+      if (document.execCommand('copy')) {
+        toast('日志已复制，粘贴保存发给 Claude 即可');
+        return;
+      }
+    } catch (e) { /* 忽略 */ }
+    toast('复制失败：文本已全选，请长按手动复制');
+  }
+
+  $('btn-export-download').addEventListener('click', function () {
+    var text = $('export-text').value;
+    if (!text) return;
+    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'xnz_log.txt';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 1000);
+  });
+
+  $('btn-export-close').addEventListener('click', function () {
+    hide('export-modal');
+  });
+  // ==================== 临时导出结束 ====================
+
   // ==================== 启动 ====================
   showScreen('menu');
   setText('version-note', '网页版 v0.12');

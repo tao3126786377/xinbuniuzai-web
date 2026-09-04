@@ -362,6 +362,24 @@ html, body {
 }
 .pick-status { font-size: 13px; color: var(--muted); min-height: 18px; }
 
+/* ---------- 临时：导出日志弹窗（测试后删除） ---------- */
+.export-text {
+  width: 100%;
+  height: 42vh;
+  min-height: 180px;
+  background: var(--panel2);
+  border: 1px solid var(--accent-dark);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: Consolas, Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px;
+  resize: none;
+  outline: none;
+}
+/* 临时导出结束 */
+
 /* ---------- 对局记录弹窗 ---------- */
 .hist-box { max-height: 80vh; }
 .hist-list {
