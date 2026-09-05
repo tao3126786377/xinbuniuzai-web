@@ -142,6 +142,25 @@ const VaugEq = AI.evaluateAug(eqAugComp, eqAugPlayer, AI.GAMMA);
 const vStart = VaugEq[AI.AUG_IDX[0][0][0]];
 check(Math.abs(vStart - 0.49483569) < 1e-4, '1f. 增广求解器自检：均衡 vs 均衡 V(0,0,start) = ' + vStart.toFixed(8) + '（容差 1e-4）');
 
+// 脏数据健壮性（2026-09-05 线上事故数据形态：undefined 回合行 / 空对局 / 中止对局）
+let weirdOk = true;
+try {
+  const weirdLog = 'GAME_START 1\nGAME_END NORMAL 2\n' +
+    'GAME_START 3\n0 0 o undefined 4\nGAME_END ABORT 5\n' +
+    'GAME_START 6\n0 0 o o 7\nGAME_END NORMAL 8\n';
+  const ws = AI.buildAiSession(weirdLog, Strategies);
+  for (let b1 = 0; b1 <= MB; b1++) {
+    for (let b2 = 0; b2 <= MB; b2++) {
+      if (Game.isTerminal(b1, b2)) continue;
+      for (let mi = 0; mi < 10; mi++) AI.computeFinalStrategyMem(ws, b1, b2, mi);
+    }
+  }
+} catch (e) {
+  weirdOk = false;
+  console.error('  异常：' + e.message);
+}
+check(weirdOk, '1g. 脏日志（undefined 回合/空对局/中止对局）可构建会话并全单元决策');
+
 // ================= 第 2 层：日志相关 =================
 console.log('== 第 2 层：日志相关检查（' + LOG_PATH + '）==');
 if (fs.existsSync(LOG_PATH)) {

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "gen": "node tools/gen_strategies.js",
-    "test:ai": "node test/verify_ai.js"
+    "test:ai": "node test/verify_ai.js && node test/mode_ai_smoke.js"
   },
   "dependencies": {
     "ws": "^8.18.0"

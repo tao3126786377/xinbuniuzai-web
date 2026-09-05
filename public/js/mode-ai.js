@@ -1,15 +1,19 @@
 /* 西部牛仔 · 人机对战模式（完全客户端运行，无需服务器）
  *
- * AI 管线忠实移植自 C++：页面加载（首次进入）时构建模型一次，之后每局复用；
- * AI 在玩家出招前采样（保持同时性与"不偷看"性质）；
+ * AI 管线（含记忆-1 升级式）由 AI.buildAiSession 统一构建：页面加载（首次进入）时
+ * 构建一次，之后每局复用；AI 在玩家出招前采样（保持同时性与"不偷看"性质）；
  * 日志存 localStorage，格式与 C++ game_log.txt 完全一致。
+ *
+ * 对局归属纪律（2026-09-05 修复）：出招后的揭示/结算定时器全部捕获本回合的
+ * 对局对象 g，回调时校验 module 级 game 仍指向 g——防止"揭示 1.5 秒内离开并
+ * 重开新局"时旧定时器污染新对局（曾导致空对局 GAME_START+END 与记录错位）。
  */
 (function () {
   'use strict';
 
   var LOG_KEY = 'xnz_log_v1';
 
-  var session = null;   // AI 会话（后验/BR/桶总量）
+  var session = null;   // AI 会话（后验/BR/桶总量/记忆管线）
   var logText = '';     // 当前日志文本（内存镜像，追加后写回）
   var game = null;      // 当前对局状态
 
@@ -31,27 +35,14 @@
     Stats.refresh();
   }
 
-  /* 构建 AI 会话（与 C++ main 启动序列一致：日志 → 桶 → 后验 → 最佳响应） */
+  /* 构建 AI 会话（与 C++ main 启动序列一致：日志 → 桶 → 后验 → 最佳响应 → 记忆管线） */
   function buildSession() {
     try { logText = localStorage.getItem(LOG_KEY) || ''; } catch (e) { logText = ''; }
-    var loaded = AI.loadAndProcessLog(logText);
-    if (loaded.changed) {
-      logText = loaded.prunedText;   // 裁剪后写回（等价 C++ 的 dropped_any 重写）
+    session = AI.buildAiSession(logText, Strategies);
+    if (session.loaded.changed) {
+      logText = session.loaded.prunedText;   // 裁剪后写回（等价 C++ 的 dropped_any 重写）
       saveLog();
     }
-    var pool = AI.buildPoolStats(loaded.weightedCount, loaded.totalWeight);
-    var post = AI.buildPosterior(pool.poolCount, pool.poolTotal, Strategies.eq_policy_player);
-    var br = AI.computeBestResponse(post, Strategies.eq_policy_comp, Strategies.V_values);
-    session = {
-      post: post,
-      Vbr: br.Vbr,
-      Veq: br.Veq,
-      brPolicy: br.brPolicy,
-      poolTotal: pool.poolTotal,
-      eqComp: Strategies.eq_policy_comp,
-      eqPlayer: Strategies.eq_policy_player
-    };
-    // 刷新菜单脚注
     refreshMemoryNote();
   }
 
@@ -92,42 +83,44 @@
     App.hide('pick-area');
     App.show('actions');
     App.showScreen('game');
-    startRound();
+    startRound(game);
   }
 
-  function startRound() {
-    game.playerActed = false;
-    game.compAction = -1;
-    App.setText('round-label', '回合 ' + game.round + '/' + Game.MAX_ROUNDS);
-    App.updateBullets('my-bullets-num', 'my-bullets-icons', game.b1);
-    App.updateBullets('opp-bullets-num', 'opp-bullets-icons', game.b2);
+  function startRound(g) {
+    g = g || game;
+    g.playerActed = false;
+    g.compAction = -1;
+    App.setText('round-label', '回合 ' + g.round + '/' + Game.MAX_ROUNDS);
+    App.updateBullets('my-bullets-num', 'my-bullets-icons', g.b1);
+    App.updateBullets('opp-bullets-num', 'opp-bullets-icons', g.b2);
     App.hide('my-action');
     App.hide('opp-action');
     App.setText('my-status', '');
     App.setText('opp-status', '');
     App.hide('banner');
     App.hide('countdown');
-    App.setActionButtons({ u: game.b1 > 0, i: true, o: game.b1 < Game.MAX_BULLET });
+    App.setActionButtons({ u: g.b1 > 0, i: true, o: g.b1 < Game.MAX_BULLET });
 
     // AI 在玩家出招前采样（与 C++ 一致：玩家看不到也影响不了本次 AI 行动）；
     // 记忆-1 升级式：按 (状态, 上一回合动作对) 决策
-    var probs = AI.computeFinalStrategyMem(session, game.b1, game.b2, game.mem);
-    game.compAction = AI.sampleAction(probs);
+    var probs = AI.computeFinalStrategyMem(session, g.b1, g.b2, g.mem);
+    g.compAction = AI.sampleAction(probs);
   }
 
   function onAction(a) {
     if (!game || game.over || game.playerActed) return;
     if (!Game.isFeasible(game.b1, a)) return;
 
-    game.playerActed = true;
+    var g = game;   // 本回合归属的对局：揭示/结算定时器期间 game 可能已被替换或置空
+    g.playerActed = true;
     var pch = Game.ACT_CHARS[a];
-    var cch = Game.ACT_CHARS[game.compAction];
+    var cch = Game.ACT_CHARS[g.compAction];
 
     // 更新局内记忆（下一回合的决策依据）
-    game.mem = AI.memIndex(pch, cch);
+    g.mem = AI.memIndex(pch, cch);
 
     // 日志先行（C++ 顺序：结算前写回合行，瞬间胜负回合也写）
-    game.logLines.push(game.b1 + ' ' + game.b2 + ' ' + pch + ' ' + cch + ' ' + nowSec());
+    g.logLines.push(g.b1 + ' ' + g.b2 + ' ' + pch + ' ' + cch + ' ' + nowSec());
 
     App.lockActionButtons();
     App.setText('my-status', '已出招');
@@ -135,29 +128,34 @@
     App.setText('opp-status', '电脑出招中…');
 
     setTimeout(function () {
+      if (game !== g || g.over) return;   // 期间已离开/新开局：放弃陈旧回调
+
       App.setText('opp-status', '');
       App.showBadge('opp-action', '出招：' + App.actionName(cch), App.actionBadgeClass(cch));
 
-      var r = Game.step(game.b1, game.b2, a, game.compAction);
+      var r = Game.step(g.b1, g.b2, a, g.compAction);
       var outcome = r.winner === 1 ? 'win' : r.winner === 2 ? 'lose' : r.winner === 0 ? 'draw' : 'continue';
-      game.b1 = r.b1;
-      game.b2 = r.b2;
-      App.updateBullets('my-bullets-num', 'my-bullets-icons', game.b1);
-      App.updateBullets('opp-bullets-num', 'opp-bullets-icons', game.b2);
+      g.b1 = r.b1;
+      g.b2 = r.b2;
+      App.updateBullets('my-bullets-num', 'my-bullets-icons', g.b1);
+      App.updateBullets('opp-bullets-num', 'opp-bullets-icons', g.b2);
 
       if (outcome === 'continue') {
         App.addHistoryChip(App.actionName(pch) + '/' + App.actionName(cch), '');
-        if (game.round >= Game.MAX_ROUNDS) {
+        if (g.round >= Game.MAX_ROUNDS) {
           // 回合上限平局（C++ 语义：非终止结算后检查）
-          game.over = true;
-          endGame('draw', '回合数达到 ' + Game.MAX_ROUNDS + ' 上限，平局！');
+          g.over = true;
+          endGame(g, 'draw', '回合数达到 ' + Game.MAX_ROUNDS + ' 上限，平局！');
           return;
         }
-        game.round++;
+        g.round++;
         App.showBanner('对手出招：' + App.actionName(cch) + '！');
-        setTimeout(startRound, 1500);
+        setTimeout(function () {
+          if (game !== g) return;   // 揭示期间离开：下一回合不再开始
+          startRound(g);
+        }, 1500);
       } else {
-        game.over = true;
+        g.over = true;
         var cls = outcome === 'win' ? 'win' : outcome === 'lose' ? 'lose' : 'draw';
         App.addHistoryChip(pch + '/' + cch, cls);
         // 结束原因区分：瞬间胜负（开枪打中装弹）vs 子弹数先到 5
@@ -169,15 +167,23 @@
         } else {
           reason = '双方子弹都达到了 10 颗。';
         }
+        // 终局日志先行写入：若用户在揭示期间离开/重开，本局记录不丢失也不错位
+        g.logLines.push('GAME_END NORMAL ' + nowSec());
+        logText += g.logLines.join('\n') + '\n';
+        saveLog();
+        refreshMemoryNote();
         App.showBanner('对手出招：' + App.actionName(cch) + '！');
-        setTimeout(function () { endGame(outcome, reason); }, 1500);
+        setTimeout(function () {
+          if (game !== g) return;   // 揭示期间离开/新开局：结果页不再打扰
+          App.showResult(outcome, reason);
+        }, 1500);
       }
     }, 1500);
   }
 
-  function endGame(outcome, reason) {
-    game.logLines.push('GAME_END NORMAL ' + nowSec());
-    logText += game.logLines.join('\n') + '\n';
+  function endGame(g, outcome, reason) {
+    g.logLines.push('GAME_END NORMAL ' + nowSec());
+    logText += g.logLines.join('\n') + '\n';
     saveLog();
     refreshMemoryNote();
     App.showResult(outcome, reason);
