@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "config": {
+    "rounds": 5,
+    "cap": 100,
+    "money": 50
+  },
+  "states": 51034258,
+  "max_local_duality_gap": 5.551115123125783e-16,
+  "accumulated_error_bound": 3.868572129306358e-12,
+  "certified": true,
+  "seconds": 56.514859099988826,
+  "root_value": 0.4999999999999999,
+  "artifact_bytes": 421432888
+}

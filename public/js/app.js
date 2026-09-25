@@ -3,7 +3,7 @@
   'use strict';
 
   var SCREENS = ['menu', 'pvp-menu', 'lobby', 'game', 'result', 'disconnected'];
-  var activeMode = null;   // 'ai' | 'pvp'（决定对局界面按钮文案与行为）
+  var activeMode = null;   // 'ai' | 'ai-match' | 'pvp'
 
   function $(id) { return document.getElementById(id); }
 
@@ -126,20 +126,25 @@
   // 动作按钮：按当前模式分发（AI 本地结算 / PvP 提交服务器）
   $('act-u').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.onAction(Game.ACT_U);
+    else if (activeMode === 'ai-match') ModeMatchAI.onAction(Game.ACT_U);
     else ModePvp.submitAction(Game.ACT_U);
   });
   $('act-i').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.onAction(Game.ACT_I);
+    else if (activeMode === 'ai-match') ModeMatchAI.onAction(Game.ACT_I);
     else ModePvp.submitAction(Game.ACT_I);
   });
   $('act-o').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.onAction(Game.ACT_O);
+    else if (activeMode === 'ai-match') ModeMatchAI.onAction(Game.ACT_O);
     else ModePvp.submitAction(Game.ACT_O);
   });
 
   $('btn-mode-ai').addEventListener('click', function () {
-    ModeAI.enter();   // 首次进入时构建 AI 会话（懒加载，带遮罩）
+    ModeAI.enter();   // 每局开始前构建 AI 会话（带遮罩）
   });
+
+  $('btn-mode-ai-match').addEventListener('click', function () { ModeMatchAI.enter(); });
 
   $('btn-mode-pvp').addEventListener('click', function () {
     activeMode = 'pvp';
@@ -152,9 +157,13 @@
   });
 
   // 一局选弹按钮
-  $('pick-0').addEventListener('click', function () { ModePvp.submitBullets(0); });
-  $('pick-1').addEventListener('click', function () { ModePvp.submitBullets(1); });
-  $('pick-2').addEventListener('click', function () { ModePvp.submitBullets(2); });
+  function pickBullets(n) {
+    if (activeMode === 'ai-match') ModeMatchAI.onAction(n);
+    else ModePvp.submitBullets(n);
+  }
+  $('pick-0').addEventListener('click', function () { pickBullets(0); });
+  $('pick-1').addEventListener('click', function () { pickBullets(1); });
+  $('pick-2').addEventListener('click', function () { pickBullets(2); });
 
   $('btn-pvp-back').addEventListener('click', function () {
     showScreen('menu');
@@ -197,16 +206,19 @@
 
   $('btn-leave-game').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.abortToMenu();
+    else if (activeMode === 'ai-match') ModeMatchAI.abortToMenu();
     else ModePvp.leave();
   });
 
   $('btn-rematch').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.startGame();
+    else if (activeMode === 'ai-match') ModeMatchAI.startGame();
     else ModePvp.rematchVote();
   });
 
   $('btn-result-menu').addEventListener('click', function () {
     if (activeMode === 'ai') ModeAI.toMenu();
+    else if (activeMode === 'ai-match') ModeMatchAI.toMenu();
     else ModePvp.leave();
   });
 
@@ -294,8 +306,8 @@
 
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.13.1');
-  console.log('西部牛仔 网页版 v0.13.1');
+  setText('version-note', '网页版 v0.14.0');
+  console.log('西部牛仔 网页版 v0.14.0');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();

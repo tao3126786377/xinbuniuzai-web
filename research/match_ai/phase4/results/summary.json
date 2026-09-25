@@ -1,0 +1,3583 @@
+{
+  "source": "synthetic",
+  "overall": {
+    "states": 1408,
+    "mean_opportunity_cost": {
+      "neural2": 0.00046264679317623865,
+      "neural3": 0.0006226040860061653,
+      "adaptive3": 0.0006322067714941421
+    },
+    "root_gain_by_depth": {
+      "1": 0.0014160274418455537,
+      "2": 0.004427266743398447,
+      "3": 0.005968911665540302
+    },
+    "mean_safe_span": 0.006151213812335024,
+    "mean_unrestricted_root_gap": 0.06486676525851101,
+    "positive_safe_span": 1014,
+    "flat2_nonflat3": 14,
+    "changed_depth": 69,
+    "depth_gain": {
+      "mean": -0.00015995729282992685,
+      "ci95": [
+        -0.0015740853021478174,
+        0.0008895956250850812
+      ]
+    },
+    "adaptive_gain": {
+      "mean": -9.602685487976653e-06,
+      "ci95": [
+        -2.4810702036283786e-05,
+        3.706029487072643e-06
+      ]
+    }
+  },
+  "families": {
+    "fixed": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 0.00015025839788886428,
+        "neural3": 6.509357874690632e-05,
+        "adaptive3": 9.042441945030781e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.00037734945377779607,
+        "2": 0.004711861188186092,
+        "3": 0.002686868905968485
+      },
+      "mean_safe_span": 0.002871205292479519,
+      "mean_unrestricted_root_gap": 0.0582254881184396,
+      "positive_safe_span": 84,
+      "flat2_nonflat3": 2,
+      "changed_depth": 9,
+      "depth_gain": {
+        "mean": 8.516481914195797e-05,
+        "ci95": [
+          -6.249717882013484e-05,
+          0.0002681286185368463
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -2.5330840703401483e-05,
+        "ci95": [
+          -7.542090933866331e-05,
+          -9.19551611825711e-08
+        ]
+      }
+    },
+    "reactive": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 2.9532297176157615e-05,
+        "neural3": 1.1001629278264708e-05,
+        "adaptive3": 1.1325275111548252e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0021730843300361235,
+        "2": 0.015517320499042192,
+        "3": 0.017585813759770877
+      },
+      "mean_safe_span": 0.017701928980894406,
+      "mean_unrestricted_root_gap": 0.09395648788322508,
+      "positive_safe_span": 96,
+      "flat2_nonflat3": 1,
+      "changed_depth": 3,
+      "depth_gain": {
+        "mean": 1.8530667897892907e-05,
+        "ci95": [
+          4.831492853079808e-07,
+          4.938945178975034e-05
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -3.2364583328354374e-07,
+        "ci95": [
+          -8.570647915687526e-07,
+          0.0
+        ]
+      }
+    },
+    "bankroll": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 8.422789380019844e-05,
+        "neural3": 8.303239955083233e-05,
+        "adaptive3": 6.0346475348799136e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.00029242717863102354,
+        "2": 0.00027316969979242537,
+        "3": 0.000287199345125752
+      },
+      "mean_safe_span": 0.00042986691331648114,
+      "mean_unrestricted_root_gap": 0.021619361245187423,
+      "positive_safe_span": 91,
+      "flat2_nonflat3": 0,
+      "changed_depth": 5,
+      "depth_gain": {
+        "mean": 1.1954942493661025e-06,
+        "ci95": [
+          -8.43527108670473e-07,
+          3.905482502363812e-06
+        ]
+      },
+      "adaptive_gain": {
+        "mean": 2.26859242020332e-05,
+        "ci95": [
+          -7.292529409986007e-07,
+          6.716262944742617e-05
+        ]
+      }
+    },
+    "streak": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 0.0005111291480209721,
+        "neural3": 7.449693904882163e-05,
+        "adaptive3": 7.12134247750761e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0005711780991013196,
+        "2": 0.0041626577306562535,
+        "3": 0.0037539048638680736
+      },
+      "mean_safe_span": 0.003863417119355378,
+      "mean_unrestricted_root_gap": 0.06580764379826007,
+      "positive_safe_span": 94,
+      "flat2_nonflat3": 2,
+      "changed_depth": 6,
+      "depth_gain": {
+        "mean": 0.0004366322089721505,
+        "ci95": [
+          -1.9596475680680155e-05,
+          0.0012052292263426676
+        ]
+      },
+      "adaptive_gain": {
+        "mean": 3.2835142737455258e-06,
+        "ci95": [
+          -2.3393657791102276e-05,
+          4.140864786003579e-05
+        ]
+      }
+    },
+    "cycle": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 0.00018163551798038268,
+        "neural3": 0.00014238037630283622,
+        "adaptive3": 0.00016079822699299317
+      },
+      "root_gain_by_depth": {
+        "1": 0.0016643799875767002,
+        "2": 0.0017866722338647071,
+        "3": 0.002028687345841982
+      },
+      "mean_safe_span": 0.0024125488964791366,
+      "mean_unrestricted_root_gap": 0.05421718435631369,
+      "positive_safe_span": 106,
+      "flat2_nonflat3": 1,
+      "changed_depth": 7,
+      "depth_gain": {
+        "mean": 3.925514167754646e-05,
+        "ci95": [
+          -2.215057934135253e-06,
+          0.0001086939950293705
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -1.8417850690156945e-05,
+        "ci95": [
+          -4.6531550938670125e-05,
+          1.9164469334861663e-06
+        ]
+      }
+    },
+    "switch": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 5.270542940205238e-05,
+        "neural3": 4.121857874313825e-05,
+        "adaptive3": 4.046691353462367e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0007450659956416864,
+        "2": 0.000738333120897936,
+        "3": 0.000725200082264676
+      },
+      "mean_safe_span": 0.000798864690628493,
+      "mean_unrestricted_root_gap": 0.03884885543018815,
+      "positive_safe_span": 88,
+      "flat2_nonflat3": 1,
+      "changed_depth": 6,
+      "depth_gain": {
+        "mean": 1.1486850658914131e-05,
+        "ci95": [
+          -7.675732040428666e-08,
+          3.3096999793414056e-05
+        ]
+      },
+      "adaptive_gain": {
+        "mean": 7.516652085145809e-07,
+        "ci95": [
+          -2.4292292195277336e-05,
+          2.8032876510176508e-05
+        ]
+      }
+    },
+    "mimic": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 0.0033785248889007025,
+        "neural3": 0.006208271208227803,
+        "adaptive3": 0.00625577613962877
+      },
+      "root_gain_by_depth": {
+        "1": 0.0024590893156911883,
+        "2": 0.0036355562136986016,
+        "3": 0.021847972170772882
+      },
+      "mean_safe_span": 0.021917974751041396,
+      "mean_unrestricted_root_gap": 0.07045831179122383,
+      "positive_safe_span": 81,
+      "flat2_nonflat3": 4,
+      "changed_depth": 13,
+      "depth_gain": {
+        "mean": -0.0028297463193271005,
+        "ci95": [
+          -0.01841388396957001,
+          0.009289082654547257
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -4.750493140096721e-05,
+        "ci95": [
+          -0.00014490890067337094,
+          3.7037960938173602e-06
+        ]
+      }
+    },
+    "ambush": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 6.249908016006233e-05,
+        "neural3": 6.249908016006493e-05,
+        "adaptive3": 6.247969543532114e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.000552553060121877,
+        "2": 0.000621139874546791,
+        "3": 0.0006273814571639961
+      },
+      "mean_safe_span": 0.0009402404444407749,
+      "mean_unrestricted_root_gap": 0.029455497689293522,
+      "positive_safe_span": 92,
+      "flat2_nonflat3": 0,
+      "changed_depth": 3,
+      "depth_gain": {
+        "mean": -2.6020852139652106e-18,
+        "ci95": [
+          -6.938893903907228e-18,
+          0.0
+        ]
+      },
+      "adaptive_gain": {
+        "mean": 1.938472474379005e-08,
+        "ci95": [
+          -7.549729661767562e-07,
+          8.131271404029222e-07
+        ]
+      }
+    },
+    "changing": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 8.643343007524442e-05,
+        "neural3": 6.87049653751797e-05,
+        "adaptive3": 8.54284410985685e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0006549356978887193,
+        "2": 0.000920098462679858,
+        "3": 0.0018125104023696264
+      },
+      "mean_safe_span": 0.00201195067804248,
+      "mean_unrestricted_root_gap": 0.03742982328948377,
+      "positive_safe_span": 86,
+      "flat2_nonflat3": 0,
+      "changed_depth": 6,
+      "depth_gain": {
+        "mean": 1.7728464700064728e-05,
+        "ci95": [
+          0.0,
+          5.223551977063222e-05
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -1.6723475723388805e-05,
+        "ci95": [
+          -0.00010850491280411561,
+          5.905529425816473e-05
+        ]
+      }
+    },
+    "delayed": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 6.112398417040413e-05,
+        "neural3": 1.693781075353144e-05,
+        "adaptive3": 2.3932230854278348e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0035578548522203126,
+        "2": 0.01030515799533245,
+        "3": 0.008758633961583995
+      },
+      "mean_safe_span": 0.0088861996733872,
+      "mean_unrestricted_root_gap": 0.13530742801385462,
+      "positive_safe_span": 104,
+      "flat2_nonflat3": 2,
+      "changed_depth": 3,
+      "depth_gain": {
+        "mean": 4.4186173416872686e-05,
+        "ci95": [
+          2.5144735130208173e-06,
+          0.00010982310263455253
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -6.9944201007469085e-06,
+        "ci95": [
+          -1.9717373181006148e-05,
+          2.635711987999972e-06
+        ]
+      }
+    },
+    "contrarian": {
+      "states": 128,
+      "mean_opportunity_cost": {
+        "neural2": 0.0004910446573635839,
+        "neural3": 7.500837988044145e-05,
+        "adaptive3": 9.208324420527684e-05
+      },
+      "root_gain_by_depth": {
+        "1": 0.0025283838896143444,
+        "2": 0.006027967158685614,
+        "3": 0.0055438560262129725
+      },
+      "mean_safe_span": 0.005829154495620007,
+      "mean_unrestricted_root_gap": 0.10820833622815129,
+      "positive_safe_span": 92,
+      "flat2_nonflat3": 1,
+      "changed_depth": 8,
+      "depth_gain": {
+        "mean": 0.00041603627748314237,
+        "ci95": [
+          1.3592817213565686e-06,
+          0.0012431875605268118
+        ]
+      },
+      "adaptive_gain": {
+        "mean": -1.7074864324835397e-05,
+        "ci95": [
+          -4.977351563632999e-05,
+          3.469446951953614e-18
+        ]
+      }
+    }
+  },
+  "controlled": {
+    "fixed": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5031872392518612,
+        "shared_value": 0.5031872392518612,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.018314508651205968,
+          0.981685491348794
+        ],
+        "informed_value": 0.5038987184358272,
+        "shared_value": 0.5038987184358272,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -2.15476171638862e-06,
+          "neural3": -2.15476171638862e-06,
+          "adaptive3": -2.15476171638862e-06
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2597248848660519,
+          0.7402751151339482
+        ],
+        "informed_value": 0.4809420246065223,
+        "shared_value": 0.48094202460652236,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.7799850029642794e-05,
+          "neural3": -1.7799850029642794e-05,
+          "adaptive3": -1.7799850029642794e-05
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5037688088866275,
+        "shared_value": 0.5037688088866276,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9990383370213969,
+          0.0009616629786030756,
+          4.163336342344337e-17
+        ],
+        "informed_value": 0.5170291384125209,
+        "shared_value": 0.5170291384125207,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -0.0006247878840048848,
+          "neural3": -0.0006247878840048848,
+          "adaptive3": -0.0006137249075541806
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.173649939341822,
+          0.02894015210959471,
+          0.7974099085485833
+        ],
+        "informed_value": 0.5091141826976708,
+        "shared_value": 0.5091141826976708,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -2.966007284110894e-06,
+          "neural3": -1.3559906296700674e-06,
+          "adaptive3": -1.3559906296700674e-06
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.5626839326491702,
+          0.43731606735082984
+        ],
+        "informed_value": 0.5681597070197415,
+        "shared_value": 0.5681597070197414,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -3.4906070694340485e-05,
+          "neural3": -3.4906070694340485e-05,
+          "adaptive3": -4.48792337499615e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5046778426541004,
+        "shared_value": 0.5046778426541004,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.00033685641900293994,
+          "neural3": -0.00033685641900293994,
+          "adaptive3": -6.73712838006324e-05
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9739068285849086,
+          0.026093171415091352,
+          2.42861286636753e-17
+        ],
+        "informed_value": 0.5075884640021563,
+        "shared_value": 0.5075884640021565,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.0009252373726478247,
+          "neural3": -0.0009252373726478247,
+          "adaptive3": -0.0009252373726478247
+        }
+      }
+    ],
+    "reactive": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5101756701153587,
+        "shared_value": 0.5101756701153587,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5045054615829573,
+        "shared_value": 0.5045054615829573,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.4482995126317463,
+        "shared_value": 0.4482995126317464,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.9402033891901638,
+          0.059796610809836226
+        ],
+        "informed_value": 0.5216306888322413,
+        "shared_value": 0.5216306888322413,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.0004931569719194284,
+          "neural3": -0.0004931569719194284,
+          "adaptive3": -0.0004931569719194284
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8344825858637047,
+          0.16436948892720948,
+          0.0011479252090857983
+        ],
+        "informed_value": 0.5370808162849218,
+        "shared_value": 0.5370808162849217,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -0.001751187850867919,
+          "neural3": -0.001751187850867919,
+          "adaptive3": -0.00011163058599805709
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5063044732264057,
+        "shared_value": 0.5063044732264057,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -4.224562323584813e-05,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.5626839326491702,
+          0.43731606735082984
+        ],
+        "informed_value": 0.568286812610526,
+        "shared_value": 0.568286812610526,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -2.571314963162319e-05,
+          "neural3": -2.571314963162319e-05,
+          "adaptive3": -3.30597638120711e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5279052892258733,
+        "shared_value": 0.5279052892258732,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -3.812448944062741e-05,
+          "neural3": -3.812448944062741e-05,
+          "adaptive3": -7.62489788797005e-06
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5151099917505576,
+        "shared_value": 0.5151099917505574,
+        "root_history_value": 2.220446049250313e-16,
+        "network_minus_shared": {
+          "neural2": 2.220446049250313e-16,
+          "neural3": 2.220446049250313e-16,
+          "adaptive3": 2.220446049250313e-16
+        }
+      }
+    ],
+    "bankroll": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5286502108039906,
+        "shared_value": 0.5286502108039906,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5054776153569854,
+        "shared_value": 0.5054776153569853,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.49656014650398145,
+        "shared_value": 0.4965601465039816,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.6653345369377348e-16,
+          "neural3": -1.6653345369377348e-16,
+          "adaptive3": -1.6653345369377348e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5056631961295652,
+        "shared_value": 0.5056631961295652,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8367784362818761,
+          0.16322156371812388,
+          2.7755575615628914e-17
+        ],
+        "informed_value": 0.5142170089781885,
+        "shared_value": 0.5142170089781885,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -8.780227170013255e-05,
+          "neural3": -8.780227170013255e-05,
+          "adaptive3": -1.0495963410628306e-06
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5051075421110061,
+        "shared_value": 0.5051075421110062,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.2156067806801119e-06,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5719527373548832,
+        "shared_value": 0.5719527373548832,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -3.118419491354718e-05,
+          "neural3": -3.118419491354718e-05,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.17728819588571365,
+          0.7768965113354735,
+          0.0458152927788128
+        ],
+        "informed_value": 0.5028339819664059,
+        "shared_value": 0.5028339819664059,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -7.694955040316032e-05,
+          "neural3": -7.694955040316032e-05,
+          "adaptive3": -0.0001006263351425174
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5058839568474874,
+        "shared_value": 0.5058839568474874,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      }
+    ],
+    "streak": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5051741311630653,
+        "shared_value": 0.5051741311630653,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.504442379618946,
+        "shared_value": 0.5044423796189462,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -2.220446049250313e-16,
+          "neural3": -2.220446049250313e-16,
+          "adaptive3": -2.220446049250313e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.4782005641122791,
+        "shared_value": 0.4782005641122791,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5021045049840152,
+        "shared_value": 0.502104504984015,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8344825858637047,
+          0.16436948892720948,
+          0.0011479252090857983
+        ],
+        "informed_value": 0.5373775674920446,
+        "shared_value": 0.5357670715153898,
+        "root_history_value": 0.0016104959766547466,
+        "network_minus_shared": {
+          "neural2": 0.00016159866266718392,
+          "neural3": 0.00016159866266718392,
+          "adaptive3": 1.9954499702490303e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5049080705590916,
+        "shared_value": 0.5048563269521842,
+        "root_history_value": 5.17436069074062e-05,
+        "network_minus_shared": {
+          "neural2": 4.703964264329841e-06,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5637973809031437,
+        "shared_value": 0.5637825931926514,
+        "root_history_value": 1.4787710492236705e-05,
+        "network_minus_shared": {
+          "neural2": -2.925172321366354e-05,
+          "neural3": -2.925172321366354e-05,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.17728819588571365,
+          0.7768965113354735,
+          0.0458152927788128
+        ],
+        "informed_value": 0.512557239369295,
+        "shared_value": 0.5125351074321548,
+        "root_history_value": 2.213193714017958e-05,
+        "network_minus_shared": {
+          "neural2": -3.1457580934701745e-05,
+          "neural3": -3.1457580934701745e-05,
+          "adaptive3": -3.095650119955273e-05
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5137120229871833,
+        "shared_value": 0.5137120229871833,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      }
+    ],
+    "cycle": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5107243697232569,
+        "shared_value": 0.510724369723257,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.018314508651205968,
+          0.981685491348794
+        ],
+        "informed_value": 0.5020052180757217,
+        "shared_value": 0.5020052180757217,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -4.797834742542584e-05,
+          "neural3": -4.797834742542584e-05,
+          "adaptive3": -4.797834742542584e-05
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2597248848660519,
+          0.7402751151339482
+        ],
+        "informed_value": 0.458615819228632,
+        "shared_value": 0.45861581922863204,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -4.7137929262863754e-05,
+          "neural3": -4.7137929262863754e-05,
+          "adaptive3": -4.7137929262863754e-05
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5022944440118136,
+        "shared_value": 0.5022944440118134,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9990383370213969,
+          0.0009616629786030756,
+          4.163336342344337e-17
+        ],
+        "informed_value": 0.5732828314651465,
+        "shared_value": 0.5732828314651466,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.008415344068506081,
+          "neural3": -0.008415344068506081,
+          "adaptive3": -0.00882266360611439
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.173649939341822,
+          0.02894015210959471,
+          0.7974099085485833
+        ],
+        "informed_value": 0.503105113791084,
+        "shared_value": 0.5031051137910839,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -4.27525675328333e-06,
+          "neural3": -1.5424083956716572e-06,
+          "adaptive3": -1.5424083956716572e-06
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.5626839326491702,
+          0.43731606735082984
+        ],
+        "informed_value": 0.5664079061171273,
+        "shared_value": 0.5664079061171272,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -3.447072104589832e-05,
+          "neural3": -3.447072104589832e-05,
+          "adaptive3": -4.431949848759942e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5074347079807056,
+        "shared_value": 0.5074347079807057,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.00031358455278551745,
+          "neural3": -0.00031358455278551745,
+          "adaptive3": -6.271691055725892e-05
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9739068285849086,
+          0.026093171415091352,
+          2.42861286636753e-17
+        ],
+        "informed_value": 0.5245676210896004,
+        "shared_value": 0.5245676210896004,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.0011657208873140368,
+          "neural3": -0.0011657208873140368,
+          "adaptive3": -0.0011657208873140368
+        }
+      }
+    ],
+    "switch": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5033947901964738,
+        "shared_value": 0.5033947901964738,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5054652450005879,
+        "shared_value": 0.5054652450005878,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2597248848660519,
+          0.7402751151339482
+        ],
+        "informed_value": 0.48126078663946065,
+        "shared_value": 0.4812607866394606,
+        "root_history_value": 5.551115123125783e-17,
+        "network_minus_shared": {
+          "neural2": -1.664494834185959e-05,
+          "neural3": -1.664494834185959e-05,
+          "adaptive3": -1.664494834185959e-05
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5016106401643332,
+        "shared_value": 0.5016106401643332,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9990383370213969,
+          0.0009616629786030756,
+          4.163336342344337e-17
+        ],
+        "informed_value": 0.5173047713170897,
+        "shared_value": 0.5173047713170897,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.0006092060906556229,
+          "neural3": -0.0006092060906556229,
+          "adaptive3": -0.000597915133884408
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.510727680425695,
+        "shared_value": 0.510727680425695,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.611248042987512e-06,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.5626839326491702,
+          0.43731606735082984
+        ],
+        "informed_value": 0.5637873642056563,
+        "shared_value": 0.5637873642056564,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -2.8329824146244853e-05,
+          "neural3": -2.8329824146244853e-05,
+          "adaptive3": -3.642405961645778e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5033114592194132,
+        "shared_value": 0.5033114592194131,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": -0.00030415542497830295,
+          "neural3": -0.00030415542497830295,
+          "adaptive3": -6.083108499566059e-05
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.9739068285849086,
+          0.026093171415091352,
+          2.42861286636753e-17
+        ],
+        "informed_value": 0.5077099835405258,
+        "shared_value": 0.5077099835405258,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.0008688790168860372,
+          "neural3": -0.0008688790168860372,
+          "adaptive3": -0.0008688790168860372
+        }
+      }
+    ],
+    "mimic": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5203008267134085,
+        "shared_value": 0.5203008267134085,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.018314508651205968,
+          0.981685491348794
+        ],
+        "informed_value": 0.5048568868521965,
+        "shared_value": 0.504854847171473,
+        "root_history_value": 2.0396807235423253e-06,
+        "network_minus_shared": {
+          "neural2": -0.0002773604426191678,
+          "neural3": -0.0002773604426191678,
+          "adaptive3": -0.0002773604426191678
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2597248848660519,
+          0.7402751151339482
+        ],
+        "informed_value": 0.4902564293837529,
+        "shared_value": 0.49025392558576447,
+        "root_history_value": 2.5037979884401373e-06,
+        "network_minus_shared": {
+          "neural2": -9.653126001596402e-06,
+          "neural3": -9.653126001596402e-06,
+          "adaptive3": -9.653126001596402e-06
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.504779490378054,
+        "shared_value": 0.5047794903780541,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8367784362818761,
+          0.16322156371812388,
+          2.7755575615628914e-17
+        ],
+        "informed_value": 0.5386433329166649,
+        "shared_value": 0.5349815569558615,
+        "root_history_value": 0.003661775960803415,
+        "network_minus_shared": {
+          "neural2": -0.0020278324246478796,
+          "neural3": -0.0020278324246478796,
+          "adaptive3": -5.2699099462261145e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5065084835646759,
+        "shared_value": 0.5064878382714914,
+        "root_history_value": 2.0645293184573532e-05,
+        "network_minus_shared": {
+          "neural2": -4.8105575938706124e-05,
+          "neural3": -2.220446049250313e-16,
+          "adaptive3": -2.220446049250313e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5662277893239617,
+        "shared_value": 0.566198339929632,
+        "root_history_value": 2.9449394329694734e-05,
+        "network_minus_shared": {
+          "neural2": 1.1779757731922302e-05,
+          "neural3": 1.1779757731922302e-05,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5038811892657451,
+        "shared_value": 0.5038101228925097,
+        "root_history_value": 7.106637323539555e-05,
+        "network_minus_shared": {
+          "neural2": 3.6987891360307223e-05,
+          "neural3": 3.6987891360307223e-05,
+          "adaptive3": 9.30159099876704e-06
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5184373050912685,
+        "shared_value": 0.5177399671355889,
+        "root_history_value": 0.0006973379556796111,
+        "network_minus_shared": {
+          "neural2": 2.220446049250313e-16,
+          "neural3": 2.220446049250313e-16,
+          "adaptive3": 2.220446049250313e-16
+        }
+      }
+    ],
+    "ambush": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5317883978010323,
+        "shared_value": 0.5317883978010323,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.018314508651205968,
+          0.981685491348794
+        ],
+        "informed_value": 0.5032661533311386,
+        "shared_value": 0.5031373632200394,
+        "root_history_value": 0.00012879011109911964,
+        "network_minus_shared": {
+          "neural2": -0.00012788360127802267,
+          "neural3": -0.00012788360127802267,
+          "adaptive3": -0.00012788360127802267
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2597248848660519,
+          0.7402751151339482
+        ],
+        "informed_value": 0.4474106956610725,
+        "shared_value": 0.44739322194467496,
+        "root_history_value": 1.747371639754247e-05,
+        "network_minus_shared": {
+          "neural2": -2.0757152672801205e-05,
+          "neural3": -2.0757152672801205e-05,
+          "adaptive3": -2.0757152672801205e-05
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5050987534790065,
+        "shared_value": 0.5050987534790063,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8367784362818761,
+          0.16322156371812388,
+          2.7755575615628914e-17
+        ],
+        "informed_value": 0.5573332916980901,
+        "shared_value": 0.5572938250823358,
+        "root_history_value": 3.946661575426891e-05,
+        "network_minus_shared": {
+          "neural2": -0.00011833913725234346,
+          "neural3": -0.00011833913725234346,
+          "adaptive3": -2.6250161627050517e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.506582018372354,
+        "shared_value": 0.5065670952423336,
+        "root_history_value": 1.4923130020383368e-05,
+        "network_minus_shared": {
+          "neural2": -1.4418183066355894e-06,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5726506266592627,
+        "shared_value": 0.5726424544502897,
+        "root_history_value": 8.172208972978545e-06,
+        "network_minus_shared": {
+          "neural2": -3.309565783937707e-05,
+          "neural3": -3.309565783937707e-05,
+          "adaptive3": -2.220446049250313e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5102805244889835,
+        "shared_value": 0.5102805244889836,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -0.00012536521824735303,
+          "neural3": -0.00012536521824735303,
+          "adaptive3": -8.6625923778616e-07
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5157738453308522,
+        "shared_value": 0.5157738453308522,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      }
+    ],
+    "changing": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5043996726241396,
+        "shared_value": 0.5043996726241396,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5041981689592444,
+        "shared_value": 0.5041981689592445,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.4794582595824187,
+        "shared_value": 0.4794582595824187,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5019170629548858,
+        "shared_value": 0.5019170629548857,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8344825858637047,
+          0.16436948892720948,
+          0.0011479252090857983
+        ],
+        "informed_value": 0.5367377048891554,
+        "shared_value": 0.5345796679179052,
+        "root_history_value": 0.0021580369712501657,
+        "network_minus_shared": {
+          "neural2": 0.0002120241357137509,
+          "neural3": 0.0002120241357137509,
+          "adaptive3": 2.037888016181988e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5048844644898536,
+        "shared_value": 0.5048181232776843,
+        "root_history_value": 6.634121216930744e-05,
+        "network_minus_shared": {
+          "neural2": 6.031019288199602e-06,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5635162180425404,
+        "shared_value": 0.5634988152769856,
+        "root_history_value": 1.7402765554730415e-05,
+        "network_minus_shared": {
+          "neural2": -3.054986049322306e-05,
+          "neural3": -3.054986049322306e-05,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.16760059741705688,
+          0.7889899742681847,
+          0.043409428314758476
+        ],
+        "informed_value": 0.512685935628342,
+        "shared_value": 0.512670905657385,
+        "root_history_value": 1.5029970956925709e-05,
+        "network_minus_shared": {
+          "neural2": -5.824081795124947e-05,
+          "neural3": -5.824081795124947e-05,
+          "adaptive3": -6.371009849104325e-05
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.513058084278959,
+        "shared_value": 0.5130580842789589,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      }
+    ],
+    "delayed": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5117002873755864,
+        "shared_value": 0.5116114087908633,
+        "root_history_value": 8.88785847230622e-05,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5040917861717709,
+        "shared_value": 0.504089892409548,
+        "root_history_value": 1.8937622228154538e-06,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.47262811094381163,
+        "shared_value": 0.4726233521897476,
+        "root_history_value": 4.758754064027038e-06,
+        "network_minus_shared": {
+          "neural2": -5.551115123125783e-17,
+          "neural3": -5.551115123125783e-17,
+          "adaptive3": -5.551115123125783e-17
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.8933949864476785,
+          0.10660501355232155
+        ],
+        "informed_value": 0.5063047342517961,
+        "shared_value": 0.5063047342517961,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8344825858637047,
+          0.16436948892720948,
+          0.0011479252090857983
+        ],
+        "informed_value": 0.5375134080070043,
+        "shared_value": 0.5361042997138104,
+        "root_history_value": 0.0014091082931939614,
+        "network_minus_shared": {
+          "neural2": -0.00012766496775584724,
+          "neural3": -0.00012766496775584724,
+          "adaptive3": -2.686313649380434e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5061232024181613,
+        "shared_value": 0.5060933920359999,
+        "root_history_value": 2.9810382161432614e-05,
+        "network_minus_shared": {
+          "neural2": -4.3465346311943875e-05,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          0.5616228000062936,
+          0.4383771999937064
+        ],
+        "informed_value": 0.5675513240534178,
+        "shared_value": 0.5675253989382136,
+        "root_history_value": 2.592511520416174e-05,
+        "network_minus_shared": {
+          "neural2": 8.840384243424815e-06,
+          "neural3": 8.840384243424815e-06,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.510537216781519,
+        "shared_value": 0.5105131140562879,
+        "root_history_value": 2.4102725231123223e-05,
+        "network_minus_shared": {
+          "neural2": -8.091942952226372e-05,
+          "neural3": -8.091942952226372e-05,
+          "adaptive3": -4.002416588266833e-06
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5139229432212075,
+        "shared_value": 0.5136315265189804,
+        "root_history_value": 0.0002914167022270986,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      }
+    ],
+    "contrarian": [
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 0,
+          "bc": 0,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.0,
+          1.0
+        ],
+        "informed_value": 0.5150567946011587,
+        "shared_value": 0.5150567946011588,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": -1.1102230246251565e-16,
+          "neural3": -1.1102230246251565e-16,
+          "adaptive3": -1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 1,
+          "bc": 0,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.004212047921020261,
+          0.9957879520789797
+        ],
+        "informed_value": 0.5043466719492793,
+        "shared_value": 0.5043466719492793,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 0,
+          "ph": 2,
+          "bc": 0,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.2588966341976859,
+          0.7411033658023141
+        ],
+        "informed_value": 0.4563032828515998,
+        "shared_value": 0.4563032828515998,
+        "root_history_value": 0.0,
+        "network_minus_shared": {
+          "neural2": 0.0,
+          "neural3": 0.0,
+          "adaptive3": 0.0
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 0,
+          "bc": 1,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.9402033891901638,
+          0.059796610809836226
+        ],
+        "informed_value": 0.5219468811196891,
+        "shared_value": 0.5215385515895238,
+        "root_history_value": 0.0004083295301653411,
+        "network_minus_shared": {
+          "neural2": -0.00018172994148213384,
+          "neural3": -0.00018172994148213384,
+          "adaptive3": -0.00018172994148213384
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 1,
+          "bc": 1,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.8344825858637047,
+          0.16436948892720948,
+          0.0011479252090857983
+        ],
+        "informed_value": 0.5358199822366642,
+        "shared_value": 0.5351837694593143,
+        "root_history_value": 0.0006362127773498205,
+        "network_minus_shared": {
+          "neural2": -0.001893231518074856,
+          "neural3": -0.001893231518074856,
+          "adaptive3": -7.689344283112742e-05
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 1,
+          "ph": 2,
+          "bc": 1,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1636617609224537,
+          0.029283879563603184,
+          0.8070543595139431
+        ],
+        "informed_value": 0.5092964819726302,
+        "shared_value": 0.5092961963012054,
+        "root_history_value": 2.8567142484892116e-07,
+        "network_minus_shared": {
+          "neural2": -4.4058123649826086e-05,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      },
+      {
+        "histories": 9,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 0,
+          "bc": 2,
+          "bh": 0,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          -0.0,
+          0.5626839326491702,
+          0.43731606735082984
+        ],
+        "informed_value": 0.5688260987021774,
+        "shared_value": 0.5687950168976788,
+        "root_history_value": 3.1081804498622745e-05,
+        "network_minus_shared": {
+          "neural2": -1.2549996841304534e-05,
+          "neural3": -1.2549996841304534e-05,
+          "adaptive3": -2.676324765471527e-06
+        }
+      },
+      {
+        "histories": 18,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 1,
+          "bc": 2,
+          "bh": 1,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.1770458182436324,
+          0.7800396047473271,
+          0.042914577009040444
+        ],
+        "informed_value": 0.5245419194182224,
+        "shared_value": 0.5245062597235852,
+        "root_history_value": 3.56596946371468e-05,
+        "network_minus_shared": {
+          "neural2": -3.2214904745475614e-05,
+          "neural3": -3.2214904745475614e-05,
+          "adaptive3": -6.442603322720508e-06
+        }
+      },
+      {
+        "histories": 19,
+        "state": {
+          "phase": "play",
+          "round": 1,
+          "turn": 6,
+          "mc": 50,
+          "mh": 50,
+          "pc": 2,
+          "ph": 2,
+          "bc": 2,
+          "bh": 2,
+          "previous": [
+            1,
+            1
+          ],
+          "last_result": 0
+        },
+        "shared_distribution": [
+          0.955833646383418,
+          0.04054936002275596,
+          0.0036169935938260914
+        ],
+        "informed_value": 0.5136199111108579,
+        "shared_value": 0.5136199111108578,
+        "root_history_value": 1.1102230246251565e-16,
+        "network_minus_shared": {
+          "neural2": 1.1102230246251565e-16,
+          "neural3": 1.1102230246251565e-16,
+          "adaptive3": 1.1102230246251565e-16
+        }
+      }
+    ]
+  },
+  "max_local_loss": 3.940594060058977e-05,
+  "accumulated_loss_bound": 0.01990000505386857,
+  "timings": {
+    "oracle1": {
+      "mean_ms": 0.21896420308952325,
+      "p95_ms": 0.21334503544494493,
+      "max_ms": 29.452600050717592
+    },
+    "oracle2": {
+      "mean_ms": 0.8697318194621899,
+      "p95_ms": 1.473020040430128,
+      "max_ms": 2.660099999047816
+    },
+    "oracle3": {
+      "mean_ms": 5.8498152707629325,
+      "p95_ms": 10.066334973089395,
+      "max_ms": 17.680600052699447
+    },
+    "neural2": {
+      "mean_ms": 2.099022302321497,
+      "p95_ms": 3.4663500089664,
+      "max_ms": 4.895700025372207
+    },
+    "neural3": {
+      "mean_ms": 14.820574434700326,
+      "p95_ms": 25.497875013388693,
+      "max_ms": 36.78779990877956
+    },
+    "adaptive3": {
+      "mean_ms": 16.669298155730676,
+      "p95_ms": 26.984695001738146,
+      "max_ms": 41.4522000355646
+    }
+  },
+  "seconds": 46.753863999969326
+}

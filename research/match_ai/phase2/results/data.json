@@ -1,0 +1,43 @@
+{
+  "source": "synthetic",
+  "split_seeds": {
+    "train": 31,
+    "validation": 47,
+    "test": 61,
+    "games": 79
+  },
+  "profiles_per_family": {
+    "train": 64,
+    "validation": 16,
+    "test": 32
+  },
+  "games_per_profile": 2,
+  "training_families": [
+    "fixed",
+    "reactive",
+    "bankroll",
+    "streak",
+    "cycle",
+    "switch"
+  ],
+  "unseen_families": [
+    "mimic",
+    "ambush"
+  ],
+  "window": 8,
+  "inputs": 107,
+  "splits": {
+    "train": {
+      "observations": 46711,
+      "profiles": 384
+    },
+    "validation": {
+      "observations": 11668,
+      "profiles": 96
+    },
+    "test": {
+      "observations": 29921,
+      "profiles": 256
+    }
+  }
+}

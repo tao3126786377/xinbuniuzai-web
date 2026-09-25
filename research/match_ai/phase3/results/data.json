@@ -1,0 +1,48 @@
+{
+  "source": "synthetic",
+  "study": 3,
+  "seed_prefix": [
+    20260925,
+    3
+  ],
+  "splits": {
+    "validation": 103,
+    "test": 107,
+    "games": 109
+  },
+  "development_families": [
+    "fixed",
+    "reactive",
+    "bankroll",
+    "streak",
+    "cycle",
+    "switch",
+    "mimic",
+    "ambush",
+    "changing"
+  ],
+  "unseen_families": [
+    "delayed",
+    "contrarian"
+  ],
+  "config": {
+    "rounds": 5,
+    "cap": 100,
+    "money": 50
+  },
+  "baseline_error": 3.868572129306358e-12,
+  "sequences": {
+    "validation": {
+      "profiles": 288,
+      "observations": 31584
+    },
+    "test": {
+      "profiles": 704,
+      "observations": 73233
+    }
+  },
+  "frozen_weights": {
+    "linear": "c2166ce7b2ac3ff0c24dd86dd3e2b3a26a4728c58017dcb5a5c2307df58d802e",
+    "neural": "4a6cd05e29adddeffcf80ea29cd709ae507b7e63e2cdc1db82997dff0e8d5d5c"
+  }
+}

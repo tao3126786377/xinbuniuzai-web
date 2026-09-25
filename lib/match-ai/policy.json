@@ -1,0 +1,16 @@
+{
+  "id": "full-temporal3-v1",
+  "source": "phase5 temporal3",
+  "inputs": 203,
+  "hidden": 96,
+  "outputs": 3,
+  "history": 64,
+  "depth": 3,
+  "temperature": 0,
+  "delta": 3.9405940594059406e-05,
+  "defaultBudgetMs": 2500,
+  "format": "little-endian float64; W0 C-order, b0, W1 C-order, b1",
+  "sourceWeightsSha256": "a3c63bf649882f753d5aec1aef71c9e7366afbe74cb33864b1e73e6ba31111a7",
+  "weightsSha256": "ed5ca8b40a62b0256bb5161e6bd847c01c16061e528b9e9baa97d90d993a1fae",
+  "equilibriumManifestSha256": "6c6a82881f07c7ffc62acdd6cd6194cd9756dcc04933a983b6f5b540f3ae42d4"
+}

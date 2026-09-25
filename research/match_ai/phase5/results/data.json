@@ -1,0 +1,48 @@
+{
+  "source": "synthetic",
+  "seed_prefix": [
+    20260925,
+    5
+  ],
+  "splits": {
+    "train": 11,
+    "validation": 17,
+    "tuning": 23,
+    "test": 31
+  },
+  "train_families": [
+    "fixed",
+    "reactive",
+    "bankroll",
+    "streak",
+    "cycle",
+    "switch",
+    "mimic",
+    "ambush",
+    "changing",
+    "delayed",
+    "contrarian",
+    "lagged",
+    "own_lag"
+  ],
+  "heldout_families": [
+    "hybrid",
+    "drifting"
+  ],
+  "labels": "sampled public human actions only; no hidden type or true probability inputs",
+  "history_window": 64,
+  "games_per_profile": 3,
+  "max_rows_per_profile": 96,
+  "sequences": {
+    "train": {
+      "profiles": 832,
+      "observations": 75057,
+      "generated_branch_observations": 36681
+    },
+    "validation": {
+      "profiles": 208,
+      "observations": 18563,
+      "generated_branch_observations": 8993
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "computer_equilibrium_vs_best_response": 0.49999999999999467,
+  "best_response_vs_human_equilibrium": 0.5000000000000051,
+  "exploitability_gap": 1.0436096431476471e-14,
+  "seconds": 83.69368580006994,
+  "passed": true
+}

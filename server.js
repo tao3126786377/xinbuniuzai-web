@@ -867,7 +867,10 @@ function invalidMsg(ws) {
 // ==================== WebSocket 服务 ====================
 const wss = new WebSocketServer({ noServer: true, maxPayload: 4096 });
 
-const server = http.createServer((req, res) => serveStatic(req, res));
+const matchAI = require('./lib/match-ai/http').createHandler({ originAllowed, clientIp });
+const server = http.createServer((req, res) => {
+  if (!matchAI.handle(req, res)) serveStatic(req, res);
+});
 
 function originAllowed(req) {
   const origin = req.headers.origin;
@@ -997,6 +1000,7 @@ setInterval(() => {
 // 优雅关闭（平台重启/本地 Ctrl+C）：通知所有房间后退出
 function shutdown(signal) {
   console.log('[' + signal + '] 正在关闭服务器…');
+  matchAI.close();
   for (const room of rooms.values()) {
     broadcast(room, { type: 'room_closed', reason: 'shutdown' });
   }

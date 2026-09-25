@@ -1,7 +1,7 @@
 /* 西部牛仔 · 菜单统计与对局记录（纯客户端，读 localStorage 日志）
  *
  * - refresh()：主菜单脚注分模式显示对局数与胜率（快速模式读 xnz_log_v1；
- *   完整模式的电脑对手开发中，暂显示"暂无对局"）
+ *   完整模式使用独立记录 xnz_match_history_v1）
  * - openHistory()/closeHistory()：对局记录弹窗，最近 20 局，
  *   结果由回放 Game.step 得出，动作用中文（开枪/防御/装弹，不用 u/i/o）
  *
@@ -12,6 +12,23 @@
 
   var LOG_KEY_FAST = 'xnz_log_v1';
   var MAX_SHOW_GAMES = 20;
+  var fullHistory = { version: 1, wins: 0, losses: 0, draws: 0, games: [] };
+  try {
+    var savedFull = JSON.parse(localStorage.getItem('xnz_match_history_v1') || 'null');
+    if (savedFull && savedFull.version === 1 && Array.isArray(savedFull.games) &&
+        ['wins', 'losses', 'draws'].every(function (k) { return Number.isSafeInteger(savedFull[k]) && savedFull[k] >= 0; })) fullHistory = savedFull;
+  } catch (_) {}
+
+  function recordFullMatch(game) {
+    if (fullHistory.games.some(function (g) { return g.id === game.id; })) return;
+    fullHistory[game.outcome === 'win' ? 'wins' : game.outcome === 'lose' ? 'losses' : 'draws']++;
+    fullHistory.games.push(game);
+    fullHistory.games = fullHistory.games.slice(-MAX_SHOW_GAMES);
+    // Bound storage while retaining lifetime totals and the latest completed match.
+    while (fullHistory.games.length > 1 && JSON.stringify(fullHistory).length > 600000) fullHistory.games.shift();
+    try { localStorage.setItem('xnz_match_history_v1', JSON.stringify(fullHistory)); }
+    catch (_) { App.toast('浏览器存储已满，本局记录仅在当前页面保留'); }
+  }
 
   function actionName(ch) {
     if (ch === 'u') return '开枪';
@@ -82,9 +99,13 @@
       fastLine = '快速模式：' + games.length + ' 局（胜 ' + wins + ' / 负 ' + losses +
         ' / 平 ' + draws + '，胜率 ' + rate + '%）';
     }
+    var total = fullHistory.wins + fullHistory.losses + fullHistory.draws;
+    var decisive = fullHistory.wins + fullHistory.losses;
+    var fullLine = total ? '完整模式：' + total + ' 局（胜 ' + fullHistory.wins + ' / 负 ' + fullHistory.losses +
+      ' / 平 ' + fullHistory.draws + '，胜率 ' + (decisive ? Math.round(fullHistory.wins / decisive * 100) : 0) + '%）' : '完整模式：暂无对局记录';
     // 内容全部由数字拼接，无用户输入，innerHTML 安全
     document.getElementById('ai-memory-note').innerHTML =
-      fastLine + '<br>完整模式：暂无对局（开发中）';
+      fastLine + '<br>' + fullLine;
   }
 
   /* 对局记录弹窗：最近 20 局（新在前），动作用中文 */
@@ -94,10 +115,10 @@
     var games = parseGames(fastText);
     var list = document.getElementById('history-list');
     list.textContent = '';
-    if (games.length === 0) {
+    if (games.length === 0 && fullHistory.games.length === 0) {
       var empty = document.createElement('p');
       empty.className = 'hist-empty';
-      empty.textContent = '暂无对局记录（完整模式的电脑对手开发中，暂不计入）';
+      empty.textContent = '暂无人机对局记录';
       list.appendChild(empty);
     } else {
       var start = Math.max(0, games.length - MAX_SHOW_GAMES);
@@ -107,7 +128,7 @@
         block.className = 'hist-game';
         var title = document.createElement('div');
         title.className = 'hist-title hist-' + g.outcome;
-        title.textContent = '第 ' + (i + 1) + ' 局 · ' +
+        title.textContent = '快速 · 第 ' + (i + 1) + ' 局 · ' +
           (g.outcome === 'win' ? '你赢了' : g.outcome === 'lose' ? '你输了' : '平局') +
           ' · ' + g.rounds.length + ' 回合';
         block.appendChild(title);
@@ -115,6 +136,22 @@
         block.appendChild(movesRow('电脑：', g.rounds, false));
         list.appendChild(block);
       }
+    }
+    for (var f = fullHistory.games.length - 1; f >= 0; f--) {
+      var full = fullHistory.games[f];
+      var box = document.createElement('div'); box.className = 'hist-game';
+      var heading = document.createElement('div'); heading.className = 'hist-title';
+      heading.textContent = '完整 · ' + (full.outcome === 'win' ? '你赢了' : full.outcome === 'lose' ? '你输了' : '平局') +
+        ' · 筹码 你 ' + full.money[1] + ' / 电脑 ' + full.money[0];
+      box.appendChild(heading);
+      var moves = document.createElement('div'); moves.className = 'hist-moves';
+      moves.textContent = full.events.map(function (e) {
+        var pick = e.before.phase === 'pick';
+        return '轮' + e.before.round + (pick ? '选弹' : '·' + e.before.turn) + ' 你' +
+          (pick ? e.human : actionName(['u', 'i', 'o'][e.human])) + '/电脑' +
+          (pick ? e.computer : actionName(['u', 'i', 'o'][e.computer]));
+      }).join(' · ');
+      box.appendChild(moves); list.appendChild(box);
     }
     document.getElementById('history-modal').classList.remove('hidden');
   }
@@ -139,6 +176,7 @@
   }
 
   window.Stats = {
+    recordFullMatch: recordFullMatch,
     refresh: refresh,
     openHistory: openHistory,
     closeHistory: closeHistory

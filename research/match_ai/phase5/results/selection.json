@@ -1,0 +1,14 @@
+{
+  "selected": "temporal3",
+  "validation_scores": {
+    "old2": 0.8197115384615384,
+    "refreshed2": 0.8197115384615384,
+    "temporal2": 0.8269230769230769,
+    "temporal3": 0.8365384615384616
+  },
+  "criterion": "highest mean complete-match validation score; candidate order breaks exact ties",
+  "weight_hashes": {
+    "refreshed.npz": "8502cd13c9ae86c3fb897281dffff2954fc2ddea3ef191a623b11497ce3bdb67",
+    "temporal.npz": "a3c63bf649882f753d5aec1aef71c9e7366afbe74cb33864b1e73e6ba31111a7"
+  }
+}

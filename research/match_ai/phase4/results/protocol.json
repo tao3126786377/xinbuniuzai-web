@@ -1,0 +1,47 @@
+{
+  "source": "synthetic",
+  "seed_prefix": [
+    20260925,
+    4
+  ],
+  "profiles_per_family": 128,
+  "families": [
+    "fixed",
+    "reactive",
+    "bankroll",
+    "streak",
+    "cycle",
+    "switch",
+    "mimic",
+    "ambush",
+    "changing",
+    "delayed",
+    "contrarian"
+  ],
+  "natural_collection": "equilibrium policy; one uniformly selected post-observation state per independent full match",
+  "controlled": "all legal four synchronous moves returning to initial ammo, then defend/defend; equal history weights",
+  "depths": [
+    1,
+    2,
+    3
+  ],
+  "candidates": [
+    "neural2",
+    "neural3",
+    "adaptive3"
+  ],
+  "value_tolerance": 1e-10,
+  "tuning": "none; all networks and phase-three hyperparameters frozen",
+  "hashes": {
+    "neural.npz": "4a6cd05e29adddeffcf80ea29cd709ae507b7e63e2cdc1db82997dff0e8d5d5c",
+    "linear.npz": "c2166ce7b2ac3ff0c24dd86dd3e2b3a26a4728c58017dcb5a5c2307df58d802e",
+    "selection.json": "d944984c813c20da4e87722d54ac0787be9c3e870e6e1a34aeb1f3443884097a"
+  },
+  "baseline_error": 3.868572129306358e-12,
+  "config": {
+    "rounds": 5,
+    "cap": 100,
+    "money": 50
+  },
+  "workers": 4
+}

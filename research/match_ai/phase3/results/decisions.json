@@ -1,0 +1,8585 @@
+{
+  "source": "synthetic",
+  "selection": "up to 12 evenly spaced states from the first neural game in each family; post-hoc descriptive diagnostic",
+  "states": 131,
+  "mean_total_variation": 0.09166878866054358,
+  "fraction_tv_above_001": 0.0916030534351145,
+  "changed_states": 12,
+  "changed_with_equal_reference_values": 12,
+  "mean_opportunity_cost": {
+    "neural": 1.996480810858002e-05,
+    "calibrated": 1.9568726698319334e-05,
+    "static": 2.116923584571473e-05,
+    "adaptive": 2.1465740136914e-05,
+    "frozen": 2.1465740136914e-05
+  },
+  "rows": [
+    {
+      "family": "fixed",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.4942547764104792,
+        0.500065767113245,
+        0.5051643325105144
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.3231113777526264,
+        "calibrated": 1.232877540117083,
+        "static": 1.2530119927783185,
+        "adaptive": 1.220130224606114,
+        "frozen": 1.220130224606114
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 3,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 2,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.5044939709460382,
+        0.5003404482385309,
+        0.5221234476069683
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.482489182042086,
+        "calibrated": 0.5360227819498921,
+        "static": 0.5377091653262035,
+        "adaptive": 0.6008363954660901,
+        "frozen": 0.6008363954660901
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 6,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 34,
+        "mh": 66,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.6513964646858016,
+          0.0,
+          0.3486035353141984
+        ],
+        "calibrated": [
+          0.6513964646858016,
+          0.0,
+          0.3486035353141984
+        ],
+        "static": [
+          0.6513964646858016,
+          0.0,
+          0.3486035353141984
+        ],
+        "adaptive": [
+          0.6513964646858016,
+          0.0,
+          0.3486035353141984
+        ],
+        "frozen": [
+          0.6513964646858016,
+          0.0,
+          0.3486035353141984
+        ]
+      },
+      "oracle_root_scores": [
+        0.20382418027065136,
+        0.14353712658616347,
+        0.03363762248752121
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7513253622565267,
+        "calibrated": 0.8424472672844477,
+        "static": 0.8881510162094561,
+        "adaptive": 0.9675668093939666,
+        "frozen": 0.9675668093939666
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 8,
+      "state": {
+        "phase": "pick",
+        "round": 3,
+        "turn": 1,
+        "mc": 40,
+        "mh": 60,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.10615339917019291,
+        0.16120638123339426,
+        0.22736008052758275
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.2482146469195368,
+        "calibrated": 1.193915420661004,
+        "static": 1.2915188894688467,
+        "adaptive": 1.2136505354141804,
+        "frozen": 1.2136505354141804
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 11,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 3,
+        "mc": 40,
+        "mh": 60,
+        "pc": 2,
+        "ph": 1,
+        "bc": 3,
+        "bh": 1,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.27391910769018424,
+          0.4929045617231359,
+          0.23317633058667986
+        ],
+        "calibrated": [
+          0.27391910769018424,
+          0.4929045617231359,
+          0.23317633058667986
+        ],
+        "static": [
+          0.27391910769018424,
+          0.4929045617231359,
+          0.23317633058667986
+        ],
+        "adaptive": [
+          0.27391910769018424,
+          0.4929045617231359,
+          0.23317633058667986
+        ],
+        "frozen": [
+          0.27391910769018424,
+          0.4929045617231359,
+          0.23317633058667986
+        ]
+      },
+      "oracle_root_scores": [
+        0.5228200007906942,
+        0.3417567043866277,
+        0.08771203075131492
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.831023203362496,
+        "calibrated": 0.896715303252829,
+        "static": 0.946048086000622,
+        "adaptive": 0.944952641848827,
+        "frozen": 0.944952641848827
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 14,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 52,
+        "mh": 48,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.938852216581011,
+          0.029698460979377048,
+          0.03144932243961192
+        ],
+        "calibrated": [
+          0.938852216581011,
+          0.029698460979377048,
+          0.03144932243961192
+        ],
+        "static": [
+          0.938852216581011,
+          0.029698460979377048,
+          0.03144932243961192
+        ],
+        "adaptive": [
+          0.938852216581011,
+          0.029698460979377048,
+          0.03144932243961192
+        ],
+        "frozen": [
+          0.938852216581011,
+          0.029698460979377048,
+          0.03144932243961192
+        ]
+      },
+      "oracle_root_scores": [
+        0.6274819773971478,
+        0.6516898394707468,
+        0.35269673835966486
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.9484667252079833,
+        "calibrated": 0.9584368818597888,
+        "static": 0.9172859885358914,
+        "adaptive": 0.9656744976111657,
+        "frozen": 0.9656744976111657
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 16,
+      "state": {
+        "phase": "pick",
+        "round": 5,
+        "turn": 1,
+        "mc": 52,
+        "mh": 48,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.00010702726422751425,
+          0.0,
+          0.9998929727357725
+        ],
+        "calibrated": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "static": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "adaptive": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "frozen": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ]
+      },
+      "oracle_root_scores": [
+        0.8913611097223408,
+        0.6971461866853066,
+        0.7182984612021728
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 4.3574593075135226e-05,
+        "static": 4.3574593075135226e-05,
+        "adaptive": 4.3574593075135226e-05,
+        "frozen": 4.3574593075135226e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7811421678217574,
+        "calibrated": 0.8658604348885501,
+        "static": 0.9607439914455748,
+        "adaptive": 0.889048686968593,
+        "frozen": 0.889048686968593
+      },
+      "adaptive_vs_neural_total_variation": 0.001184372453374096
+    },
+    {
+      "family": "fixed",
+      "event_id": 19,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 52,
+        "mh": 48,
+        "pc": 2,
+        "ph": 1,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0006510178367486641,
+          0.9993489821632513
+        ],
+        "calibrated": [
+          0.0006510178367486641,
+          0.9993489821632513
+        ],
+        "static": [
+          0.0006510178367486641,
+          0.9993489821632513
+        ],
+        "adaptive": [
+          0.0006510178367486641,
+          0.9993489821632513
+        ],
+        "frozen": [
+          0.0006510178367486641,
+          0.9993489821632513
+        ]
+      },
+      "oracle_root_scores": [
+        0.8960023199132475,
+        0.6779635760842522
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6566483429345582,
+        "calibrated": 0.6685101281777983,
+        "static": 0.7429789438787431,
+        "adaptive": 0.6746773109435292,
+        "frozen": 0.6746773109435292
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 22,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 6,
+        "mc": 52,
+        "mh": 48,
+        "pc": 2,
+        "ph": 1,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.3237696030935106,
+          0.6762303969064893
+        ],
+        "calibrated": [
+          -0.0,
+          0.3237696030935106,
+          0.6762303969064893
+        ],
+        "static": [
+          -0.0,
+          0.3237696030935106,
+          0.6762303969064893
+        ],
+        "adaptive": [
+          -0.0,
+          0.3237696030935106,
+          0.6762303969064893
+        ],
+        "frozen": [
+          -0.0,
+          0.3237696030935106,
+          0.6762303969064893
+        ]
+      },
+      "oracle_root_scores": [
+        0.6779040678941981,
+        0.9553339793222978,
+        0.733128189525557
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4402731405036915,
+        "calibrated": 0.40219487652620745,
+        "static": 0.4076015988149307,
+        "adaptive": 0.42787339099383026,
+        "frozen": 0.42787339099383026
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 24,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 8,
+        "mc": 52,
+        "mh": 48,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.45431305042814335,
+          0.5456869495718566
+        ],
+        "calibrated": [
+          -0.0,
+          0.45431305042814335,
+          0.5456869495718566
+        ],
+        "static": [
+          -0.0,
+          0.45431305042814335,
+          0.5456869495718566
+        ],
+        "adaptive": [
+          -0.0,
+          0.45431305042814335,
+          0.5456869495718566
+        ],
+        "frozen": [
+          -0.0,
+          0.45431305042814335,
+          0.5456869495718566
+        ]
+      },
+      "oracle_root_scores": [
+        0.7330834773727284,
+        0.9728355940779767,
+        0.7921441867621016
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5703786685631012,
+        "calibrated": 0.6070791665067298,
+        "static": 0.602414462876256,
+        "adaptive": 0.6213878675973219,
+        "frozen": 0.6213878675973219
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 27,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 11,
+        "mc": 52,
+        "mh": 48,
+        "pc": 2,
+        "ph": 1,
+        "bc": 4,
+        "bh": 1,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.6455475145027215,
+          0.2240334611866227,
+          0.13041902431065577
+        ],
+        "calibrated": [
+          0.6455475145027215,
+          0.2240334611866227,
+          0.13041902431065577
+        ],
+        "static": [
+          0.6455475145027215,
+          0.2240334611866227,
+          0.13041902431065577
+        ],
+        "adaptive": [
+          0.6455475145027215,
+          0.2240334611866227,
+          0.13041902431065577
+        ],
+        "frozen": [
+          0.6455475145027215,
+          0.2240334611866227,
+          0.13041902431065577
+        ]
+      },
+      "oracle_root_scores": [
+        0.9657110572240877,
+        0.923623448173333,
+        0.18462879613546113
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6134172375043515,
+        "calibrated": 0.6615944626731449,
+        "static": 0.6657658501395489,
+        "adaptive": 0.6776733215268386,
+        "frozen": 0.6776733215268386
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "fixed",
+      "event_id": 30,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 14,
+        "mc": 52,
+        "mh": 48,
+        "pc": 2,
+        "ph": 1,
+        "bc": 4,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.8745002716918341,
+        0.9906386408447669,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.40378981907831846,
+        "calibrated": 0.41879181486532174,
+        "static": 0.4113575208175715,
+        "adaptive": 0.41904904230362605,
+        "frozen": 0.41904904230362605
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.4962566114028734,
+        0.5000083009577668,
+        0.5550680034202097
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7541609983572996,
+        "calibrated": 0.8535772871868652,
+        "static": 0.8355308301644742,
+        "adaptive": 0.8877336278967481,
+        "frozen": 0.8877336278967481
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 2,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.8911941009386669,
+          0.10880589906133309
+        ],
+        "calibrated": [
+          0.0,
+          0.8911941009386669,
+          0.10880589906133309
+        ],
+        "static": [
+          0.0,
+          0.8911941009386669,
+          0.10880589906133309
+        ],
+        "adaptive": [
+          0.0,
+          0.8911941009386669,
+          0.10880589906133309
+        ],
+        "frozen": [
+          0.0,
+          0.8911941009386669,
+          0.10880589906133309
+        ]
+      },
+      "oracle_root_scores": [
+        0.5054982530243568,
+        0.5031490857530831,
+        0.5034102430728893
+      ],
+      "opportunity_cost": {
+        "neural": 2.1328376153095796e-05,
+        "calibrated": 2.1328376153095796e-05,
+        "static": 2.1328376153095796e-05,
+        "adaptive": 2.1328376153095796e-05,
+        "frozen": 2.1328376153095796e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.775767373839552,
+        "calibrated": 0.7472238730141609,
+        "static": 0.745939316449753,
+        "adaptive": 0.7300509257654106,
+        "frozen": 0.7300509257654106
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 3,
+      "state": {
+        "phase": "pick",
+        "round": 2,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.9429364870214338,
+          0.057063512978566155
+        ],
+        "calibrated": [
+          0.0,
+          0.9429364870214338,
+          0.057063512978566155
+        ],
+        "static": [
+          0.0,
+          0.9429364870214338,
+          0.057063512978566155
+        ],
+        "adaptive": [
+          0.0,
+          0.9429364870214338,
+          0.057063512978566155
+        ],
+        "frozen": [
+          0.0,
+          0.9429364870214338,
+          0.057063512978566155
+        ]
+      },
+      "oracle_root_scores": [
+        0.49610162585030876,
+        0.5021123772515914,
+        0.5616255372581576
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.3287267343953868,
+        "calibrated": 1.209201594573072,
+        "static": 1.1666907712137295,
+        "adaptive": 1.0847830691790294,
+        "frozen": 1.0847830691790294
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 4,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.8966033128396699,
+          0.10339668716033013
+        ],
+        "calibrated": [
+          0.0,
+          0.8966033128396699,
+          0.10339668716033013
+        ],
+        "static": [
+          0.0,
+          0.8966033128396699,
+          0.10339668716033013
+        ],
+        "adaptive": [
+          0.0,
+          0.8966033128396699,
+          0.10339668716033013
+        ],
+        "frozen": [
+          0.0,
+          0.8966033128396699,
+          0.10339668716033013
+        ]
+      },
+      "oracle_root_scores": [
+        0.5050177146898619,
+        0.5036589366348191,
+        0.5037324955936278
+      ],
+      "opportunity_cost": {
+        "neural": 1.4878827624409396e-05,
+        "calibrated": 1.4878827624409396e-05,
+        "static": 1.4878827624409396e-05,
+        "adaptive": 1.4878827624409396e-05,
+        "frozen": 1.4878827624409396e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.40001870888885876,
+        "calibrated": 0.47141334829974485,
+        "static": 0.4751536549940525,
+        "adaptive": 0.5320883078683897,
+        "frozen": 0.5320883078683897
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 5,
+      "state": {
+        "phase": "pick",
+        "round": 3,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.9424671323409033,
+          0.05753286765909671
+        ],
+        "calibrated": [
+          0.0,
+          0.9424671323409033,
+          0.05753286765909671
+        ],
+        "static": [
+          0.0,
+          0.9424671323409033,
+          0.05753286765909671
+        ],
+        "adaptive": [
+          0.0,
+          0.9424671323409033,
+          0.05753286765909671
+        ],
+        "frozen": [
+          0.0,
+          0.9424671323409033,
+          0.05753286765909671
+        ]
+      },
+      "oracle_root_scores": [
+        0.4955179551182606,
+        0.5018718923567419,
+        0.570760842385981
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.45629609448885206,
+        "calibrated": 0.5026942053350801,
+        "static": 0.5415467115724789,
+        "adaptive": 0.7228442074009706,
+        "frozen": 0.7228442074009706
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 6,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.9452665323428482,
+          0.05473346765715181
+        ],
+        "calibrated": [
+          -0.0,
+          0.9452665323428482,
+          0.05473346765715181
+        ],
+        "static": [
+          -0.0,
+          0.9452665323428482,
+          0.05473346765715181
+        ],
+        "adaptive": [
+          -0.0,
+          0.9452665323428482,
+          0.05473346765715181
+        ],
+        "frozen": [
+          -0.0,
+          0.9452665323428482,
+          0.05473346765715181
+        ]
+      },
+      "oracle_root_scores": [
+        0.5040086122974712,
+        0.5500959413431208,
+        0.5043467518858872
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3022633430991839,
+        "calibrated": 0.3371868125196549,
+        "static": 0.3449886257964525,
+        "adaptive": 0.390931267779302,
+        "frozen": 0.390931267779302
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 7,
+      "state": {
+        "phase": "pick",
+        "round": 4,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0006294661225262304,
+          0.41735015370048856,
+          0.5820203801769852
+        ],
+        "calibrated": [
+          0.0006294661225262304,
+          0.41735015370048856,
+          0.5820203801769852
+        ],
+        "static": [
+          0.0006294661225262304,
+          0.41735015370048856,
+          0.5820203801769852
+        ],
+        "adaptive": [
+          0.0006294661225262304,
+          0.41735015370048856,
+          0.5820203801769852
+        ],
+        "frozen": [
+          0.0006294661225262304,
+          0.41735015370048856,
+          0.5820203801769852
+        ]
+      },
+      "oracle_root_scores": [
+        0.4939883379721968,
+        0.5007622993740821,
+        0.5948581803184536
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5210340710027155,
+        "calibrated": 0.4512803048056087,
+        "static": 0.46281336641046444,
+        "adaptive": 0.5122775167355053,
+        "frozen": 0.5122775167355053
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 8,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 0,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.6193913869571349,
+          0.3806086130428651
+        ],
+        "calibrated": [
+          -0.0,
+          0.6193913869571349,
+          0.3806086130428651
+        ],
+        "static": [
+          -0.0,
+          0.6193913869571349,
+          0.3806086130428651
+        ],
+        "adaptive": [
+          -0.0,
+          0.6193913869571349,
+          0.3806086130428651
+        ],
+        "frozen": [
+          -0.0,
+          0.6193913869571349,
+          0.3806086130428651
+        ]
+      },
+      "oracle_root_scores": [
+        0.5079942134002147,
+        0.8371520003869704,
+        0.5897365351059671
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.41903549229171383,
+        "calibrated": 0.4887683887948979,
+        "static": 0.4634349907891693,
+        "adaptive": 0.43978272072566704,
+        "frozen": 0.43978272072566704
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 9,
+      "state": {
+        "phase": "pick",
+        "round": 5,
+        "turn": 1,
+        "mc": 53,
+        "mh": 47,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "calibrated": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "static": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "adaptive": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ],
+        "frozen": [
+          -0.0,
+          0.0011843724533740834,
+          0.9988156275466259
+        ]
+      },
+      "oracle_root_scores": [
+        0.9715934215984696,
+        0.9567191808365638,
+        0.8701892251092767
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.45905943635309826,
+        "calibrated": 0.476149938707213,
+        "static": 0.47984099210074227,
+        "adaptive": 0.4949889553841414,
+        "frozen": 0.4949889553841414
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 10,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 53,
+        "mh": 47,
+        "pc": 2,
+        "ph": 0,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.4636628207885055,
+          0.5363371792114945
+        ],
+        "calibrated": [
+          -0.0,
+          0.4636628207885055,
+          0.5363371792114945
+        ],
+        "static": [
+          -0.0,
+          0.4636628207885055,
+          0.5363371792114945
+        ],
+        "adaptive": [
+          -0.0,
+          0.4636628207885055,
+          0.5363371792114945
+        ],
+        "frozen": [
+          -0.0,
+          0.4636628207885055,
+          0.5363371792114945
+        ]
+      },
+      "oracle_root_scores": [
+        0.77929871825006,
+        0.9859751858371789,
+        0.8208664569914319
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.36204828169771125,
+        "calibrated": 0.433453814883577,
+        "static": 0.41585741777820623,
+        "adaptive": 0.3929271441558238,
+        "frozen": 0.3929271441558238
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "reactive",
+      "event_id": 11,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 2,
+        "mc": 53,
+        "mh": 47,
+        "pc": 2,
+        "ph": 0,
+        "bc": 3,
+        "bh": 1,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.6563710695478903,
+          0.21098878921140346,
+          0.13264014124070628
+        ],
+        "calibrated": [
+          0.6563710695478903,
+          0.21098878921140346,
+          0.13264014124070628
+        ],
+        "static": [
+          0.6579094947456456,
+          0.2100418823248672,
+          0.13204862292948716
+        ],
+        "adaptive": [
+          0.6579094947456456,
+          0.2100418823248672,
+          0.13204862292948716
+        ],
+        "frozen": [
+          0.6579094947456456,
+          0.2100418823248672,
+          0.13204862292948716
+        ]
+      },
+      "oracle_root_scores": [
+        0.7622669580369382,
+        0.9799211795920256,
+        0.768299598053643
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.00020966669830901896,
+        "adaptive": 0.00020966669830901896,
+        "frozen": 0.00020966669830901896
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.504018529690759,
+        "calibrated": 0.618608303116509,
+        "static": 0.7078895083338415,
+        "adaptive": 0.9225397839531633,
+        "frozen": 0.9225397839531633
+      },
+      "adaptive_vs_neural_total_variation": 0.0015384251977553776
+    },
+    {
+      "family": "bankroll",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.49653770644565887,
+        0.5000045361385558,
+        0.5556339583249915
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7473972998790599,
+        "calibrated": 0.8490681548680388,
+        "static": 0.8306395649359479,
+        "adaptive": 0.8839284987817605,
+        "frozen": 0.8839284987817605
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 5,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 4,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.4995105125073306,
+        0.5016713629302221
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.29327838939631007,
+        "calibrated": 0.34539592160130483,
+        "static": 0.3400765064059037,
+        "adaptive": 0.36725003840552434,
+        "frozen": 0.36725003840552434
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 9,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 8,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.49946938842420024,
+        0.5014424739608262
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.28981448343558935,
+        "calibrated": 0.3365488702836955,
+        "static": 0.3234734959926232,
+        "adaptive": 0.3022454203843001,
+        "frozen": 0.3022454203843001
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 13,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 12,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.49942212658805796,
+        0.5012251366826596
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.2870419132112373,
+        "calibrated": 0.30814218476220534,
+        "static": 0.3011044085158996,
+        "adaptive": 0.28755350763555565,
+        "frozen": 0.28755350763555565
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 17,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 16,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.9096104412640595,
+          0.06193796067720003,
+          0.028451598058740424
+        ],
+        "calibrated": [
+          0.9096104412640595,
+          0.06193796067720003,
+          0.028451598058740424
+        ],
+        "static": [
+          0.9096104412640595,
+          0.06193796067720003,
+          0.028451598058740424
+        ],
+        "adaptive": [
+          0.9096104412640595,
+          0.06193796067720003,
+          0.028451598058740424
+        ],
+        "frozen": [
+          0.9096104412640595,
+          0.06193796067720003,
+          0.028451598058740424
+        ]
+      },
+      "oracle_root_scores": [
+        0.49702559277780534,
+        0.5032017348489124,
+        0.49454538595513703
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.43191995460746324,
+        "calibrated": 0.45176274246922876,
+        "static": 0.45021090349293746,
+        "adaptive": 0.4507229299682114,
+        "frozen": 0.4507229299682114
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 21,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 20,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.892548963647096,
+          0.10745103635290398
+        ],
+        "calibrated": [
+          0.0,
+          0.892548963647096,
+          0.10745103635290398
+        ],
+        "static": [
+          0.0,
+          0.892548963647096,
+          0.10745103635290398
+        ],
+        "adaptive": [
+          0.0,
+          0.892548963647096,
+          0.10745103635290398
+        ],
+        "frozen": [
+          0.0,
+          0.892548963647096,
+          0.10745103635290398
+        ]
+      },
+      "oracle_root_scores": [
+        0.500818731551398,
+        0.4996770283910758,
+        0.5413703663656275
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4187374738189189,
+        "calibrated": 0.4898098343306845,
+        "static": 0.4827028423413695,
+        "adaptive": 0.4745542915580988,
+        "frozen": 0.4745542915580988
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 25,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 24,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.9155457109437212,
+          0.05091557398182087,
+          0.03353871507445796
+        ],
+        "calibrated": [
+          0.9155457109437212,
+          0.05091557398182087,
+          0.03353871507445796
+        ],
+        "static": [
+          0.9155457109437212,
+          0.05091557398182087,
+          0.03353871507445796
+        ],
+        "adaptive": [
+          0.9155457109437212,
+          0.05091557398182087,
+          0.03353871507445796
+        ],
+        "frozen": [
+          0.9155457109437212,
+          0.05091557398182087,
+          0.03353871507445796
+        ]
+      },
+      "oracle_root_scores": [
+        0.49634452715317073,
+        0.502648718061107,
+        0.49418293907241845
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.534112772706898,
+        "calibrated": 0.6153615761914766,
+        "static": 0.5860923213213921,
+        "adaptive": 0.5497971602884093,
+        "frozen": 0.5497971602884093
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 29,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 28,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.916921287404495,
+          0.04651998994875379,
+          0.036558722646751245
+        ],
+        "calibrated": [
+          0.916921287404495,
+          0.04651998994875379,
+          0.036558722646751245
+        ],
+        "static": [
+          0.916921287404495,
+          0.04651998994875379,
+          0.036558722646751245
+        ],
+        "adaptive": [
+          0.916921287404495,
+          0.04651998994875379,
+          0.036558722646751245
+        ],
+        "frozen": [
+          0.916921287404495,
+          0.04651998994875379,
+          0.036558722646751245
+        ]
+      },
+      "oracle_root_scores": [
+        0.4959454603246901,
+        0.5023113099571611,
+        0.4939587662039858
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4664792171012464,
+        "calibrated": 0.5786424861489642,
+        "static": 0.5406686008943087,
+        "adaptive": 0.4583795670242568,
+        "frozen": 0.4583795670242568
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 33,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 32,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.8117226087257535,
+          0.15923474514277464,
+          0.02904264613147184
+        ],
+        "calibrated": [
+          0.8117226087257535,
+          0.15923474514277464,
+          0.02904264613147184
+        ],
+        "static": [
+          0.8117226087257535,
+          0.15923474514277464,
+          0.02904264613147184
+        ],
+        "adaptive": [
+          0.8117226087257535,
+          0.15923474514277464,
+          0.02904264613147184
+        ],
+        "frozen": [
+          0.8117226087257535,
+          0.15923474514277464,
+          0.02904264613147184
+        ]
+      },
+      "oracle_root_scores": [
+        0.4955140927860484,
+        0.5011542827075126,
+        0.49417179388652577
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5025716695965645,
+        "calibrated": 0.5907510616371999,
+        "static": 0.5595302742974971,
+        "adaptive": 0.5025637274214056,
+        "frozen": 0.5025637274214056
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 37,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 36,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.0009539449677822391,
+          0.9990460550322178
+        ],
+        "calibrated": [
+          -0.0,
+          0.0009539449677822391,
+          0.9990460550322178
+        ],
+        "static": [
+          -0.0,
+          0.0009539449677822391,
+          0.9990460550322178
+        ],
+        "adaptive": [
+          -0.0,
+          0.0009539449677822391,
+          0.9990460550322178
+        ],
+        "frozen": [
+          -0.0,
+          0.0009539449677822391,
+          0.9990460550322178
+        ]
+      },
+      "oracle_root_scores": [
+        0.49276736809305466,
+        0.4930804179936129,
+        0.49514409142654936
+      ],
+      "opportunity_cost": {
+        "neural": 1.968630886473033e-06,
+        "calibrated": 1.968630886473033e-06,
+        "static": 1.968630886473033e-06,
+        "adaptive": 1.968630886473033e-06,
+        "frozen": 1.968630886473033e-06
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4264925631605342,
+        "calibrated": 0.49551569226184505,
+        "static": 0.47441974564203926,
+        "adaptive": 0.42931886583378864,
+        "frozen": 0.42931886583378864
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "bankroll",
+      "event_id": 41,
+      "state": {
+        "phase": "pick",
+        "round": 3,
+        "turn": 1,
+        "mc": 54,
+        "mh": 46,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          0.9967977740988766,
+          0.003202225901123401
+        ],
+        "static": [
+          0.0,
+          0.9967977740988766,
+          0.003202225901123401
+        ],
+        "adaptive": [
+          0.0,
+          0.9967977740988766,
+          0.003202225901123401
+        ],
+        "frozen": [
+          0.0,
+          0.9967977740988766,
+          0.003202225901123401
+        ]
+      },
+      "oracle_root_scores": [
+        0.5956162943570229,
+        0.6341075541515515,
+        0.6211345470543668
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 4.1542499342073214e-05,
+        "static": 4.1542499342073214e-05,
+        "adaptive": 4.1542499342073214e-05,
+        "frozen": 4.1542499342073214e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.47444421385403324,
+        "calibrated": 0.588894442695115,
+        "static": 0.6217523305643894,
+        "adaptive": 0.672363091494861,
+        "frozen": 0.672363091494861
+      },
+      "adaptive_vs_neural_total_variation": 0.003202225901123401
+    },
+    {
+      "family": "bankroll",
+      "event_id": 46,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 54,
+        "mh": 46,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9570977942833131,
+        0.9938504126545316
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5765412590546694,
+        "calibrated": 0.6968313569839654,
+        "static": 0.7067725451775724,
+        "adaptive": 0.7060509218011368,
+        "frozen": 0.7060509218011368
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.4436006477550827,
+        0.5006774489372562,
+        0.5030643764795355
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4079699508296522,
+        "calibrated": 1.2894499221684337,
+        "static": 1.3012343466282916,
+        "adaptive": 1.2410528650117594,
+        "frozen": 1.2410528650117594
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 9,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 8,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 2,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.5115202324190894,
+        0.5066638031921936,
+        0.4966961822196181
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.1172220558342707,
+        "calibrated": 1.0637025875875474,
+        "static": 1.1770081739512117,
+        "adaptive": 1.2604365588944446,
+        "frozen": 1.2604365588944446
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 18,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 17,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.24920484242181742,
+          0.28262958442876296,
+          0.46816557314941964
+        ],
+        "calibrated": [
+          0.24920484242181742,
+          0.28262958442876296,
+          0.46816557314941964
+        ],
+        "static": [
+          0.24920484242181742,
+          0.28262958442876296,
+          0.46816557314941964
+        ],
+        "adaptive": [
+          0.24920484242181742,
+          0.28262958442876296,
+          0.46816557314941964
+        ],
+        "frozen": [
+          0.24920484242181742,
+          0.28262958442876296,
+          0.46816557314941964
+        ]
+      },
+      "oracle_root_scores": [
+        0.39709970417682494,
+        0.3224324825712632,
+        0.4636705815583712
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.417219413859217,
+        "calibrated": 0.4433094638549018,
+        "static": 0.4345583642769581,
+        "adaptive": 0.441441798018428,
+        "frozen": 0.441441798018428
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 27,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 8,
+        "mc": 44,
+        "mh": 56,
+        "pc": 2,
+        "ph": 2,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.6036102042467407,
+          0.09077802337638084,
+          0.3056117723768784
+        ],
+        "calibrated": [
+          0.6036102042467407,
+          0.09077802337638084,
+          0.3056117723768784
+        ],
+        "static": [
+          0.6036102042467407,
+          0.09077802337638084,
+          0.3056117723768784
+        ],
+        "adaptive": [
+          0.6036102042467407,
+          0.09077802337638084,
+          0.3056117723768784
+        ],
+        "frozen": [
+          0.6036102042467407,
+          0.09077802337638084,
+          0.3056117723768784
+        ]
+      },
+      "oracle_root_scores": [
+        0.26342572641974704,
+        0.9309282981660988,
+        0.3385889821486669
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5021428569593434,
+        "calibrated": 0.5907951219525349,
+        "static": 0.7090279911910088,
+        "adaptive": 0.6158080185500316,
+        "frozen": 0.6158080185500316
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 36,
+      "state": {
+        "phase": "pick",
+        "round": 3,
+        "turn": 1,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.8788519103669381,
+        0.8255178917897674,
+        0.7789474836556171
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6203260594194026,
+        "calibrated": 0.7343771242076718,
+        "static": 0.7693318492182384,
+        "adaptive": 0.7365351676541984,
+        "frozen": 0.7365351676541984
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 45,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 9,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.8580025786556218,
+          0.0917781056082416,
+          0.05021931573613661
+        ],
+        "calibrated": [
+          0.8580025786556218,
+          0.0917781056082416,
+          0.05021931573613661
+        ],
+        "static": [
+          0.8580025786556218,
+          0.0917781056082416,
+          0.05021931573613661
+        ],
+        "adaptive": [
+          0.8580025786556218,
+          0.0917781056082416,
+          0.05021931573613661
+        ],
+        "frozen": [
+          0.8580025786556218,
+          0.0917781056082416,
+          0.05021931573613661
+        ]
+      },
+      "oracle_root_scores": [
+        0.8805701876819161,
+        0.9889992473892032,
+        0.8740093523663948
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7806698156681648,
+        "calibrated": 0.8290027989234395,
+        "static": 0.9274863508460038,
+        "adaptive": 0.8351054507371976,
+        "frozen": 0.8351054507371976
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 54,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 18,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.10289078175823088,
+          0.8971092182417691
+        ],
+        "calibrated": [
+          -0.0,
+          0.10289078175823088,
+          0.8971092182417691
+        ],
+        "static": [
+          -0.0,
+          0.10289078175823088,
+          0.8971092182417691
+        ],
+        "adaptive": [
+          -0.0,
+          0.10289078175823088,
+          0.8971092182417691
+        ],
+        "frozen": [
+          -0.0,
+          0.10289078175823088,
+          0.8971092182417691
+        ]
+      },
+      "oracle_root_scores": [
+        0.8167747106950587,
+        0.986011732653958,
+        0.8700902182804983
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.8718494393450109,
+        "calibrated": 0.8843126123541678,
+        "static": 0.9921110154696972,
+        "adaptive": 0.8893246496661383,
+        "frozen": 0.8893246496661383
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 63,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 7,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 4,
+        "bh": 3,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9759025104768446
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5650405814650259,
+        "calibrated": 0.6782260892250672,
+        "static": 0.7588877328429297,
+        "adaptive": 0.6905192367029929,
+        "frozen": 0.6905192367029929
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 72,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 16,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9759025104768445
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6026966820492798,
+        "calibrated": 0.716400682676795,
+        "static": 0.6711813749153234,
+        "adaptive": 0.8032603962430351,
+        "frozen": 0.8032603962430351
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 81,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 25,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9950227741589525,
+        0.9367430707197317,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6215351717865798,
+        "calibrated": 0.7188467789773947,
+        "static": 0.7034768827605039,
+        "adaptive": 0.9058994244560417,
+        "frozen": 0.9058994244560417
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "streak",
+      "event_id": 90,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 68,
+        "mh": 32,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3989850152492048,
+        "calibrated": 0.4481000124476332,
+        "static": 0.4878559107065313,
+        "adaptive": 0.4555278941512078,
+        "frozen": 0.4555278941512078
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "streak",
+      "event_id": 99,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 12,
+        "mc": 68,
+        "mh": 32,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 4,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7670360589340852,
+        "calibrated": 0.8084221591002383,
+        "static": 0.9059706059388042,
+        "adaptive": 0.8144818721508399,
+        "frozen": 0.8144818721508399
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.44429175986589325,
+        0.500668894391837,
+        0.5034056552622312
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4032630109503292,
+        "calibrated": 1.286311962248885,
+        "static": 1.297968654364704,
+        "adaptive": 1.2386867834513748,
+        "frozen": 1.2386867834513748
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 6,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 5,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 3,
+        "bh": 1,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.4642240617493426,
+          0.3590195060667839,
+          0.1767564321838735
+        ],
+        "calibrated": [
+          0.4642240617493426,
+          0.3590195060667839,
+          0.1767564321838735
+        ],
+        "static": [
+          0.4642240617493426,
+          0.3590195060667839,
+          0.1767564321838735
+        ],
+        "adaptive": [
+          0.4642240617493426,
+          0.3590195060667839,
+          0.1767564321838735
+        ],
+        "frozen": [
+          0.4642240617493426,
+          0.3590195060667839,
+          0.1767564321838735
+        ]
+      },
+      "oracle_root_scores": [
+        0.5323913414765198,
+        0.6508475177013304,
+        0.5709947186104555
+      ],
+      "opportunity_cost": {
+        "neural": 7.564342608412655e-05,
+        "calibrated": 7.564342608412655e-05,
+        "static": 7.564342608412655e-05,
+        "adaptive": 7.564342608412655e-05,
+        "frozen": 7.564342608412655e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.9698257584300962,
+        "calibrated": 1.5833964756820724,
+        "static": 1.551188891354369,
+        "adaptive": 1.2277784288433395,
+        "frozen": 1.2277784288433395
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 12,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 11,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 3,
+        "bh": 2,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.8740129977195321,
+          0.0,
+          0.12598700228046789
+        ],
+        "calibrated": [
+          0.8740129977195321,
+          0.0,
+          0.12598700228046789
+        ],
+        "static": [
+          0.8740129977195321,
+          0.0,
+          0.12598700228046789
+        ],
+        "adaptive": [
+          0.8740129977195321,
+          0.0,
+          0.12598700228046789
+        ],
+        "frozen": [
+          0.8740129977195321,
+          0.0,
+          0.12598700228046789
+        ]
+      },
+      "oracle_root_scores": [
+        0.5076651005351839,
+        0.5018163413001722,
+        0.5283485890417873
+      ],
+      "opportunity_cost": {
+        "neural": 4.426127380285916e-05,
+        "calibrated": 4.426127380285916e-05,
+        "static": 4.426127380285916e-05,
+        "adaptive": 4.426127380285916e-05,
+        "frozen": 4.426127380285916e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.45184797581030534,
+        "calibrated": 0.5544550416296637,
+        "static": 0.5607170292526191,
+        "adaptive": 0.9971909201710321,
+        "frozen": 0.9971909201710321
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 17,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 2,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.9992847808202514,
+        "calibrated": 2.194176110391359,
+        "static": 2.1771379874830696,
+        "adaptive": 1.2265351570914387,
+        "frozen": 1.2265351570914387
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 23,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 8,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.44981206408914215,
+        "calibrated": 0.5338583953815087,
+        "static": 0.5772667008751868,
+        "adaptive": 0.9179090463271853,
+        "frozen": 0.9179090463271853
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 28,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 13,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.43261775823646254,
+        "calibrated": 0.5157025125208261,
+        "static": 0.5231110938042437,
+        "adaptive": 0.9598313321508134,
+        "frozen": 0.9598313321508134
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 34,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 19,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5814857535893788,
+        "calibrated": 0.6805161750454607,
+        "static": 0.704870878573056,
+        "adaptive": 1.026405378559919,
+        "frozen": 1.026405378559919
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 39,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 24,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 3,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.43371988617008483,
+        "calibrated": 0.4817043275330069,
+        "static": 0.5042011201918433,
+        "adaptive": 0.8476737203167273,
+        "frozen": 0.8476737203167273
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 45,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 30,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 4,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.42337565639411445,
+        "calibrated": 0.48084255782448687,
+        "static": 0.5147010042012704,
+        "adaptive": 0.5696196627866685,
+        "frozen": 0.5696196627866685
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 50,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 35,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 3,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.537337250781707,
+        "calibrated": 0.6642285195562077,
+        "static": 0.6822958824126102,
+        "adaptive": 0.6694564727157333,
+        "frozen": 0.6694564727157333
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 56,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 41,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.45733941974979947,
+        "calibrated": 0.4826708429366422,
+        "static": 0.5672380171300393,
+        "adaptive": 0.4936722833863893,
+        "frozen": 0.4936722833863893
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "cycle",
+      "event_id": 62,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 47,
+        "mc": 2,
+        "mh": 98,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 4,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.0,
+        0.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7697577853908291,
+        "calibrated": 0.8408404427013095,
+        "static": 0.8879224534616752,
+        "adaptive": 0.8470771321192274,
+        "frozen": 0.8470771321192274
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.49524784411143996,
+        0.5000218117847124,
+        0.5530369580103972
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7784339194531547,
+        "calibrated": 0.869759234584102,
+        "static": 0.8530841399893999,
+        "adaptive": 0.9013891152110908,
+        "frozen": 0.9013891152110908
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 8,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 7,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.8936859316202779,
+          0.10631406837972213
+        ],
+        "calibrated": [
+          0.0,
+          0.8936859316202779,
+          0.10631406837972213
+        ],
+        "static": [
+          0.0,
+          0.8936859316202779,
+          0.10631406837972213
+        ],
+        "adaptive": [
+          0.0,
+          0.8936859316202779,
+          0.10631406837972213
+        ],
+        "frozen": [
+          0.0,
+          0.8936859316202779,
+          0.10631406837972213
+        ]
+      },
+      "oracle_root_scores": [
+        0.5013230086847797,
+        0.4997442167736782,
+        0.540070713897034
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3747575816001575,
+        "calibrated": 0.4307968366357334,
+        "static": 0.40655167190333796,
+        "adaptive": 0.3733862866133757,
+        "frozen": 0.3733862866133757
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 16,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 15,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          0,
+          0
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.8941142081781153,
+          0.10588579182188473
+        ],
+        "calibrated": [
+          0.0,
+          0.8941142081781153,
+          0.10588579182188473
+        ],
+        "static": [
+          0.0,
+          0.8941142081781153,
+          0.10588579182188473
+        ],
+        "adaptive": [
+          0.0,
+          0.8941142081781153,
+          0.10588579182188473
+        ],
+        "frozen": [
+          0.0,
+          0.8941142081781153,
+          0.10588579182188473
+        ]
+      },
+      "oracle_root_scores": [
+        0.5008961939696794,
+        0.49967395330915,
+        0.5399925316575046
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.35473283412240664,
+        "calibrated": 0.3849154442375676,
+        "static": 0.3855606950115734,
+        "adaptive": 0.389806581881505,
+        "frozen": 0.389806581881505
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 24,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.06212606440512693,
+          0.9378739355948731
+        ],
+        "calibrated": [
+          0.0,
+          0.06212606440512693,
+          0.9378739355948731
+        ],
+        "static": [
+          0.0,
+          0.06212606440512693,
+          0.9378739355948731
+        ],
+        "adaptive": [
+          0.0,
+          0.06212606440512693,
+          0.9378739355948731
+        ],
+        "frozen": [
+          0.0,
+          0.06212606440512693,
+          0.9378739355948731
+        ]
+      },
+      "oracle_root_scores": [
+        0.6877422540590182,
+        0.9580191363660665,
+        0.7866124772257812
+      ],
+      "opportunity_cost": {
+        "neural": 7.695832931620128e-05,
+        "calibrated": 7.695832931620128e-05,
+        "static": 7.695832931620128e-05,
+        "adaptive": 7.695832931620128e-05,
+        "frozen": 7.695832931620128e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.084350412388066,
+        "calibrated": 1.650064263577719,
+        "static": 1.5894199916507903,
+        "adaptive": 1.5460071155261623,
+        "frozen": 1.5460071155261623
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 31,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 3,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 1,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999998,
+        0.9999999999999998
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.649667881820984,
+        "calibrated": 0.7028400126200424,
+        "static": 0.7391037655054531,
+        "adaptive": 0.7300643392631067,
+        "frozen": 0.7300643392631067
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 39,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 11,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 1,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3561557434545882,
+        "calibrated": 0.39376377442722577,
+        "static": 0.384618491036826,
+        "adaptive": 0.38709463660287485,
+        "frozen": 0.38709463660287485
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 47,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 19,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 1,
+        "bc": 4,
+        "bh": 0,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3810160002362557,
+        "calibrated": 0.3558551256172301,
+        "static": 0.3549069469153786,
+        "adaptive": 0.3546701004255447,
+        "frozen": 0.3546701004255447
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 55,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 27,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 1,
+        "bc": 3,
+        "bh": 0,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.37364206839641473,
+        "calibrated": 0.35772314807472316,
+        "static": 0.3554457391488472,
+        "adaptive": 0.3551362197465384,
+        "frozen": 0.3551362197465384
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 62,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 34,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 1,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.42388059124888283,
+        "calibrated": 0.3575175405226856,
+        "static": 0.3586253828001378,
+        "adaptive": 0.3618185181978978,
+        "frozen": 0.3618185181978978
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 70,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 6,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7153741365154865,
+        "calibrated": 0.8094865192391388,
+        "static": 0.8347496286562627,
+        "adaptive": 0.859006360243783,
+        "frozen": 0.859006360243783
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "switch",
+      "event_id": 78,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 14,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5426341468255858,
+        "calibrated": 0.6234505250342,
+        "static": 0.6248192807820868,
+        "adaptive": 0.6434107337329963,
+        "frozen": 0.6434107337329963
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "switch",
+      "event_id": 86,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 22,
+        "mc": 84,
+        "mh": 16,
+        "pc": 0,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5342562908174348,
+        "calibrated": 0.5902944118661833,
+        "static": 0.5714407911345225,
+        "adaptive": 0.5572327692082332,
+        "frozen": 0.5572327692082332
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.49507516164466353,
+        0.5000564438342888,
+        0.5043253007184177
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.331648367830206,
+        "calibrated": 1.2385688668354695,
+        "static": 1.2595134082407262,
+        "adaptive": 1.225601691470081,
+        "frozen": 1.225601691470081
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 4,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.028458733900979267,
+          0.9715412660990207
+        ],
+        "calibrated": [
+          -0.0,
+          0.028458733900979267,
+          0.9715412660990207
+        ],
+        "static": [
+          -0.0,
+          0.028458733900979267,
+          0.9715412660990207
+        ],
+        "adaptive": [
+          -0.0,
+          0.028458733900979267,
+          0.9715412660990207
+        ],
+        "frozen": [
+          -0.0,
+          0.028458733900979267,
+          0.9715412660990207
+        ]
+      },
+      "oracle_root_scores": [
+        0.49646315032927196,
+        0.4924588757132507,
+        0.5036734625305747
+      ],
+      "opportunity_cost": {
+        "neural": 1.0053029963708049e-05,
+        "calibrated": 1.0053029963708049e-05,
+        "static": 1.0053029963708049e-05,
+        "adaptive": 1.0053029963708049e-05,
+        "frozen": 1.0053029963708049e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.8823994493186214,
+        "calibrated": 1.550278408820618,
+        "static": 1.3258929558968104,
+        "adaptive": 1.0846208057294469,
+        "frozen": 1.0846208057294469
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 8,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.02672158796521372,
+          0.9732784120347863
+        ],
+        "calibrated": [
+          -0.0,
+          0.02672158796521372,
+          0.9732784120347863
+        ],
+        "static": [
+          -0.0,
+          0.02672158796521372,
+          0.9732784120347863
+        ],
+        "adaptive": [
+          -0.0,
+          0.02672158796521372,
+          0.9732784120347863
+        ],
+        "frozen": [
+          -0.0,
+          0.02672158796521372,
+          0.9732784120347863
+        ]
+      },
+      "oracle_root_scores": [
+        0.4957675379894433,
+        0.49171774822248815,
+        0.5036542201645843
+      ],
+      "opportunity_cost": {
+        "neural": 9.283243322499857e-06,
+        "calibrated": 9.283243322499857e-06,
+        "static": 9.283243322499857e-06,
+        "adaptive": 9.283243322499857e-06,
+        "frozen": 9.283243322499857e-06
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.690754265038336,
+        "calibrated": 2.0190166554334734,
+        "static": 1.7193234006621871,
+        "adaptive": 1.5176668651811789,
+        "frozen": 1.5176668651811789
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 12,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 66,
+        "mh": 34,
+        "pc": 0,
+        "ph": 1,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.982806397237848,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.0906063218156377,
+        "calibrated": 1.0640626367573953,
+        "static": 0.9828918652975339,
+        "adaptive": 0.9783743995885792,
+        "frozen": 0.9783743995885792
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 15,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 4,
+        "mc": 66,
+        "mh": 34,
+        "pc": 0,
+        "ph": 1,
+        "bc": 3,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9951497845710039,
+        0.9972703280099824,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5986847210946615,
+        "calibrated": 0.5503656547359296,
+        "static": 0.5560697248882855,
+        "adaptive": 0.5783684435478382,
+        "frozen": 0.5783684435478382
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 19,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 3,
+        "mc": 64,
+        "mh": 36,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 3.8625389791983635,
+        "calibrated": 2.672255681250699,
+        "static": 2.5010356683634622,
+        "adaptive": 2.2479431063885267,
+        "frozen": 2.2479431063885267
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 23,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 7,
+        "mc": 64,
+        "mh": 36,
+        "pc": 0,
+        "ph": 0,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.9842991693173,
+        "calibrated": 1.0195064683524337,
+        "static": 0.9666306117315381,
+        "adaptive": 0.8902022511557042,
+        "frozen": 0.8902022511557042
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 27,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 1,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.2637404065537825,
+        "calibrated": 1.2060678713038255,
+        "static": 1.102484112584873,
+        "adaptive": 0.9036616186019839,
+        "frozen": 0.9036616186019839
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 30,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 4,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 1,
+        "bc": 0,
+        "bh": 3,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.8511109510447987,
+        "calibrated": 1.5592673814709141,
+        "static": 1.4304177457152605,
+        "adaptive": 1.0798880267827466,
+        "frozen": 1.0798880267827466
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 34,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 8,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 1,
+        "bc": 1,
+        "bh": 3,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.604782901339028,
+        "calibrated": 0.6536108617879425,
+        "static": 0.643995311634479,
+        "adaptive": 0.6222531767485222,
+        "frozen": 0.6222531767485222
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 38,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 12,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 1,
+        "bc": 0,
+        "bh": 4,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5709996848964978,
+        "calibrated": 0.5563313233755456,
+        "static": 0.5577413215754822,
+        "adaptive": 0.5871215042423032,
+        "frozen": 0.5871215042423032
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "mimic",
+      "event_id": 42,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 16,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 1,
+        "bc": 3,
+        "bh": 4,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.4900824541241997,
+        "calibrated": 1.9256468763773387,
+        "static": 1.8095831184844542,
+        "adaptive": 1.4420147610400347,
+        "frozen": 1.4420147610400347
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.4951763228259446,
+        0.5000227696981177,
+        0.5528929575260013
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7801548619680886,
+        "calibrated": 0.8709065295940578,
+        "static": 0.854328664166619,
+        "adaptive": 0.9023572849912581,
+        "frozen": 0.9023572849912581
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 7,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 6,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.4995945838619391,
+        0.5015037781613543
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.305947074330154,
+        "calibrated": 1.067694691651328,
+        "static": 0.9344934737261354,
+        "adaptive": 0.7805409067438823,
+        "frozen": 0.7805409067438823
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 13,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 12,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.5511220870642103,
+          0.4488779129357897
+        ],
+        "calibrated": [
+          0.0,
+          0.5511220870642103,
+          0.4488779129357897
+        ],
+        "static": [
+          0.0,
+          0.5511220870642103,
+          0.4488779129357897
+        ],
+        "adaptive": [
+          0.0,
+          0.5511220870642103,
+          0.4488779129357897
+        ],
+        "frozen": [
+          0.0,
+          0.5511220870642103,
+          0.4488779129357897
+        ]
+      },
+      "oracle_root_scores": [
+        0.5400320269039568,
+        0.5091703724602217,
+        0.5923876976422685
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3588972740288972,
+        "calibrated": 0.39357504047366104,
+        "static": 0.38390572489320357,
+        "adaptive": 0.3710657603277923,
+        "frozen": 0.3710657603277923
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 19,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 18,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.55137530766289,
+          0.44862469233711
+        ],
+        "calibrated": [
+          0.0,
+          0.55137530766289,
+          0.44862469233711
+        ],
+        "static": [
+          0.0,
+          0.55137530766289,
+          0.44862469233711
+        ],
+        "adaptive": [
+          0.0,
+          0.55137530766289,
+          0.44862469233711
+        ],
+        "frozen": [
+          0.0,
+          0.55137530766289,
+          0.44862469233711
+        ]
+      },
+      "oracle_root_scores": [
+        0.5399574984554112,
+        0.5089191460145627,
+        0.5923532887117284
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.38070565888277713,
+        "calibrated": 0.36016397593217425,
+        "static": 0.3584940789654163,
+        "adaptive": 0.3668876953697241,
+        "frozen": 0.3668876953697241
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 25,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 24,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.4993793116163994,
+        0.5005594211567664
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3661650014129665,
+        "calibrated": 0.3672345181741535,
+        "static": 0.3618343443454824,
+        "adaptive": 0.3713372995408094,
+        "frozen": 0.3713372995408094
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 31,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 30,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.8846127591262898,
+          0.11538724087371022
+        ],
+        "calibrated": [
+          0.0,
+          0.8846127591262898,
+          0.11538724087371022
+        ],
+        "static": [
+          0.0,
+          0.8846127591262898,
+          0.11538724087371022
+        ],
+        "adaptive": [
+          0.0,
+          0.8846127591262898,
+          0.11538724087371022
+        ],
+        "frozen": [
+          0.0,
+          0.8846127591262898,
+          0.11538724087371022
+        ]
+      },
+      "oracle_root_scores": [
+        0.5002597327599019,
+        0.4997466699157443,
+        0.5397435850097906
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.36551425115400443,
+        "calibrated": 0.41256903061922834,
+        "static": 0.4148981917738172,
+        "adaptive": 0.43957260800457515,
+        "frozen": 0.43957260800457515
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 38,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 37,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          0,
+          1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.4990809922650993,
+        0.4998947779863878
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3636030620041472,
+        "calibrated": 0.36984530532384086,
+        "static": 0.3643974290515758,
+        "adaptive": 0.36043901738149986,
+        "frozen": 0.36043901738149986
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 44,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 2,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 0,
+        "bc": 3,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.6452451943030564,
+          0.3547548056969436
+        ],
+        "calibrated": [
+          0.0,
+          0.6452451943030564,
+          0.3547548056969436
+        ],
+        "static": [
+          0.0,
+          0.6452451943030564,
+          0.3547548056969436
+        ],
+        "adaptive": [
+          0.0,
+          0.6452451943030564,
+          0.3547548056969436
+        ],
+        "frozen": [
+          0.0,
+          0.6452451943030564,
+          0.3547548056969436
+        ]
+      },
+      "oracle_root_scores": [
+        0.64509915075894,
+        0.5845374131583193,
+        0.8683162030671261
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.40391835948323734,
+        "calibrated": 0.3582710358681019,
+        "static": 0.35964029558816607,
+        "adaptive": 0.40146911985523415,
+        "frozen": 0.40146911985523415
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 50,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 4,
+        "mc": 65,
+        "mh": 35,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 1,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        0.9999999999999998
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.4989640665637145,
+        "calibrated": 1.9525483946117332,
+        "static": 1.8818670970554896,
+        "adaptive": 1.660102846811843,
+        "frozen": 1.660102846811843
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 56,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 3,
+        "mc": 64,
+        "mh": 36,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999998
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 3.627214645402304,
+        "calibrated": 2.531818178473393,
+        "static": 2.0045011994108717,
+        "adaptive": 1.1139240806987232,
+        "frozen": 1.1139240806987232
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 62,
+      "state": {
+        "phase": "pick",
+        "round": 5,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.2668471433851063,
+        "calibrated": 1.8303033452626174,
+        "static": 1.6592764683525323,
+        "adaptive": 1.1795368331441891,
+        "frozen": 1.1795368331441891
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "ambush",
+      "event_id": 69,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 7,
+        "mc": 60,
+        "mh": 40,
+        "pc": 0,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.248748432697997,
+        "calibrated": 1.1945380471060294,
+        "static": 1.2127960584941886,
+        "adaptive": 1.2419659994975811,
+        "frozen": 1.2419659994975811
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "changing",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.49497568778021855,
+        0.5000254568841566,
+        0.5524890002485102
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7849825349857695,
+        "calibrated": 0.8741249782725119,
+        "static": 0.857819864911603,
+        "adaptive": 0.9050732427200538,
+        "frozen": 0.9050732427200538
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 5,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 2,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 2,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.5512023284270607,
+          0.44879767157293926
+        ],
+        "calibrated": [
+          0.0,
+          0.5512023284270607,
+          0.44879767157293926
+        ],
+        "static": [
+          0.0,
+          0.5512023284270607,
+          0.44879767157293926
+        ],
+        "adaptive": [
+          0.0,
+          0.5512023284270607,
+          0.44879767157293926
+        ],
+        "frozen": [
+          0.0,
+          0.5512023284270607,
+          0.44879767157293926
+        ]
+      },
+      "oracle_root_scores": [
+        0.5438319720043203,
+        0.5114970146622699,
+        0.6013801052082621
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3775034457288208,
+        "calibrated": 0.4258714913269205,
+        "static": 0.4541802505831226,
+        "adaptive": 0.5896503429425268,
+        "frozen": 0.5896503429425268
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 10,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 7,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.6779722629698451,
+          0.30583990949093026,
+          0.016187827539224597
+        ],
+        "calibrated": [
+          0.6779722629698451,
+          0.30583990949093026,
+          0.016187827539224597
+        ],
+        "static": [
+          0.6779722629698451,
+          0.30583990949093026,
+          0.016187827539224597
+        ],
+        "adaptive": [
+          0.6779722629698451,
+          0.30583990949093026,
+          0.016187827539224597
+        ],
+        "frozen": [
+          0.6779722629698451,
+          0.30583990949093026,
+          0.016187827539224597
+        ]
+      },
+      "oracle_root_scores": [
+        0.49917977011016723,
+        0.5077373110478871,
+        0.4921860094270679
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6014912076338137,
+        "calibrated": 0.700134822977509,
+        "static": 0.6919976551974146,
+        "adaptive": 0.8084279990336196,
+        "frozen": 0.8084279990336196
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 14,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 11,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 3,
+        "bh": 3,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.8982688009703567,
+          0.09206781078531705,
+          0.00966338824432629
+        ],
+        "calibrated": [
+          0.8982688009703567,
+          0.09206781078531705,
+          0.00966338824432629
+        ],
+        "static": [
+          0.8982688009703567,
+          0.09206781078531705,
+          0.00966338824432629
+        ],
+        "adaptive": [
+          0.8982688009703567,
+          0.09206781078531705,
+          0.00966338824432629
+        ],
+        "frozen": [
+          0.8982688009703567,
+          0.09206781078531705,
+          0.00966338824432629
+        ]
+      },
+      "oracle_root_scores": [
+        0.49386097447065247,
+        0.6134771333760839,
+        0.4931177901010914
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.8909871494935713,
+        "calibrated": 2.0968627636126698,
+        "static": 1.961547763711093,
+        "adaptive": 1.6354195100216868,
+        "frozen": 1.6354195100216868
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 19,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 3,
+        "mc": 48,
+        "mh": 52,
+        "pc": 2,
+        "ph": 0,
+        "bc": 4,
+        "bh": 0,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.8844706380793763,
+        0.6626323676921286,
+        0.9991338598142026
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.48060122044457526,
+        "calibrated": 0.5371908853023694,
+        "static": 0.5596502323065011,
+        "adaptive": 0.6542345251672538,
+        "frozen": 0.6542345251672538
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 24,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 4,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 0,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          2,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4554992711343562,
+        "calibrated": 1.2733533244802193,
+        "static": 1.1786063080209352,
+        "adaptive": 1.0383900036966305,
+        "frozen": 1.0383900036966305
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 28,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 8,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 0,
+        "bc": 2,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.962557215137808,
+        "calibrated": 1.0045088013197063,
+        "static": 0.9902522182452761,
+        "adaptive": 1.0582805144424399,
+        "frozen": 1.0582805144424399
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 33,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 13,
+        "mc": 63,
+        "mh": 37,
+        "pc": 0,
+        "ph": 0,
+        "bc": 3,
+        "bh": 4,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0000000000000002,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 2.220446049250313e-16,
+        "calibrated": 2.220446049250313e-16,
+        "static": 0.0,
+        "adaptive": 2.220446049250313e-16,
+        "frozen": 2.220446049250313e-16
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4614314883567199,
+        "calibrated": 1.241284212328109,
+        "static": 1.2402492553768494,
+        "adaptive": 1.1072541058132586,
+        "frozen": 1.1072541058132586
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 38,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 61,
+        "mh": 39,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.0661856166051509,
+        "calibrated": 0.925607056343658,
+        "static": 0.8799934528209956,
+        "adaptive": 0.6955326850743234,
+        "frozen": 0.6955326850743234
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 42,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 7,
+        "mc": 61,
+        "mh": 39,
+        "pc": 0,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.565765883675156,
+        "calibrated": 0.6429178427890019,
+        "static": 0.6360761694516204,
+        "adaptive": 0.9345508583355879,
+        "frozen": 0.9345508583355879
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "changing",
+      "event_id": 47,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 12,
+        "mc": 61,
+        "mh": 39,
+        "pc": 0,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 2.6015824966543,
+        "calibrated": 1.9220920169577802,
+        "static": 1.852146719377542,
+        "adaptive": 1.1600673097973253,
+        "frozen": 1.1600673097973253
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "changing",
+      "event_id": 52,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 17,
+        "mc": 61,
+        "mh": 39,
+        "pc": 0,
+        "ph": 0,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0000000000000002,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 2.220446049250313e-16,
+        "calibrated": 2.220446049250313e-16,
+        "static": 2.220446049250313e-16,
+        "adaptive": 2.220446049250313e-16,
+        "frozen": 2.220446049250313e-16
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.5421923851360662,
+        "calibrated": 0.5935037116964315,
+        "static": 0.593889923519878,
+        "adaptive": 1.0170275772561803,
+        "frozen": 1.0170275772561803
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.44277339620323936,
+        0.5006876886087404,
+        0.5026558705393559
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4136040921776267,
+        "calibrated": 1.2932060164004167,
+        "static": 1.305143334693524,
+        "adaptive": 1.243885031619751,
+        "frozen": 1.243885031619751
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 2,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "calibrated": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "static": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "adaptive": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "frozen": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ]
+      },
+      "oracle_root_scores": [
+        0.43293998850031146,
+        0.9382703938332624,
+        0.5000287147336567
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.0047404289088875,
+        "calibrated": 1.0314744733591354,
+        "static": 1.0678352885087448,
+        "adaptive": 1.1211245601981825,
+        "frozen": 1.1211245601981825
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 3,
+      "state": {
+        "phase": "pick",
+        "round": 2,
+        "turn": 1,
+        "mc": 74,
+        "mh": 26,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.9861552635922781,
+        0.9723452946312534,
+        0.929993620468392
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3591938873599617,
+        "calibrated": 0.4390897657853574,
+        "static": 0.46418003121239787,
+        "adaptive": 0.6833940655624051,
+        "frozen": 0.6833940655624051
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 5,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 2,
+        "mc": 74,
+        "mh": 26,
+        "pc": 0,
+        "ph": 2,
+        "bc": 1,
+        "bh": 3,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.2545459559809938,
+          0.7454540440190063
+        ],
+        "calibrated": [
+          -0.0,
+          0.2545459559809938,
+          0.7454540440190063
+        ],
+        "static": [
+          -0.0,
+          0.2545459559809938,
+          0.7454540440190063
+        ],
+        "adaptive": [
+          0.0,
+          0.2521675645831616,
+          0.7478324354168384
+        ],
+        "frozen": [
+          0.0,
+          0.2521675645831616,
+          0.7478324354168384
+        ]
+      },
+      "oracle_root_scores": [
+        0.9405845765627366,
+        0.9966960270862261,
+        0.9803647949003286
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 3.884206214688213e-05,
+        "frozen": 3.884206214688213e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4839954251024411,
+        "calibrated": 0.6176839913650196,
+        "static": 0.6249247851679559,
+        "adaptive": 0.694035313087378,
+        "frozen": 0.694035313087378
+      },
+      "adaptive_vs_neural_total_variation": 0.0023783913978321636
+    },
+    {
+      "family": "delayed",
+      "event_id": 6,
+      "state": {
+        "phase": "pick",
+        "round": 3,
+        "turn": 1,
+        "mc": 92,
+        "mh": 8,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.67544361192473,
+        "calibrated": 0.7715269539774695,
+        "static": 0.6861992608689189,
+        "adaptive": 0.6833343152630698,
+        "frozen": 0.6833343152630698
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 8,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 2,
+        "mc": 92,
+        "mh": 8,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 3,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.37281707987256874,
+        "calibrated": 0.4742868931982404,
+        "static": 0.4769423928608014,
+        "adaptive": 0.49408608654060915,
+        "frozen": 0.49408608654060915
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 9,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 3,
+        "mc": 92,
+        "mh": 8,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 4,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3549592296515442,
+        "calibrated": 0.39532822626230507,
+        "static": 0.3998529032837549,
+        "adaptive": 0.4113701881796893,
+        "frozen": 0.4113701881796893
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 11,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 77,
+        "mh": 23,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.40791585232943095,
+        "calibrated": 0.5164191803442432,
+        "static": 0.5242197558687323,
+        "adaptive": 0.535576860616483,
+        "frozen": 0.535576860616483
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 12,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 2,
+        "mc": 77,
+        "mh": 23,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 3,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3552635845949572,
+        "calibrated": 0.39647028842648024,
+        "static": 0.40444139128815115,
+        "adaptive": 0.41469630442816185,
+        "frozen": 0.41469630442816185
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 14,
+      "state": {
+        "phase": "pick",
+        "round": 5,
+        "turn": 1,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "static": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          -0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.40169762618675964,
+        "calibrated": 0.5070867838800948,
+        "static": 0.48242472462805686,
+        "adaptive": 0.4660513690184356,
+        "frozen": 0.4660513690184356
+      },
+      "adaptive_vs_neural_total_variation": 1.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 15,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 0,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          1.0,
+          0.0
+        ],
+        "calibrated": [
+          1.0,
+          0.0
+        ],
+        "static": [
+          1.0,
+          0.0
+        ],
+        "adaptive": [
+          1.0,
+          0.0
+        ],
+        "frozen": [
+          1.0,
+          0.0
+        ]
+      },
+      "oracle_root_scores": [
+        1.0,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6443381915133719,
+        "calibrated": 0.7514046903530057,
+        "static": 0.710058227448645,
+        "adaptive": 0.6729159751695548,
+        "frozen": 0.6729159751695548
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "delayed",
+      "event_id": 17,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 62,
+        "mh": 38,
+        "pc": 0,
+        "ph": 2,
+        "bc": 1,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.5429400543124809,
+        0.9803738211081184,
+        1.0
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.3570291158312827,
+        "calibrated": 0.38229537815848175,
+        "static": 0.3916038336910598,
+        "adaptive": 0.40628992794065755,
+        "frozen": 0.40628992794065755
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 1,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "calibrated": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "static": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "adaptive": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ],
+        "frozen": [
+          0.01189667184823173,
+          0.9874434687606128,
+          0.0006598593911554941
+        ]
+      },
+      "oracle_root_scores": [
+        0.4938297815917055,
+        0.5000705969725419,
+        0.505598987047882
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.3186888498965494,
+        "calibrated": 1.2299291882130319,
+        "static": 1.249643980080033,
+        "adaptive": 1.217295769558188,
+        "frozen": 1.217295769558188
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 3,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 2,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "calibrated": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "static": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "adaptive": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "frozen": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_root_scores": [
+        0.525295347460371,
+        0.5003892416425734,
+        0.5144988669562871
+      ],
+      "opportunity_cost": {
+        "neural": 0.0017622184305288169,
+        "calibrated": 0.0017622184305288169,
+        "static": 0.0017622184305288169,
+        "adaptive": 0.0017622184305288169,
+        "frozen": 0.0017622184305288169
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.4905883825984352,
+        "calibrated": 0.541422248987458,
+        "static": 0.5430349252526995,
+        "adaptive": 0.6037134434908797,
+        "frozen": 0.6037134434908797
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 5,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 4,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": 0
+      },
+      "policies": {
+        "neural": [
+          0.8291835146936383,
+          0.16967465703230686,
+          0.0011418282740548735
+        ],
+        "calibrated": [
+          0.8291835146936383,
+          0.16967465703230686,
+          0.0011418282740548735
+        ],
+        "static": [
+          0.8291835146936383,
+          0.16967465703230686,
+          0.0011418282740548735
+        ],
+        "adaptive": [
+          0.8291835146936383,
+          0.16967465703230686,
+          0.0011418282740548735
+        ],
+        "frozen": [
+          0.8291835146936383,
+          0.16967465703230686,
+          0.0011418282740548735
+        ]
+      },
+      "oracle_root_scores": [
+        0.5021833564818933,
+        0.6839450711586321,
+        0.48447130972996133
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.9430840350737293,
+        "calibrated": 0.9856527348740605,
+        "static": 1.0240132679698521,
+        "adaptive": 1.1018364526708213,
+        "frozen": 1.1018364526708213
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 8,
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 2,
+        "mc": 58,
+        "mh": 42,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 0,
+        "previous": [
+          1,
+          0
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.9266447057706054,
+          0.07335529422939457
+        ],
+        "calibrated": [
+          0.0,
+          0.9266447057706054,
+          0.07335529422939457
+        ],
+        "static": [
+          0.0,
+          0.9266447057706054,
+          0.07335529422939457
+        ],
+        "adaptive": [
+          0.0,
+          0.9266447057706054,
+          0.07335529422939457
+        ],
+        "frozen": [
+          0.0,
+          0.9266447057706054,
+          0.07335529422939457
+        ]
+      },
+      "oracle_root_scores": [
+        0.7300824103416433,
+        0.7538475101650154,
+        0.7405174369898967
+      ],
+      "opportunity_cost": {
+        "neural": 0.00044297032360707256,
+        "calibrated": 0.00044297032360707256,
+        "static": 0.00044297032360707256,
+        "adaptive": 0.00044297032360707256,
+        "frozen": 0.00044297032360707256
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.6015550795219574,
+        "calibrated": 0.629756942586365,
+        "static": 0.5760266940146138,
+        "adaptive": 0.6499511105605433,
+        "frozen": 0.6499511105605433
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 10,
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 58,
+        "mh": 42,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 1
+      },
+      "policies": {
+        "neural": [
+          0.9594857800370401,
+          0.023393270334863298,
+          0.0171209496280966
+        ],
+        "calibrated": [
+          0.9594857800370401,
+          0.023393270334863298,
+          0.0171209496280966
+        ],
+        "static": [
+          0.9594857800370401,
+          0.023393270334863298,
+          0.0171209496280966
+        ],
+        "adaptive": [
+          0.9594857800370401,
+          0.023393270334863298,
+          0.0171209496280966
+        ],
+        "frozen": [
+          0.9594857800370401,
+          0.023393270334863298,
+          0.0171209496280966
+        ]
+      },
+      "oracle_root_scores": [
+        0.76654380565815,
+        0.7887100204891024,
+        0.5568550475502249
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.7691683932867603,
+        "calibrated": 0.8558076606793821,
+        "static": 0.8644807453723725,
+        "adaptive": 0.9807351683301542,
+        "frozen": 0.9807351683301542
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 13,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 2,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.010241972556579531,
+          0.9897580274434205
+        ],
+        "calibrated": [
+          -0.0,
+          0.010241972556579531,
+          0.9897580274434205
+        ],
+        "static": [
+          -0.0,
+          0.010241972556579531,
+          0.9897580274434205
+        ],
+        "adaptive": [
+          -0.0,
+          0.010241972556579531,
+          0.9897580274434205
+        ],
+        "frozen": [
+          -0.0,
+          0.010241972556579531,
+          0.9897580274434205
+        ]
+      },
+      "oracle_root_scores": [
+        0.40895397887635854,
+        0.8939211675921646,
+        0.49902533647466557
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4819334513491507,
+        "calibrated": 1.3426165737031641,
+        "static": 1.3434927518761883,
+        "adaptive": 1.2209149480862627,
+        "frozen": 1.2209149480862627
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 15,
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 4,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.06012953083179363,
+          0.9398704691682064
+        ],
+        "calibrated": [
+          -0.0,
+          0.06012953083179363,
+          0.9398704691682064
+        ],
+        "static": [
+          -0.0,
+          0.06012953083179363,
+          0.9398704691682064
+        ],
+        "adaptive": [
+          -0.0,
+          0.06012953083179363,
+          0.9398704691682064
+        ],
+        "frozen": [
+          -0.0,
+          0.06012953083179363,
+          0.9398704691682064
+        ]
+      },
+      "oracle_root_scores": [
+        0.381823637442483,
+        0.8894132615358556,
+        0.47496581724674536
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.0530443416300077,
+        "calibrated": 1.0536760414519386,
+        "static": 1.0724221770707976,
+        "adaptive": 1.0755597180172305,
+        "frozen": 1.0755597180172305
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 18,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.6554449984463661,
+          0.0,
+          0.34455500155363394
+        ],
+        "calibrated": [
+          0.6554449984463661,
+          0.0,
+          0.34455500155363394
+        ],
+        "static": [
+          0.6554449984463661,
+          0.0,
+          0.34455500155363394
+        ],
+        "adaptive": [
+          0.6554449984463661,
+          0.0,
+          0.34455500155363394
+        ],
+        "frozen": [
+          0.6554449984463661,
+          0.0,
+          0.34455500155363394
+        ]
+      },
+      "oracle_root_scores": [
+        0.5274821728229785,
+        0.5224243756605182,
+        0.48396015714011276
+      ],
+      "opportunity_cost": {
+        "neural": 1.8822213772917706e-05,
+        "calibrated": 1.8822213772917706e-05,
+        "static": 1.8822213772917706e-05,
+        "adaptive": 1.8822213772917706e-05,
+        "frozen": 1.8822213772917706e-05
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.8942281719599923,
+        "calibrated": 0.9534039388859817,
+        "static": 0.904986603555056,
+        "adaptive": 1.0354256696816508,
+        "frozen": 1.0354256696816508
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 20,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          1,
+          1
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.9494149392035307,
+          0.03729432505734047,
+          0.013290735739128826
+        ],
+        "calibrated": [
+          0.9494149392035307,
+          0.03729432505734047,
+          0.013290735739128826
+        ],
+        "static": [
+          0.9494149392035307,
+          0.03729432505734047,
+          0.013290735739128826
+        ],
+        "adaptive": [
+          0.9494149392035307,
+          0.03729432505734047,
+          0.013290735739128826
+        ],
+        "frozen": [
+          0.9494149392035307,
+          0.03729432505734047,
+          0.013290735739128826
+        ]
+      },
+      "oracle_root_scores": [
+        0.48687413531536716,
+        0.9000119734974725,
+        0.4524012714417714
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.4708262032276334,
+        "calibrated": 1.325828645947754,
+        "static": 1.2375869772047179,
+        "adaptive": 1.1649511992193105,
+        "frozen": 1.1649511992193105
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 23,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 6,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 2,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.9496482515097688,
+          0.03692560065100812,
+          0.013426147839223045
+        ],
+        "calibrated": [
+          0.9496482515097688,
+          0.03692560065100812,
+          0.013426147839223045
+        ],
+        "static": [
+          0.9496482515097688,
+          0.03692560065100812,
+          0.013426147839223045
+        ],
+        "adaptive": [
+          0.9496482515097688,
+          0.03692560065100812,
+          0.013426147839223045
+        ],
+        "frozen": [
+          0.9496482515097688,
+          0.03692560065100812,
+          0.013426147839223045
+        ]
+      },
+      "oracle_root_scores": [
+        0.48673177025186265,
+        0.8999684248700659,
+        0.4522842547783896
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 0.9387618916555704,
+        "calibrated": 0.9828862378238478,
+        "static": 1.01307459671376,
+        "adaptive": 1.0838280065127246,
+        "frozen": 1.0838280065127246
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    },
+    {
+      "family": "contrarian",
+      "event_id": 25,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 8,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 2,
+        "bh": 3,
+        "previous": [
+          1,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          0.0,
+          0.11039331107963189,
+          0.8896066889203681
+        ],
+        "calibrated": [
+          -0.0,
+          0.11070121066075621,
+          0.8892987893392438
+        ],
+        "static": [
+          -0.0,
+          0.11070121066075621,
+          0.8892987893392438
+        ],
+        "adaptive": [
+          -0.0,
+          0.11070121066075621,
+          0.8892987893392438
+        ],
+        "frozen": [
+          -0.0,
+          0.11070121066075621,
+          0.8892987893392438
+        ]
+      },
+      "oracle_root_scores": [
+        0.3372082467794852,
+        0.8836936575349983,
+        0.4387311906777465
+      ],
+      "opportunity_cost": {
+        "neural": 0.00013700375716135804,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.6082141115166402,
+        "calibrated": 1.358451202012959,
+        "static": 1.3156023823550211,
+        "adaptive": 1.1122135453471182,
+        "frozen": 1.1122135453471182
+      },
+      "adaptive_vs_neural_total_variation": 0.0003078995811243157
+    },
+    {
+      "family": "contrarian",
+      "event_id": 28,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 11,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 3,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "policies": {
+        "neural": [
+          -0.0,
+          0.4161244784563118,
+          0.5838755215436882
+        ],
+        "calibrated": [
+          -0.0,
+          0.4161244784563118,
+          0.5838755215436882
+        ],
+        "static": [
+          -0.0,
+          0.4161244784563118,
+          0.5838755215436882
+        ],
+        "adaptive": [
+          -0.0,
+          0.4161244784563118,
+          0.5838755215436882
+        ],
+        "frozen": [
+          -0.0,
+          0.4161244784563118,
+          0.5838755215436882
+        ]
+      },
+      "oracle_root_scores": [
+        0.09146235526475455,
+        0.8792167763090732,
+        0.09901888200030232
+      ],
+      "opportunity_cost": {
+        "neural": 0.0,
+        "calibrated": 0.0,
+        "static": 0.0,
+        "adaptive": 0.0,
+        "frozen": 0.0
+      },
+      "prediction_cross_entropy": {
+        "neural": 1.1153906636314104,
+        "calibrated": 1.094973293447874,
+        "static": 1.0091508651483116,
+        "adaptive": 1.0920144627811013,
+        "frozen": 1.0920144627811013
+      },
+      "adaptive_vs_neural_total_variation": 0.0
+    }
+  ]
+}

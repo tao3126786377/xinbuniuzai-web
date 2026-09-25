@@ -1,0 +1,82 @@
+{
+  "config": {
+    "rounds": 2,
+    "cap": 2,
+    "money": 10
+  },
+  "delta": 3.9405940594059406e-05,
+  "results": [
+    {
+      "opponent": "uniform",
+      "equilibrium": 0.9444444444444444,
+      "safe_oracle": 0.9614197530864197,
+      "unconstrained_diagnostic": 0.9614197530864197,
+      "safe_gain": 0.016975308641975273,
+      "states": 1054,
+      "max_local_loss": 0.0,
+      "full_best_response_score": 0.5,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.15628730005118996
+    },
+    {
+      "opponent": "reload",
+      "equilibrium": 0.9998611111111111,
+      "safe_oracle": 0.9999995407986111,
+      "unconstrained_diagnostic": 0.9999995407986111,
+      "safe_gain": 0.00013842968749999685,
+      "states": 1054,
+      "max_local_loss": 3.940594059403946e-05,
+      "full_best_response_score": 0.5,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.06250560004264116
+    },
+    {
+      "opponent": "shoot",
+      "equilibrium": 0.9998611111111111,
+      "safe_oracle": 0.9998655883246528,
+      "unconstrained_diagnostic": 0.9998655883246528,
+      "safe_gain": 4.477213541687064e-06,
+      "states": 1054,
+      "max_local_loss": 0.0,
+      "full_best_response_score": 0.5,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.06454150006175041
+    },
+    {
+      "opponent": "reactive",
+      "equilibrium": 0.5327777777777779,
+      "safe_oracle": 0.9984552681916012,
+      "unconstrained_diagnostic": 0.9986201308834877,
+      "safe_gain": 0.46567749041382334,
+      "states": 1054,
+      "max_local_loss": 3.940594059403946e-05,
+      "full_best_response_score": 0.4999211912244682,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.06519770005252212
+    },
+    {
+      "opponent": "bankroll",
+      "equilibrium": 0.5327777777777779,
+      "safe_oracle": 0.5331670485146607,
+      "unconstrained_diagnostic": 0.5331670485146607,
+      "safe_gain": 0.00038927073688277414,
+      "states": 1054,
+      "max_local_loss": 0.0,
+      "full_best_response_score": 0.5,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.06426590005867183
+    },
+    {
+      "opponent": "switch",
+      "equilibrium": 0.9998611111111111,
+      "safe_oracle": 0.9999921436631944,
+      "unconstrained_diagnostic": 0.9999921436631944,
+      "safe_gain": 0.0001310325520833544,
+      "states": 1054,
+      "max_local_loss": 0.0,
+      "full_best_response_score": 0.5,
+      "guaranteed_floor": 0.499763564296393,
+      "seconds": 0.06284089991822839
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "reload": [
+    {
+      "observations": [
+        0,
+        0
+      ],
+      "samples": 128,
+      "learned_logloss": 4.404482027540708,
+      "prior_logloss": 4.404482027540708,
+      "belief_entropy": 3.834191157901057
+    },
+    {
+      "observations": [
+        1,
+        4
+      ],
+      "samples": 512,
+      "learned_logloss": 1.8183331753642247,
+      "prior_logloss": 2.3348403433461717,
+      "belief_entropy": 3.869905459744241
+    },
+    {
+      "observations": [
+        5,
+        9
+      ],
+      "samples": 640,
+      "learned_logloss": 1.0031532372993837,
+      "prior_logloss": 2.4188486843359143,
+      "belief_entropy": 3.168972345530425
+    },
+    {
+      "observations": [
+        10,
+        19
+      ],
+      "samples": 1280,
+      "learned_logloss": 1.3009186200931642,
+      "prior_logloss": 3.4249502718088656,
+      "belief_entropy": 2.274608671133268
+    },
+    {
+      "observations": [
+        20,
+        49
+      ],
+      "samples": 3840,
+      "learned_logloss": 1.229369301385643,
+      "prior_logloss": 2.957803977806138,
+      "belief_entropy": 1.9161105259316487
+    },
+    {
+      "observations": [
+        50,
+        99
+      ],
+      "samples": 2944,
+      "learned_logloss": 1.2682212533240445,
+      "prior_logloss": 3.1504029587910103,
+      "belief_entropy": 1.828432616769345
+    }
+  ],
+  "reactive": [
+    {
+      "observations": [
+        0,
+        0
+      ],
+      "samples": 128,
+      "learned_logloss": 3.563794437342564,
+      "prior_logloss": 3.563794437342564,
+      "belief_entropy": 3.834191157901057
+    },
+    {
+      "observations": [
+        1,
+        4
+      ],
+      "samples": 512,
+      "learned_logloss": 1.2026150055501459,
+      "prior_logloss": 1.7300005858503287,
+      "belief_entropy": 3.835957000247472
+    },
+    {
+      "observations": [
+        5,
+        9
+      ],
+      "samples": 640,
+      "learned_logloss": 0.9371354229781742,
+      "prior_logloss": 1.6779062294211813,
+      "belief_entropy": 3.1794278962756897
+    },
+    {
+      "observations": [
+        10,
+        19
+      ],
+      "samples": 1280,
+      "learned_logloss": 1.1211739288585147,
+      "prior_logloss": 1.8575110406240452,
+      "belief_entropy": 2.8091599946351855
+    },
+    {
+      "observations": [
+        20,
+        49
+      ],
+      "samples": 3747,
+      "learned_logloss": 1.03917927819294,
+      "prior_logloss": 1.8416064864287498,
+      "belief_entropy": 2.4037848311467207
+    },
+    {
+      "observations": [
+        50,
+        99
+      ],
+      "samples": 773,
+      "learned_logloss": 1.1080328330096467,
+      "prior_logloss": 1.7980685804126526,
+      "belief_entropy": 2.51572766978865
+    }
+  ],
+  "switch": [
+    {
+      "observations": [
+        0,
+        0
+      ],
+      "samples": 128,
+      "learned_logloss": 4.404482027540708,
+      "prior_logloss": 4.404482027540708,
+      "belief_entropy": 3.834191157901057
+    },
+    {
+      "observations": [
+        1,
+        4
+      ],
+      "samples": 512,
+      "learned_logloss": 1.8719208805535985,
+      "prior_logloss": 2.331764931283834,
+      "belief_entropy": 3.8785825887203873
+    },
+    {
+      "observations": [
+        5,
+        9
+      ],
+      "samples": 640,
+      "learned_logloss": 2.0402010663278825,
+      "prior_logloss": 2.610713297004655,
+      "belief_entropy": 3.550662106965562
+    },
+    {
+      "observations": [
+        10,
+        19
+      ],
+      "samples": 1280,
+      "learned_logloss": 1.4868775094363418,
+      "prior_logloss": 2.8605591700105437,
+      "belief_entropy": 2.6224681470624587
+    },
+    {
+      "observations": [
+        20,
+        49
+      ],
+      "samples": 3833,
+      "learned_logloss": 1.2475578178353834,
+      "prior_logloss": 3.099553097443155,
+      "belief_entropy": 1.789013918256907
+    },
+    {
+      "observations": [
+        50,
+        99
+      ],
+      "samples": 4976,
+      "learned_logloss": 0.8898364680705005,
+      "prior_logloss": 3.659742447212406,
+      "belief_entropy": 1.2674928796950033
+    },
+    {
+      "observations": [
+        100,
+        199
+      ],
+      "samples": 7442,
+      "learned_logloss": 1.0474826966104032,
+      "prior_logloss": 3.5746407454810356,
+      "belief_entropy": 1.2900185062718839
+    },
+    {
+      "observations": [
+        200,
+        499
+      ],
+      "samples": 4171,
+      "learned_logloss": 1.0209006466585515,
+      "prior_logloss": 3.629995464121915,
+      "belief_entropy": 1.1999184989308431
+    },
+    {
+      "observations": [
+        500,
+        2000
+      ],
+      "samples": 58,
+      "learned_logloss": 0.8337474982506131,
+      "prior_logloss": 3.8775209401565247,
+      "belief_entropy": 1.1087547240294044
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-09-25T12:25:10.314781+00:00",
+  "source_sha256": {
+    "__init__.py": "3c60831f9dcd78edde3e0d091e0183d27e9a793516a7ff4dcf0709c80fc3a5a2",
+    "__main__.py": "87d4d763854492b786ae08c40b59efa5f431adf94fa29733743f52069ecca59f",
+    "audit.py": "be73de7fc7fb893f307d59152532932ba68acccf729e4d9bc118d4b889cba230",
+    "belief.py": "32f3fbc66180f8119dda42df1aff4093b2aba8d63207ce0f86c4d15840cb6e72",
+    "equilibrium.py": "95ee7235329ed11f82f18ff67eeed328dca2de51df423110b63e84180450a1fc",
+    "experiments.py": "29d3ef8ec87b98cf9cc152ef4c6780a1917f3a78798d7028e3784f35798b30fc",
+    "matrix.py": "1e102b3b62ca59f85e08e8faad17c03a1b7864752da2124ce9fd97e3a04e1620",
+    "planner.py": "4e2e47ce039b85758a083cb89cf7aef1413836cc8e3d424a87fd36bbaeb4174e",
+    "report.py": "714d4235a82f6d0c01166491e9b984f9832b92b721a372247f9d50b4624b963f",
+    "rollout.py": "d1f33673a7b0900e9d5f07eb44db2784ecc9bfae57cbb70165730a6bf7e4d679",
+    "rules.py": "486195d47781dc4a06d636079f8cf123d602b320f89b923bfb48cf1aa970037c",
+    "tests\\js_reference.js": "5050c888226120ea0244c65db83eb41d8f3d1ad3865d8ef4d52605dcd4732720",
+    "tests\\test_research.py": "e1b1c81f70358ef7dee836b329ac4ef193a15cfeeff444a783fb8290b154f2c6"
+  },
+  "javascript_rule_sha256": {
+    "game.js": "d1badf201ca98830fb9faa2339cb1d6080a87f711c9ead4f5633064e74d74bec",
+    "match.js": "ddb6ace7e2a0b4836701a75fd4e757268100f48812bd4480efd8cef3d323ac3d"
+  },
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "numba": "0.67.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14"
+}

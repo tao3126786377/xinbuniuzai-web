@@ -1,0 +1,71 @@
+{
+  "policy": "full-temporal3-v1",
+  "files": [
+    {
+      "name": "manifest.json",
+      "bytes": 85886,
+      "compressed": 5231,
+      "sha256": "6c6a82881f07c7ffc62acdd6cd6194cd9756dcc04933a983b6f5b540f3ae42d4"
+    },
+    {
+      "name": "picks_1.npy",
+      "bytes": 136,
+      "compressed": 94,
+      "sha256": "299cb591620fb42c26e5e061f89f85e860d5ab5c87d73f76ead094fadfd59a91"
+    },
+    {
+      "name": "picks_2.npy",
+      "bytes": 536,
+      "compressed": 378,
+      "sha256": "f95992cd2e58f5cf1f09a963c11f1fe6747178ddac6594651e98959d93b7f2b8"
+    },
+    {
+      "name": "picks_3.npy",
+      "bytes": 2856,
+      "compressed": 640,
+      "sha256": "7913ccb0561bc79722f714df24b1c97f8325b97c4844746731cb1e84a0862442"
+    },
+    {
+      "name": "picks_4.npy",
+      "bytes": 5464,
+      "compressed": 469,
+      "sha256": "21d2f547fb19d619982414ef6a18d15fb7f2f2cf3ac17d661196759b3f3b8381"
+    },
+    {
+      "name": "picks_5.npy",
+      "bytes": 7256,
+      "compressed": 368,
+      "sha256": "f0a48666a3ac90a0576a6cfb7ac376cc7c6ce414027f783b3039801042c7c94d"
+    },
+    {
+      "name": "values_1.npy",
+      "bytes": 216128,
+      "compressed": 123228,
+      "sha256": "a907921408ffceb513453667411b46422a624c1082e887c541783f9ad76c41a8"
+    },
+    {
+      "name": "values_2.npy",
+      "bytes": 11016128,
+      "compressed": 5849705,
+      "sha256": "11b93c414961cd35dbd8862e74c02326ff808c08f5c45cd6039923e4201b584b"
+    },
+    {
+      "name": "values_3.npy",
+      "bytes": 73656128,
+      "compressed": 25958997,
+      "sha256": "38d6ce67b732c2220f186f6186f22285897bc6e2f3b35f38d9d51769a66d4627"
+    },
+    {
+      "name": "values_4.npy",
+      "bytes": 144072128,
+      "compressed": 31680185,
+      "sha256": "93cd9de3a532be672dac147486fe40dcbb4ee1c5286dbcad1b11df794a1ebcea"
+    },
+    {
+      "name": "values_5.npy",
+      "bytes": 192456128,
+      "compressed": 15982831,
+      "sha256": "3d4c63c33ffb285b1b5d9f2d3a4a77f092d38849e767eeca677a26c21be1021e"
+    }
+  ]
+}

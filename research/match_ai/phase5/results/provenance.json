@@ -1,0 +1,52 @@
+{
+  "seed_prefix": [
+    20260925,
+    5
+  ],
+  "numpy": "2.5.3",
+  "weights": {
+    "refreshed.npz": "8502cd13c9ae86c3fb897281dffff2954fc2ddea3ef191a623b11497ce3bdb67",
+    "temporal.npz": "a3c63bf649882f753d5aec1aef71c9e7366afbe74cb33864b1e73e6ba31111a7"
+  },
+  "baseline_model": "4a6cd05e29adddeffcf80ea29cd709ae507b7e63e2cdc1db82997dff0e8d5d5c",
+  "source_hashes": {
+    "audit.py": "be73de7fc7fb893f307d59152532932ba68acccf729e4d9bc118d4b889cba230",
+    "belief.py": "32f3fbc66180f8119dda42df1aff4093b2aba8d63207ce0f86c4d15840cb6e72",
+    "equilibrium.py": "95ee7235329ed11f82f18ff67eeed328dca2de51df423110b63e84180450a1fc",
+    "experiments.py": "29d3ef8ec87b98cf9cc152ef4c6780a1917f3a78798d7028e3784f35798b30fc",
+    "matrix.py": "1e102b3b62ca59f85e08e8faad17c03a1b7864752da2124ce9fd97e3a04e1620",
+    "planner.py": "4e2e47ce039b85758a083cb89cf7aef1413836cc8e3d424a87fd36bbaeb4174e",
+    "report.py": "714d4235a82f6d0c01166491e9b984f9832b92b721a372247f9d50b4624b963f",
+    "rollout.py": "d1f33673a7b0900e9d5f07eb44db2784ecc9bfae57cbb70165730a6bf7e4d679",
+    "rules.py": "486195d47781dc4a06d636079f8cf123d602b320f89b923bfb48cf1aa970037c",
+    "__init__.py": "3c60831f9dcd78edde3e0d091e0183d27e9a793516a7ff4dcf0709c80fc3a5a2",
+    "__main__.py": "87d4d763854492b786ae08c40b59efa5f431adf94fa29733743f52069ecca59f",
+    "phase2\\data.py": "6480e00fa9e846c58bf350d6e49eb4b2a81f6837300295c37429c3ceca43f618",
+    "phase2\\network.py": "aea83c6d5e7d5b062a5f01095781c52d90e63be11d97e46cdc6339b9fb487865",
+    "phase2\\report.py": "933c4a7da632ae5dd08e09a7e8aa4a1d052a164fd4e475aa6ee5e1a94b316b12",
+    "phase2\\study.py": "e01f4ccff77b132c3baa37b446e293b3efc473094f5f3a3d850365653eb447f3",
+    "phase2\\__init__.py": "988c79a4e432d0df51d728710fc3e8fcbcc7cf448cf4056c28bb6d669199e24f",
+    "phase2\\__main__.py": "16636a4e609e8506a7fe1c4ba6c1ed06ad2864214417fbb68e5fd5250cc8e684",
+    "phase3\\data.py": "e71b37a412a48264437c67b248a531b1c9dac9337c3a5c119eaca8d9b3360e97",
+    "phase3\\reliability.py": "cbc0439a452a9f764d7c5fa581ceac7d558bcb20c77b2ab7a8dd6be54a4ce773",
+    "phase3\\report.py": "be8bf43556ef4b7dff24863ad86b635aeffcc7575a3cdb40ebccd01063d034be",
+    "phase3\\study.py": "1a475871c22ce1210df46f2a3f2fc53db1273eecaa536dc95ce3d113cac51885",
+    "phase3\\__init__.py": "26a3dcdf9f72307b3aa2d23f25d14df53dd2f6688ed24452b6425f2de145ada8",
+    "phase3\\__main__.py": "53b04322772b3886ed41ff56c064313494c9a909a4c48278ed39013f76a62e1f",
+    "phase4\\endgame.py": "a3294584d14e7bcebdefc0b894c112a78b0d76d597530d0790aa3ade4be92d1c",
+    "phase4\\report.py": "656fc849f623f086ad4529f5ffb3b6901910c68bd6dda3eb026c3142ffbed349",
+    "phase4\\study.py": "47e1563e93c9a9232fa42b46747feb51f990a123dd318b43711f8b727c035b16",
+    "phase4\\__init__.py": "de1c75c3abf7324bd9638ae35ea0984f78158c064899dfec861d992757955c42",
+    "phase4\\__main__.py": "667488dd2a5ee5bc046871b8d0fe5fd3f9c9fefb80b22828e81477675cbc3bba",
+    "phase5\\data.py": "de3aaebdac46da9c2b91d38a3c84da57ee3b0597269a3396f8d44e1114de3916",
+    "phase5\\model.py": "9208e12f07082fb4e73b1fa8c0d96d37cd43e672407bd3ada97f7f694820a36a",
+    "phase5\\run.py": "afbe1674fd040912e5e5a5f69e08de6e78e493e53d2d3dd09ac8cf44a6641424",
+    "phase5\\__init__.py": "d822b67747b9dda7df4a84ae6c2cf860eab23c00f2690f82830be26e88fb1872",
+    "phase5\\__main__.py": "39346264bea5c36fd5106cd189b38ea6d0e16beca00a7a0378c68959a4cc5fe9",
+    "tests\\test_phase2.py": "56097c4d26960e29e99c40ed5ebf5b7de4241558fcb163b96da89c0cf8b3d3aa",
+    "tests\\test_phase3.py": "75b521d21dda72f98beb48465349aaace5d6f264a9d9b038aaf43b53b4d7cfd2",
+    "tests\\test_phase4.py": "436c863c520b83306a8756f1992b9b0edfc34272aa8cbf8e78dcd9894d67f697",
+    "tests\\test_phase5.py": "b496c4bcee864c922d0897d90b1458cc456ff5cc1886fa139b3effcbf982eea2",
+    "tests\\test_research.py": "e1b1c81f70358ef7dee836b329ac4ef193a15cfeeff444a783fb8290b154f2c6"
+  }
+}

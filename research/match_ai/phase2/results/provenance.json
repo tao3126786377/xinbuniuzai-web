@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-25T12:59:30.253404+00:00",
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "generator_seed": 20260925,
+  "training_seed": 101,
+  "initialization_seed": 20260925,
+  "source_hashes": {
+    "audit.py": "be73de7fc7fb893f307d59152532932ba68acccf729e4d9bc118d4b889cba230",
+    "belief.py": "32f3fbc66180f8119dda42df1aff4093b2aba8d63207ce0f86c4d15840cb6e72",
+    "equilibrium.py": "95ee7235329ed11f82f18ff67eeed328dca2de51df423110b63e84180450a1fc",
+    "experiments.py": "29d3ef8ec87b98cf9cc152ef4c6780a1917f3a78798d7028e3784f35798b30fc",
+    "matrix.py": "1e102b3b62ca59f85e08e8faad17c03a1b7864752da2124ce9fd97e3a04e1620",
+    "planner.py": "4e2e47ce039b85758a083cb89cf7aef1413836cc8e3d424a87fd36bbaeb4174e",
+    "report.py": "714d4235a82f6d0c01166491e9b984f9832b92b721a372247f9d50b4624b963f",
+    "rollout.py": "d1f33673a7b0900e9d5f07eb44db2784ecc9bfae57cbb70165730a6bf7e4d679",
+    "rules.py": "486195d47781dc4a06d636079f8cf123d602b320f89b923bfb48cf1aa970037c",
+    "__init__.py": "3c60831f9dcd78edde3e0d091e0183d27e9a793516a7ff4dcf0709c80fc3a5a2",
+    "__main__.py": "87d4d763854492b786ae08c40b59efa5f431adf94fa29733743f52069ecca59f",
+    "phase2\\data.py": "6480e00fa9e846c58bf350d6e49eb4b2a81f6837300295c37429c3ceca43f618",
+    "phase2\\network.py": "aea83c6d5e7d5b062a5f01095781c52d90e63be11d97e46cdc6339b9fb487865",
+    "phase2\\report.py": "933c4a7da632ae5dd08e09a7e8aa4a1d052a164fd4e475aa6ee5e1a94b316b12",
+    "phase2\\study.py": "e01f4ccff77b132c3baa37b446e293b3efc473094f5f3a3d850365653eb447f3",
+    "phase2\\__init__.py": "988c79a4e432d0df51d728710fc3e8fcbcc7cf448cf4056c28bb6d669199e24f",
+    "phase2\\__main__.py": "16636a4e609e8506a7fe1c4ba6c1ed06ad2864214417fbb68e5fd5250cc8e684",
+    "tests\\test_phase2.py": "56097c4d26960e29e99c40ed5ebf5b7de4241558fcb163b96da89c0cf8b3d3aa",
+    "tests\\test_research.py": "e1b1c81f70358ef7dee836b329ac4ef193a15cfeeff444a783fb8290b154f2c6"
+  },
+  "artifact_hashes": {
+    "linear.npz": "c2166ce7b2ac3ff0c24dd86dd3e2b3a26a4728c58017dcb5a5c2307df58d802e",
+    "neural.npz": "4a6cd05e29adddeffcf80ea29cd709ae507b7e63e2cdc1db82997dff0e8d5d5c",
+    "test.npz": "645378ba03ea9d6e902c236109c3bbd95186ca175039cf3f616c3db3cd347bee",
+    "train.npz": "aa61cb3b52b3d6c3339f2d43f80e5488c1425acecc260f4a05a8f649b565a277",
+    "validation.npz": "aa419a8ec59d88a3c36cd4e5cf3887fa46947762fd3c5bacf307279303348337"
+  }
+}

@@ -1,7 +1,7 @@
 /* 西部牛仔 · 人机对战模式（完全客户端运行，无需服务器）
  *
- * AI 管线（含记忆-1 升级式）由 AI.buildAiSession 统一构建：页面加载（首次进入）时
- * 构建一次，之后每局复用；AI 在玩家出招前采样（保持同时性与"不偷看"性质）；
+ * AI 管线（含记忆-1 升级式）由 AI.buildAiSession 在每局开始前用最新日志统一构建，
+ * 局内复用；AI 在玩家出招前采样（保持同时性与"不偷看"性质）；
  * 日志存 localStorage，格式与 C++ game_log.txt 完全一致。
  *
  * 对局归属纪律（2026-09-05 修复）：出招后的揭示/结算定时器全部捕获本回合的
@@ -16,6 +16,7 @@
   var session = null;   // AI 会话（后验/BR/桶总量/记忆管线）
   var logText = '';     // 当前日志文本（内存镜像，追加后写回）
   var game = null;      // 当前对局状态
+  var loading = false; // 防止模型构建前重复开局
 
   function nowSec() { return Math.floor(Date.now() / 1000); }
 
@@ -46,22 +47,30 @@
     refreshMemoryNote();
   }
 
-  /* 进入人机对战：首次构建模型（带加载遮罩），随后开局 */
+  /* 菜单进入与再来一局共用开局流程 */
   function enter() {
-    App.setActiveMode('ai');
-    if (!session) {
-      App.show('loading-overlay');
-      setTimeout(function () {
-        buildSession();
-        App.hide('loading-overlay');
-        startGame();
-      }, 50);   // 让遮罩先绘制
-    } else {
-      startGame();
-    }
+    startGame();
   }
 
+  /* 每局开始前读取最新日志重建模型，加载期间先让遮罩绘制 */
   function startGame() {
+    if (loading) return;
+    loading = true;
+    game = null;   // 立即使上一局尚未执行的揭示/结算回调失效
+    App.setActiveMode('ai');
+    App.show('loading-overlay');
+    setTimeout(function () {
+      try {
+        buildSession();
+        beginGame();
+      } finally {
+        loading = false;
+        App.hide('loading-overlay');
+      }
+    }, 50);
+  }
+
+  function beginGame() {
     App.setActiveMode('ai');
     game = {
       b1: 0,

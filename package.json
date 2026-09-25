@@ -5,8 +5,12 @@
   "description": "西部牛仔 网页版（人机对战 + 玩家对决）",
   "scripts": {
     "start": "node server.js",
+    "build": "node tools/prepare_match_ai.js",
+    "pack:match-ai": "node tools/pack_match_ai.js",
     "gen": "node tools/gen_strategies.js",
-    "test:ai": "node test/verify_ai.js && node test/mode_ai_smoke.js"
+    "test:ai": "node test/verify_ai.js && node test/mode_ai_smoke.js",
+    "test:match-ai": "node test/match_ai_runtime.js",
+    "test:match-web": "node test/mode_ai_match_smoke.js && node test/match_ai_http.js"
   },
   "dependencies": {
     "ws": "^8.18.0"

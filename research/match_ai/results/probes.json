@@ -1,0 +1,4548 @@
+{
+  "timing": [
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.4983314455067263,
+          1.0,
+          0.3333333333333333
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 4,
+          "seconds": 0.07744630007073283,
+          "visits": [
+            0,
+            1,
+            3
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.6666666666666666,
+          1.0,
+          0.25
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 16,
+          "seconds": 0.013422999996691942,
+          "visits": [
+            3,
+            1,
+            12
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.6428571428571429,
+          1.0,
+          0.47959183673469385
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 64,
+          "seconds": 0.04840969992801547,
+          "visits": [
+            14,
+            1,
+            49
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "scores": [
+          0.4666666666666667,
+          0.65,
+          0.5078740157480315
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5492764416734257,
+          "simulations": 633,
+          "seconds": 0.5008680999744684,
+          "visits": [
+            105,
+            20,
+            508
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "scores": [
+          0.4827586206896552,
+          0.5789473684210527,
+          0.531021897810219
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5492764416734257,
+          "simulations": 1337,
+          "seconds": 1.0002866999711841,
+          "visits": [
+            203,
+            38,
+            1096
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "scores": [
+          0.4943289224952741,
+          0.5444444444444444,
+          0.5300766283524905
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5492764416734257,
+          "simulations": 3229,
+          "seconds": 2.5010362999746576,
+          "visits": [
+            529,
+            90,
+            2610
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.3333333333333333,
+          0.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 4,
+          "seconds": 0.0026087999576702714,
+          "visits": [
+            0,
+            3,
+            1
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.5,
+          0.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 16,
+          "seconds": 0.0074130999855697155,
+          "visits": [
+            0,
+            14,
+            2
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.4915254237288136,
+          0.2
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 64,
+          "seconds": 0.028931700042448938,
+          "visits": [
+            0,
+            59,
+            5
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.5,
+          0.533160621761658,
+          0.5070422535211268
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 1046,
+          "seconds": 0.500271899974905,
+          "visits": [
+            10,
+            965,
+            71
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.011896671848231639,
+          0.9351990368532811,
+          0.05290429129848728
+        ],
+        "scores": [
+          0.5416666666666666,
+          0.5153609831029186,
+          0.5190839694656488
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.2708746005235504,
+          "simulations": 2108,
+          "seconds": 1.000063700019382,
+          "visits": [
+            24,
+            1953,
+            131
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.5075757575757576,
+          0.5174002047082907,
+          0.5168350168350169
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 5248,
+          "seconds": 2.500273899990134,
+          "visits": [
+            66,
+            4885,
+            297
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 4,
+          "seconds": 0.0033426000736653805,
+          "visits": [
+            0,
+            0,
+            4
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 16,
+          "seconds": 0.0015350000467151403,
+          "visits": [
+            0,
+            0,
+            16
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 64,
+          "seconds": 0.003550400026142597,
+          "visits": [
+            0,
+            0,
+            64
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.5,
+          1.0,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 9578,
+          "seconds": 0.5000219999346882,
+          "visits": [
+            2,
+            1,
+            9575
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.5,
+          1.0,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 19801,
+          "seconds": 1.0000881999731064,
+          "visits": [
+            2,
+            2,
+            19797
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "frozen",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.7,
+          0.8571428571428571,
+          0.9999702687703164
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 50464,
+          "seconds": 2.500201900023967,
+          "visits": [
+            5,
+            7,
+            50452
+          ],
+          "kind": "frozen",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15250242658590388,
+          0.025838927832599286,
+          0.8216586455814968
+        ],
+        "scores": [
+          0.4983314455067263,
+          0.5126981447976294,
+          0.625
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5426546645560797,
+          "simulations": 4,
+          "seconds": 0.00479279994033277,
+          "visits": [
+            0,
+            0,
+            4
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.4983314455067263,
+          1.0,
+          0.32142857142857145
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 16,
+          "seconds": 0.015166099998168647,
+          "visits": [
+            0,
+            2,
+            14
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "scores": [
+          0.4090909090909091,
+          1.0,
+          0.4019607843137255
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5492764416734257,
+          "simulations": 64,
+          "seconds": 0.053548799944110215,
+          "visits": [
+            11,
+            2,
+            51
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15250242658590388,
+          0.025838927832599286,
+          0.8216586455814968
+        ],
+        "scores": [
+          0.463302752293578,
+          0.47058823529411764,
+          0.5129310344827587
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5426546645560797,
+          "simulations": 590,
+          "seconds": 0.5003815999953076,
+          "visits": [
+            109,
+            17,
+            464
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15248980077824725,
+          0.027780421456688867,
+          0.819729777765064
+        ],
+        "scores": [
+          0.5173267326732673,
+          0.5394736842105263,
+          0.5186680121089808
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5492764416734257,
+          "simulations": 1231,
+          "seconds": 1.000398900010623,
+          "visits": [
+            202,
+            38,
+            991
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15250242658590388,
+          0.025838927832599286,
+          0.8216586455814968
+        ],
+        "scores": [
+          0.5126050420168067,
+          0.4879518072289157,
+          0.5216576426488962
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5426546645560797,
+          "simulations": 2960,
+          "seconds": 2.5003823000006378,
+          "visits": [
+            476,
+            83,
+            2401
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.3333333333333333,
+          0.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 4,
+          "seconds": 0.0023934999480843544,
+          "visits": [
+            0,
+            3,
+            1
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.5,
+          0.5
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 16,
+          "seconds": 0.00820230005774647,
+          "visits": [
+            0,
+            14,
+            2
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.4993054373707956,
+          0.5517241379310345,
+          0.3333333333333333
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 64,
+          "seconds": 0.02984850003849715,
+          "visits": [
+            0,
+            58,
+            6
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          0.8571428571428571,
+          0.5433403805496829,
+          0.5
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 1022,
+          "seconds": 0.5004949999274686,
+          "visits": [
+            14,
+            946,
+            62
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          0.6333333333333333,
+          0.5301746956061408,
+          0.49586776859504134
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 2040,
+          "seconds": 1.0003285999409854,
+          "visits": [
+            30,
+            1889,
+            121
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          -0.0,
+          0.9999612140473928,
+          3.878595260720097e-05
+        ],
+        "scores": [
+          0.5238095238095238,
+          0.5351416648363716,
+          0.5131578947368421
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.000432751668714507,
+          "simulations": 4882,
+          "seconds": 2.5002862999681383,
+          "visits": [
+            63,
+            4553,
+            266
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 4,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 4,
+          "seconds": 0.00104310002643615,
+          "visits": [
+            0,
+            0,
+            4
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 16,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 16,
+          "seconds": 0.0012685999972745776,
+          "visits": [
+            0,
+            0,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_simulations": 64,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 64,
+          "seconds": 0.004515700042247772,
+          "visits": [
+            0,
+            0,
+            64
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 0.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.5,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 9473,
+          "seconds": 0.50004940002691,
+          "visits": [
+            0,
+            1,
+            9472
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 1.0,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 18743,
+          "seconds": 1.000244399998337,
+          "visits": [
+            1,
+            1,
+            18741
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "kind": "belief",
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "budget_seconds": 2.5,
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.7142857142857143,
+          0.7857142857142857,
+          0.9999793861186123
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 48525,
+          "seconds": 2.5001389000099152,
+          "visits": [
+            7,
+            7,
+            48511
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9977041495818286,
+        0.001147925209085718,
+        0.001147925209085724
+      ],
+      "human": [
+        0.9977041495818286,
+        0.001147925209085724,
+        0.001147925209085718
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5002414260695485,
+          0.4997585739304513
+        ],
+        [
+          0.4997585739304513,
+          0.4999999999999999,
+          0.709832303968386
+        ],
+        [
+          0.5002414260695485,
+          0.2901676960316148,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9978202924526514,
+        0.00108985377367437,
+        0.0010898537736743733
+      ],
+      "human": [
+        0.9978202924526514,
+        0.0010898537736743733,
+        0.00108985377367437
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5002517777820455,
+          0.49974822221795423
+        ],
+        [
+          0.49974822221795423,
+          0.4999999999999999,
+          0.7305162272062218
+        ],
+        [
+          0.5002517777820455,
+          0.26948377279377866,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 40,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9978202924526514,
+        0.00108985377367437,
+        0.0010898537736743733
+      ],
+      "human": [
+        0.9978202924526514,
+        0.0010898537736743733,
+        0.00108985377367437
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5002517777820455,
+          0.49974822221795423
+        ],
+        [
+          0.49974822221795423,
+          0.4999999999999999,
+          0.7305162272062218
+        ],
+        [
+          0.5002517777820455,
+          0.26948377279377866,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 40,
+        "mh": 60,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.22572696421823887,
+      "computer": [
+        0.9693210500758545,
+        0.011213591547645469,
+        0.01946535837650007
+      ],
+      "human": [
+        0.9599094723649396,
+        0.01960539112892969,
+        0.020485136506130687
+      ],
+      "q": [
+        [
+          0.22569982859911356,
+          0.2295844293911762,
+          0.2233067032827099
+        ],
+        [
+          0.22133447156883002,
+          0.22567204218541848,
+          0.4316065817708875
+        ],
+        [
+          0.22960866748873976,
+          0.033667499064337025,
+          0.22764626781085928
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 2,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.774273035781762,
+      "computer": [
+        0.9599094723649394,
+        0.019605391128931456,
+        0.0204851365061291
+      ],
+      "human": [
+        0.9693210500758542,
+        0.011213591547644085,
+        0.019465358376501693
+      ],
+      "q": [
+        [
+          0.7743001714008872,
+          0.7786655284311704,
+          0.7703913325112607
+        ],
+        [
+          0.7704155706088243,
+          0.7743279578145823,
+          0.9663325009356631
+        ],
+        [
+          0.7766932967172906,
+          0.5683934182291132,
+          0.7723537321891412
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9975183566555326,
+        0.0012408216722349518,
+        0.00124082167223248
+      ],
+      "human": [
+        0.9975183566555326,
+        0.001240821672232478,
+        0.0012408216722349496
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5003327698844694,
+          0.4996672301155297
+        ],
+        [
+          0.4996672301155297,
+          0.4999999999999999,
+          0.7675195604081005
+        ],
+        [
+          0.5003327698844694,
+          0.23248043959189968,
+          0.49999999999999944
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 40,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9975183566555326,
+        0.0012408216722349518,
+        0.00124082167223248
+      ],
+      "human": [
+        0.9975183566555326,
+        0.001240821672232478,
+        0.0012408216722349496
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5003327698844694,
+          0.4996672301155297
+        ],
+        [
+          0.4996672301155297,
+          0.4999999999999999,
+          0.7675195604081005
+        ],
+        [
+          0.5003327698844694,
+          0.23248043959189968,
+          0.49999999999999944
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 40,
+        "mh": 60,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.15936569931439207,
+      "computer": [
+        0.8854839535695744,
+        0.03035340426738731,
+        0.08416264216303834
+      ],
+      "human": [
+        0.7918834768545483,
+        0.08226525928122119,
+        0.1258512638642305
+      ],
+      "q": [
+        [
+          0.15932719378812915,
+          0.1745156382708865,
+          0.14970491618831117
+        ],
+        [
+          0.11838756200792017,
+          0.1592869760498174,
+          0.4172604954290975
+        ],
+        [
+          0.17454965695371888,
+          0.0,
+          0.16799759837868145
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.8406343006856085,
+      "computer": [
+        0.7918834768545483,
+        0.08226525928122183,
+        0.12585126386422985
+      ],
+      "human": [
+        0.8854839535695743,
+        0.0303534042673872,
+        0.08416264216303851
+      ],
+      "q": [
+        [
+          0.8406728062118715,
+          0.8816124379920802,
+          0.8254503430462816
+        ],
+        [
+          0.8254843617291141,
+          0.8407130239501832,
+          1.0
+        ],
+        [
+          0.8502950838116894,
+          0.582739504570903,
+          0.8320024016213192
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 3,
+        "turn": 1,
+        "mc": 30,
+        "mh": 30,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9975183566555326,
+        0.0012408216722349518,
+        0.00124082167223248
+      ],
+      "human": [
+        0.9975183566555326,
+        0.001240821672232478,
+        0.0012408216722349496
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5003327698844694,
+          0.4996672301155297
+        ],
+        [
+          0.4996672301155297,
+          0.4999999999999999,
+          0.7675195604081005
+        ],
+        [
+          0.5003327698844694,
+          0.23248043959189968,
+          0.49999999999999944
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999998,
+      "computer": [
+        0.9929633238081962,
+        0.003518338095901464,
+        0.0035183380959023375
+      ],
+      "human": [
+        0.9929633238081962,
+        0.0035183380959023383,
+        0.003518338095901465
+      ],
+      "q": [
+        [
+          0.4999999999999998,
+          0.5017716354731051,
+          0.4982283645268949
+        ],
+        [
+          0.4982283645268949,
+          0.4999999999999998,
+          1.0
+        ],
+        [
+          0.5017716354731051,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 40,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999998,
+      "computer": [
+        0.9929633238081962,
+        0.003518338095901464,
+        0.0035183380959023375
+      ],
+      "human": [
+        0.9929633238081962,
+        0.0035183380959023383,
+        0.003518338095901465
+      ],
+      "q": [
+        [
+          0.4999999999999998,
+          0.5017716354731051,
+          0.4982283645268949
+        ],
+        [
+          0.4982283645268949,
+          0.4999999999999998,
+          1.0
+        ],
+        [
+          0.5017716354731051,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 40,
+        "mh": 60,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.11454506416780469,
+      "computer": [
+        0.8863169357016365,
+        0.02316102665349129,
+        0.09052203764487224
+      ],
+      "human": [
+        0.7791510086133934,
+        0.08848649049381499,
+        0.13236250089279172
+      ],
+      "q": [
+        [
+          0.11447659941304678,
+          0.12624751038377643,
+          0.10712480535964426
+        ],
+        [
+          0.07120122837705153,
+          0.11440587950344557,
+          0.3697813214774316
+        ],
+        [
+          0.12630539607539154,
+          0.0,
+          0.12189318963848521
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.8854549358321957,
+      "computer": [
+        0.779151008613393,
+        0.08848649049381549,
+        0.13236250089279145
+      ],
+      "human": [
+        0.8863169357016351,
+        0.023161026653491477,
+        0.0905220376448734
+      ],
+      "q": [
+        [
+          0.8855234005869537,
+          0.9287987716229489,
+          0.8736946039246088
+        ],
+        [
+          0.8737524896162239,
+          0.885594120496555,
+          1.0
+        ],
+        [
+          0.8928751946403563,
+          0.6302186785225685,
+          0.8781068103615153
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 4,
+        "turn": 1,
+        "mc": 20,
+        "mh": 20,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999998,
+      "computer": [
+        0.9929633238081962,
+        0.003518338095901464,
+        0.0035183380959023375
+      ],
+      "human": [
+        0.9929633238081962,
+        0.0035183380959023383,
+        0.003518338095901465
+      ],
+      "q": [
+        [
+          0.4999999999999998,
+          0.5017716354731051,
+          0.4982283645268949
+        ],
+        [
+          0.4982283645268949,
+          0.4999999999999998,
+          1.0
+        ],
+        [
+          0.5017716354731051,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "human": [
+        0.9753915213407323,
+        0.012304239329633334,
+        0.012304239329634382
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 40,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "human": [
+        0.9753915213407323,
+        0.012304239329633334,
+        0.012304239329634382
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 40,
+        "mh": 60,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.0,
+      "computer": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "human": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "q": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 60,
+        "mh": 40,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 1.0,
+      "computer": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "human": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "q": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 1,
+        "mc": 10,
+        "mh": 10,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "human": [
+        0.9753915213407323,
+        0.012304239329633334,
+        0.012304239329634382
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    }
+  ],
+  "payout_contexts": [
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999998,
+      "computer": [
+        0.992827365640961,
+        0.0035863171795177087,
+        0.003586317179521287
+      ],
+      "q": [
+        [
+          0.4999999999999998,
+          0.5002237358667647,
+          0.49977626413323506
+        ],
+        [
+          0.49977626413323506,
+          0.4999999999999998,
+          0.5619384956991688
+        ],
+        [
+          0.5002237358667647,
+          0.4380615043008319,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5027312520189678,
+      "computer": [
+        0.9785214678640008,
+        0.017399695215117833,
+        0.004078836920881355
+      ],
+      "q": [
+        [
+          0.5027772309734095,
+          0.5032074616760777,
+          0.5007883690621424
+        ],
+        [
+          0.5000475769713851,
+          0.5028245021600523,
+          0.6119102268609298
+        ],
+        [
+          0.5031489529288711,
+          0.38808977313907095,
+          0.5030920893557251
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5040234104329271,
+      "computer": [
+        0.9778953546105376,
+        0.017836254709661346,
+        0.0042683906798010735
+      ],
+      "q": [
+        [
+          0.5040926901741856,
+          0.5047334573916139,
+          0.5011900650090673
+        ],
+        [
+          0.5000762161398675,
+          0.5041639542373786,
+          0.6592368086578189
+        ],
+        [
+          0.5046453838775862,
+          0.34076319134218125,
+          0.5045598240557785
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4972687479810322,
+      "computer": [
+        0.9724805204480648,
+        0.003618501502010842,
+        0.023900978049924464
+      ],
+      "q": [
+        [
+          0.49722276902659046,
+          0.4999524230286147,
+          0.49685104707112904
+        ],
+        [
+          0.49679253832392245,
+          0.49717549783994774,
+          0.6119102268609298
+        ],
+        [
+          0.4992116309378574,
+          0.38808977313907095,
+          0.496907910644275
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9977041495818286,
+        0.001147925209085718,
+        0.001147925209085724
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5002414260695485,
+          0.4997585739304513
+        ],
+        [
+          0.4997585739304513,
+          0.4999999999999999,
+          0.709832303968386
+        ],
+        [
+          0.5002414260695485,
+          0.2901676960316148,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5047459830296792,
+      "computer": [
+        0.9850654137251083,
+        0.013698105154101203,
+        0.0012364811207906008
+      ],
+      "q": [
+        [
+          0.5048111652024434,
+          0.5051107305946333,
+          0.5008166099584277
+        ],
+        [
+          0.5000329750974213,
+          0.5048779399151166,
+          0.7872987269116196
+        ],
+        [
+          0.5050295088036648,
+          0.21270127308838074,
+          0.5049500401995415
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.495976589567073,
+      "computer": [
+        0.9715147192865049,
+        0.0037823503380581994,
+        0.024702930375437013
+      ],
+      "q": [
+        [
+          0.49590730982581455,
+          0.49992378386013225,
+          0.49535461612241394
+        ],
+        [
+          0.4952665426083862,
+          0.4958360457626214,
+          0.6592368086578189
+        ],
+        [
+          0.49880993499093274,
+          0.34076319134218125,
+          0.49544017594422163
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.49525401697032057,
+      "computer": [
+        0.9826444113304328,
+        0.0009654328138626068,
+        0.01639015585570465
+      ],
+      "q": [
+        [
+          0.4951888347975565,
+          0.4999670249025785,
+          0.4949704911963353
+        ],
+        [
+          0.4948892694053668,
+          0.49512206008488335,
+          0.7872987269116196
+        ],
+        [
+          0.4991833900415722,
+          0.21270127308838074,
+          0.4950499598004587
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4999999999999999,
+      "computer": [
+        0.9926867429934685,
+        0.0036566285032659227,
+        0.00365662850326566
+      ],
+      "q": [
+        [
+          0.4999999999999999,
+          0.5015102012694113,
+          0.4984897987305884
+        ],
+        [
+          0.4984897987305884,
+          0.4999999999999999,
+          0.9099833434153104
+        ],
+        [
+          0.5015102012694113,
+          0.09001665658468985,
+          0.4999999999999998
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5056681622306345,
+      "computer": [
+        0.97502603718765,
+        0.018396981575674744,
+        0.0065769812366752774
+      ],
+      "q": [
+        [
+          0.5058198416097748,
+          0.5090733327246825,
+          0.49635581867734935
+        ],
+        [
+          0.49644363700883726,
+          0.505974740904525,
+          1.0
+        ],
+        [
+          0.508984588992186,
+          0.0,
+          0.5034731916957699
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5056681622306345,
+      "computer": [
+        0.97502603718765,
+        0.018396981575674744,
+        0.0065769812366752774
+      ],
+      "q": [
+        [
+          0.5058198416097748,
+          0.5090733327246825,
+          0.49635581867734935
+        ],
+        [
+          0.49644363700883726,
+          0.505974740904525,
+          1.0
+        ],
+        [
+          0.508984588992186,
+          0.0,
+          0.5034731916957699
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4943318377693656,
+      "computer": [
+        0.9754821376474272,
+        0.00631870600806429,
+        0.018199156344508482
+      ],
+      "q": [
+        [
+          0.49418015839022533,
+          0.503556362991163,
+          0.4910154110078144
+        ],
+        [
+          0.49092666727531775,
+          0.4940252590954751,
+          1.0
+        ],
+        [
+          0.503644181322651,
+          0.0,
+          0.49652680830423057
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5056681622306345,
+      "computer": [
+        0.97502603718765,
+        0.018396981575674744,
+        0.0065769812366752774
+      ],
+      "q": [
+        [
+          0.5058198416097748,
+          0.5090733327246825,
+          0.49635581867734935
+        ],
+        [
+          0.49644363700883726,
+          0.505974740904525,
+          1.0
+        ],
+        [
+          0.508984588992186,
+          0.0,
+          0.5034731916957699
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 0,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4943318377693656,
+      "computer": [
+        0.9754821376474272,
+        0.00631870600806429,
+        0.018199156344508482
+      ],
+      "q": [
+        [
+          0.49418015839022533,
+          0.503556362991163,
+          0.4910154110078144
+        ],
+        [
+          0.49092666727531775,
+          0.4940252590954751,
+          1.0
+        ],
+        [
+          0.503644181322651,
+          0.0,
+          0.49652680830423057
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 1,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.4943318377693656,
+      "computer": [
+        0.9754821376474272,
+        0.00631870600806429,
+        0.018199156344508482
+      ],
+      "q": [
+        [
+          0.49418015839022533,
+          0.503556362991163,
+          0.4910154110078144
+        ],
+        [
+          0.49092666727531775,
+          0.4940252590954751,
+          1.0
+        ],
+        [
+          0.503644181322651,
+          0.0,
+          0.49652680830423057
+        ]
+      ]
+    },
+    {
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 50,
+        "mh": 50,
+        "pc": 2,
+        "ph": 2,
+        "bc": 1,
+        "bh": 1,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "value": 0.5000000000000002,
+      "computer": [
+        0.9753915213407323,
+        0.01230423932963439,
+        0.012304239329633343
+      ],
+      "q": [
+        [
+          0.5000000000000002,
+          0.5063073335478254,
+          0.49369266645217447
+        ],
+        [
+          0.49369266645217447,
+          0.5000000000000002,
+          1.0
+        ],
+        [
+          0.5063073335478254,
+          0.0,
+          0.4999999999999999
+        ]
+      ]
+    }
+  ],
+  "temperatures": [
+    {
+      "temperature": 0.0,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.525,
+          0.42857142857142855,
+          0.44258373205741625
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 256,
+          "seconds": 0.21098289999645203,
+          "visits": [
+            40,
+            7,
+            209
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.0,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.9477555680926683,
+          0.052244431907331745
+        ],
+        "scores": [
+          0.0,
+          0.5502092050209205,
+          0.5625
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.20507154527744173,
+          "simulations": 256,
+          "seconds": 0.12772150000091642,
+          "visits": [
+            1,
+            239,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.0,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": -0.0,
+          "simulations": 256,
+          "seconds": 0.017866000067442656,
+          "visits": [
+            0,
+            0,
+            256
+          ],
+          "kind": "belief",
+          "temperature": 0.0,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "temperature": 0.002,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.15250242658590388,
+          0.025838927832599286,
+          0.8216586455814968
+        ],
+        "scores": [
+          0.41025641025641024,
+          0.4444444444444444,
+          0.4855769230769231
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5426546645560797,
+          "simulations": 256,
+          "seconds": 0.22107659990433604,
+          "visits": [
+            39,
+            9,
+            208
+          ],
+          "kind": "belief",
+          "temperature": 0.002,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.002,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          1.0,
+          0.5543933054393305,
+          0.375
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 256,
+          "seconds": 0.13732370000798255,
+          "visits": [
+            1,
+            239,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.002,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.002,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          6.097648718976386e-35,
+          4.292163808180677e-49,
+          1.0
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 1.0,
+          "local_loss": 0.0,
+          "entropy": 4.803884676107162e-33,
+          "simulations": 256,
+          "seconds": 0.018564100028015673,
+          "visits": [
+            0,
+            0,
+            256
+          ],
+          "kind": "belief",
+          "temperature": 0.002,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "temperature": 0.005,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.5285714285714286,
+          0.75,
+          0.5046082949308756
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 256,
+          "seconds": 0.22612510004546493,
+          "visits": [
+            35,
+            4,
+            217
+          ],
+          "kind": "belief",
+          "temperature": 0.005,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.005,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          1.0,
+          0.5543933054393305,
+          0.375
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 256,
+          "seconds": 0.1332442999118939,
+          "visits": [
+            1,
+            239,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.005,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.005,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          2.0609381595474896e-14,
+          4.4985289043564946e-20,
+          0.9999999999999793
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.9999999999999897,
+          "local_loss": 1.0325074129013956e-14,
+          "entropy": 6.701162128741182e-13,
+          "simulations": 256,
+          "seconds": 0.01932900003157556,
+          "visits": [
+            0,
+            0,
+            256
+          ],
+          "kind": "belief",
+          "temperature": 0.005,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "temperature": 0.01,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.5285714285714286,
+          0.75,
+          0.5046082949308756
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 256,
+          "seconds": 0.2201796000590548,
+          "visits": [
+            35,
+            4,
+            217
+          ],
+          "kind": "belief",
+          "temperature": 0.01,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.01,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012526110273784266,
+          0.9874434687606127,
+          3.0420965603017436e-05
+        ],
+        "scores": [
+          1.0,
+          0.5585774058577406,
+          0.375
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06765736683777485,
+          "simulations": 256,
+          "seconds": 0.1342630999861285,
+          "visits": [
+            1,
+            239,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.01,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.01,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          1.4355965892053998e-07,
+          2.120973269712251e-10,
+          0.9999998562282437
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.9999999282201705,
+          "local_loss": 7.177982952466522e-08,
+          "entropy": 2.4104959368962986e-06,
+          "simulations": 256,
+          "seconds": 0.01863099995534867,
+          "visits": [
+            0,
+            0,
+            256
+          ],
+          "kind": "belief",
+          "temperature": 0.01,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": false
+        }
+      }
+    },
+    {
+      "temperature": 0.02,
+      "state": {
+        "phase": "play",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 1,
+        "ph": 2,
+        "bc": 1,
+        "bh": 2,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          0.1630714906864116,
+          0.02743952223196307,
+          0.8094889870816253
+        ],
+        "scores": [
+          0.5285714285714286,
+          0.75,
+          0.5046082949308756
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.5007148551194923,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.5654944469486654,
+          "simulations": 256,
+          "seconds": 0.21453390002716333,
+          "visits": [
+            35,
+            4,
+            217
+          ],
+          "kind": "belief",
+          "temperature": 0.02,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.02,
+      "state": {
+        "phase": "pick",
+        "round": 1,
+        "turn": 1,
+        "mc": 50,
+        "mh": 50,
+        "pc": 0,
+        "ph": 0,
+        "bc": 0,
+        "bh": 0,
+        "previous": [
+          -1,
+          -1
+        ],
+        "last_result": 0
+      },
+      "decision": {
+        "actions": [
+          0,
+          1,
+          2
+        ],
+        "probabilities": [
+          0.012525586930274021,
+          0.987400030382409,
+          7.438268731698191e-05
+        ],
+        "scores": [
+          1.0,
+          0.5585774058577406,
+          0.375
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.49996059405940585,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.06808920013255049,
+          "simulations": 256,
+          "seconds": 0.13705620006658137,
+          "visits": [
+            1,
+            239,
+            16
+          ],
+          "kind": "belief",
+          "temperature": 0.02,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    },
+    {
+      "temperature": 0.02,
+      "state": {
+        "phase": "play",
+        "round": 5,
+        "turn": 3,
+        "mc": 59,
+        "mh": 41,
+        "pc": 0,
+        "ph": 2,
+        "bc": 2,
+        "bh": 4,
+        "previous": [
+          2,
+          2
+        ],
+        "last_result": -1
+      },
+      "decision": {
+        "actions": [
+          1,
+          0,
+          2
+        ],
+        "probabilities": [
+          7.881188118807891e-05,
+          1.4562202804594992e-05,
+          0.9999066259160073
+        ],
+        "scores": [
+          0.8424348499723499,
+          0.7772602428665281,
+          1.0
+        ],
+        "diagnostics": {
+          "fallback": false,
+          "worst_continuation": 0.999960594059406,
+          "local_loss": 3.940594059403946e-05,
+          "entropy": 0.001000200026389885,
+          "simulations": 256,
+          "seconds": 0.01860119996126741,
+          "visits": [
+            0,
+            0,
+            256
+          ],
+          "kind": "belief",
+          "temperature": 0.02,
+          "safety_budget": 0.02,
+          "delta": 3.9405940594059406e-05,
+          "safety_limited": true
+        }
+      }
+    }
+  ],
+  "profile": [
+    {
+      "function": "run",
+      "file": "rollout.py",
+      "calls": 1024,
+      "self_seconds": 0.5164633000000001,
+      "total_seconds": 0.5175818
+    },
+    {
+      "function": "_simulate",
+      "file": "planner.py",
+      "calls": 1024,
+      "self_seconds": 0.2034351,
+      "total_seconds": 1.0321531000000002
+    },
+    {
+      "function": "safe_distribution",
+      "file": "matrix.py",
+      "calls": 2033,
+      "self_seconds": 0.034882500000000004,
+      "total_seconds": 0.058516700000000005
+    },
+    {
+      "function": "probabilities",
+      "file": "belief.py",
+      "calls": 623,
+      "self_seconds": 0.0317,
+      "total_seconds": 0.050843000000000006
+    },
+    {
+      "function": "feasible",
+      "file": "rules.py",
+      "calls": 26020,
+      "self_seconds": 0.0199333,
+      "total_seconds": 0.0313308
+    },
+    {
+      "function": "transition",
+      "file": "rules.py",
+      "calls": 11148,
+      "self_seconds": 0.017214,
+      "total_seconds": 0.0734663
+    },
+    {
+      "function": "__init__",
+      "file": "planner.py",
+      "calls": 1025,
+      "self_seconds": 0.0136761,
+      "total_seconds": 0.0781976
+    },
+    {
+      "function": "<genexpr>",
+      "file": "rules.py",
+      "calls": 103290,
+      "self_seconds": 0.011397500000000001,
+      "total_seconds": 0.011397500000000001
+    },
+    {
+      "function": "actions",
+      "file": "rules.py",
+      "calls": 13826,
+      "self_seconds": 0.008675800000000001,
+      "total_seconds": 0.0400066
+    },
+    {
+      "function": "scores",
+      "file": "planner.py",
+      "calls": 2033,
+      "self_seconds": 0.0086618,
+      "total_seconds": 0.0101775
+    },
+    {
+      "function": "observe",
+      "file": "belief.py",
+      "calls": 1024,
+      "self_seconds": 0.008174500000000001,
+      "total_seconds": 0.012989200000000001
+    },
+    {
+      "function": "prediction",
+      "file": "belief.py",
+      "calls": 1025,
+      "self_seconds": 0.005338900000000001,
+      "total_seconds": 0.057138100000000004
+    }
+  ],
+  "temperature": 0.0,
+  "process_peak_resident_bytes": 314916864,
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0"
+}

@@ -1,6 +1,8 @@
 # 西部牛仔 · 网页版（人机对战 + 玩家对决）
 
-单进程 Node.js 服务器：静态页面 + WebSocket 房间对战。无构建步骤，手机浏览器（含微信内置浏览器）可直接游玩。
+Node.js 服务器：静态页面 + WebSocket 房间对战 + 后台线程中的完整模式 AI。手机浏览器（含微信内置浏览器）可直接游玩。首次启动自动准备模型资源，也可先运行 `npm run build`。
+
+**更新原 Render 网址**：按 [DEPLOY_RENDER.md](DEPLOY_RENDER.md) 操作现有服务，保留 `https://xinbuniuzai-web.onrender.com`。
 
 ## 局域网试玩
 
@@ -19,7 +21,8 @@
 - **完整对决**：完整对局最多 5 轮。每轮双方先**保密选择初始子弹**（0~2 颗），轮开始时公开，
   该轮从所选子弹数开局；轮末按子弹差结算筹码 y=(i+1)(j+1)x（劣势方获胜赔付翻倍，
   x=0 不结算），平局双方各扣 5×自选子弹；一方筹码归零立即结束，5 轮后筹码多者胜；
-  选弹与出招限时、连击规则相同（连续 3 次超时判负）。人机完整对局暂未开放
+  玩家对决的选弹与出招限时、连击规则相同（连续 3 次超时判负）。完整人机已开放，不限时，需联网；
+  使用独立记忆，逐回合更新并跨局保留。刷新或退出后重新开局，已保存记忆保留，中途退出不计胜负。
 
 ## 环境变量（部署/调参）
 
@@ -44,8 +47,8 @@
 ### 方案：GitHub + Render（免费，约 20 分钟）
 
 1. **注册/登录**：[github.com](https://github.com)（托管代码）与 [render.com](https://render.com)（托管服务器，免费额度）
-2. **上传代码**：在 GitHub 新建**私有仓库**，把 `web/` 文件夹里的内容推上去（`package.json`、`server.js`、`public/`、`launch.js`、`start.bat`、`README.md`——`node_modules` 不用传）
-3. **在 Render 创建服务**：Dashboard → New → **Web Service** → 连接该仓库 → 保持自动检测的设置（Node 环境、Build Command 留空或 `npm install`、Start Command `npm start`）→ 选择免费实例 → Create
+2. **上传代码**：仅首次新建服务时需要创建仓库；原站点更新请看上方部署文档。上传 `web/` 的代码及 `lib/`、`assets/`、`tools/`，遵循 `.gitignore`，无需传 `node_modules` 和 `.runtime`。
+3. **在 Render 创建服务**：仅首次新建时 Dashboard → New → **Web Service** → 连接仓库（Node 环境、Build Command `npm ci && npm run build`、Start Command `npm start`）→ 选择实例 → Create。更新原网址不需要新建服务。
 4. **配置环境变量**（服务设置 → Environment）：`ROOM_CODE_LENGTH=5`、`ALLOW_NO_ORIGIN=false`（其余默认即可）
 5. **拿链接分发**：部署完成后得到 `https://xxx.onrender.com`，微信里直接发这个链接即可游玩（平台自带 HTTPS/WSS，代码零改动）
 
@@ -60,6 +63,9 @@ PC 跑 `start.bat`，再开一个穿透工具（如 Cloudflare Tunnel：`cloudfl
 
 ## 开发
 
+- 完整模式电脑决策见 [`lib/match-ai/README.md`](lib/match-ai/README.md)。固定 `full-temporal3-v1` 策略，已接入本地页面与 HTTP 后台线程，公网部署按上方文档进行。
+- `npm run test:match-web`：完整模式 HTTP 会话和页面控制器验证，无 Python 依赖。
+- `npm run test:match-ai`：完整模式决策移植与会话验证（首次先按模块文档生成离线参考数据）。
 - `npm run gen`：从 `../Game_XiBuNiuZai/strategy_data.h` 重新生成 `public/strategies.js`
 - `npm run test:ai`：AI 移植正确性验证（需先在项目根目录运行 `python web/tools/gen_reference.py` 生成最强对照数据）
 

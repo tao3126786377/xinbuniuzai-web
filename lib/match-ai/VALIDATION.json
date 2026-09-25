@@ -1,0 +1,20 @@
+{
+  "policy": "full-temporal3-v1",
+  "transitions": 3853,
+  "matrices": 270,
+  "policyStates": 121,
+  "maxFeature": 0,
+  "maxPrediction": 5.551115123125783e-16,
+  "maxScore": 3.3306690738754696e-16,
+  "maxValue": 0,
+  "maxLoss": 0.00003940594059470559,
+  "alternateTies": 5,
+  "completeSessionMatches": 3,
+  "sessionDecisions": 335,
+  "meanDecisionMs": 1.945754545454547,
+  "p95DecisionMs": 4.3857,
+  "maxDecisionMs": 7.165900000000001,
+  "nodeVersion": "v24.18.0",
+  "platform": "win32",
+  "tableBlockCacheCapacityBytes": 6912000
+}

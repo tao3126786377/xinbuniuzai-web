@@ -650,7 +650,7 @@
     return { VbrMem: VbrG, VeqMem: VeqG, brMem: brG };
   }
 
-  /* 页面加载时的一次性管线（C++ main 启动序列）：
+  /* 每局开始前的模型构建管线：
    * 载入日志 → 差桶统计 → 后验 → 完整最佳响应 → 记忆-1 增广管线 → 打包会话
    */
   function buildAiSession(logText, strategies) {
