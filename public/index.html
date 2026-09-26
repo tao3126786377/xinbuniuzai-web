@@ -23,6 +23,7 @@
       <button class="link-btn" id="btn-history">对局记录</button>
       <!-- 临时：导出对战日志按钮（测试后删除） -->
       <button class="link-btn" id="btn-export-log">导出对战日志（临时）</button>
+      <button class="link-btn" id="btn-export-match-log">导出完整人机诊断</button>
       <!-- 临时结束 -->
       <p class="footnote" id="ai-memory-note"></p>
       <p class="footnote" id="version-note"></p>
@@ -161,7 +162,7 @@
     <!-- 临时：导出对战日志弹窗（测试后删除） -->
     <div id="export-modal" class="modal hidden">
       <div class="modal-box hist-box">
-        <h3>导出对战日志（临时）</h3>
+        <h3 id="export-title">导出对战日志（临时）</h3>
         <p class="footnote" id="export-info"></p>
         <textarea id="export-text" class="export-text" readonly></textarea>
         <button class="big-btn" id="btn-export-copy">复制日志</button>

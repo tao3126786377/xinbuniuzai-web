@@ -93,7 +93,7 @@
     try {
       var value = await request('session', { memory: memory, requestId: requestId() }, 'POST', 5);
       if (current !== g) { discard(value.sessionId); return; }
-      accept(g, value); render(g);
+      accept(g, value); g.initialMemory = value.memory; render(g);
     } catch (e) { failed(g, e); }
   }
   async function onAction(action) {
@@ -108,7 +108,8 @@
       if (current !== g) return;
       accept(g, value);
       var r = value.result, settle = r.settlement, pick = r.before.phase === 'pick';
-      g.events.push({ before: r.before, human: r.human, computer: r.computer, settlement: settle, score: r.score });
+      g.events.push({ before: r.before, human: r.human, computer: r.computer, settlement: settle, score: r.score,
+        decision: r.decision, predictionReview: r.predictionReview, risk: r.risk });
       App.setText('opp-status', ''); App.setText('my-status', '');
       App.showBadge('my-action', pick ? '初始 ' + r.human + ' 颗' : names[r.human], pick ? '' : App.actionBadgeClass(chars[r.human]));
       App.showBadge('opp-action', pick ? '初始 ' + r.computer + ' 颗' : names[r.computer], pick ? '' : App.actionBadgeClass(chars[r.computer]));
@@ -121,7 +122,7 @@
         var outcome = r.score === 0 ? 'win' : r.score === 1 ? 'lose' : 'draw';
         Stats.recordFullMatch({ id: value.sessionId + ':' + value.snapshot.gameNumber,
           source: 'human', policy: value.policy, endedAt: new Date().toISOString(),
-          outcome: outcome, money: settle.money, events: g.events });
+          outcome: outcome, money: settle.money, initialMemory: g.initialMemory, events: g.events });
       }
       g.timer = setTimeout(function () {
         if (current !== g) return;
@@ -140,7 +141,7 @@
     try {
       var value = await request('rematch', { sessionId: g.data.sessionId, gameNumber: g.data.snapshot.gameNumber });
       if (current !== g) return;
-      accept(g, value); render(g);
+      accept(g, value); g.initialMemory = value.memory; render(g);
     } catch (e) { failed(g, e); }
   }
   function toMenu() {

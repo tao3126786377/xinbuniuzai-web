@@ -243,7 +243,11 @@
   });
 
   // ==================== 临时：导出对战日志（测试后删除） ====================
+  var exportFilename = 'xnz_log.txt';
   $('btn-export-log').addEventListener('click', function () {
+    exportFilename = 'xnz_log.txt';
+    setText('export-title', '导出快速人机日志');
+    setText('btn-export-download', '下载文件（xnz_log.txt）');
     var text = '';
     try { text = localStorage.getItem('xnz_log_v1') || ''; } catch (e) { text = ''; }
     if (!text) {
@@ -256,12 +260,21 @@
     show('export-modal');
   });
 
+  $('btn-export-match-log').addEventListener('click', function () {
+    exportFilename = 'xnz_match_diagnostics.json';
+    setText('export-title', '导出完整人机诊断');
+    setText('btn-export-download', '下载诊断文件（JSON）');
+    $('export-text').value = Stats.exportFullDiagnostics();
+    setText('export-info', '当前浏览器保留的完整人机记录；新完成的对局含预测与决策诊断。仅导出，不自动上传。');
+    show('export-modal');
+  });
+
   $('btn-export-copy').addEventListener('click', function () {
     var text = $('export-text').value;
     if (!text) return;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function () {
-        toast('日志已复制，粘贴保存发给 Claude 即可');
+        toast('日志已复制，可粘贴保存或用于分析');
       }, function () {
         fallbackCopyExport();
       });
@@ -276,7 +289,7 @@
     ta.select();
     try {
       if (document.execCommand('copy')) {
-        toast('日志已复制，粘贴保存发给 Claude 即可');
+        toast('日志已复制，可粘贴保存或用于分析');
         return;
       }
     } catch (e) { /* 忽略 */ }
@@ -290,7 +303,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'xnz_log.txt';
+    a.download = exportFilename;
     document.body.appendChild(a);
     a.click();
     setTimeout(function () {
@@ -306,8 +319,8 @@
 
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.14.0');
-  console.log('西部牛仔 网页版 v0.14.0');
+  setText('version-note', '网页版 v0.15.0');
+  console.log('西部牛仔 网页版 v0.15.0');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();

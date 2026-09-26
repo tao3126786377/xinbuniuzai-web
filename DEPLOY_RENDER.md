@@ -1,4 +1,4 @@
-# 更新原 Render 网址（v0.14.0）
+# 更新原 Render 网址（v0.15.0）
 
 项目根目录《工作记录.md》的 2026-09-02 部署记录确认：
 
@@ -7,11 +7,11 @@
 - 真正的 Git 仓库在 `E:\VS code\Game_XiBuNiuZai - web\web`，不是外面的项目总目录。
 - 原部署使用 Render 免费 Web Service，推送 `main` 后自动部署。
 
-以上仓库和分支已与本地 Git 配置核对；本次没有登录 Render 后台、推送或部署，后台设置请按下面核对。
+以上仓库和分支已与本地 Git 配置及远端 main 核对。推送成功不等于部署成功，最后仍需检查原网址的页面和完整人机会话版本。
 
 ## 本次更新内容
 
-完整人机按钮已开放。固定 `full-temporal3-v1` 策略：小型行为网络、三步规划、完整模式均衡安全约束。电脑在玩家提交前锁定动作，双方公开后使用新观察规划下一步；模型权重固定，行为记忆逐回合更新，跨轮、跨局保留。快速模式每局读取最新日志的修补也包含在内。
+完整人机升级为 `full-temporal3-credit-v1`：保留小型行为网络和三步规划，使用已验证的动态整局风险余额；跨轮保留、再来一局重置，相对均衡的整局最坏期望得分损失仍低于 0.02。旧行为记忆兼容。完整诊断可手动导出；快速模式保留原策略及每局读取最新日志的修补。取舍和验证见 [发布说明](RELEASE_AI_V0_15.md)。
 
 完整模式计算在 Node 后台线程执行。浏览器只接收状态和已揭示动作，不下载均衡表。玩家记忆与完成对局记录保存在当前浏览器，和快速模式分开。退出不计入胜负；刷新页面或服务器重启后，需要重新开局，已保存的行为记忆保留。
 
@@ -26,7 +26,7 @@ npm run build
 npm start
 ```
 
-打开 <http://localhost:3000>，主菜单应显示 `网页版 v0.14.0`，进入“完整 · 人机对战”。如 3000 端口正在运行旧服务，先在旧终端按 Ctrl+C 退出，再重新启动。
+打开 <http://localhost:3000>，主菜单应显示 `网页版 v0.15.0`，进入“完整 · 人机对战”。如 3000 端口正在运行旧服务，先在旧终端按 Ctrl+C 退出，再重新启动。
 
 本次新测试可以运行：`npm run test:match-web`。原快速模式检查为 `npm run test:ai`；原联机检查为 `node test/pvp_test.js` 和 `node test/match_test.js`。
 
@@ -53,17 +53,17 @@ Environment 保留 `ROOM_CODE_LENGTH=5`、`ALLOW_NO_ORIGIN=false`。无需 Pytho
 
 ## 3. 提交本地修改并推送
 
-在同一个 PowerShell 中执行。`git status` 用来核对本次需要提交的本地文件；包括此前研究模块、固定模型和快速模式修补。
+在同一个 PowerShell 中执行。先用 `git status` 核对需要发布的文件，再选择性暂存。本次运行不需要上传全部离线研究结果，不要把研究候选误接到网页入口。
 
 ```powershell
 git status --short
-git add .
+git add lib/match-ai public tools/analyze_match_ai.js README.md DEPLOY_RENDER.md RELEASE_AI_V0_15.md
 git diff --cached --stat
-git commit -m "接入完整模式人机 AI，保留连续对局学习修补"
+git commit -m "发布 v0.15.0 完整模式动态整局余额与诊断导出"
 git push origin main
 ```
 
-提交列表中应包含 `assets/match-ai/*.gz`、`assets/match-ai/bundle.json`、`lib/match-ai/weights.bin`、新页面脚本、服务器接口和准备脚本。模型表压缩后总计约 **80 MB**，最大的单个文件约 32 MB；本次首次推送可能比以前慢。请使用 Git 推送，避免逐个通过 GitHub 网页上传。
+首次完整 AI 发布所需的 `assets/match-ai/*.gz`、`assets/match-ai/bundle.json` 和网络权重已在原仓库，本版不重新生成或上传大表。新增的 `lib/match-ai/credit.js` 与更新的 `worker.js`、`index.js` 必须一起发布。测试和说明可一并暂存，完成后用 `git diff --cached --stat` 核对。
 
 `.gitignore` 已排除 `node_modules/`、`.runtime/`、`research/artifacts/` 和研究依赖缓存。这些大目录无需提交。`assets/match-ai/` 是必须提交的发布资源，不能漏掉。
 
@@ -74,9 +74,9 @@ git push origin main
 在 Render → Events/Logs 等待最新部署显示 `Live`。若自动部署没有开启，在现有服务中选 **Manual Deploy → Deploy latest commit**。
 
 - 构建日志：`npm run build` 成功；首次准备资源会显示“模型资源已准备就绪”。
-- 运行日志：`[完整人机] full-temporal3-v1 已就绪`。
+- 运行日志：`[完整人机] full-temporal3-credit-v1 已就绪`。
 - 打开 <https://xinbuniuzai-web.onrender.com/api/match-ai/health>，应得到 `{"ready":true}`。
-- 刷新原游戏网址（必要时强制刷新），确认版本为 `v0.14.0`。
+- 刷新原游戏网址（必要时强制刷新），确认版本为 `v0.15.0`；完整人机会话响应的 `policy` 为 `full-temporal3-credit-v1`。
 - 玩一次完整人机：选弹、出招、轮末结算、再来一局；返回菜单能看到完整模式统计。
 - 用原来的房间方式验证一次玩家对决。
 
@@ -89,11 +89,11 @@ Render 免费服务仍可能冷启动，具体限制以 [免费服务说明](htt
 - **对局过期或服务器重启**：回菜单重新进入；浏览器保存的完整模式记忆仍在。部署时正在进行的联机/人机对局不跨进程恢复。
 - **想恢复上一版**：在 Render 的部署记录里使用上一成功版本的回滚入口，并按后台提示处理自动部署设置。不要为了回滚创建另一个服务。
 
-## 本地验收（2026-09-26）
+## 原 v0.14.0 接入验收记录（2026-09-26）
 
 - 快速模式 AI 数学对照与页面冒烟测试通过，连续对局学习修补保留。
 - 完整模式 Node 移植：3,853 个规则转移、270 个矩阵、121 个策略状态通过；3 场会话、335 次决策通过。
 - 新 HTTP/页面控制器：整局结算、重复请求、隐藏动作、非法动作、跨局记忆、旧回调隔离和两种日志隔离通过。
 - 原快速 PvP：66 通过 / 0 失败；完整 PvP：114 通过 / 0 失败。
 - 浏览器实测：菜单、选弹、动作揭示、跨轮筹码显示通过。
-- 已用发布压缩包准备运行资源并启动本地服务。公网版本尚未更新。
+- 当时已用发布压缩包准备运行资源并启动本地服务；用户随后确认原版部署成功。v0.15.0 的新增验收见 [发布说明](RELEASE_AI_V0_15.md)。

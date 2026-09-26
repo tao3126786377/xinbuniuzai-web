@@ -20,7 +20,7 @@ global.App = { setActiveMode(){},showScreen(s){screen=s;},setText(id,text){docum
 require('../public/js/stats'); global.Stats = window.Stats;
 require('../public/js/mode-ai-match'); const Mode = window.ModeMatchAI;
 const state = {phase:'pick',round:1,turn:1,mc:50,mh:50,pc:0,ph:0,bc:0,bh:0,previous:[-1,-1],last_result:0};
-const base = { sessionId:'a'.repeat(48),policy:'full-temporal3-v1',snapshot:{state,over:false,gameNumber:1,lastScore:null},
+const base = { sessionId:'a'.repeat(48),policy:'full-temporal3-credit-v1',snapshot:{state,over:false,gameNumber:1,lastScore:null,credit:.0199},
   ready:{decisionId:'d1',phase:'pick',gameNumber:1},memory:{version:1,policy:'full-temporal3-v1',observations:0,events:[]} };
 async function deliver(value,status=200) { const resolve = pending.shift(); assert.ok(resolve); resolve({ok:status===200,status,json:async()=>value}); await new Promise(resolve => setImmediate(resolve)); }
 async function main() {
@@ -29,7 +29,8 @@ async function main() {
   Mode.onAction(2); Mode.onAction(1); assert.equal(calls.length,2,'double submit');
   assert.deepEqual(calls[1].data,{sessionId:base.sessionId,decisionId:'d1',action:2});
   const next = {...base,snapshot:{...base.snapshot,state:{...state,phase:'play',pc:1,ph:2,bc:1,bh:2}},ready:{...base.ready,decisionId:'d2',phase:'play'},
-    memory:{...base.memory,observations:1},result:{before:state,computer:1,human:2,state:{...state,bc:1,bh:2},score:null,settlement:{}}};
+    memory:{...base.memory,observations:1},result:{before:state,computer:1,human:2,state:{...state,bc:1,bh:2},score:null,settlement:{},
+      decision:{diagnostics:{humanPrediction:[.2,.3,.5]}},predictionReview:{nll:Math.log(2)},risk:{before:.0199,after:.018}}};
   await deliver(next); assert.equal(JSON.parse(storage.get('xnz_match_memory_v1')).observations,1);
   Mode.onAction(0); assert.equal(calls.length,2,'cannot act during reveal'); reveal();
   Mode.onAction(0);
@@ -39,6 +40,13 @@ async function main() {
   assert.equal(JSON.parse(storage.get('xnz_match_history_v1')).wins,1);
   Stats.recordFullMatch(JSON.parse(storage.get('xnz_match_history_v1')).games[0]);
   assert.equal(JSON.parse(storage.get('xnz_match_history_v1')).wins,1,'duplicate log');
+  const exported = JSON.parse(Stats.exportFullDiagnostics());
+  assert.equal(exported.schema,'xnz-match-diagnostics-v1');
+  assert(!Stats.exportFullDiagnostics().includes(base.sessionId),'diagnostic export removes session tokens');
+  assert.deepEqual(exported.games[0].initialMemory,base.memory,'retain game-start public memory for replay');
+  assert.deepEqual(exported.games[0].events[0].decision,next.result.decision,'save revealed forecast for analysis');
+  assert.deepEqual(exported.games[0].events[0].predictionReview,next.result.predictionReview);
+  assert.deepEqual(exported.games[0].events[0].risk,next.result.risk);
   Mode.startGame(); assert.equal(calls.at(-1).url,'/api/match-ai/rematch');
   await deliver({...base,snapshot:{...base.snapshot,gameNumber:2},memory:end.memory});
   assert.equal(screen,'game');

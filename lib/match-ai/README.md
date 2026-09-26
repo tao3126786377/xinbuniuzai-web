@@ -1,6 +1,6 @@
-# 完整模式电脑决策：full-temporal3-v1
+# 完整模式电脑决策：full-temporal3-credit-v1
 
-固定第五阶段选出的 `temporal3`：203→96→3 行为网络、最近 64 次公开事件、三步同时行动规划、原安全约束。模型参数固定，历史统计每次揭示后更新。选弹与轮内出招均已实现，最终从安全分布随机采样。
+固定第五阶段选出的 `temporal3`：203→96→3 行为网络、最近 64 次公开事件、三步同时行动规划。v0.15.0 将每步固定限额替换为第六阶段验证的动态整局风险余额，整局相对均衡的最坏期望得分损失仍低于 0.02。模型参数固定，历史统计每次揭示后更新。选弹与轮内出招均已实现，最终从安全分布随机采样。
 
 这是可调用的 **Node.js 模块**，不依赖 Python 运行时或实验脚本。已通过 `worker.js` / `http.js` 接入本地完整人机菜单，在后台线程中计算；原快速模式和联机协议保持原状。公网更新步骤见 [DEPLOY_RENDER.md](../../DEPLOY_RENDER.md)。
 
@@ -9,7 +9,7 @@
 ```js
 const { createEngine } = require('./lib/match-ai');
 const { prepare } = require('./tools/prepare_match_ai');
-const engine = createEngine({ tablesPath: await prepare() }); // 整个进程复用一个引擎和有上限的读表缓存
+const engine = createEngine({ tablesPath: await prepare(), strategy: 'credit' }); // 网页发布策略
 const session = engine.createSession(); // 每位玩家独立会话
 
 const ready = session.prepareDecision(); // 电脑已锁定；不会公开动作或概率
@@ -54,11 +54,19 @@ engine.close(); // 退出进程或彻底停止使用时关闭文件句柄
 
 ## 决策预算与诊断
 
-默认 `prepareDecision({ budgetMs: 2500 })`，可缩小预算。搜索超过预算或预测出现非有限值时，返回当前状态的均衡策略；概率求解也有数值检查。由于文件读取和当前一步运算不可中断，预算是软上限；本机测时不保证手机或部署服务器性能。
+默认 `prepareDecision({ budgetMs: 2500 })`，可缩小预算。动态余额搜索超时使用已完整求值且安全的一步分布，没有完成结果或预测异常时使用均衡分布；概率求解也有数值检查。由于文件读取和当前一步运算不可中断，预算是软上限；本机测时不保证手机或部署服务器性能。
+
+每局初始余额 0.0199。玩家动作公开后按 `R' = max(0, R + p·Qeq[:,b] - Veq)` 更新，`p` 为揭示前锁定的完整分布，不按抽中动作更新。换轮不重置；再来一局才重置。会话 `snapshot.credit` 和揭示结果 `risk.before/after` 可核对余额。客户端不能覆盖会话余额，重复请求不重复扣减。
+
+记忆仍使用 `full-temporal3-v1` 标识不变的模型和事件格式，因此升级与回滚都能保留旧记忆；实际对局 `policy` 为 `full-temporal3-credit-v1`。记忆不保存进行中的状态或余额，刷新/重连失效后重新开局，不能在旧筹码局面补回初始余额。
 
 终局揭示后，`revealed.decision` 中可以查看合法动作顺序、最终分布、三步动作得分和诊断。`diagnostics` 包括节点数、耗时、单步最大损失、数值回退次数和预算回退原因。无历史时使用均衡；持续对局中保留历史，网络权重不在线重训。
 
-离线诊断也可用 `engine.decide(state, history, options)`。其中 `history` 为本模块格式的已公开事件；正式游戏优先使用 `createSession()`，让模块维护阶段和记忆，避免调用方错序或混入未公开动作。
+本地 v0.14.1 增加决策诊断：每次揭示后可查看此前锁定的 `humanPrediction`、均衡玩家分布、动作得分跨度、相对均衡分布的距离、预测收益差与 `safetyLimited`。`predictionReview` 用真实公开动作计算该次冻结预测的 NLL/Brier；决定锁定前不公开这些信息，网络参数与安全预算保持原样。
+
+页面在完成的对局记录中保存诊断与开局公开记忆，菜单“导出完整人机诊断”输出 `xnz-match-diagnostics-v1` JSON，移除服务器会话令牌。旧记录没有预测时分析器跳过，不补造。`node tools/analyze_match_ai.js <导出文件.json>` 给出描述性汇总与值得复查的事件；动作得分差是搜索估计，不是真实整局损失。记录只在当前浏览器保存，未增加自动上传或集中训练。
+
+离线诊断也可用 `engine.decide(state, history, {credit, budgetMs})`，调用者负责提供实际余额。其中 `history` 为已公开事件；正式游戏使用 `createSession()`，自动维护余额和阶段。省略 `strategy` 的 `createEngine()` 保留原静态策略，仅用于原研究和移植对照；网页工作线程显式选择 `credit`。
 
 ## 复现与检查
 
@@ -76,4 +84,4 @@ npm run test:ai
 
 移植验证覆盖 Python/JS 状态转移、网络特征与概率、三步动作价值、安全小矩阵，以及重复请求、旧决定拒绝、跨轮/跨局记忆、持久化恢复和预算回退。浮点等值时可以选择不同的同分安全分布，测试比较实际动作价值，不要求这些等值分布逐项相同。
 
-`VALIDATION.json` 是决策移植验证摘要；详细参考数据在忽略目录 `research/artifacts`。网页集成另运行 `npm run test:match-web`；当前本地改动尚未推送到公网。
+`VALIDATION.json` 是原决策移植验证摘要；详细参考数据在忽略目录 `research/artifacts`。已有离线参考数据时，`node test/match_ai_credit_runtime.js` 对照研究版及会话余额；网页集成运行 `npm run test:match-web`。本次发布检查见 [发布说明](../../RELEASE_AI_V0_15.md)。

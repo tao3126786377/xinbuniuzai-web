@@ -4,6 +4,10 @@ Node.js 服务器：静态页面 + WebSocket 房间对战 + 后台线程中的�
 
 **更新原 Render 网址**：按 [DEPLOY_RENDER.md](DEPLOY_RENDER.md) 操作现有服务，保留 `https://xinbuniuzai-web.onrender.com`。
 
+**完整人机模型说明**：见 [完整模式AI模型说明.md](完整模式AI模型说明.md)，包含当前策略、神经网络、学习方式、实验效果与限制。
+
+**v0.15.0 发布**：完整模式采用已验证的动态整局风险余额，快速模式保留原策略及连续学习修补。采用和暂缓的成果、测试结果见 [本次发布说明](RELEASE_AI_V0_15.md)。完整模式可导出诊断，用 `node tools/analyze_match_ai.js xnz_match_diagnostics.json` 分析当前浏览器的新对局；不自动上传。
+
 ## 局域网试玩
 
 1. 双击 `start.bat`（首次运行会自动安装依赖；需要已安装 [Node.js](https://nodejs.org/) LTS）
@@ -63,7 +67,7 @@ PC 跑 `start.bat`，再开一个穿透工具（如 Cloudflare Tunnel：`cloudfl
 
 ## 开发
 
-- 完整模式电脑决策见 [`lib/match-ai/README.md`](lib/match-ai/README.md)。固定 `full-temporal3-v1` 策略，已接入本地页面与 HTTP 后台线程，公网部署按上方文档进行。
+- 完整模式电脑决策见 [`lib/match-ai/README.md`](lib/match-ai/README.md)。网页使用 `full-temporal3-credit-v1`，固定原神经网络，采用动态整局余额；公网部署按上方文档进行。
 - `npm run test:match-web`：完整模式 HTTP 会话和页面控制器验证，无 Python 依赖。
 - `npm run test:match-ai`：完整模式决策移植与会话验证（首次先按模块文档生成离线参考数据）。
 - `npm run gen`：从 `../Game_XiBuNiuZai/strategy_data.h` 重新生成 `public/strategies.js`

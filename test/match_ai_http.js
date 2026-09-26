@@ -41,6 +41,8 @@ async function main() {
     assert.equal((await api('session',{requestId:randomUUID(),memory:{bad:true}})).status,400);
     const create = { requestId: randomUUID() };
     let game = await ok('session',create);
+    assert.equal(game.policy,'full-temporal3-credit-v1');
+    assert.equal(game.snapshot.credit,.0199);
     assert.deepEqual(await ok('session',create),game,'create retry must not allocate another session');
     privateReady(game);
     assert.equal(game.memory.observations,0);
@@ -64,7 +66,9 @@ async function main() {
       assert.deepEqual(next.result.settlement,expected.settlement);
       assert.equal(next.result.score,expected.score);
       assert.equal(next.memory.observations,++decisions);
-      assert.ok(next.result.decision.diagnostics.maxLocalLoss < .0199/505+1e-10);
+      assert.equal(next.result.risk.before,game.snapshot.credit);
+      assert.equal(next.result.risk.after,next.snapshot.credit);
+      assert.ok(next.result.decision.diagnostics.maxLocalLoss <= next.result.risk.before+1e-10);
       if (!next.snapshot.over) privateReady(next);
       game = next;
     }
@@ -73,11 +77,14 @@ async function main() {
     const again = await ok('rematch',rematch);
     assert.deepEqual(await ok('rematch',rematch),again);
     assert.equal(again.snapshot.gameNumber,2);
+    assert.equal(again.snapshot.credit,.0199);
     assert.deepEqual(again.memory,game.memory);
     await ok('session',{sessionId:game.sessionId},'DELETE');
     assert.equal((await api('step',pick)).status,410);
     const restored = await ok('session',{requestId:randomUUID(),memory:game.memory});
     assert.deepEqual(restored.memory,game.memory);
+    assert.equal(restored.snapshot.credit,.0199);
+    assert.equal(restored.snapshot.state.mc,50,'refresh restores memory into a new match, not a fresh budget in the old match');
     await ok('session',{sessionId:restored.sessionId},'DELETE');
     console.log('Full-match HTTP passed: complete game, '+decisions+' decisions, hidden commitment, retries, legality, memory, origin, body limit; max request '+maxMs.toFixed(1)+' ms (local).');
   } finally { server.kill(); }

@@ -175,8 +175,18 @@
     document.getElementById('history-modal').classList.add('hidden');
   }
 
+  function exportFullDiagnostics() {
+    return JSON.stringify({ schema: 'xnz-match-diagnostics-v1', exportedAt: new Date().toISOString(),
+      games: fullHistory.games.map(function (game, i) {
+        // Server session tokens are not needed to analyse public completed games.
+        return { id: 'local-' + (i + 1), source: game.source, policy: game.policy, endedAt: game.endedAt,
+          outcome: game.outcome, money: game.money, initialMemory: game.initialMemory, events: game.events };
+      }) }, null, 2);
+  }
+
   window.Stats = {
     recordFullMatch: recordFullMatch,
+    exportFullDiagnostics: exportFullDiagnostics,
     refresh: refresh,
     openHistory: openHistory,
     closeHistory: closeHistory
