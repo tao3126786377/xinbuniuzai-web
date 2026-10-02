@@ -1,6 +1,6 @@
-# 完整模式电脑决策：full-temporal3-credit-v1
+# 完整模式电脑决策：full-temporal3-belief005-v1
 
-固定第五阶段选出的 `temporal3`：203→96→3 行为网络、最近 64 次公开事件、三步同时行动规划。v0.15.0 将每步固定限额替换为第六阶段验证的动态整局风险余额，整局相对均衡的最坏期望得分损失仍低于 0.02。模型参数固定，历史统计每次揭示后更新。选弹与轮内出招均已实现，最终从安全分布随机采样。
+v0.16.0 使用原 203→96→3 行为网络及 814 个行为假设的贝叶斯模型库。每次公开动作后更新后验并回补 0.5% 基础先验；三步同时行动规划的模拟分支也推进后验。动态整局风险余额保留，整局相对均衡的最坏期望得分损失仍低于 0.02。网络参数固定，后验与公开历史跨轮、跨局保存。选弹与轮内出招均按安全分布随机采样。
 
 这是可调用的 **Node.js 模块**，不依赖 Python 运行时或实验脚本。已通过 `worker.js` / `http.js` 接入本地完整人机菜单，在后台线程中计算；原快速模式和联机协议保持原状。公网更新步骤见 [DEPLOY_RENDER.md](../../DEPLOY_RENDER.md)。
 
@@ -9,7 +9,7 @@
 ```js
 const { createEngine } = require('./lib/match-ai');
 const { prepare } = require('./tools/prepare_match_ai');
-const engine = createEngine({ tablesPath: await prepare(), strategy: 'credit' }); // 网页发布策略
+const engine = createEngine({ tablesPath: await prepare(), strategy: 'belief' }); // 网页发布策略
 const session = engine.createSession(); // 每位玩家独立会话
 
 const ready = session.prepareDecision(); // 电脑已锁定；不会公开动作或概率
@@ -58,7 +58,7 @@ engine.close(); // 退出进程或彻底停止使用时关闭文件句柄
 
 每局初始余额 0.0199。玩家动作公开后按 `R' = max(0, R + p·Qeq[:,b] - Veq)` 更新，`p` 为揭示前锁定的完整分布，不按抽中动作更新。换轮不重置；再来一局才重置。会话 `snapshot.credit` 和揭示结果 `risk.before/after` 可核对余额。客户端不能覆盖会话余额，重复请求不重复扣减。
 
-记忆仍使用 `full-temporal3-v1` 标识不变的模型和事件格式，因此升级与回滚都能保留旧记忆；实际对局 `policy` 为 `full-temporal3-credit-v1`。记忆不保存进行中的状态或余额，刷新/重连失效后重新开局，不能在旧筹码局面补回初始余额。
+记忆外层仍使用 `full-temporal3-v1` 标识原网络及公开事件格式；新增 `belief` 保存 `fixed-share-005-v1` 后验概率、轮内行动计数和观察计数。旧记忆保留事件，新后验从先验开始。旧版回滚仍可读取事件，但不保存新增后验。实际对局 `policy` 为 `full-temporal3-belief005-v1`。记忆不保存进行中的状态或余额，刷新后重新开局，不能在旧筹码局面补回初始余额。恢复请求上限为 32 KiB。
 
 终局揭示后，`revealed.decision` 中可以查看合法动作顺序、最终分布、三步动作得分和诊断。`diagnostics` 包括节点数、耗时、单步最大损失、数值回退次数和预算回退原因。无历史时使用均衡；持续对局中保留历史，网络权重不在线重训。
 
@@ -66,7 +66,7 @@ engine.close(); // 退出进程或彻底停止使用时关闭文件句柄
 
 页面在完成的对局记录中保存诊断与开局公开记忆，菜单“导出完整人机诊断”输出 `xnz-match-diagnostics-v1` JSON，移除服务器会话令牌。旧记录没有预测时分析器跳过，不补造。`node tools/analyze_match_ai.js <导出文件.json>` 给出描述性汇总与值得复查的事件；动作得分差是搜索估计，不是真实整局损失。记录只在当前浏览器保存，未增加自动上传或集中训练。
 
-离线诊断也可用 `engine.decide(state, history, {credit, budgetMs})`，调用者负责提供实际余额。其中 `history` 为已公开事件；正式游戏使用 `createSession()`，自动维护余额和阶段。省略 `strategy` 的 `createEngine()` 保留原静态策略，仅用于原研究和移植对照；网页工作线程显式选择 `credit`。
+离线诊断也可用 `engine.decide(state, history, {credit, budgetMs})`，调用者负责提供实际余额；该单次调用使用新后验，不用于还原已有会话。正式游戏使用 `createSession()` 自动维护后验、余额和阶段。省略 `strategy` 保留原静态策略，`credit` 保留旧动态余额策略，均用于历史对照；网页工作线程显式选择 `belief`。新增检查为 `node test/match_ai_belief.js`。
 
 ## 复现与检查
 

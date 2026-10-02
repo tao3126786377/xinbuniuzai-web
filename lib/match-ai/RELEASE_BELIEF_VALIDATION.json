@@ -1,0 +1,15 @@
+{
+  "source": "synthetic parity check against frozen phase17 fixed .005 candidate",
+  "observations": 1010,
+  "plans": 204,
+  "maxAbsoluteDifference": 0,
+  "hashes": {
+    "lib/match-ai/belief.js": "8a99fdaad62775d760a05c8ad7690a8e74559ecab717e5c5f652e8f1f368f9e5",
+    "lib/match-ai/credit.js": "7d8bbc4ce742394d0e44df78be03378578ff9c170f32da1d7b98df0b3dd95812",
+    "lib/match-ai/index.js": "e31c9723d734bcf19c2cd103f69ca85e70e9fcdabe75bad56b2e2b8932947d11",
+    "lib/match-ai/weights.bin": "ed5ca8b40a62b0256bb5161e6bd847c01c16061e528b9e9baa97d90d993a1fae",
+    "research/match_ai/phase17/belief.js": "a19164d4cc3840f3d68b2264b8a6fb8e513ed996aef02bf946bd9a894f73b48b",
+    "research/match_ai/phase16/belief.js": "b5dbac4a24d9ddc594a6b48de32bbe227953057a5b61213ee61df32e34dc2463",
+    "research/match_ai/phase16/planner.js": "30aa0a56c4bba0cca0c8a11789cd37c33d777eda5c1e3f5355d42aa52a6b3a85"
+  }
+}

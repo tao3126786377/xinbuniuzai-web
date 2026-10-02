@@ -319,8 +319,8 @@
 
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.15.0');
-  console.log('西部牛仔 网页版 v0.15.0');
+  setText('version-note', '网页版 v0.16.0');
+  console.log('西部牛仔 网页版 v0.16.0');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();

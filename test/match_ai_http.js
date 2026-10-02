@@ -37,11 +37,11 @@ async function main() {
     assert.ok(healthy,logs);
     assert.match(await (await fetch(base)).text(),/mode-ai-match\.js/);
     assert.equal((await api('session',{requestId:randomUUID()},'POST','https://evil.example')).status,403);
-    assert.equal((await api('session',{garbage:'x'.repeat(17000)})).status,413);
+    assert.equal((await api('session',{garbage:'x'.repeat(34000)})).status,413);
     assert.equal((await api('session',{requestId:randomUUID(),memory:{bad:true}})).status,400);
     const create = { requestId: randomUUID() };
     let game = await ok('session',create);
-    assert.equal(game.policy,'full-temporal3-credit-v1');
+    assert.equal(game.policy,'full-temporal3-belief005-v1');
     assert.equal(game.snapshot.credit,.0199);
     assert.deepEqual(await ok('session',create),game,'create retry must not allocate another session');
     privateReady(game);
