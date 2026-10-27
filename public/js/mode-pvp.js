@@ -246,7 +246,7 @@
         } else {
           App.hide('pick-area');
           App.show('actions');
-          App.setText('round-label', '回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+          App.setText('round-label', '回合' + state.round);
           refreshPanels();
           App.setActionButtons({ u: myBullets() > 0, i: true, o: myBullets() < Game.MAX_BULLET });
         }
@@ -274,7 +274,7 @@
         var mySeat = state.session.seat;
         App.hide('pick-area');
         App.show('actions');
-        App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+        App.setText('round-label', '第' + state.matchRound + '/' + Match.MATCH_ROUNDS + '轮\n回合' + state.round);
         App.hide('my-action');
         App.hide('opp-action');
         App.showBanner('初始子弹公开：你 ' + state.picks[mySeat] + ' 颗 / 对手 ' + state.picks[1 - mySeat] + ' 颗');
@@ -392,7 +392,7 @@
     } else {
       cls = 'draw';
     }
-    App.addHistoryChip(App.actionName(myChar) + '/' + App.actionName(oppChar), cls);
+    App.addHistoryChip('回合' + msg.round + '　你' + App.actionName(myChar) + '，对手' + App.actionName(oppChar), cls);
 
     if (msg.outcome === 'continue') {
       // 先展示双方行动 REVEAL_MS，再进入下一回合（新回合服务器已计时，无影响）
@@ -403,7 +403,7 @@
         state.round = nextRound;
         state.deadline = nextDeadline;
         state.acted = false;
-        App.setText('round-label', '回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+        App.setText('round-label', '回合' + state.round);
         App.setText('my-status', '');
         App.setText('opp-status', '');
         App.hide('my-action');
@@ -419,7 +419,7 @@
     } else {
       state.round = msg.round;
       state.acted = true;
-      App.setText('round-label', '回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+      App.setText('round-label', '回合' + state.round);
       // 终局：game_over 紧随其后到达，等揭示完成再展示结果页
       revealTimer = setTimeout(function () {
         revealTimer = null;
@@ -451,24 +451,14 @@
     App.showBadge('opp-action', '对手：' + App.actionName(oppChar), App.actionBadgeClass(oppChar));
     App.lockActionButtons();
 
+    var actionClass = msg.outcome === 'continue' ? '' : msg.outcome === 'draw' ? 'draw' :
+      (msg.outcome === 'p1_win') === (my === 0) ? 'win' : 'lose';
+    App.addHistoryChip('回合' + msg.round + '　你' + App.actionName(myChar) + '，对手' + App.actionName(oppChar), actionClass);
     if (msg.outcome === 'continue') {
       App.showBanner('对手出招：' + App.actionName(oppChar) + '！');
-      App.addHistoryChip(App.actionName(myChar) + '/' + App.actionName(oppChar), '');
     } else {
-      // 结算展示 + 每轮筹码芯片
+      // 结算由横幅展示；滚动区只保留本轮逐回合动作。
       App.showBanner(matchSettlementText(msg));
-      var myDelta = 0;
-      var hcls = 'draw';
-      if (msg.outcome === 'p1_win') {
-        myDelta = my === 0 ? msg.transfer : -msg.transfer;
-        hcls = my === 0 ? 'win' : 'lose';
-      } else if (msg.outcome === 'p2_win') {
-        myDelta = my === 1 ? msg.transfer : -msg.transfer;
-        hcls = my === 1 ? 'win' : 'lose';
-      } else if (msg.drawPenalty) {
-        myDelta = -msg.drawPenalty[my];
-      }
-      App.addHistoryChip('第' + msg.matchRound + '轮 ' + (myDelta === 0 ? '0' : (myDelta >= 0 ? '+' : '') + myDelta), hcls);
     }
 
     if (msg.outcome === 'continue') {
@@ -480,7 +470,7 @@
         state.round = nextRound;
         state.deadline = nextDeadline;
         state.acted = false;
-        App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+        App.setText('round-label', '第' + state.matchRound + '/' + Match.MATCH_ROUNDS + '轮\n回合' + state.round);
         App.setText('my-status', '');
         App.setText('opp-status', '');
         App.hide('my-action');
@@ -530,21 +520,6 @@
       ' 筹码（x=' + msg.x + '，y=' + msg.y + (msg.double ? '，劣势方双倍 ×2' : '') + '）';
   }
 
-  /* 一局每轮结算摘要芯片（重进重建） */
-  function matchHistoryDeltaText(mh, seat) {
-    var d;
-    if (mh.draw) d = -(Match.PICK_PENALTY * mh.picks[seat]);
-    else if (mh.outcome === 'p1_win') d = seat === 0 ? mh.transfer : -mh.transfer;
-    else d = seat === 1 ? mh.transfer : -mh.transfer;
-    if (d === 0) return '0';
-    return (d >= 0 ? '+' : '') + d;
-  }
-  function matchHistoryChipClass(mh, seat) {
-    if (mh.draw) return 'draw';
-    if (mh.outcome === 'p1_win') return seat === 0 ? 'win' : 'lose';
-    return seat === 1 ? 'win' : 'lose';
-  }
-
   /* 进入选弹阶段：显示选弹 UI、隐藏动作区（deadline 由服务器消息置位，倒计时组件零改动） */
   function enterPickUI(matchRound, deadline) {
     state.phase = 'pick';
@@ -554,7 +529,8 @@
     state.deadline = deadline;
     state.b1 = 0;   // 选弹阶段子弹归零显示（新轮不继承上轮终弹，与服务器一致）
     state.b2 = 0;
-    App.setText('round-label', '第 ' + matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 选弹');
+    App.clearHistory();
+    App.setText('round-label', '第' + matchRound + '/' + Match.MATCH_ROUNDS + '轮\n选择初始子弹');
     App.hide('banner');
     App.hide('my-action');
     App.hide('opp-action');
@@ -630,16 +606,14 @@
       return;
     }
 
-    // 重建历史：对决移动芯片 + 每轮结算筹码芯片
+    // 只重建当前轮已经公开的动作。
     if (msg.history) {
       for (var i = 0; i < msg.history.length; i++) {
         var h = msg.history[i];
-        App.addHistoryChip(App.actionName(h.a1) + '/' + App.actionName(h.a2), '');
+        var mine = msg.seat === 0 ? h.a1 : h.a2;
+        var theirs = msg.seat === 0 ? h.a2 : h.a1;
+        App.addHistoryChip('回合' + (i + 1) + '　你' + App.actionName(mine) + '，对手' + App.actionName(theirs), '');
       }
-    }
-    for (var k = 0; k < state.matchHistory.length; k++) {
-      var mh = state.matchHistory[k];
-      App.addHistoryChip('第' + mh.matchRound + '轮 ' + matchHistoryDeltaText(mh, msg.seat), matchHistoryChipClass(mh, msg.seat));
     }
 
     App.setText('opp-status', msg.opponentConnected ? '' : '对手已断开，等待重连…');
@@ -657,7 +631,7 @@
     } else {
       App.hide('pick-area');
       App.show('actions');
-      App.setText('round-label', '第 ' + state.matchRound + '/' + Match.MATCH_ROUNDS + ' 轮 · 回合 ' + state.round + '/' + Game.MAX_ROUNDS);
+      App.setText('round-label', '第' + state.matchRound + '/' + Match.MATCH_ROUNDS + '轮\n回合' + state.round);
       App.hide('banner');
       App.hide('my-action');
       App.hide('opp-action');
@@ -705,7 +679,9 @@
     if (msg.history) {
       for (var i = 0; i < msg.history.length; i++) {
         var h = msg.history[i];
-        App.addHistoryChip(App.actionName(h.a1) + '/' + App.actionName(h.a2), '');
+        var mine = msg.seat === 0 ? h.a1 : h.a2;
+        var theirs = msg.seat === 0 ? h.a2 : h.a1;
+        App.addHistoryChip('回合' + (i + 1) + '　你' + App.actionName(mine) + '，对手' + App.actionName(theirs), '');
       }
     }
 
@@ -729,7 +705,7 @@
 
     // playing：同步本回合状态
     state.acted = msg.acted[msg.seat];
-    App.setText('round-label', '回合 ' + msg.round + '/' + Game.MAX_ROUNDS);
+    App.setText('round-label', '回合' + msg.round);
     App.hide('banner');
     App.hide('my-action');
     App.hide('opp-action');

@@ -99,7 +99,7 @@
     g = g || game;
     g.playerActed = false;
     g.compAction = -1;
-    App.setText('round-label', '回合 ' + g.round + '/' + Game.MAX_ROUNDS);
+    App.setText('round-label', '回合' + g.round);
     App.updateBullets('my-bullets-num', 'my-bullets-icons', g.b1);
     App.updateBullets('opp-bullets-num', 'opp-bullets-icons', g.b2);
     App.hide('my-action');
@@ -150,7 +150,7 @@
       App.updateBullets('opp-bullets-num', 'opp-bullets-icons', g.b2);
 
       if (outcome === 'continue') {
-        App.addHistoryChip(App.actionName(pch) + '/' + App.actionName(cch), '');
+        App.addHistoryChip('回合' + g.round + '　你' + App.actionName(pch) + '，电脑' + App.actionName(cch), '');
         if (g.round >= Game.MAX_ROUNDS) {
           // 回合上限平局（C++ 语义：非终止结算后检查）
           g.over = true;
@@ -166,7 +166,7 @@
       } else {
         g.over = true;
         var cls = outcome === 'win' ? 'win' : outcome === 'lose' ? 'lose' : 'draw';
-        App.addHistoryChip(pch + '/' + cch, cls);
+        App.addHistoryChip('回合' + g.round + '　你' + App.actionName(pch) + '，电脑' + App.actionName(cch), cls);
         // 结束原因区分：瞬间胜负（开枪打中装弹）vs 子弹数先到 5
         var reason;
         if (outcome === 'win') {

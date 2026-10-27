@@ -54,6 +54,7 @@
     App.setText('opp-money', mc); App.setText('my-money', mh);
   }
   function setup() {
+    if (current) current.historyRound = 1;
     App.setActiveMode('ai-match'); App.showScreen('game');
     App.setText('game-mode-label', '完整 · 人机对战'); App.setText('opponent-name', '电脑');
     App.setText('btn-leave-game', '结束对局，返回菜单');
@@ -69,7 +70,8 @@
     g.busy = false;
     App.hide('opp-action'); App.hide('my-action'); App.hide('banner');
     panels(s.bc, s.bh, s.mc, s.mh);
-    App.setText('round-label', '第 ' + s.round + '/5 轮 · ' + (s.phase === 'pick' ? '选弹' : '回合 ' + s.turn + '/100'));
+    if (g.historyRound !== s.round) { App.clearHistory(); g.historyRound = s.round; }
+    App.setText('round-label', '第' + s.round + '/5轮\n' + (s.phase === 'pick' ? '选择初始子弹' : '回合' + s.turn));
     App.setText('opp-status', '电脑已选好，等待你选择'); App.setText('my-status', '');
     if (s.phase === 'pick') {
       App.hide('actions'); App.show('pick-area');
@@ -88,7 +90,7 @@
   }
   async function enter() {
     if (current) return;
-    var g = { busy: true, events: [], data: null, timer: null };
+    var g = { busy: true, events: [], data: null, timer: null, historyRound: 1 };
     current = g; setup();
     try {
       var value = await request('session', { memory: memory, requestId: requestId() }, 'POST', 5);
@@ -113,7 +115,7 @@
       App.setText('opp-status', ''); App.setText('my-status', '');
       App.showBadge('my-action', pick ? '初始 ' + r.human + ' 颗' : names[r.human], pick ? '' : App.actionBadgeClass(chars[r.human]));
       App.showBadge('opp-action', pick ? '初始 ' + r.computer + ' 颗' : names[r.computer], pick ? '' : App.actionBadgeClass(chars[r.computer]));
-      App.addHistoryChip('轮' + r.before.round + (pick ? '选弹' : '·' + r.before.turn) + ' 你' + (pick ? r.human : names[r.human]) + '/电脑' + (pick ? r.computer : names[r.computer]));
+      if (!pick) App.addHistoryChip('回合' + r.before.turn + '　你' + names[r.human] + '，电脑' + names[r.computer]);
       if (settle.round_end) {
         panels(settle.final_bullets[0], settle.final_bullets[1], settle.money[0], settle.money[1]);
         App.showBanner('本轮' + (settle.winner === 2 ? '你胜' : settle.winner === 1 ? '电脑胜' : '平局') + '，结算后你 ' + settle.money[1] + ' / 电脑 ' + settle.money[0] + ' 筹码');

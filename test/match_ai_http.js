@@ -41,7 +41,7 @@ async function main() {
     assert.equal((await api('session',{requestId:randomUUID(),memory:{bad:true}})).status,400);
     const create = { requestId: randomUUID() };
     let game = await ok('session',create);
-    assert.equal(game.policy,'full-temporal3-belief005-v1');
+    assert.equal(game.policy,'full-temporal3-belief005-recent10-v1');
     assert.equal(game.snapshot.credit,.0199);
     assert.deepEqual(await ok('session',create),game,'create retry must not allocate another session');
     privateReady(game);

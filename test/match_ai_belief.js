@@ -9,7 +9,7 @@ async function main() {
   let decisions = 0, rounds = 0;
   try {
     const session = engine.createSession({seed:41}), other = engine.createSession({seed:42}), isolated = other.exportMemory();
-    assert.equal(engine.policy,'full-temporal3-belief005-v1');
+    assert.equal(engine.policy,'full-temporal3-belief005-recent10-v1');
     for(let game=0;game<3;game++) {
       while(!session.getState().over) {
         const before = session.getState(), saved = session.exportMemory();
@@ -20,9 +20,11 @@ async function main() {
         const legal=Rules.actions(before.state)[1],human=legal[decisions%legal.length],r=session.reveal(ready.decisionId,human);
         assert.equal(r.decision.policy,engine.policy);assert.equal(r.decision.diagnostics.creditBefore,before.credit);
         assert(r.decision.diagnostics.maxLocalLoss<=before.credit+1e-10);assert.equal(r.risk.after,session.getState().credit);
+        assert(r.decision.diagnostics.recentWeight>=0&&r.decision.diagnostics.recentWeight<=1);
         const memory=session.exportMemory();assert.equal(memory.belief.observations,++decisions);assert.equal(memory.observations,decisions);
         assert.equal(memory.belief.plays,saved.belief.plays+Number(before.state.phase==='play'));
         memory.belief.weights.forEach((w,i)=>assert(w>=.005*Beliefs.PRIOR[i]-1e-15));
+        assert(memory.belief.recentWeight>=Beliefs.RECENT_SHARE*Beliefs.RECENT_PRIOR-1e-15);
         assert(Buffer.byteLength(JSON.stringify({requestId:'0'.repeat(36),memory}))<32768);
         assert.throws(()=>session.reveal(ready.decisionId,human));assert.deepEqual(session.exportMemory(),memory);
         if(r.settlement.round_end)rounds++;
@@ -36,8 +38,12 @@ async function main() {
       const migrated=engine.createSession({memory:expected}).exportMemory();
       assert.deepEqual(migrated.events,expected.events);assert.equal(migrated.observations,expected.observations);
       assert.deepEqual(migrated.belief.weights,Array.from(Beliefs.PRIOR));
+      assert.equal(migrated.belief.recentWeight,Beliefs.RECENT_PRIOR);
+      const legacy=JSON.parse(JSON.stringify(saved));legacy.belief.policy=Beliefs.LEGACY_MEMORY_POLICY;delete legacy.belief.recentWeight;
+      const upgraded=engine.createSession({memory:legacy}).exportMemory();assert.deepEqual(upgraded.belief.weights,saved.belief.weights);
+      assert.equal(upgraded.belief.recentWeight,Beliefs.RECENT_PRIOR);assert.equal(upgraded.belief.policy,Beliefs.MEMORY_POLICY);
       const p=restored.prepareDecision();restored.reveal(p.decisionId,1);assert.deepEqual(session.exportMemory(),saved,'restored session must not alias original');
-      for(const mutation of [b=>b.weights.pop(),b=>b.weights.fill(0),b=>b.weights[0]=NaN,b=>b.weights[0]=-1,b=>b.plays=-1,b=>b.observations++,b=>b.policy='unknown']) {
+      for(const mutation of [b=>b.weights.pop(),b=>b.weights.fill(0),b=>b.weights[0]=NaN,b=>b.weights[0]=-1,b=>b.plays=-1,b=>b.observations++,b=>delete b.recentWeight,b=>b.recentWeight=NaN,b=>b.recentWeight=2,b=>b.policy='unknown']) {
         const bad=JSON.parse(JSON.stringify(saved));mutation(bad.belief);assert.throws(()=>engine.createSession({memory:bad}),/belief memory/);
       }
       assert.throws(()=>engine.createSession({memory:{...saved,belief:null}}),/belief memory/);

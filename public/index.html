@@ -8,6 +8,7 @@
 </head>
 <body>
   <div id="app">
+    <button class="music-toggle" id="btn-music" type="button" aria-pressed="false">♫ 音乐</button>
 
     <!-- 主菜单 -->
     <section id="screen-menu" class="screen">
@@ -19,13 +20,13 @@
         <button class="big-btn" id="btn-mode-pvp-match">完整 · 玩家对决</button>
         <button class="big-btn" id="btn-mode-ai-match">完整 · 人机对战</button>
       </div>
-      <button class="link-btn" id="btn-rules">游戏规则</button>
-      <button class="link-btn" id="btn-history">对局记录</button>
-      <!-- 临时：导出对战日志按钮（测试后删除） -->
-      <button class="link-btn" id="btn-export-log">导出对战日志（临时）</button>
-      <button class="link-btn" id="btn-export-match-log">导出完整人机诊断</button>
-      <!-- 临时结束 -->
-      <p class="footnote" id="ai-memory-note"></p>
+      <p class="footnote menu-stats" id="ai-memory-note"></p>
+      <div class="utility-links">
+        <button class="link-btn" id="btn-rules">游戏规则</button>
+        <button class="link-btn" id="btn-history">对局记录</button>
+        <button class="link-btn" id="btn-export-log">导出对战日志</button>
+        <button class="link-btn" id="btn-export-match-log">导出完整人机诊断</button>
+      </div>
       <p class="footnote" id="version-note"></p>
     </section>
 
@@ -57,35 +58,37 @@
     <section id="screen-game" class="screen hidden">
       <div class="top-bar">
         <span id="game-mode-label">人机对战</span>
-        <span id="round-label">回合 1/100</span>
       </div>
 
-      <div class="bullet-panel" id="opponent-panel">
-        <div class="panel-name" id="opponent-name">电脑</div>
-        <div class="bullets-row">
-          <span class="bullets-num" id="opp-bullets-num">0</span>
-          <span class="bullet-icons" id="opp-bullets-icons"></span>
+      <div class="duel-row">
+        <div class="bullet-panel" id="opponent-panel">
+          <div class="panel-name" id="opponent-name">电脑</div>
+          <div class="bullets-row">
+            <span class="bullets-num" id="opp-bullets-num">0</span>
+            <span class="bullet-icons" id="opp-bullets-icons"></span>
+          </div>
+          <div class="money-row hidden" id="opp-money-row"><span class="money-label">筹码</span><span class="money-num" id="opp-money">50</span></div>
+          <div class="action-badge hidden" id="opp-action"></div>
+          <div class="panel-status" id="opp-status"></div>
         </div>
-        <div class="money-row hidden" id="opp-money-row"><span class="money-label">筹码</span><span class="money-num" id="opp-money">50</span></div>
-        <div class="action-badge hidden" id="opp-action"></div>
-        <div class="panel-status" id="opp-status"></div>
+        <div class="versus">VS</div>
+        <div class="bullet-panel" id="player-panel">
+          <div class="panel-name">你</div>
+          <div class="bullets-row">
+            <span class="bullets-num" id="my-bullets-num">0</span>
+            <span class="bullet-icons" id="my-bullets-icons"></span>
+          </div>
+          <div class="money-row hidden" id="my-money-row"><span class="money-label">筹码</span><span class="money-num" id="my-money">50</span></div>
+          <div class="action-badge hidden" id="my-action"></div>
+          <div class="panel-status" id="my-status"></div>
+        </div>
       </div>
 
       <div class="mid-area">
+        <div class="round-label" id="round-label">回合1</div>
         <div class="banner hidden" id="banner"></div>
         <div class="countdown hidden" id="countdown"></div>
-        <div class="history-strip" id="history-strip"></div>
-      </div>
-
-      <div class="bullet-panel" id="player-panel">
-        <div class="panel-name">你</div>
-        <div class="bullets-row">
-          <span class="bullets-num" id="my-bullets-num">0</span>
-          <span class="bullet-icons" id="my-bullets-icons"></span>
-        </div>
-        <div class="money-row hidden" id="my-money-row"><span class="money-label">筹码</span><span class="money-num" id="my-money">50</span></div>
-        <div class="action-badge hidden" id="my-action"></div>
-        <div class="panel-status" id="my-status"></div>
+        <div class="history-strip" id="history-strip" aria-label="本轮对战记录"></div>
       </div>
 
       <div class="pick-area hidden" id="pick-area">
@@ -189,6 +192,7 @@
   <script src="js/mode-ai-match.js"></script>
   <script src="js/stats.js"></script>
   <script src="js/mode-pvp.js"></script>
+  <script src="js/music.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

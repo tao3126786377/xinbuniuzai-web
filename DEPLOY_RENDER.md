@@ -1,4 +1,4 @@
-# 更新原 Render 网址（v0.16.0）
+# 更新原 Render 网址（v0.17.0）
 
 项目根目录《工作记录.md》的 2026-09-02 部署记录确认：
 
@@ -11,7 +11,7 @@
 
 ## 本次更新内容
 
-完整人机升级为 `full-temporal3-belief005-v1`：原网络与 814 个行为假设结合，每次公开动作后更新后验并回补 0.5% 先验，三步模拟也考虑后续学习。动态整局风险余额保持原样，最坏期望得分损失仍低于 0.02。新后验支持刷新后的新会话恢复；旧记忆保留公开历史。快速模式与联机规则不变。取舍和验证见 [发布说明](RELEASE_AI_V0_16.md)。
+完整人机升级为 `full-temporal3-belief005-recent10-v1`：原网络、814 个行为假设与固定遗忘继续保留，新增初始占比 10% 的动态近期公开动作层。动态整局风险余额保持原样，最坏期望得分损失仍低于 0.02；旧后验记忆可以迁移。网页同时更新菜单、对局滚动记录和手动背景音乐。取舍和验证见 [发布说明](RELEASE_AI_V0_17.md)。
 
 完整模式计算在 Node 后台线程执行。浏览器只接收状态和已揭示动作，不下载均衡表。玩家记忆与完成对局记录保存在当前浏览器，和快速模式分开。退出不计入胜负；刷新页面或服务器重启后，需要重新开局，已保存的行为记忆保留。
 
@@ -26,7 +26,7 @@ npm run build
 npm start
 ```
 
-打开 <http://localhost:3000>，主菜单应显示 `网页版 v0.16.0`，进入“完整 · 人机对战”。如 3000 端口正在运行旧服务，先在旧终端按 Ctrl+C 退出，再重新启动。
+打开 <http://localhost:3000>，主菜单应显示 `网页版 v0.17.0`，进入“完整 · 人机对战”。如 3000 端口正在运行旧服务，先在旧终端按 Ctrl+C 退出，再重新启动。
 
 本次新增 `node test/match_ai_belief.js`；页面与 HTTP 检查为 `npm run test:match-web`。原快速模式检查为 `npm run test:ai`；原联机检查为 `node test/pvp_test.js` 和 `node test/match_test.js`。
 
@@ -59,7 +59,7 @@ Environment 保留 `ROOM_CODE_LENGTH=5`、`ALLOW_NO_ORIGIN=false`。无需 Pytho
 git status --short
 git add lib/match-ai/index.js lib/match-ai/belief.js lib/match-ai/credit.js lib/match-ai/worker.js lib/match-ai/http.js lib/match-ai/README.md lib/match-ai/RELEASE_BELIEF_VALIDATION.json public/js/app.js test/match_ai_belief.js test/match_ai_http.js README.md DEPLOY_RENDER.md RELEASE_AI_V0_16.md 完整模式AI模型说明.md
 git diff --cached --stat
-git commit -m "发布 v0.16.0 完整模式固定遗忘策略与后验记忆"
+git commit -m "发布 v0.17.0 界面音乐与动态近期适应"
 git push origin main
 ```
 
@@ -74,9 +74,9 @@ git push origin main
 在 Render → Events/Logs 等待最新部署显示 `Live`。若自动部署没有开启，在现有服务中选 **Manual Deploy → Deploy latest commit**。
 
 - 构建日志：`npm run build` 成功；首次准备资源会显示“模型资源已准备就绪”。
-- 运行日志：`[完整人机] full-temporal3-belief005-v1 已就绪`。
+- 运行日志：`[完整人机] full-temporal3-belief005-recent10-v1 已就绪`。
 - 打开 <https://xinbuniuzai-web.onrender.com/api/match-ai/health>，应得到 `{"ready":true}`。
-- 刷新原游戏网址（必要时强制刷新），确认版本为 `v0.16.0`；完整人机会话响应的 `policy` 为 `full-temporal3-belief005-v1`，公开记忆中含 `belief.policy: fixed-share-005-v1`。
+- 刷新原游戏网址（必要时强制刷新），确认版本为 `v0.17.0`；完整人机会话响应的 `policy` 为 `full-temporal3-belief005-recent10-v1`，公开记忆中含 `belief.policy: fixed-share-005-recent10-v1`。
 - 玩一次完整人机：选弹、出招、轮末结算、再来一局；返回菜单能看到完整模式统计。
 - 用原来的房间方式验证一次玩家对决。
 

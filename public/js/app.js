@@ -82,7 +82,7 @@
     chip.className = 'history-chip' + (cls ? ' ' + cls : '');
     chip.textContent = text;
     el.appendChild(chip);
-    el.scrollLeft = el.scrollWidth;
+    el.scrollTop = el.scrollHeight;
   }
   function clearHistory() { $('history-strip').textContent = ''; }
 
@@ -145,6 +145,8 @@
   });
 
   $('btn-mode-ai-match').addEventListener('click', function () { ModeMatchAI.enter(); });
+
+  $('btn-music').addEventListener('click', function () { GameMusic.toggle(); });
 
   $('btn-mode-pvp').addEventListener('click', function () {
     activeMode = 'pvp';
@@ -319,8 +321,8 @@
 
   // ==================== 启动 ====================
   showScreen('menu');
-  setText('version-note', '网页版 v0.16.0');
-  console.log('西部牛仔 网页版 v0.16.0');
+  setText('version-note', '网页版 v0.17.0');
+  console.log('西部牛仔 网页版 v0.17.0');
 
   // 页面加载：若存在未完成的 PvP 会话则静默重进（刷新/杀后台恢复）
   ModePvp.init();
