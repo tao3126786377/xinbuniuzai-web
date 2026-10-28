@@ -140,6 +140,7 @@ npm start
 | `ROOM_TTL_MS` | `600000` | 空房间清理时限，毫秒 |
 | `ALLOWED_ORIGINS` | 空 | 额外允许的 WebSocket Origin，逗号分隔 |
 | `ALLOW_NO_ORIGIN` | `true` | 是否允许不带 Origin 的连接 |
+| `MINIGAME_APP_ID` | 空 | 允许访问 HTTP API 的微信小游戏 AppID；通过微信固定 Referer 精确校验 |
 
 例如，PowerShell 中可用 `$env:PORT=8080` 设置端口，再运行 `npm start`；Linux/macOS 可使用 `PORT=8080 npm start`。
 

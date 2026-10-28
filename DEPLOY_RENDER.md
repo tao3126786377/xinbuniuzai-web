@@ -82,6 +82,26 @@ git push origin main
 
 Render 免费服务仍可能冷启动，具体限制以 [免费服务说明](https://render.com/docs/free) 为准。本地请求耗时不能代表 Render 实际速度；首次上线后观察请求延迟和实例内存即可，暂不需要购买更高规格。
 
+## 5. 微信小游戏与训练数据配置
+
+小游戏前端由微信开发者工具上传。Render 只运行完整 AI 和玩家联机；训练数据写入腾讯 CloudBase，不使用 Render 磁盘。
+
+在 Render 增加 `MINIGAME_APP_ID`，值与 `minigame/project.config.json` 一致。微信公众平台还需要把 `https://xinbuniuzai-web.onrender.com` 加入 request 合法域名。微信请求的 Referer 由平台固定生成；服务端只接受该 AppID 对应的 `servicewechat.com` 或 `appservice.wx.com` Referer，WebSocket 仍使用原 Origin 策略。
+
+策略记忆与训练数据使用 CloudBase 环境 `cloud1-d1gclwenrc6f659c0`，两类授权相互独立：
+
+1. 建立 `adaptive_memory` 与 `training_matches`，权限都设为“仅管理员可读写”。
+2. 分别上传部署 `adaptive-memory` 和 `training-data`，选择“云端安装依赖”。
+3. 分别配置 `ADAPTIVE_HASH_SECRET` 和 `TRAINING_HASH_SECRET`；使用两个不同的高强度随机值，不要写入代码、Git、截图或聊天。
+4. `adaptive_memory` 只用于恢复跨局电脑策略，不进入训练导出；`training_matches` 只在玩家另行允许后保存完成对局。
+5. 两个云函数都只在内存中读取微信身份并生成不同玩家哈希，数据库不保存 OpenID 原值、昵称或头像；“数据与隐私”中可分别关闭并删除。
+
+本地验证客户端调用顺序：
+
+```bash
+node test/minigame_clients.js
+```
+
 ## 常见问题
 
 - **原网页还是旧版**：检查 Render 最新部署是否对应刚推送的提交、Branch 是否为 `main`，然后强制刷新页面。

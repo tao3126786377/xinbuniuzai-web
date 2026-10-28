@@ -2,3 +2,4 @@ node_modules/
 *.log
 log*.txt
 .runtime/
+minigame/project.private.config.json

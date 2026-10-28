@@ -12,7 +12,7 @@ async function main() {
   const port = socket.address().port; await new Promise(resolve => socket.close(resolve));
   const base = 'http://127.0.0.1:'+port;
   const server = spawn(process.execPath,['server.js'],{ cwd: path.join(__dirname,'..'),
-    env: { ...process.env, PORT: String(port), ALLOW_NO_ORIGIN: 'false' }, stdio: ['ignore','pipe','pipe'] });
+    env: { ...process.env, PORT: String(port), ALLOW_NO_ORIGIN: 'false', MINIGAME_APP_ID: 'wx-test-app' }, stdio: ['ignore','pipe','pipe'] });
   let logs = ''; server.stdout.on('data',b => logs += b); server.stderr.on('data',b => logs += b);
   async function api(route,data,method = 'POST',origin = base) {
     const res = await fetch(base+'/api/match-ai/'+route,{ method,
@@ -30,13 +30,21 @@ async function main() {
   }
   try {
     let healthy = false;
-    for (let n = 0; n < 150; n++) {
+    for (let n = 0; n < 300; n++) {
       try { if ((await fetch(base+'/api/match-ai/health')).ok) { healthy = true; break; } } catch (_) {}
       await sleep(100);
     }
     assert.ok(healthy,logs);
     assert.match(await (await fetch(base)).text(),/mode-ai-match\.js/);
     assert.equal((await api('session',{requestId:randomUUID()},'POST','https://evil.example')).status,403);
+    let mini = await fetch(base+'/api/match-ai/session',{ method:'POST', headers:{
+      Referer:'https://servicewechat.com/wx-test-app/devtools/page-frame.html','Content-Type':'application/json'
+    },body:JSON.stringify({memory:{bad:true}}) });
+    assert.equal(mini.status,400,'matching WeChat AppID referer should reach API validation');
+    mini = await fetch(base+'/api/match-ai/session',{ method:'POST', headers:{
+      Referer:'https://servicewechat.com/wx-other/devtools/page-frame.html','Content-Type':'application/json'
+    },body:JSON.stringify({requestId:randomUUID()}) });
+    assert.equal(mini.status,403,'other WeChat AppID referer must be rejected');
     assert.equal((await api('session',{garbage:'x'.repeat(34000)})).status,413);
     assert.equal((await api('session',{requestId:randomUUID(),memory:{bad:true}})).status,400);
     const create = { requestId: randomUUID() };

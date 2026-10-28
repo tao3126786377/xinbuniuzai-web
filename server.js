@@ -9,7 +9,8 @@
  *  - 安全：maxPayload 4KB、Origin 校验、令牌桶限流、防路径穿越、无自由文本、零磁盘写入。
  *
  * 环境变量：PORT / ROUND_TIMEOUT_MS / GRACE_MS / TIMEOUT_STRIKES / MAX_ROOMS /
- *          MAX_ROOMS_PER_IP / ROOM_TTL_MS / ROOM_CODE_LENGTH / ALLOWED_ORIGINS / ALLOW_NO_ORIGIN
+ *          MAX_ROOMS_PER_IP / ROOM_TTL_MS / ROOM_CODE_LENGTH / ALLOWED_ORIGINS / ALLOW_NO_ORIGIN /
+ *          MINIGAME_APP_ID
  *
  * 一局模式（mode='match'）：最多 5 轮筹码对决，每轮先保密选初始子弹 0~2（选弹与出招
  * 共享 60 秒限时与连击计数），轮末按子弹差 x 结算 y=(i+1)(j+1)x（劣势方胜双倍），
@@ -44,6 +45,7 @@ const TEST_BULLET_CHOICE = (TEST_BULLET_CHOICE_RAW >= 0 && TEST_BULLET_CHOICE_RA
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
   .split(',').map(s => s.trim()).filter(Boolean);
 const ALLOW_NO_ORIGIN = (process.env.ALLOW_NO_ORIGIN || 'true') !== 'false';
+const MINIGAME_APP_ID = process.env.MINIGAME_APP_ID || '';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
 // ==================== 静态文件服务（防路径穿越） ====================
@@ -868,7 +870,7 @@ function invalidMsg(ws) {
 // ==================== WebSocket 服务 ====================
 const wss = new WebSocketServer({ noServer: true, maxPayload: 4096 });
 
-const matchAI = require('./lib/match-ai/http').createHandler({ originAllowed, clientIp });
+const matchAI = require('./lib/match-ai/http').createHandler({ originAllowed: apiOriginAllowed, clientIp });
 const server = http.createServer((req, res) => {
   if (!matchAI.handle(req, res)) serveStatic(req, res);
 });
@@ -881,6 +883,21 @@ function originAllowed(req) {
     if (u.host === req.headers.host) return true;
     return ALLOWED_ORIGINS.indexOf(origin) !== -1 || ALLOWED_ORIGINS.indexOf(u.host) !== -1;
   } catch (e) {
+    return false;
+  }
+}
+
+function apiOriginAllowed(req) {
+  if (originAllowed(req)) return true;
+  if (!MINIGAME_APP_ID) return false;
+  try {
+    const referer = new URL(req.headers.referer || '');
+    const wechatHost = referer.hostname === 'servicewechat.com'
+      || referer.hostname === 'appservice.wx.com';
+    return referer.protocol === 'https:'
+      && wechatHost
+      && referer.pathname.startsWith(`/${MINIGAME_APP_ID}/`);
+  } catch (error) {
     return false;
   }
 }
