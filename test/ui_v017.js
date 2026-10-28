@@ -9,6 +9,7 @@ var html = fs.readFileSync(path.join(root, 'public', 'index.html'), 'utf8');
 var css = fs.readFileSync(path.join(root, 'public', 'styles.css'), 'utf8');
 var app = fs.readFileSync(path.join(root, 'public', 'js', 'app.js'), 'utf8');
 var music = fs.readFileSync(path.join(root, 'public', 'js', 'music.js'), 'utf8');
+var server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
 var piano = path.join(root, 'public', 'assets', 'audio', 'the-entertainer.mp3');
 
 var modeIds = [
@@ -42,6 +43,7 @@ assert(/\.history-strip\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?overflow-y:
 assert(!css.includes('#d09a56 47% 49%'), 'hard horizon color split remains');
 assert(music.includes("new Audio('assets/audio/the-entertainer.mp3')"), 'piano recording not configured');
 assert(fs.statSync(piano).size > 1000000, 'piano recording is missing or incomplete');
+assert(server.includes("'.mp3': 'audio/mpeg'"), 'MP3 MIME type is not configured');
 assert(app.includes('网页版 v0.17.0'), 'page version is not v0.17.0');
 
 console.log('v0.17 UI static checks passed');

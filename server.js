@@ -54,6 +54,7 @@ const MIME = {
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
+  '.mp3': 'audio/mpeg',
   '.ico': 'image/x-icon',
   '.txt': 'text/plain; charset=utf-8'
 };
