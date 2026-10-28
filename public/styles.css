@@ -1,4 +1,4 @@
-/* 西部牛仔 · 手机优先样式（西部主题棕金色调） */
+/* 西部牛仔 · 手机优先样式（深夜西部暖色调） */
 
 :root {
   --bg: #142238;
@@ -20,8 +20,10 @@
 
 html, body {
   height: 100%;
-  background: radial-gradient(circle at 50% 18%, rgba(217, 121, 53, 0.34), transparent 27%),
-    linear-gradient(180deg, var(--bg) 0 47%, #d09a56 47% 49%, #140e0b 82%);
+  background:
+    radial-gradient(ellipse at 50% 24%, rgba(208, 105, 47, 0.28), transparent 43%),
+    radial-gradient(ellipse at 50% 112%, rgba(126, 65, 30, 0.30), transparent 57%),
+    linear-gradient(155deg, #111e32 0%, #171a25 48%, #21130f 100%);
   color: var(--text);
   font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
   -webkit-tap-highlight-color: transparent;
@@ -30,11 +32,9 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  inset: auto 0 0;
-  height: 27%;
+  inset: 0;
   pointer-events: none;
-  background: linear-gradient(155deg, transparent 0 45%, #090909 46% 56%, transparent 57%) bottom/45% 100% repeat-x;
-  opacity: 0.66;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(3, 5, 9, 0.42) 100%);
 }
 
 #app {

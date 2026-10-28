@@ -8,6 +8,8 @@ var root = path.join(__dirname, '..');
 var html = fs.readFileSync(path.join(root, 'public', 'index.html'), 'utf8');
 var css = fs.readFileSync(path.join(root, 'public', 'styles.css'), 'utf8');
 var app = fs.readFileSync(path.join(root, 'public', 'js', 'app.js'), 'utf8');
+var music = fs.readFileSync(path.join(root, 'public', 'js', 'music.js'), 'utf8');
+var piano = path.join(root, 'public', 'assets', 'audio', 'the-entertainer.mp3');
 
 var modeIds = [
   'btn-mode-ai',
@@ -37,6 +39,9 @@ assert(html.includes('<script src="js/music.js"></script>'), 'music script not l
 assert(!html.includes('正午决斗'), 'obsolete duel title remains');
 assert(/\.history-strip\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?overflow-y:\s*auto;/.test(css),
   'round history must be a vertical scroll area');
+assert(!css.includes('#d09a56 47% 49%'), 'hard horizon color split remains');
+assert(music.includes("new Audio('assets/audio/the-entertainer.mp3')"), 'piano recording not configured');
+assert(fs.statSync(piano).size > 1000000, 'piano recording is missing or incomplete');
 assert(app.includes('网页版 v0.17.0'), 'page version is not v0.17.0');
 
 console.log('v0.17 UI static checks passed');
