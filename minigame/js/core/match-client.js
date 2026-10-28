@@ -48,7 +48,11 @@ async function request(route, data, method, retries, onRetry) {
 }
 
 function requestId() {
-  return `match_${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}_${Math.random().toString(36).slice(2)}`;
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (character) => {
+    const random = Math.floor(Math.random() * 16);
+    const value = character === 'y' ? (random & 3) | 8 : random;
+    return value.toString(16);
+  });
 }
 
 class MatchClient {

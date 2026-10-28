@@ -278,6 +278,7 @@ export default class Main {
     const state = value.snapshot.state;
     const revealed = this.matchReveal;
     const before = revealed ? revealed.before : state;
+    const displayState = state || before;
     const pick = before.phase === 'pick';
     const settlement = revealed && revealed.settlement;
     const top = Math.max(SAFE_TOP + 10, 36);
@@ -293,10 +294,10 @@ export default class Main {
       'bold',
     );
 
-    let computerBullets = state.bc;
-    let playerBullets = state.bh;
-    let computerMoney = state.mc;
-    let playerMoney = state.mh;
+    let computerBullets = displayState.bc;
+    let playerBullets = displayState.bh;
+    let computerMoney = displayState.mc;
+    let playerMoney = displayState.mh;
     if (settlement && settlement.round_end) {
       computerBullets = settlement.final_bullets[0];
       playerBullets = settlement.final_bullets[1];
@@ -354,7 +355,7 @@ export default class Main {
     const enabled = !this.matchBusy && !this.matchError && value.ready && !value.snapshot.over;
     const labels = pick ? ['0 颗', '1 颗', '2 颗'] : ACTION_NAMES;
     for (let action = 0; action < 3; action++) {
-      const legal = pick || Game.isFeasible(state.bh, action);
+      const legal = pick || Game.isFeasible(displayState.bh, action);
       this.drawButton(
         `match-action-${action}`,
         labels[action],
