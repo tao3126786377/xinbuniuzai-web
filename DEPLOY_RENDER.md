@@ -86,7 +86,7 @@ Render 免费服务仍可能冷启动，具体限制以 [免费服务说明](htt
 
 小游戏前端由微信开发者工具上传。Render 只运行完整 AI 和玩家联机；训练数据写入腾讯 CloudBase，不使用 Render 磁盘。
 
-在 Render 增加 `MINIGAME_APP_ID`，值与 `minigame/project.config.json` 一致。微信公众平台还需要把 `https://xinbuniuzai-web.onrender.com` 加入 request 合法域名。微信请求的 Referer 由平台固定生成；服务端只接受该 AppID 对应的 `servicewechat.com` 或 `appservice.wx.com` Referer，WebSocket 仍使用原 Origin 策略。
+在 Render 增加 `MINIGAME_APP_ID`，值与 `minigame/project.config.json` 一致。微信公众平台还需要把 `https://xinbuniuzai-web.onrender.com` 加入 request 合法域名，并把 `wss://xinbuniuzai-web.onrender.com` 加入 socket 合法域名。微信请求的 Referer 由平台固定生成；HTTP 与 WebSocket 均只接受该 AppID 对应的 `servicewechat.com` 或 `appservice.wx.com` Referer，网页端仍使用原 Origin 策略。
 
 策略记忆与训练数据使用 CloudBase 环境 `cloud1-d1gclwenrc6f659c0`，两类授权相互独立：
 

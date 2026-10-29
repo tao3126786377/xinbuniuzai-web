@@ -40,7 +40,8 @@ class C {
   connect(opts) {
     const self = this;
     return new Promise((resolve, reject) => {
-      self.ws = new WebSocket('ws://127.0.0.1:' + PORT, opts || {});
+      self.ws = new WebSocket('ws://127.0.0.1:' + PORT,
+        opts || { origin: 'http://127.0.0.1:' + PORT });
       self.ws.on('message', raw => {
         let msg;
         try { msg = JSON.parse(raw); } catch (e) { return; }
@@ -88,6 +89,9 @@ class C {
   countType(type) {
     return this.history.filter(m => m.type === type).length;
   }
+  close() {
+    if (this.ws) this.ws.close();
+  }
 }
 
 function outcomeName(winner) {
@@ -104,7 +108,9 @@ async function main() {
       GRACE_MS: String(GRACE_MS),
       TIMEOUT_STRIKES: '3',
       ROUND_CAP_OVERRIDE: String(ROUND_CAP),
-      TEST_TIMEOUT_ACTION: 'i'
+      TEST_TIMEOUT_ACTION: 'i',
+      ALLOW_NO_ORIGIN: 'false',
+      MINIGAME_APP_ID: 'wx-test-app'
     }),
     stdio: ['ignore', 'ignore', 'pipe']
   });
@@ -406,6 +412,26 @@ async function testRoundCap() {
 /* ---------- 安全 ---------- */
 async function testSecurity() {
   console.log('== 安全：Origin / 限流 / 超大消息 ==');
+  const mini = new C('MINI');
+  await mini.connect({ headers: {
+    Referer: 'https://servicewechat.com/wx-test-app/devtools/page-frame.html'
+  } });
+  mini.send({ type: 'ping' });
+  check((await mini.waitFor('pong')).type === 'pong', '正确 AppID Referer 的小游戏 WS 升级通过');
+  mini.close();
+
+  let wrongAppRejected = false;
+  try {
+    await new Promise((resolve, reject) => {
+      const ws = new WebSocket('ws://127.0.0.1:' + PORT, { headers: {
+        Referer: 'https://servicewechat.com/wx-other/devtools/page-frame.html'
+      } });
+      ws.on('open', () => { ws.close(); reject(new Error('open')); });
+      ws.on('error', () => { wrongAppRejected = true; resolve(); });
+    });
+  } catch (e) { /* onerror 已置位 */ }
+  check(wrongAppRejected, '其他 AppID Referer 的小游戏 WS 升级被拒绝');
+
   // 恶意 Origin 拒绝
   let originRejected = false;
   try {

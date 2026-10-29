@@ -903,7 +903,7 @@ function apiOriginAllowed(req) {
 }
 
 server.on('upgrade', (req, socket, head) => {
-  if (!originAllowed(req)) {
+  if (!apiOriginAllowed(req)) {
     socket.write('HTTP/1.1 403 Forbidden\r\n\r\n');
     socket.destroy();
     return;

@@ -4,11 +4,32 @@ const assert = require('assert/strict');
 const storage = new Map();
 const calls = [];
 const cloudCalls = [];
+const sockets = [];
+
+function fakeSocket(options) {
+  const handlers = {};
+  const socket = {
+    options,
+    sent: [],
+    closed: false,
+    onOpen(fn) { handlers.open = fn; },
+    onMessage(fn) { handlers.message = fn; },
+    onClose(fn) { handlers.close = fn; },
+    onError(fn) { handlers.error = fn; },
+    send(value) { this.sent.push(JSON.parse(value.data)); },
+    close() { this.closed = true; if (handlers.close) handlers.close({}); },
+    emitOpen() { handlers.open(); },
+    emitMessage(value) { handlers.message({ data: JSON.stringify(value) }); },
+  };
+  sockets.push(socket);
+  return socket;
+}
 
 global.wx = {
   getStorageSync(key) { return storage.get(key) || ''; },
   setStorageSync(key, value) { storage.set(key, value); },
   removeStorageSync(key) { storage.delete(key); },
+  connectSocket(options) { return fakeSocket(options); },
   request(options) {
     calls.push(options);
     const session = {
@@ -42,6 +63,7 @@ global.wx = {
 
 async function main() {
   const MatchClient = require('../minigame/js/core/match-client');
+  const PvpClient = require('../minigame/js/core/pvp-client');
   const QuickSession = require('../minigame/js/core/quick-session');
   const Adaptive = require('../minigame/js/core/adaptive-client');
   const Training = require('../minigame/js/core/training-client');
@@ -55,6 +77,22 @@ async function main() {
   assert.deepEqual(calls.slice(0, 4).map((call) => call.method), ['POST', 'POST', 'POST', 'DELETE']);
   assert.match(calls[0].data.requestId, /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/);
   assert.equal(calls[1].data.action, 2);
+
+  const pvpMessages = [];
+  const pvp = new PvpClient({ onMessage(value) { pvpMessages.push(value); } });
+  pvp.create('match');
+  const socket = sockets.at(-1);
+  assert.equal(socket.options.url, 'wss://xinbuniuzai-web.onrender.com');
+  socket.emitOpen();
+  assert.deepEqual(socket.sent[0], { type: 'create_room', mode: 'match' });
+  socket.emitMessage({ type: 'room_created', code: '12345', seat: 0, token: 'token-1' });
+  assert.equal(JSON.parse(storage.get(PvpClient.SESSION_KEY)).code, '12345');
+  pvp.send({ type: 'submit_bullets', bullets: 2 });
+  assert.deepEqual(socket.sent.at(-1), { type: 'submit_bullets', bullets: 2 });
+  assert.equal(pvpMessages.at(-1).type, 'room_created');
+  pvp.leave();
+  assert.equal(storage.has(PvpClient.SESSION_KEY), false);
+  assert.equal(socket.closed, true);
 
   let savedQuickLog = '';
   const quick = new QuickSession({ onSave(value) { savedQuickLog = value; } });

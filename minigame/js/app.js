@@ -2,6 +2,7 @@ import './render';
 
 const QuickSession = require('./core/quick-session');
 const MatchClient = require('./core/match-client');
+const PvpClient = require('./core/pvp-client');
 const Adaptive = require('./core/adaptive-client');
 const Training = require('./core/training-client');
 const Game = QuickSession.Game;
@@ -61,6 +62,15 @@ export default class Main {
     this.matchStartedAt = 0;
     this.matchHistoryRound = 1;
     this.matchError = '';
+    this.pvp = null;
+    this.pvpMode = 'single';
+    this.pvpState = null;
+    this.pvpReveal = null;
+    this.pvpEvents = [];
+    this.pvpStatus = '';
+    this.pvpRevealTimer = null;
+    this.pvpReconnectTimer = null;
+    this.pvpPendingGameOver = null;
     this.runId = 0;
     this.adaptiveState = null;
     this.adaptiveConsentPrompt = null;
@@ -80,6 +90,9 @@ export default class Main {
     else if (this.screen === 'privacy') this.drawPrivacy();
     else if (this.screen === 'quick') this.drawQuickGame();
     else if (this.screen === 'match') this.drawMatchGame();
+    else if (this.screen === 'pvp-menu') this.drawPvpMenu();
+    else if (this.screen === 'pvp-lobby') this.drawPvpLobby();
+    else if (this.screen === 'pvp-game') this.drawPvpGame();
     else if (this.screen === 'result') this.drawResult();
   }
 
@@ -368,6 +381,114 @@ export default class Main {
     }
   }
 
+  drawPvpMenu() {
+    const top = Math.max(SAFE_TOP + 10, 36);
+    this.drawButton('pvp-menu-back', '‹ 菜单', 16, top, 76, 38, true);
+    this.drawText(
+      this.pvpMode === 'match' ? '完整 · 好友对决' : '快速 · 好友对决',
+      WIDTH / 2,
+      top + 88,
+      28,
+      '#e07f3a',
+      'center',
+      'bold',
+    );
+    this.drawText(
+      this.pvpMode === 'match' ? '五轮筹码对决，双方同时决策' : '创建房间，把房间号发给好友',
+      WIDTH / 2,
+      top + 130,
+      14,
+      '#c6ad90',
+    );
+    const width = Math.min(330, WIDTH - 48);
+    const x = (WIDTH - width) / 2;
+    this.drawButton('pvp-create', '创建房间', x, top + 190, width, 62, true);
+    this.drawButton('pvp-join', '输入房间号加入', x, top + 268, width, 62, true);
+    this.drawText('房间内不传输昵称、头像或聊天内容', WIDTH / 2, top + 362, 13, '#8f837a');
+  }
+
+  drawPvpLobby() {
+    const state = this.pvpState;
+    const top = Math.max(SAFE_TOP + 10, 36);
+    this.drawButton('pvp-leave', '‹ 离开', 16, top, 76, 38, true);
+    this.drawText('等待好友加入', WIDTH / 2, top + 100, 27, '#e07f3a', 'center', 'bold');
+    this.drawText('房间号', WIDTH / 2, top + 160, 15, '#c6ad90');
+    this.drawText(state && state.code ? state.code : '连接中…', WIDTH / 2, top + 212, 42, '#fff2dc', 'center', 'bold');
+    this.drawText(this.pvpStatus || '正在连接服务器…', WIDTH / 2, top + 278, 14, '#c6ad90');
+    this.drawText('请让好友选择相同模式并输入房间号', WIDTH / 2, top + 326, 13, '#8f837a');
+    if (state && state.code) {
+      const width = Math.min(260, WIDTH - 80);
+      this.drawButton('pvp-copy', '复制房间号', (WIDTH - width) / 2, top + 360, width, 54, true);
+    }
+  }
+
+  drawPvpGame() {
+    const state = this.pvpState;
+    if (!state) return;
+    const top = Math.max(SAFE_TOP + 10, 36);
+    const pick = state.mode === 'match' && state.phase === 'pick';
+    const mySeat = state.seat;
+    const myBullets = mySeat === 0 ? state.b1 : state.b2;
+    const opponentBullets = mySeat === 0 ? state.b2 : state.b1;
+    const myMoney = mySeat === 0 ? state.money[0] : state.money[1];
+    const opponentMoney = mySeat === 0 ? state.money[1] : state.money[0];
+
+    this.drawButton('pvp-leave', '‹ 离开', 16, top, 76, 38, true);
+    const roundText = state.mode === 'match'
+      ? `第${state.matchRound}/5轮　${pick ? '选择初始子弹' : `回合 ${state.round}`}`
+      : `回合 ${state.round}`;
+    this.drawText(roundText, WIDTH / 2 + 32, top + 19, 17, '#fff2dc', 'center', 'bold');
+    this.drawText(`房间 ${state.code}`, WIDTH / 2, top + 47, 12, '#8f837a');
+
+    let myAction = pick ? (state.acted ? `已选择 ${state.myPick} 颗` : '等待选择') : (state.acted ? '已出招' : '等待出招');
+    let opponentAction = state.opponentConnected ? '等待对手' : '对手断线，等待重连';
+    if (this.pvpReveal) {
+      myAction = this.pvpReveal.pick ? `${this.pvpReveal.human} 颗` : ACTION_NAMES[this.pvpReveal.human];
+      opponentAction = this.pvpReveal.pick ? `${this.pvpReveal.opponent} 颗` : ACTION_NAMES[this.pvpReveal.opponent];
+    }
+
+    const gap = 10;
+    const panelWidth = (WIDTH - 36 - gap) / 2;
+    const panelY = top + 76;
+    this.drawPanel('你', myBullets, myAction, 18, panelY, panelWidth, state.mode === 'match' ? myMoney : undefined);
+    this.drawPanel('好友', opponentBullets, opponentAction, 18 + panelWidth + gap, panelY, panelWidth,
+      state.mode === 'match' ? opponentMoney : undefined);
+
+    const historyY = panelY + 150;
+    roundedRect(ctx, 18, historyY, WIDTH - 36, 172, 12);
+    ctx.fillStyle = 'rgba(30, 27, 26, 0.64)';
+    ctx.fill();
+    this.drawText('本轮记录', 32, historyY + 22, 14, '#c6ad90', 'left', 'bold');
+    const history = this.pvpEvents.filter((event) => state.mode !== 'match'
+      || event.matchRound === state.matchRound).slice(-4);
+    if (!history.length) {
+      this.drawText(pick ? '双方选择后一起公开' : '尚未出招', WIDTH / 2, historyY + 76, 14, '#8f837a');
+    } else {
+      history.forEach((event, index) => {
+        const line = `回合${event.round}　你${ACTION_NAMES[event.human]}，好友${ACTION_NAMES[event.opponent]}`;
+        this.drawText(line, 32, historyY + 50 + index * 25, 14, '#fff2dc', 'left');
+      });
+    }
+    if (this.pvpStatus) this.drawText(this.pvpStatus, WIDTH / 2, historyY + 151, 12, '#e07f3a');
+
+    const buttonGap = 8;
+    const buttonWidth = (WIDTH - 36 - buttonGap * 2) / 3;
+    const buttonY = HEIGHT - 96;
+    const labels = pick ? ['0 颗', '1 颗', '2 颗'] : ACTION_NAMES;
+    for (let action = 0; action < 3; action++) {
+      const legal = pick || Game.isFeasible(myBullets, action);
+      this.drawButton(
+        `pvp-action-${action}`,
+        labels[action],
+        18 + action * (buttonWidth + buttonGap),
+        buttonY,
+        buttonWidth,
+        58,
+        state.status === 'playing' && !state.acted && legal,
+      );
+    }
+  }
+
   drawResult() {
     const titles = { win: '你赢了！', lose: '你输了', draw: '平局' };
     const colors = { win: '#e07f3a', lose: '#e8a0a0', draw: '#b0b0c8' };
@@ -376,7 +497,8 @@ export default class Main {
 
     const width = Math.min(320, WIDTH - 48);
     const x = (WIDTH - width) / 2;
-    const againId = this.resultSource === 'match' ? 'match-again' : 'quick-again';
+    const againId = this.resultSource === 'match' ? 'match-again'
+      : this.resultSource === 'pvp' ? 'pvp-again' : 'quick-again';
     this.drawButton(againId, '再来一局', x, HEIGHT * 0.52, width, 58, true);
     this.drawButton('result-menu', '返回主菜单', x, HEIGHT * 0.52 + 72, width, 58, true);
   }
@@ -763,6 +885,425 @@ export default class Main {
     }
   }
 
+  resetPvpState(mode) {
+    if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
+    if (this.pvpReconnectTimer) clearTimeout(this.pvpReconnectTimer);
+    this.pvpRevealTimer = null;
+    this.pvpReconnectTimer = null;
+    this.pvpPendingGameOver = null;
+    this.pvpReveal = null;
+    this.pvpEvents = [];
+    this.pvpStatus = '';
+    this.pvpState = {
+      mode: mode === 'match' ? 'match' : 'single',
+      status: 'connecting',
+      phase: mode === 'match' ? 'pick' : 'play',
+      code: '',
+      seat: 0,
+      b1: 0,
+      b2: 0,
+      round: 1,
+      matchRound: 1,
+      money: [50, 50],
+      acted: false,
+      myPick: null,
+      opponentConnected: true,
+    };
+  }
+
+  enterPvp(mode) {
+    this.pvpMode = mode === 'match' ? 'match' : 'single';
+    this.result = null;
+    this.screen = 'pvp-menu';
+    this.render();
+  }
+
+  makePvpClient(token) {
+    if (this.pvp) this.pvp.close();
+    this.pvp = new PvpClient({
+      onOpen: () => {
+        if (token !== this.runId) return;
+        this.pvpStatus = '已连接，正在进入房间…';
+        this.render();
+      },
+      onMessage: (message) => {
+        if (token === this.runId) this.handlePvpMessage(message);
+      },
+      onClose: () => {
+        if (token !== this.runId || !this.pvpState || this.pvpState.status === 'finished') return;
+        this.pvpState.opponentConnected = false;
+        this.pvpStatus = '连接中断，正在尝试恢复…';
+        this.render();
+        if (this.pvpReconnectTimer) clearTimeout(this.pvpReconnectTimer);
+        this.pvpReconnectTimer = setTimeout(() => {
+          this.pvpReconnectTimer = null;
+          if (token === this.runId && this.pvp && !this.pvp.rejoin()) {
+            this.pvpStatus = '房间已失效，请返回菜单重试';
+            this.render();
+          }
+        }, 1500);
+      },
+      onError: () => {
+        if (token !== this.runId) return;
+        this.pvpStatus = '网络连接异常';
+        this.render();
+      },
+    });
+  }
+
+  createPvp() {
+    const token = ++this.runId;
+    this.resetPvpState(this.pvpMode);
+    this.pvpStatus = '正在创建房间…';
+    this.screen = 'pvp-lobby';
+    this.render();
+    this.makePvpClient(token);
+    this.pvp.create(this.pvpMode);
+  }
+
+  joinPvp() {
+    wx.showModal({
+      title: '加入房间',
+      content: '',
+      editable: true,
+      placeholderText: '请输入房间号',
+      confirmText: '加入',
+      cancelText: '取消',
+      success: (answer) => {
+        if (!answer.confirm) return;
+        const code = String(answer.content || '').trim();
+        if (!/^\d{3,6}$/.test(code)) {
+          wx.showToast({ title: '请输入正确的房间号', icon: 'none' });
+          return;
+        }
+        const token = ++this.runId;
+        this.resetPvpState(this.pvpMode);
+        this.pvpState.code = code;
+        this.pvpStatus = '正在加入房间…';
+        this.screen = 'pvp-lobby';
+        this.render();
+        this.makePvpClient(token);
+        this.pvp.join(code);
+      },
+    });
+  }
+
+  schedulePvpReveal(callback, delay) {
+    if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
+    const token = this.runId;
+    this.pvpRevealTimer = setTimeout(() => {
+      this.pvpRevealTimer = null;
+      if (token === this.runId) callback();
+    }, delay);
+  }
+
+  pvpActionPair(message) {
+    const seat = this.pvpState.seat;
+    const first = Game.charToAction(message.a1);
+    const second = Game.charToAction(message.a2);
+    return seat === 0 ? [first, second] : [second, first];
+  }
+
+  handlePvpRound(message) {
+    const state = this.pvpState;
+    const pair = this.pvpActionPair(message);
+    state.b1 = message.b1_next;
+    state.b2 = message.b2_next;
+    state.acted = true;
+    if (state.mode === 'match') {
+      state.matchRound = message.matchRound;
+      state.money = message.money.slice();
+    }
+    this.pvpReveal = { human: pair[0], opponent: pair[1], pick: false };
+    this.pvpEvents.push({
+      round: message.round,
+      matchRound: state.matchRound,
+      human: pair[0],
+      opponent: pair[1],
+      outcome: message.outcome,
+    });
+    if (message.outcome === 'continue') {
+      this.pvpStatus = '双方行动已公开';
+      this.schedulePvpReveal(() => {
+        state.round = message.round + 1;
+        state.acted = false;
+        this.pvpReveal = null;
+        this.pvpStatus = '';
+        this.render();
+      }, 1100);
+    } else {
+      if (state.mode === 'match') {
+        const myMoney = state.money[state.seat];
+        const opponentMoney = state.money[1 - state.seat];
+        this.pvpStatus = `本轮结算 · 你 ${myMoney} / 好友 ${opponentMoney}`;
+      } else {
+        this.pvpStatus = '本局胜负已定';
+      }
+      this.schedulePvpReveal(() => {
+        if (this.pvpPendingGameOver) {
+          const gameOver = this.pvpPendingGameOver;
+          this.pvpPendingGameOver = null;
+          this.showPvpGameOver(gameOver);
+          return;
+        }
+        if (message.nextPhase === 'pick') {
+          state.phase = 'pick';
+          state.matchRound = message.nextMatchRound;
+          state.round = 1;
+          state.b1 = 0;
+          state.b2 = 0;
+          state.acted = false;
+          state.myPick = null;
+          this.pvpReveal = null;
+          this.pvpStatus = '';
+          this.render();
+        }
+      }, 1500);
+    }
+    this.render();
+  }
+
+  syncPvpRoom(message) {
+    const state = this.pvpState;
+    state.code = message.code;
+    state.seat = message.seat;
+    state.status = message.status;
+    state.mode = message.mode || state.mode;
+    state.phase = message.phase || 'play';
+    state.b1 = message.b1;
+    state.b2 = message.b2;
+    state.round = message.round;
+    state.matchRound = message.matchRound || 1;
+    state.money = (message.money || [50, 50]).slice();
+    state.acted = !!(message.acted && message.acted[message.seat]);
+    state.myPick = message.myPick === undefined ? null : message.myPick;
+    state.opponentConnected = message.opponentConnected !== false;
+    this.pvpEvents = (message.history || []).map((event, index) => {
+      const pair = message.seat === 0
+        ? [Game.charToAction(event.a1), Game.charToAction(event.a2)]
+        : [Game.charToAction(event.a2), Game.charToAction(event.a1)];
+      return { round: index + 1, matchRound: state.matchRound, human: pair[0], opponent: pair[1], outcome: event.outcome };
+    });
+    if (message.lastGameOver) {
+      this.showPvpGameOver(message.lastGameOver);
+    } else if (message.status === 'waiting') {
+      this.pvpStatus = '等待好友加入…';
+      this.screen = 'pvp-lobby';
+      this.render();
+    } else {
+      this.pvpStatus = state.opponentConnected ? '已恢复对局' : '好友断线，等待重连…';
+      this.screen = 'pvp-game';
+      this.render();
+    }
+  }
+
+  handlePvpMessage(message) {
+    const state = this.pvpState;
+    if (!state) return;
+    if (message.type === 'pong') return;
+    if (message.type === 'room_created' || message.type === 'room_joined') {
+      state.code = message.code;
+      state.seat = message.seat;
+      state.status = 'waiting';
+      this.pvpStatus = '等待好友加入…';
+      this.screen = 'pvp-lobby';
+      this.render();
+      return;
+    }
+    if (message.type === 'opponent_joined') {
+      this.pvpStatus = '好友已加入，正在开始…';
+      this.render();
+      return;
+    }
+    if (message.type === 'game_started') {
+      state.mode = message.mode || state.mode;
+      state.status = 'playing';
+      state.phase = message.phase || 'play';
+      state.b1 = message.b1;
+      state.b2 = message.b2;
+      state.round = message.round;
+      state.matchRound = message.matchRound || 1;
+      state.money = (message.money || [50, 50]).slice();
+      state.acted = false;
+      state.myPick = null;
+      state.opponentConnected = true;
+      this.pvpEvents = [];
+      this.pvpReveal = null;
+      this.pvpStatus = '';
+      this.screen = 'pvp-game';
+      this.render();
+      return;
+    }
+    if (message.type === 'bullet_reveal') {
+      state.phase = 'play';
+      state.matchRound = message.matchRound;
+      state.b1 = message.b1;
+      state.b2 = message.b2;
+      state.round = message.round;
+      state.money = message.money.slice();
+      state.acted = false;
+      const mine = message.picks[state.seat];
+      const theirs = message.picks[1 - state.seat];
+      this.pvpReveal = { human: mine, opponent: theirs, pick: true };
+      this.pvpStatus = `初始子弹公开：你 ${mine} / 好友 ${theirs}`;
+      this.schedulePvpReveal(() => {
+        this.pvpReveal = null;
+        this.pvpStatus = '';
+        this.render();
+      }, 1100);
+      this.render();
+      return;
+    }
+    if (message.type === 'round_result') {
+      this.handlePvpRound(message);
+      return;
+    }
+    if (message.type === 'game_over') {
+      if (this.pvpRevealTimer) this.pvpPendingGameOver = message;
+      else this.showPvpGameOver(message);
+      return;
+    }
+    if (message.type === 'rematch_status') {
+      const mine = message.votes[state.seat];
+      const theirs = message.votes[1 - state.seat];
+      this.result.reason = mine && theirs ? '双方同意，正在开始…'
+        : mine ? '已发起再来一局，等待好友同意…'
+          : '好友邀请再来一局，点击按钮即可同意';
+      this.render();
+      return;
+    }
+    if (message.type === 'opponent_left') {
+      state.opponentConnected = false;
+      this.pvpStatus = '好友断线，服务器将等待其重连';
+      this.render();
+      return;
+    }
+    if (message.type === 'opponent_rejoined') {
+      state.opponentConnected = true;
+      this.pvpStatus = '好友已重新连接';
+      this.render();
+      return;
+    }
+    if (message.type === 'room_state') {
+      this.syncPvpRoom(message);
+      return;
+    }
+    if (message.type === 'timeout_notice') {
+      const mine = message.seat === state.seat;
+      wx.showToast({ title: mine ? '你超时，系统已随机代选' : '好友超时，系统已随机代选', icon: 'none' });
+      return;
+    }
+    if (message.type === 'room_closed') {
+      wx.showToast({ title: '房间已关闭', icon: 'none' });
+      this.closePvp(false);
+      return;
+    }
+    if (message.type === 'error') {
+      const fatal = ['room_not_found', 'bad_token', 'room_full', 'game_in_progress'].includes(message.code);
+      wx.showModal({ title: '好友对决提示', content: message.msg || '服务器拒绝了本次操作', showCancel: false });
+      if (fatal) this.closePvp(true);
+    }
+  }
+
+  pvpResultReason(message) {
+    const outcome = message.result;
+    if (message.reason === 'match_end') {
+      const money = message.money || [0, 0];
+      return `完整对局结束 · 你 ${money[this.pvpState.seat]} / 好友 ${money[1 - this.pvpState.seat]} 筹码`;
+    }
+    if (message.reason === 'round_cap') return '达到回合上限，本局平局';
+    if (message.reason === 'timeout_loss') return outcome === 'lose' ? '你连续超时 3 次，判负' : '好友连续超时 3 次';
+    if (message.reason === 'opponent_left') return outcome === 'win' ? '好友已离开房间' : '你已离开房间';
+    return outcome === 'win' ? '你赢得了这局对决' : outcome === 'lose' ? '好友赢得了这局对决' : '本局平局';
+  }
+
+  showPvpGameOver(message) {
+    if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
+    this.pvpRevealTimer = null;
+    this.pvpPendingGameOver = null;
+    this.pvpState.status = 'finished';
+    this.pvpState.lastReason = message.reason;
+    this.pvpReveal = null;
+    this.result = { outcome: message.result, reason: this.pvpResultReason(message) };
+    this.resultSource = 'pvp';
+    this.screen = 'result';
+    this.render();
+  }
+
+  playPvp(action) {
+    const state = this.pvpState;
+    if (!this.pvp || !state || state.status !== 'playing' || state.acted) return;
+    if (state.phase === 'pick') {
+      if (!this.pvp.send({ type: 'submit_bullets', bullets: action })) {
+        this.pvpStatus = '连接尚未恢复，请稍后再试';
+        this.render();
+        return;
+      }
+      state.myPick = action;
+      state.acted = true;
+      this.pvpStatus = `已选择 ${action} 颗，等待好友…`;
+    } else {
+      const bullets = state.seat === 0 ? state.b1 : state.b2;
+      if (!Game.isFeasible(bullets, action)) return;
+      if (!this.pvp.send({ type: 'submit_action', action: Game.ACT_CHARS[action] })) {
+        this.pvpStatus = '连接尚未恢复，请稍后再试';
+        this.render();
+        return;
+      }
+      state.acted = true;
+      this.pvpStatus = '已出招，等待好友…';
+    }
+    this.render();
+  }
+
+  rematchPvp() {
+    if (!this.pvp || !this.pvpState || this.pvpState.status !== 'finished') return;
+    if (this.pvpState.lastReason === 'opponent_left') {
+      this.pvpState.status = 'waiting';
+      this.pvpStatus = '等待好友重新加入当前房间…';
+      this.screen = 'pvp-lobby';
+      this.render();
+      return;
+    }
+    this.pvp.send({ type: 'rematch_vote', accept: true });
+    this.result.reason = '已发起再来一局，等待好友同意…';
+    this.render();
+  }
+
+  closePvp(leaveRoom) {
+    if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
+    if (this.pvpReconnectTimer) clearTimeout(this.pvpReconnectTimer);
+    this.pvpRevealTimer = null;
+    this.pvpReconnectTimer = null;
+    if (this.pvp) {
+      if (leaveRoom !== false) this.pvp.leave();
+      else this.pvp.close();
+    }
+    this.pvp = null;
+    this.pvpState = null;
+    this.pvpReveal = null;
+    this.pvpEvents = [];
+    this.pvpStatus = '';
+    this.pvpPendingGameOver = null;
+    this.screen = 'menu';
+    this.render();
+  }
+
+  leavePvp() {
+    const playing = this.pvpState && this.pvpState.status === 'playing';
+    if (!playing) {
+      this.closePvp(true);
+      return;
+    }
+    wx.showModal({
+      title: '离开好友对决',
+      content: '对局中离开会立即判负，确定离开吗？',
+      confirmText: '离开',
+      cancelText: '继续',
+      success: (answer) => { if (answer.confirm) this.closePvp(true); },
+    });
+  }
+
   playQuick(action) {
     if (this.busy || !this.quick || this.quick.over) return;
     if (!Game.isFeasible(this.quick.b1, action)) return;
@@ -801,8 +1342,19 @@ export default class Main {
     if (this.quick && !this.quick.over) this.quick.abort();
     this.saveFullMemory();
     if (this.match) this.match.discard();
+    if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
+    if (this.pvpReconnectTimer) clearTimeout(this.pvpReconnectTimer);
+    if (this.pvp) this.pvp.leave();
     this.quick = null;
     this.match = null;
+    this.pvp = null;
+    this.pvpState = null;
+    this.pvpReveal = null;
+    this.pvpEvents = [];
+    this.pvpStatus = '';
+    this.pvpRevealTimer = null;
+    this.pvpReconnectTimer = null;
+    this.pvpPendingGameOver = null;
     this.busy = false;
     this.matchBusy = false;
     this.matchReveal = null;
@@ -831,21 +1383,35 @@ export default class Main {
       this.beginMatch().catch((error) => this.showStartError('完整模式启动失败', error));
     } else if (id === 'match-again') {
       this.rematchMatch();
+    } else if (id === 'pvp-again') {
+      this.rematchPvp();
     } else if (id === 'privacy') {
       this.showPrivacy();
     } else if (id === 'privacy-adaptive') {
       this.showAdaptivePrivacy();
     } else if (id === 'privacy-training') {
       this.showTrainingPrivacy();
-    } else if (id === 'mode-1' || id === 'mode-2') {
-      wx.showToast({ title: '该模式将在下一步迁移', icon: 'none' });
+    } else if (id === 'mode-1') {
+      this.enterPvp('single');
+    } else if (id === 'mode-2') {
+      this.enterPvp('match');
+    } else if (id === 'pvp-create') {
+      this.createPvp();
+    } else if (id === 'pvp-join') {
+      this.joinPvp();
+    } else if (id === 'pvp-copy') {
+      wx.setClipboardData({ data: this.pvpState.code });
+    } else if (id === 'pvp-leave') {
+      this.leavePvp();
     } else if (id === 'quick-back' || id === 'match-back' || id === 'result-menu'
-      || id === 'privacy-back') {
+      || id === 'privacy-back' || id === 'pvp-menu-back') {
       this.toMenu();
     } else if (id.indexOf('action-') === 0) {
       this.playQuick(Number(id.slice(7)));
     } else if (id.indexOf('match-action-') === 0) {
       this.playMatch(Number(id.slice(13)));
+    } else if (id.indexOf('pvp-action-') === 0) {
+      this.playPvp(Number(id.slice(11)));
     }
   }
 
