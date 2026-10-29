@@ -7,6 +7,7 @@ const MusicController = require('./core/music');
 const EffectsController = require('./core/effects');
 const Adaptive = require('./core/adaptive-client');
 const Training = require('./core/training-client');
+const Stats = require('./core/stats');
 const Game = QuickSession.Game;
 const ctx = canvas.getContext('2d');
 const windowInfo = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
@@ -78,6 +79,8 @@ export default class Main {
     this.runId = 0;
     this.adaptiveState = null;
     this.adaptiveConsentPrompt = null;
+    this.feedbackButton = null;
+    this.feedbackUnavailable = false;
 
     this.render();
     wx.onTouchStart(this.handleTouchStart.bind(this));
@@ -104,6 +107,8 @@ export default class Main {
     else if (this.screen === 'pvp-lobby') this.drawPvpLobby();
     else if (this.screen === 'pvp-game') this.drawPvpGame();
     else if (this.screen === 'result') this.drawResult();
+    else if (this.screen === 'rules') this.drawRules();
+    this.syncFeedbackButton();
   }
 
   drawBackground() {
@@ -311,15 +316,109 @@ export default class Main {
       true,
     );
 
+    const compact = HEIGHT < 650;
     const width = Math.min(340, WIDTH - 48);
-    const height = Math.max(54, Math.min(62, HEIGHT * 0.071));
-    const startY = Math.max(218, HEIGHT * 0.285);
+    const height = compact ? 48 : Math.max(54, Math.min(62, HEIGHT * 0.071));
+    const buttonGap = compact ? 8 : 12;
+    const startY = compact ? 204 : Math.max(218, HEIGHT * 0.285);
     const x = (WIDTH - width) / 2;
     MODES.forEach((label, index) => {
-      this.drawButton(`mode-${index}`, label, x, startY + index * (height + 12), width, height, true);
+      this.drawButton(`mode-${index}`, label, x, startY + index * (height + buttonGap), width, height, true);
     });
-    this.drawButton('privacy', '数据与隐私', WIDTH / 2 - 58, HEIGHT - 66, 116, 34, true);
+    const stats = Stats.lines();
+    const statsY = startY + 3 * (height + buttonGap) + height + 17;
+    this.drawText(stats.quick, WIDTH / 2, statsY, 12, '#c6ad90');
+    this.drawText(stats.match, WIDTH / 2, statsY + 21, 12, '#c6ad90');
+
+    const utilityGap = 8;
+    const utilityWidth = Math.min(108, (WIDTH - 48 - utilityGap * 2) / 3);
+    const utilityX = (WIDTH - utilityWidth * 3 - utilityGap * 2) / 2;
+    const utilityY = HEIGHT - 66;
+    this.drawButton('rules', '游戏规则', utilityX, utilityY, utilityWidth, 34, true);
+    this.drawButton('privacy', '数据与隐私', utilityX + utilityWidth + utilityGap, utilityY, utilityWidth, 34, true);
+    this.drawButton('feedback-fallback', '问题反馈', utilityX + (utilityWidth + utilityGap) * 2, utilityY, utilityWidth, 34, true);
     this.drawText('微信小游戏功能迁移版', WIDTH / 2, HEIGHT - 18, 12, 'rgba(198, 173, 144, 0.64)');
+  }
+
+  syncFeedbackButton() {
+    if (this.feedbackUnavailable || typeof wx.createFeedbackButton !== 'function') return;
+    if (!this.feedbackButton) {
+      const gap = 8;
+      const width = Math.min(108, (WIDTH - 48 - gap * 2) / 3);
+      const left = (WIDTH - width * 3 - gap * 2) / 2 + (width + gap) * 2;
+      try {
+        this.feedbackButton = wx.createFeedbackButton({
+          type: 'text',
+          text: '',
+          style: {
+            left,
+            top: HEIGHT - 66,
+            width,
+            height: 34,
+            lineHeight: 34,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderColor: 'rgba(0,0,0,0)',
+            borderWidth: 0,
+            borderRadius: 15,
+            color: 'rgba(0,0,0,0)',
+            textAlign: 'center',
+            fontSize: 14,
+          },
+        });
+      } catch (_) {
+        this.feedbackButton = null;
+      }
+      if (!this.feedbackButton) {
+        this.feedbackUnavailable = true;
+        return;
+      }
+    }
+    if (this.screen === 'menu') {
+      this.feedbackButton.show();
+      this.controls = this.controls.filter((control) => control.id !== 'feedback-fallback');
+    } else {
+      this.feedbackButton.hide();
+    }
+  }
+
+  drawRules() {
+    const top = Math.max(SAFE_TOP + 10, 36);
+    this.drawButton('rules-back', '‹ 菜单', 16, top, 76, 38, true);
+    this.drawText('游戏规则', WIDTH / 2, top + 73, 27, '#e07f3a', 'center', 'bold');
+    const x = 28;
+    const start = top + 119;
+    const gap = 22;
+    const lines = [
+      ['基本规则', true],
+      ['每回合双方同时选择开枪、防御或装弹。'],
+      ['开枪：消耗 1 颗子弹；无子弹不能开枪。'],
+      ['防御：挡住枪击，对方仍消耗子弹。'],
+      ['装弹：子弹 +1，上限 10。'],
+      ['胜负判定', true],
+      ['开枪命中正在装弹的一方，立即获胜。'],
+      ['子弹不等时，先到 5 颗的一方获胜。'],
+      ['双方都到 10 颗为平局；同时开枪则继续。'],
+      ['完整模式', true],
+      ['最多 5 轮，每轮先保密选择 0～2 颗子弹。'],
+      ['轮末结算 y=(i+1)(j+1)x，劣势获胜翻倍。'],
+      ['x=0 不结算；平局双方各扣 5×自选子弹。'],
+      ['筹码归零或第 5 轮结束时判定胜负。'],
+      ['对战说明', true],
+      ['好友对决每回合限时 60 秒。'],
+      ['连续 3 次超时判负；超时前系统随机代出。'],
+      ['人机对战不限时；完整人机需联网。'],
+    ];
+    lines.forEach((line, index) => {
+      this.drawText(
+        line[0],
+        x,
+        start + index * gap,
+        line[1] ? 14 : 13,
+        line[1] ? '#e07f3a' : '#fff2dc',
+        'left',
+        line[1] ? 'bold' : 'normal',
+      );
+    });
   }
 
   drawLoading() {
@@ -969,6 +1068,7 @@ export default class Main {
         if (value.snapshot.over) {
           const outcome = result.score === 0 ? 'win' : result.score === 1 ? 'lose' : 'draw';
           const money = result.settlement.money;
+          Stats.record('match', outcome);
           Training.upload({
             mode: 'match',
             startedAt: this.matchStartedAt,
@@ -1483,6 +1583,7 @@ export default class Main {
           this.reveal = null;
           this.render();
         } else {
+          Stats.record('quick', result.outcome);
           Training.upload(this.quick.trainingRecord(result.outcome))
             .catch(() => wx.showToast({ title: '训练记录上传失败，不影响游戏', icon: 'none' }));
           this.result = result;
@@ -1545,6 +1646,15 @@ export default class Main {
       this.rematchPvp();
     } else if (id === 'privacy') {
       this.showPrivacy();
+    } else if (id === 'rules') {
+      this.screen = 'rules';
+      this.render();
+    } else if (id === 'feedback-fallback') {
+      wx.showModal({
+        title: '问题反馈',
+        content: '当前微信版本不支持游戏内反馈，请升级微信后重试，或从右上角菜单进入反馈与投诉。',
+        showCancel: false,
+      });
     } else if (id === 'music-toggle') {
       this.music.toggle();
       this.render();
@@ -1565,7 +1675,7 @@ export default class Main {
     } else if (id === 'pvp-leave') {
       this.leavePvp();
     } else if (id === 'quick-back' || id === 'match-back' || id === 'result-menu'
-      || id === 'privacy-back' || id === 'pvp-menu-back') {
+      || id === 'privacy-back' || id === 'rules-back' || id === 'pvp-menu-back') {
       this.toMenu();
     } else if (id.indexOf('action-') === 0) {
       this.playQuick(Number(id.slice(7)));

@@ -99,6 +99,7 @@ async function main() {
   const QuickSession = require('../minigame/js/core/quick-session');
   const Adaptive = require('../minigame/js/core/adaptive-client');
   const Training = require('../minigame/js/core/training-client');
+  const Stats = require('../minigame/js/core/stats');
   const match = new MatchClient({ memory: { belief: 0 } });
   await match.start();
   assert.deepEqual(match.memory, { belief: 1 });
@@ -207,6 +208,23 @@ async function main() {
   const trainingCalls = cloudCalls.length;
   assert.equal((await Training.upload({ mode: 'quick' })).skipped, true);
   assert.equal(cloudCalls.length, trainingCalls, 'denied training must not call cloud');
+
+  storage.delete(Stats.STORAGE_KEY);
+  assert.deepEqual(Stats.lines(), {
+    quick: '快速模式：暂无对局记录',
+    match: '完整模式：暂无对局记录',
+  });
+  assert.equal(Stats.record('quick', 'win'), true);
+  assert.equal(Stats.record('quick', 'lose'), true);
+  assert.equal(Stats.record('quick', 'draw'), true);
+  assert.equal(Stats.record('match', 'draw'), true);
+  assert.deepEqual(Stats.lines(), {
+    quick: '快速模式：3 局（胜 1 / 负 1 / 平 1，胜率 50%）',
+    match: '完整模式：1 局（胜 0 / 负 0 / 平 1，胜率 0%）',
+  });
+  assert.equal(Stats.record('pvp', 'win'), false, 'friend matches must not enter AI statistics');
+  assert.equal(Stats.record('quick', 'abort'), false, 'aborted matches must not enter statistics');
+  storage.delete(Stats.STORAGE_KEY);
   console.log('Mini-game clients passed: match lifecycle, optional upload and withdrawal.');
 }
 

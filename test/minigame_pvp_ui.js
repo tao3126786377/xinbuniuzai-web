@@ -9,6 +9,7 @@ const storage = new Map([
   ['xnz_adaptive_consent_v1', 'deny'],
   ['xnz_training_consent_v1', 'deny'],
 ]);
+const feedback = { visible: false, show() { this.visible = true; }, hide() { this.visible = false; } };
 
 function gradient() {
   return { addColorStop() {} };
@@ -31,9 +32,10 @@ global.wx = {
   setStorageSync(key, value) { storage.set(key, value); },
   removeStorageSync(key) { storage.delete(key); },
   showToast() {}, showModal() {}, showLoading() {}, hideLoading() {},
+  createFeedbackButton(options) { feedback.options = options; return feedback; },
   createInnerAudioContext() {
     return {
-      play() {}, pause() {},
+      play() {}, pause() {}, stop() {},
       onPlay() {}, onPause() {}, onStop() {}, onError() {},
     };
   },
@@ -55,6 +57,29 @@ function loadMain() {
 function main() {
   const Main = loadMain();
   const ui = new Main();
+  assert.equal(feedback.visible, true, 'official feedback button must be visible on the menu');
+  assert.equal(feedback.options.text, '', 'official feedback button must transparently cover the canvas button');
+  assert.ok(ui.controls.some((control) => control.id === 'rules'));
+  assert.ok(ui.controls.some((control) => control.id === 'privacy'));
+  assert.equal(ui.controls.some((control) => control.id === 'feedback-fallback'), false,
+    'canvas fallback must not compete with the official feedback button');
+  const menuText = [];
+  const drawText = ui.drawText;
+  ui.drawText = function capture(text, ...args) {
+    menuText.push(text);
+    return drawText.call(this, text, ...args);
+  };
+  ui.render();
+  ui.drawText = drawText;
+  assert.ok(menuText.includes('快速模式：暂无对局记录'));
+  assert.ok(menuText.includes('完整模式：暂无对局记录'));
+  ui.activate('rules');
+  assert.equal(ui.screen, 'rules');
+  assert.equal(feedback.visible, false);
+  assert.ok(ui.controls.some((control) => control.id === 'rules-back'));
+  ui.activate('rules-back');
+  assert.equal(ui.screen, 'menu');
+  assert.equal(feedback.visible, true);
   const panels = [];
   const icons = [];
   ui.drawPanel = (title, bullets, action, x) => panels.push({ title, bullets, action, x });
@@ -63,6 +88,7 @@ function main() {
   ui.quick = { b1: 1, b2: 2, round: 1, history: [], over: false };
   ui.screen = 'quick';
   ui.render();
+  assert.equal(feedback.visible, false, 'feedback overlay must be hidden outside the menu');
   assert.deepEqual(icons.slice(-3), [0, 1, 2]);
   assert.deepEqual(panels.slice(-2).map((panel) => panel.title), ['电脑', '你']);
   assert.ok(panels.at(-2).x < panels.at(-1).x, 'quick player panel must stay on the right');
@@ -130,6 +156,7 @@ function main() {
   assert.equal(ui.screen, 'result');
   assert.equal(ui.result.outcome, 'lose');
   assert.match(ui.result.reason, /你 28 \/ 好友 72/);
+  assert.equal(storage.has('xnz_minigame_ai_stats_v1'), false, 'friend matches must not affect AI win rate');
 
   ui.pvpState.status = 'finished';
   ui.rematchPvp();
