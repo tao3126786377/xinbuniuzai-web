@@ -5,7 +5,7 @@ const CONSENT_VERSION = '2026-10-28-v1';
 const CONSENT_KEY = 'xnz_training_consent_v1';
 const PENDING_DELETE_KEY = 'xnz_training_delete_pending_v1';
 const NETWORK_NOTICE_KEY = 'xnz_match_network_notice_v1';
-const APP_VERSION = 'minigame-0.1.0';
+const APP_VERSION = 'minigame-0.3.0';
 
 function randomId(prefix) {
   return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}_${Math.random().toString(36).slice(2)}`;

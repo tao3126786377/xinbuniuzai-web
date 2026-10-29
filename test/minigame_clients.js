@@ -5,6 +5,8 @@ const storage = new Map();
 const calls = [];
 const cloudCalls = [];
 const sockets = [];
+const audios = [];
+const subpackages = [];
 
 function fakeSocket(options) {
   const handlers = {};
@@ -30,6 +32,27 @@ global.wx = {
   setStorageSync(key, value) { storage.set(key, value); },
   removeStorageSync(key) { storage.delete(key); },
   connectSocket(options) { return fakeSocket(options); },
+  loadSubpackage(options) {
+    subpackages.push(options.name);
+    options.success({});
+    return { onProgressUpdate() {} };
+  },
+  createInnerAudioContext() {
+    const handlers = {};
+    const audio = {
+      playing: false,
+      play() { this.playing = true; if (handlers.play) handlers.play(); },
+      pause() { this.playing = false; if (handlers.pause) handlers.pause(); },
+      stop() { this.playing = false; if (handlers.stop) handlers.stop(); },
+      seek(value) { this.position = value; },
+      onPlay(fn) { handlers.play = fn; },
+      onPause(fn) { handlers.pause = fn; },
+      onStop(fn) { handlers.stop = fn; },
+      onError(fn) { handlers.error = fn; },
+    };
+    audios.push(audio);
+    return audio;
+  },
   request(options) {
     calls.push(options);
     const session = {
@@ -64,6 +87,8 @@ global.wx = {
 async function main() {
   const MatchClient = require('../minigame/js/core/match-client');
   const PvpClient = require('../minigame/js/core/pvp-client');
+  const MusicController = require('../minigame/js/core/music');
+  const EffectsController = require('../minigame/js/core/effects');
   const QuickSession = require('../minigame/js/core/quick-session');
   const Adaptive = require('../minigame/js/core/adaptive-client');
   const Training = require('../minigame/js/core/training-client');
@@ -93,6 +118,44 @@ async function main() {
   pvp.leave();
   assert.equal(storage.has(PvpClient.SESSION_KEY), false);
   assert.equal(socket.closed, true);
+
+  const music = new MusicController();
+  assert.equal(music.isEnabled(), false);
+  assert.equal(music.toggle(), true);
+  await music.loading;
+  assert.equal(audios.at(-1).src, 'packs/bgm/the-entertainer.mp3');
+  assert.equal(audios.at(-1).volume, 0.22);
+  assert.equal(audios.at(-1).playing, true);
+  assert.equal(music.toggle(), false);
+  assert.equal(audios.at(-1).playing, false);
+
+  assert.deepEqual(EffectsController.plan(2, 0), [
+    { actor: 'opponent', action: 0, delay: 0 },
+  ]);
+  assert.deepEqual(EffectsController.plan(1, 0), [
+    { actor: 'opponent', action: 0, delay: 0 },
+    { actor: 'human', action: 1, delay: 150, hit: true },
+  ]);
+  assert.deepEqual(EffectsController.plan(0, 1), [
+    { actor: 'human', action: 0, delay: 0 },
+    { actor: 'opponent', action: 1, delay: 150, hit: true },
+  ]);
+  assert.deepEqual(EffectsController.plan(0, 0), [
+    { actor: 'human', action: 0, delay: 0 },
+    { actor: 'opponent', action: 0, delay: 140 },
+  ]);
+  const effects = new EffectsController();
+  await effects.loading;
+  assert.equal(audios.at(-8).src, 'packs/sfx/sfx-gun-player.wav');
+  assert.equal(audios.at(-7).src, 'packs/sfx/sfx-guard-player.wav');
+  assert.equal(audios.at(-4).src, 'packs/sfx/sfx-gun-player.wav');
+  assert.equal(audios.at(-3).src, 'packs/sfx/sfx-guard-opponent.wav');
+  assert.equal(EffectsController.HITS.human, 'packs/sfx/sfx-defend-player.wav');
+  effects.playRound(2, 0);
+  await Promise.resolve();
+  assert.equal(audios.at(-4).playing, true);
+  effects.stop();
+  assert.deepEqual(subpackages, ['bgm', 'sfx']);
 
   let savedQuickLog = '';
   const quick = new QuickSession({ onSave(value) { savedQuickLog = value; } });
@@ -125,6 +188,7 @@ async function main() {
   const upload = uploadCall.data.payload;
   assert.equal(upload.consent, true);
   assert.equal(upload.consentVersion, Training.CONSENT_VERSION);
+  assert.equal(upload.appVersion, 'minigame-0.3.0');
   assert.equal(upload.nickname, undefined);
   assert.equal(upload.openid, undefined);
   assert.equal(upload.clientId, undefined);

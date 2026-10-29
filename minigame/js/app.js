@@ -3,6 +3,8 @@ import './render';
 const QuickSession = require('./core/quick-session');
 const MatchClient = require('./core/match-client');
 const PvpClient = require('./core/pvp-client');
+const MusicController = require('./core/music');
+const EffectsController = require('./core/effects');
 const Adaptive = require('./core/adaptive-client');
 const Training = require('./core/training-client');
 const Game = QuickSession.Game;
@@ -71,6 +73,8 @@ export default class Main {
     this.pvpRevealTimer = null;
     this.pvpReconnectTimer = null;
     this.pvpPendingGameOver = null;
+    this.music = new MusicController();
+    this.effects = new EffectsController();
     this.runId = 0;
     this.adaptiveState = null;
     this.adaptiveConsentPrompt = null;
@@ -78,7 +82,12 @@ export default class Main {
     this.render();
     wx.onTouchStart(this.handleTouchStart.bind(this));
     wx.onTouchEnd(this.handleTouchEnd.bind(this));
-    if (wx.onHide) wx.onHide(() => this.saveFullMemory());
+    if (wx.onHide) wx.onHide(() => {
+      this.saveFullMemory();
+      this.music.pause();
+      this.effects.stop();
+    });
+    if (wx.onShow) wx.onShow(() => this.music.resume());
     setTimeout(() => this.askAdaptiveConsent(), 150);
   }
 
@@ -130,10 +139,32 @@ export default class Main {
     vignette.addColorStop(1, 'rgba(3, 5, 9, 0.42)');
     ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    ctx.fillStyle = 'rgba(240, 192, 96, 0.10)';
+    const dust = [
+      [0.10, 0.18], [0.22, 0.11], [0.34, 0.24], [0.47, 0.14], [0.61, 0.21],
+      [0.74, 0.12], [0.87, 0.25], [0.16, 0.58], [0.82, 0.53], [0.91, 0.68],
+    ];
+    dust.forEach((point, index) => {
+      const size = index % 3 === 0 ? 2 : 1;
+      ctx.fillRect(WIDTH * point[0], HEIGHT * point[1], size, size);
+    });
+
+    ctx.strokeStyle = 'rgba(194, 138, 75, 0.16)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(12, SAFE_TOP + 2);
+    ctx.lineTo(12, HEIGHT - 18);
+    ctx.moveTo(WIDTH - 12, SAFE_TOP + 2);
+    ctx.lineTo(WIDTH - 12, HEIGHT - 18);
+    ctx.stroke();
   }
 
   drawText(text, x, y, size, color, align, weight) {
     ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     ctx.textAlign = align || 'center';
     ctx.textBaseline = 'middle';
     ctx.font = `${weight || 'normal'} ${size}px sans-serif`;
@@ -141,7 +172,46 @@ export default class Main {
     ctx.fillText(text, x, y);
   }
 
-  drawButton(id, label, x, y, width, height, enabled) {
+  drawActionIcon(action, x, y, size, color) {
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = 1.7;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    if (action === 0) {
+      ctx.fillRect(x - size * 0.56, y - size * 0.28, size * 0.82, size * 0.25);
+      ctx.fillRect(x + size * 0.18, y - size * 0.22, size * 0.42, size * 0.12);
+      ctx.beginPath();
+      ctx.moveTo(x - size * 0.12, y - size * 0.04);
+      ctx.lineTo(x + size * 0.10, y + size * 0.48);
+      ctx.lineTo(x - size * 0.20, y + size * 0.48);
+      ctx.lineTo(x - size * 0.38, y - size * 0.04);
+      ctx.closePath();
+      ctx.fill();
+      return;
+    }
+    if (action === 1) {
+      ctx.beginPath();
+      ctx.moveTo(x, y - size * 0.58);
+      ctx.lineTo(x + size * 0.50, y - size * 0.34);
+      ctx.lineTo(x + size * 0.40, y + size * 0.25);
+      ctx.lineTo(x, y + size * 0.58);
+      ctx.lineTo(x - size * 0.40, y + size * 0.25);
+      ctx.lineTo(x - size * 0.50, y - size * 0.34);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x, y - size * 0.42);
+      ctx.lineTo(x, y + size * 0.36);
+      ctx.stroke();
+      return;
+    }
+    roundedRect(ctx, x - size * 0.24, y - size * 0.58, size * 0.48, size * 1.16, size * 0.24);
+    ctx.stroke();
+    ctx.fillRect(x - size * 0.24, y + size * 0.18, size * 0.48, size * 0.16);
+  }
+
+  drawButton(id, label, x, y, width, height, enabled, actionIcon) {
     const active = id === this.activeId;
     const isEnabled = enabled !== false;
     const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
@@ -157,17 +227,58 @@ export default class Main {
     }
 
     roundedRect(ctx, x, y, width, height, 15);
+    ctx.shadowColor = isEnabled ? 'rgba(0, 0, 0, 0.38)' : 'transparent';
+    ctx.shadowBlur = isEnabled ? 10 : 0;
+    ctx.shadowOffsetY = isEnabled ? 4 : 0;
     ctx.fillStyle = gradient;
     ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
     ctx.strokeStyle = isEnabled ? 'rgba(194, 138, 75, 0.45)' : 'rgba(120, 105, 94, 0.35)';
     ctx.lineWidth = 1;
     ctx.stroke();
-    this.drawText(label, x + width / 2, y + height / 2 + 1, 17, isEnabled ? '#fff2dc' : '#8f837a');
+    const color = isEnabled ? '#fff2dc' : '#8f837a';
+    if (Number.isInteger(actionIcon)) {
+      this.drawActionIcon(actionIcon, x + width / 2, y + 18, 13, color);
+      this.drawText(label, x + width / 2, y + 43, 14, color, 'center', 'bold');
+    } else {
+      this.drawText(label, x + width / 2, y + height / 2 + 1, 17, color);
+    }
 
     this.controls.push({ id, x, y, width, height, enabled: isEnabled });
   }
 
+  drawMenuScenery() {
+    const base = HEIGHT - 12;
+    ctx.fillStyle = 'rgba(8, 14, 24, 0.26)';
+    ctx.beginPath();
+    ctx.moveTo(0, base);
+    ctx.lineTo(0, HEIGHT * 0.77);
+    ctx.lineTo(WIDTH * 0.18, HEIGHT * 0.69);
+    ctx.lineTo(WIDTH * 0.37, HEIGHT * 0.80);
+    ctx.lineTo(WIDTH * 0.60, HEIGHT * 0.66);
+    ctx.lineTo(WIDTH * 0.78, HEIGHT * 0.75);
+    ctx.lineTo(WIDTH, HEIGHT * 0.64);
+    ctx.lineTo(WIDTH, base);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(5, 9, 16, 0.34)';
+    ctx.beginPath();
+    ctx.moveTo(0, base);
+    ctx.lineTo(0, HEIGHT * 0.86);
+    ctx.lineTo(WIDTH * 0.25, HEIGHT * 0.74);
+    ctx.lineTo(WIDTH * 0.45, HEIGHT * 0.86);
+    ctx.lineTo(WIDTH * 0.70, HEIGHT * 0.72);
+    ctx.lineTo(WIDTH, HEIGHT * 0.84);
+    ctx.lineTo(WIDTH, base);
+    ctx.closePath();
+    ctx.fill();
+  }
+
   drawMenu() {
+    this.drawMenuScenery();
     const titleY = Math.max(SAFE_TOP + 92, HEIGHT * 0.16);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -177,7 +288,27 @@ export default class Main {
     ctx.shadowBlur = 8;
     ctx.shadowOffsetY = 3;
     ctx.fillText('牛仔决斗', WIDTH / 2, titleY);
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
     this.drawText('开枪 · 防御 · 装弹', WIDTH / 2, titleY + 43, 16, '#c6ad90');
+    ctx.strokeStyle = 'rgba(224, 127, 58, 0.48)';
+    ctx.beginPath();
+    ctx.moveTo(WIDTH / 2 - 88, titleY + 67);
+    ctx.lineTo(WIDTH / 2 - 20, titleY + 67);
+    ctx.moveTo(WIDTH / 2 + 20, titleY + 67);
+    ctx.lineTo(WIDTH / 2 + 88, titleY + 67);
+    ctx.stroke();
+    this.drawText('◆', WIDTH / 2, titleY + 67, 9, '#e07f3a');
+    this.drawButton(
+      'music-toggle',
+      this.music.isEnabled() ? '■ 音乐' : '♫ 音乐',
+      16,
+      SAFE_TOP + 8,
+      88,
+      36,
+      true,
+    );
 
     const width = Math.min(340, WIDTH - 48);
     const height = Math.max(54, Math.min(62, HEIGHT * 0.071));
@@ -230,10 +361,18 @@ export default class Main {
   drawPanel(title, bullets, action, x, y, width, money) {
     const height = 132;
     roundedRect(ctx, x, y, width, height, 12);
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 3;
     ctx.fillStyle = 'rgba(30, 27, 26, 0.88)';
     ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
     ctx.strokeStyle = 'rgba(194, 138, 75, 0.38)';
     ctx.stroke();
+    ctx.fillStyle = 'rgba(224, 127, 58, 0.58)';
+    ctx.fillRect(x + 14, y + 4, width - 28, 2);
 
     this.drawText(title, x + width / 2, y + 22, 16, '#c6ad90', 'center', 'bold');
     this.drawText(`子弹 ${bullets}`, x + width / 2, y + 53, 22, '#fff2dc', 'center', 'bold');
@@ -255,8 +394,8 @@ export default class Main {
     const gap = 10;
     const panelWidth = (WIDTH - 36 - gap) / 2;
     const panelY = top + 62;
-    this.drawPanel('你', this.quick.b1, playerAction, 18, panelY, panelWidth);
-    this.drawPanel('电脑', this.quick.b2, computerAction, 18 + panelWidth + gap, panelY, panelWidth);
+    this.drawPanel('电脑', this.quick.b2, computerAction, 18, panelY, panelWidth);
+    this.drawPanel('你', this.quick.b1, playerAction, 18 + panelWidth + gap, panelY, panelWidth);
 
     const historyY = panelY + 150;
     roundedRect(ctx, 18, historyY, WIDTH - 36, 172, 12);
@@ -280,9 +419,9 @@ export default class Main {
     const buttonWidth = (WIDTH - 36 - buttonGap * 2) / 3;
     const buttonY = HEIGHT - 96;
     const actionEnabled = !this.busy && !this.quick.over;
-    this.drawButton('action-0', '开枪', 18, buttonY, buttonWidth, 58, actionEnabled && this.quick.b1 > 0);
-    this.drawButton('action-1', '防御', 18 + buttonWidth + buttonGap, buttonY, buttonWidth, 58, actionEnabled);
-    this.drawButton('action-2', '装弹', 18 + (buttonWidth + buttonGap) * 2, buttonY, buttonWidth, 58, actionEnabled && this.quick.b1 < Game.MAX_BULLET);
+    this.drawButton('action-0', '开枪', 18, buttonY, buttonWidth, 58, actionEnabled && this.quick.b1 > 0, 0);
+    this.drawButton('action-1', '防御', 18 + buttonWidth + buttonGap, buttonY, buttonWidth, 58, actionEnabled, 1);
+    this.drawButton('action-2', '装弹', 18 + (buttonWidth + buttonGap) * 2, buttonY, buttonWidth, 58, actionEnabled && this.quick.b1 < Game.MAX_BULLET, 2);
   }
 
   drawMatchGame() {
@@ -331,8 +470,8 @@ export default class Main {
     const gap = 10;
     const panelWidth = (WIDTH - 36 - gap) / 2;
     const panelY = top + 62;
-    this.drawPanel('你', playerBullets, playerAction, 18, panelY, panelWidth, playerMoney);
-    this.drawPanel('电脑', computerBullets, computerAction, 18 + panelWidth + gap, panelY, panelWidth, computerMoney);
+    this.drawPanel('电脑', computerBullets, computerAction, 18, panelY, panelWidth, computerMoney);
+    this.drawPanel('你', playerBullets, playerAction, 18 + panelWidth + gap, panelY, panelWidth, playerMoney);
 
     const historyY = panelY + 150;
     roundedRect(ctx, 18, historyY, WIDTH - 36, 172, 12);
@@ -377,6 +516,7 @@ export default class Main {
         buttonWidth,
         58,
         enabled && legal,
+        pick ? undefined : action,
       );
     }
   }
@@ -413,6 +553,11 @@ export default class Main {
     this.drawButton('pvp-leave', '‹ 离开', 16, top, 76, 38, true);
     this.drawText('等待好友加入', WIDTH / 2, top + 100, 27, '#e07f3a', 'center', 'bold');
     this.drawText('房间号', WIDTH / 2, top + 160, 15, '#c6ad90');
+    roundedRect(ctx, WIDTH / 2 - 110, top + 178, 220, 72, 14);
+    ctx.fillStyle = 'rgba(30, 27, 26, 0.78)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(194, 138, 75, 0.42)';
+    ctx.stroke();
     this.drawText(state && state.code ? state.code : '连接中…', WIDTH / 2, top + 212, 42, '#fff2dc', 'center', 'bold');
     this.drawText(this.pvpStatus || '正在连接服务器…', WIDTH / 2, top + 278, 14, '#c6ad90');
     this.drawText('请让好友选择相同模式并输入房间号', WIDTH / 2, top + 326, 13, '#8f837a');
@@ -450,9 +595,10 @@ export default class Main {
     const gap = 10;
     const panelWidth = (WIDTH - 36 - gap) / 2;
     const panelY = top + 76;
-    this.drawPanel('你', myBullets, myAction, 18, panelY, panelWidth, state.mode === 'match' ? myMoney : undefined);
-    this.drawPanel('好友', opponentBullets, opponentAction, 18 + panelWidth + gap, panelY, panelWidth,
+    this.drawPanel('好友', opponentBullets, opponentAction, 18, panelY, panelWidth,
       state.mode === 'match' ? opponentMoney : undefined);
+    this.drawPanel('你', myBullets, myAction, 18 + panelWidth + gap, panelY, panelWidth,
+      state.mode === 'match' ? myMoney : undefined);
 
     const historyY = panelY + 150;
     roundedRect(ctx, 18, historyY, WIDTH - 36, 172, 12);
@@ -485,6 +631,7 @@ export default class Main {
         buttonWidth,
         58,
         state.status === 'playing' && !state.acted && legal,
+        pick ? undefined : action,
       );
     }
   }
@@ -492,6 +639,11 @@ export default class Main {
   drawResult() {
     const titles = { win: '你赢了！', lose: '你输了', draw: '平局' };
     const colors = { win: '#e07f3a', lose: '#e8a0a0', draw: '#b0b0c8' };
+    roundedRect(ctx, 24, HEIGHT * 0.22, WIDTH - 48, HEIGHT * 0.24, 18);
+    ctx.fillStyle = 'rgba(30, 27, 26, 0.76)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(194, 138, 75, 0.38)';
+    ctx.stroke();
     this.drawText(titles[this.result.outcome], WIDTH / 2, HEIGHT * 0.31, 40, colors[this.result.outcome], 'center', 'bold');
     this.drawText(this.result.reason, WIDTH / 2, HEIGHT * 0.39, 15, '#fff2dc');
 
@@ -808,6 +960,7 @@ export default class Main {
       this.matchEvents.push(event);
       if (result.settlement.round_end || value.snapshot.over) this.saveFullMemory();
       this.matchReveal = result;
+      if (result.before.phase === 'play') this.effects.playRound(result.human, result.computer);
       this.render();
 
       setTimeout(() => {
@@ -1022,6 +1175,7 @@ export default class Main {
       opponent: pair[1],
       outcome: message.outcome,
     });
+    this.effects.playRound(pair[0], pair[1]);
     if (message.outcome === 'continue') {
       this.pvpStatus = '双方行动已公开';
       this.schedulePvpReveal(() => {
@@ -1271,6 +1425,7 @@ export default class Main {
   }
 
   closePvp(leaveRoom) {
+    this.effects.stop();
     if (this.pvpRevealTimer) clearTimeout(this.pvpRevealTimer);
     if (this.pvpReconnectTimer) clearTimeout(this.pvpReconnectTimer);
     this.pvpRevealTimer = null;
@@ -1317,6 +1472,7 @@ export default class Main {
       if (token !== this.runId) return;
       const result = this.quick.play(action);
       this.reveal = result;
+      this.effects.playRound(action, result.computerAction);
       this.render();
       setTimeout(() => {
         if (token !== this.runId) return;
@@ -1339,6 +1495,7 @@ export default class Main {
 
   toMenu() {
     this.runId++;
+    this.effects.stop();
     if (this.quick && !this.quick.over) this.quick.abort();
     this.saveFullMemory();
     if (this.match) this.match.discard();
@@ -1387,6 +1544,9 @@ export default class Main {
       this.rematchPvp();
     } else if (id === 'privacy') {
       this.showPrivacy();
+    } else if (id === 'music-toggle') {
+      this.music.toggle();
+      this.render();
     } else if (id === 'privacy-adaptive') {
       this.showAdaptivePrivacy();
     } else if (id === 'privacy-training') {
@@ -1435,6 +1595,7 @@ export default class Main {
     const id = control && control.id === this.activeId ? control.id : '';
     this.activeId = '';
     this.render();
+    this.music.resume();
     if (id) this.activate(id);
   }
 }

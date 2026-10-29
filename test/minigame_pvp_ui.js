@@ -26,10 +26,17 @@ global.wx = {
     return { screenWidth: 390, screenHeight: 844, safeArea: { top: 44 } };
   },
   onTouchStart() {}, onTouchEnd() {}, onHide() {},
+  onShow() {},
   getStorageSync(key) { return storage.get(key) || ''; },
   setStorageSync(key, value) { storage.set(key, value); },
   removeStorageSync(key) { storage.delete(key); },
   showToast() {}, showModal() {}, showLoading() {}, hideLoading() {},
+  createInnerAudioContext() {
+    return {
+      play() {}, pause() {},
+      onPlay() {}, onPause() {}, onStop() {}, onError() {},
+    };
+  },
 };
 
 function loadMain() {
@@ -48,6 +55,27 @@ function loadMain() {
 function main() {
   const Main = loadMain();
   const ui = new Main();
+  const panels = [];
+  const icons = [];
+  ui.drawPanel = (title, bullets, action, x) => panels.push({ title, bullets, action, x });
+  ui.drawActionIcon = (action) => icons.push(action);
+
+  ui.quick = { b1: 1, b2: 2, round: 1, history: [], over: false };
+  ui.screen = 'quick';
+  ui.render();
+  assert.deepEqual(icons.slice(-3), [0, 1, 2]);
+  assert.deepEqual(panels.slice(-2).map((panel) => panel.title), ['电脑', '你']);
+  assert.ok(panels.at(-2).x < panels.at(-1).x, 'quick player panel must stay on the right');
+
+  ui.match = { data: {
+    snapshot: { state: { phase: 'play', round: 1, turn: 1, bc: 2, bh: 1, mc: 50, mh: 50 }, over: false },
+    ready: { decisionId: 'd1' },
+  } };
+  ui.screen = 'match';
+  ui.render();
+  assert.deepEqual(panels.slice(-2).map((panel) => panel.title), ['电脑', '你']);
+  assert.ok(panels.at(-2).x < panels.at(-1).x, 'match player panel must stay on the right');
+
   ui.enterPvp('match');
   assert.equal(ui.screen, 'pvp-menu');
   assert.ok(ui.controls.some((control) => control.id === 'pvp-create'));
@@ -62,6 +90,8 @@ function main() {
   });
   assert.equal(ui.screen, 'pvp-game');
   assert.equal(ui.pvpState.phase, 'pick');
+  assert.deepEqual(panels.slice(-2).map((panel) => panel.title), ['好友', '你']);
+  assert.ok(panels.at(-2).x < panels.at(-1).x, 'PvP player panel must stay on the right');
 
   ui.handlePvpMessage({
     type: 'bullet_reveal', matchRound: 1, picks: [2, 1],
@@ -80,6 +110,8 @@ function main() {
 
   ui.pvpState.acted = false;
   let revealDone;
+  const sounds = [];
+  ui.effects.playRound = (human, opponent) => sounds.push([human, opponent]);
   ui.schedulePvpReveal = (callback) => { revealDone = callback; ui.pvpRevealTimer = 1; };
   ui.handlePvpMessage({
     type: 'round_result', round: 4, matchRound: 5,
@@ -87,6 +119,7 @@ function main() {
     timeoutStrikes: [0, 0], picks: [2, 1], money: [72, 28],
     matchOver: true, matchWinner: 1,
   });
+  assert.deepEqual(sounds.at(-1), [1, 0]);
   ui.handlePvpMessage({
     type: 'game_over', result: 'lose', reason: 'match_end', rounds: 5,
     timeoutStrikes: [0, 0], money: [72, 28],

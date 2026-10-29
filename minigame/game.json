@@ -1,3 +1,7 @@
 {
-  "deviceOrientation": "portrait"
+  "deviceOrientation": "portrait",
+  "subpackages": [
+    { "name": "bgm", "root": "packs/bgm" },
+    { "name": "sfx", "root": "packs/sfx" }
+  ]
 }
