@@ -1,6 +1,8 @@
 'use strict';
 
 const assert = require('assert/strict');
+const fs = require('fs');
+const path = require('path');
 const storage = new Map();
 const calls = [];
 const cloudCalls = [];
@@ -85,6 +87,11 @@ global.wx = {
 };
 
 async function main() {
+  const entry = fs.readFileSync(path.join(__dirname, '../minigame/game.js'), 'utf8');
+  assert(entry.includes('wx.setInnerAudioOption'), 'global audio policy must be configured');
+  assert(entry.includes('obeyMuteSwitch: false'), 'iOS mute switch must not silence the game');
+  assert(entry.includes('speakerOn: true'), 'audio output must use the speaker');
+
   const MatchClient = require('../minigame/js/core/match-client');
   const PvpClient = require('../minigame/js/core/pvp-client');
   const MusicController = require('../minigame/js/core/music');
@@ -123,7 +130,7 @@ async function main() {
   assert.equal(music.isEnabled(), false);
   assert.equal(music.toggle(), true);
   await music.loading;
-  assert.equal(audios.at(-1).src, 'packs/bgm/the-entertainer.mp3');
+  assert.equal(audios.at(-1).src, MusicController.MUSIC_URL);
   assert.equal(audios.at(-1).volume, 0.22);
   assert.equal(audios.at(-1).playing, true);
   assert.equal(music.toggle(), false);
@@ -146,16 +153,16 @@ async function main() {
   ]);
   const effects = new EffectsController();
   await effects.loading;
-  assert.equal(audios.at(-8).src, 'packs/sfx/sfx-gun-player.wav');
-  assert.equal(audios.at(-7).src, 'packs/sfx/sfx-guard-player.wav');
-  assert.equal(audios.at(-4).src, 'packs/sfx/sfx-gun-player.wav');
-  assert.equal(audios.at(-3).src, 'packs/sfx/sfx-guard-opponent.wav');
-  assert.equal(EffectsController.HITS.human, 'packs/sfx/sfx-defend-player.wav');
+  assert.equal(audios.at(-8).src, 'assets/sfx/sfx-gun-player.wav');
+  assert.equal(audios.at(-7).src, 'assets/sfx/sfx-guard-player.wav');
+  assert.equal(audios.at(-4).src, 'assets/sfx/sfx-gun-player.wav');
+  assert.equal(audios.at(-3).src, 'assets/sfx/sfx-guard-opponent.wav');
+  assert.equal(EffectsController.HITS.human, 'assets/sfx/sfx-defend-player.wav');
   effects.playRound(2, 0);
   await Promise.resolve();
   assert.equal(audios.at(-4).playing, true);
   effects.stop();
-  assert.deepEqual(subpackages, ['bgm', 'sfx']);
+  assert.deepEqual(subpackages, []);
 
   let savedQuickLog = '';
   const quick = new QuickSession({ onSave(value) { savedQuickLog = value; } });

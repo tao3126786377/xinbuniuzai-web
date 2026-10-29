@@ -1,23 +1,21 @@
 'use strict';
 
-const Subpackage = require('./subpackage');
-
 const SOURCES = {
   human: [
-    'packs/sfx/sfx-gun-player.wav',
-    'packs/sfx/sfx-guard-player.wav',
-    'packs/sfx/sfx-reload-player.wav',
+    'assets/sfx/sfx-gun-player.wav',
+    'assets/sfx/sfx-guard-player.wav',
+    'assets/sfx/sfx-reload-player.wav',
   ],
   opponent: [
-    'packs/sfx/sfx-gun-player.wav',
-    'packs/sfx/sfx-guard-opponent.wav',
-    'packs/sfx/sfx-reload-opponent.wav',
+    'assets/sfx/sfx-gun-player.wav',
+    'assets/sfx/sfx-guard-opponent.wav',
+    'assets/sfx/sfx-reload-opponent.wav',
   ],
 };
 
 const HITS = {
-  human: 'packs/sfx/sfx-defend-player.wav',
-  opponent: 'packs/sfx/sfx-defend-opponent.wav',
+  human: 'assets/sfx/sfx-defend-player.wav',
+  opponent: 'assets/sfx/sfx-defend-opponent.wav',
 };
 
 function sound(actor, action, delay, hit) {
@@ -42,7 +40,7 @@ class EffectsController {
     this.hits = {};
     this.timers = [];
     this.sequence = 0;
-    this.loading = Subpackage.load('sfx').then(() => this.create()).catch(() => false);
+    this.loading = Promise.resolve(this.create());
   }
 
   create() {
@@ -51,11 +49,13 @@ class EffectsController {
         const audio = wx.createInnerAudioContext();
         audio.src = src;
         audio.volume = action === 0 ? (actor === 'human' ? 0.58 : 0.48) : 0.52;
+        audio.onError((error) => console.warn('[audio] sound effect failed', src, error));
         this.audios[actor][action] = audio;
       });
       const hit = wx.createInnerAudioContext();
       hit.src = HITS[actor];
       hit.volume = 0.56;
+      hit.onError((error) => console.warn('[audio] hit sound failed', HITS[actor], error));
       this.hits[actor] = hit;
     });
     return true;

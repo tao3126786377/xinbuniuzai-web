@@ -88,6 +88,7 @@ export default class Main {
       this.effects.stop();
     });
     if (wx.onShow) wx.onShow(() => this.music.resume());
+    if (wx.onAudioInterruptionEnd) wx.onAudioInterruptionEnd(() => this.music.resume());
     setTimeout(() => this.askAdaptiveConsent(), 150);
   }
 

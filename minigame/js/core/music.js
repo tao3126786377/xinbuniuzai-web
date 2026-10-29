@@ -1,7 +1,7 @@
 'use strict';
 
-const Subpackage = require('./subpackage');
 const STORAGE_KEY = 'xnz_music_enabled_v1';
+const MUSIC_URL = 'https://xinbuniuzai-web.onrender.com/assets/audio/the-entertainer.mp3';
 
 class MusicController {
   constructor() {
@@ -14,13 +14,16 @@ class MusicController {
   createAudio() {
     if (this.audio) return this.audio;
     const audio = wx.createInnerAudioContext();
-    audio.src = 'packs/bgm/the-entertainer.mp3';
+    audio.src = MUSIC_URL;
     audio.loop = true;
     audio.volume = 0.22;
     audio.onPlay(() => { this.playing = true; });
     audio.onPause(() => { this.playing = false; });
     audio.onStop(() => { this.playing = false; });
-    audio.onError(() => { this.playing = false; });
+    audio.onError((error) => {
+      this.playing = false;
+      console.warn('[audio] background music failed', error);
+    });
     this.audio = audio;
     return audio;
   }
@@ -35,11 +38,9 @@ class MusicController {
 
   resume() {
     if (!this.enabled || this.playing) return Promise.resolve();
-    if (!this.loading) this.loading = Subpackage.load('bgm').catch(() => null);
-    return this.loading.then((loaded) => {
-      if (!this.enabled || this.playing || loaded === null) return;
-      this.createAudio().play();
-    });
+    this.createAudio().play();
+    this.loading = Promise.resolve();
+    return this.loading;
   }
 
   pause() {
@@ -52,5 +53,6 @@ class MusicController {
 }
 
 MusicController.STORAGE_KEY = STORAGE_KEY;
+MusicController.MUSIC_URL = MUSIC_URL;
 
 module.exports = MusicController;
